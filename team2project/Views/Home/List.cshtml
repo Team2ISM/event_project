@@ -16,7 +16,7 @@
     {
         var evnt = curEvent.Value;
         int ind = random.Next(0, colors.Count);
-        <div class="tile-wide" style="background-color:@colors.ElementAt(ind);">
+        <div class="tile-wide" style="background-color:@colors.ElementAt(ind);" onclick="window.location='Details/@evnt.id'">
             <div class="tile-content">
                 <h3>
                     @evnt.title

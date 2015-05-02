@@ -21,8 +21,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult List(HomeModel homeModel)
         {
-            var model = homeModel;
-            ViewBag.list = model.GetEvents();
+            ViewBag.list = homeModel.GetEvents();
             return View();
         }
 
@@ -30,8 +29,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Details(uint id, HomeModel homeModel)
         {
-            var model = homeModel;
-            ViewBag.curEvent = model.GetById(id);
+            ViewBag.curEvent = homeModel.GetById(id);
             return View();
         }
     }
