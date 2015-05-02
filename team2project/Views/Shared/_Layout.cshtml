@@ -5,9 +5,22 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/metro")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <header>
+        <nav>
+            <ul class="m-menu">
+                <li>
+                    @Html.ActionLink("Home", "", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink("List", "List", "Home")
+                </li>
+            </ul>
+        </nav>
+    </header>
     @RenderBody()
 
     @Scripts.Render("~/bundles/jquery")

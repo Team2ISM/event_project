@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var evnt = ViewBag.curEvent;
+}
+
+<h2>Details: @evnt.title</h2>
+<p>@evnt.desc</p>
+<p>@evnt.from</p>
+<p>@evnt.to</p>
+<p>@evnt.location</p>
