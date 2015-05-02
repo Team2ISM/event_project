@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,9 +7,11 @@
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/metro")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Layout.css")
 </head>
 <body>
     <header>
+        <h1>@ViewBag.Title</h1>
         <nav>
             <ul class="m-menu">
                 <li>
