@@ -5,7 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
-.gitingnore
+.gitignore
 .gitattributes
 # Build results
 [Dd]ebug/
@@ -130,7 +130,7 @@ publish/
 #*.pubxml
 
 # NuGet Packages Directory
-
+packages/*
 ## TODO: If the tool you use requires repositories.config
 ## uncomment the next line
 #!packages/repositories.config
