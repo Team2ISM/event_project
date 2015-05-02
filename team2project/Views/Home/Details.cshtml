@@ -1,6 +1,28 @@
 ﻿@{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var evnt = ViewBag.curEvent;
 }
 
-<h2>Details</h2>
+<div class="grid">
+    <div class="row">
+        <div class="cell">
+            <h2>@evnt.title</h2>
+        </div>
+        <div class="cell">
+            <p>@evnt.desc</p>
+        </div>
+        <div class="cell">
+            <p>@evnt.from.ToShortDateString()</p>
+        </div>
+        <div class="cell">
+            <p>From: @evnt.from</p>
+        </div>
+        <div class="cell">
+            <p>To: @evnt.to</p>
+        </div>
+        <div class="cell">
+            <p>Location: @evnt.location</p>
+        </div>
+    </div>
+</div>
