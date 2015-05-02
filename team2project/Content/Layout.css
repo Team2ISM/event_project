@@ -1,0 +1,27 @@
+header h1 {
+    color: #505060;
+    display: inline-block;
+}
+header nav {
+    display: inline-block;
+}
+ul.m-menu {
+    margin-left: 0;
+    padding-left: 0;
+}
+.m-menu li {
+    /*border-radius: 4px;*/
+    display: inline-block;
+    list-style-type: none;
+    margin: 6px;
+    padding: 4px;
+    font-size: 1.3em;
+}
+.m-menu a {
+    color: #1060c0;
+    text-decoration: none;
+}
+    .m-menu li:hover a {
+        color: #2070d0;
+        text-decoration: underline;
+    }
