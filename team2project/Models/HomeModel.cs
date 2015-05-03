@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,13 +7,14 @@ namespace team2project.Models
 {
     public class Event
     {
-        public uint id;
-        public string title;
-        public string desc;
-        public DateTime from;
-        public DateTime to;
-        public string location;
-        public Event(uint id, string title, string desc, DateTime from, DateTime to, string location)
+        public uint id { get; set; }
+        public string title { get; set; }
+        public string desc { get; set; }
+        public DateTime from { get; set; }
+        public DateTime to { get; set; }
+        public string location { get; set; }
+        public string longDesc { get; set; }
+        public Event(uint id, string title, string desc, DateTime from, DateTime to, string location, string longDesc = "")
         {
             this.id = id;
             this.title = title;
@@ -21,6 +22,7 @@ namespace team2project.Models
             this.from = from;
             this.to = to;
             this.location = location;
+            this.longDesc = longDesc;
         }
     }
     public class HomeModel
