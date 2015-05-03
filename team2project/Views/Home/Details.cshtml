@@ -1,10 +1,10 @@
-﻿@{
+@{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var evnt = ViewBag.curEvent;
 }
 
-<link href="@Url.Content("../../Content/Home/Details.css")" rel="stylesheet" />
+@Styles.Render("~/Content/Home/Details.css")
 
 <div class="grid">
     <div class="row cells12">
