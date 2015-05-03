@@ -8,6 +8,9 @@
 header, footer, nav, section {
     display: block;
 }
+p, div{
+    padding-left:10px;
+}
 
 
 /* Styles for basic forms
@@ -58,4 +61,10 @@ textarea {
 
 .validation-summary-valid {
     display: none;
+}
+
+.description-list {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

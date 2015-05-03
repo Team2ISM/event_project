@@ -4,25 +4,32 @@
     var evnt = ViewBag.curEvent;
 }
 
-<div class="grid">
-    <div class="row">
+<div class="grid" style="margin:auto">
+    <div class="row cells12">
         <div class="cell">
+            <div class="tile-small">
+                <h4>@evnt.from.ToString("dd")</h4>
+                <p>@evnt.from.ToString("MMMM")</p>
+            </div>
+        </div>
+        <div class="cell colspan11">
             <h2>@evnt.title</h2>
         </div>
-        <div class="cell">
-            <p>@evnt.desc</p>
+        <div class="row">
+            <div class="cell">
+                <p>From: @evnt.from</p>
+            </div>
+            <div class="cell">
+                <p>To: @evnt.to</p>
+            </div>
+            <div class="cell">
+                <p>Location: @evnt.location</p>
+            </div>
         </div>
-        <div class="cell">
-            <p>@evnt.from.ToShortDateString()</p>
-        </div>
-        <div class="cell">
-            <p>From: @evnt.from</p>
-        </div>
-        <div class="cell">
-            <p>To: @evnt.to</p>
-        </div>
-        <div class="cell">
-            <p>Location: @evnt.location</p>
+        <div class="row cells4">
+            <div class="cell colspan3">
+                <p>@evnt.desc</p>
+            </div>
         </div>
     </div>
 </div>

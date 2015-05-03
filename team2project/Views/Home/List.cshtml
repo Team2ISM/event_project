@@ -21,7 +21,10 @@
                 <h3>
                     @evnt.title
                 </h3>
-                <p>@evnt.location</p>
+                <p class="description-list">@evnt.desc</p>
+                <p>Date: @evnt.from.ToString("dd MMMM yy")</p>
+                <p>Time: @evnt.from.ToString("hh:mm") - @evnt.to.ToString("hh:mm")</p>
+                <p>Location: @evnt.location</p>
             </div>
         </div>
     }
