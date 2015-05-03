@@ -14,7 +14,7 @@ namespace team2project.Models
         public DateTime to { get; set; }
         public string location { get; set; }
         public string longDesc { get; set; }
-        public Event(uint id, string title, string desc, DateTime from, DateTime to, string location, string longDesc = "")
+        public Event(uint id, string title, string desc, DateTime from, DateTime to, string location="zt", string longDesc = "")
         {
             this.id = id;
             this.title = title;
@@ -28,19 +28,22 @@ namespace team2project.Models
     public class HomeModel
     {
         private Dictionary<uint, Event> eventList;
+        public void AddEvent(Event obj) {
+            eventList.Add(obj.id, obj);
+        }
         public HomeModel()
         {
             this.eventList = new Dictionary<uint, Event>();
-            eventList.Add(1, new Event(1, "title1", "desc1", new DateTime(2015, 06, 1, 12, 0, 0), new DateTime(2015, 06, 1, 13, 0, 0), "zt", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"));
-            eventList.Add(2, new Event(2, "title2", "desc2", new DateTime(2015, 06, 1, 13, 0, 0), new DateTime(2015, 06, 1, 14, 0, 0), "zt"));
-            eventList.Add(3, new Event(3, "title3", "desc3", new DateTime(2015, 06, 1, 14, 0, 0), new DateTime(2015, 06, 1, 15, 0, 0), "zt", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"));
-            eventList.Add(4, new Event(4, "title4", "desc4", new DateTime(2015, 06, 1, 15, 0, 0), new DateTime(2015, 06, 1, 16, 0, 0), "zt"));
-            eventList.Add(5, new Event(5, "title5", "desc5", new DateTime(2015, 06, 1, 16, 0, 0), new DateTime(2015, 06, 1, 17, 0, 0), "zt"));
-            eventList.Add(6, new Event(6, "title6", "desc6", new DateTime(2015, 06, 2, 12, 0, 0), new DateTime(2015, 06, 2, 13, 0, 0), "zt"));
-            eventList.Add(7, new Event(7, "title7", "desc7", new DateTime(2015, 06, 2, 13, 0, 0), new DateTime(2015, 06, 2, 15, 0, 0), "zt"));
-            eventList.Add(8, new Event(8, "title8", "desc8", new DateTime(2015, 06, 2, 15, 0, 0), new DateTime(2015, 06, 2, 16, 0, 0), "zt"));
-            eventList.Add(9, new Event(9, "title9", "desc9", new DateTime(2015, 06, 3, 16, 0, 0), new DateTime(2015, 06, 3, 17, 30, 0), "zt"));
-            eventList.Add(10, new Event(10, "title10", "desc10", new DateTime(2015, 06, 3, 18, 0, 0), new DateTime(2015, 06, 3, 19, 0, 0), "zt"));
+            AddEvent(new Event(1, "title1", "desc1", new DateTime(2015, 06, 1, 12, 0, 0), new DateTime(2015, 06, 1, 13, 0, 0), "zt", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"));
+            AddEvent(new Event(2, "title2", "desc2", new DateTime(2015, 06, 1, 13, 0, 0), new DateTime(2015, 06, 1, 14, 0, 0)));
+            AddEvent(new Event(3, "title3", "desc3", new DateTime(2015, 06, 1, 14, 0, 0), new DateTime(2015, 06, 1, 15, 0, 0), "zt", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"));
+            AddEvent(new Event(4, "title4", "desc4", new DateTime(2015, 06, 1, 15, 0, 0), new DateTime(2015, 06, 1, 16, 0, 0)));
+            AddEvent(new Event(5, "title5", "desc5", new DateTime(2015, 06, 1, 16, 0, 0), new DateTime(2015, 06, 1, 17, 0, 0)));
+            AddEvent(new Event(6, "title6", "desc6", new DateTime(2015, 06, 2, 12, 0, 0), new DateTime(2015, 06, 2, 13, 0, 0)));
+            AddEvent(new Event(7, "title7", "desc7", new DateTime(2015, 06, 2, 13, 0, 0), new DateTime(2015, 06, 2, 15, 0, 0)));
+            AddEvent(new Event(8, "title8", "desc8", new DateTime(2015, 06, 2, 15, 0, 0), new DateTime(2015, 06, 2, 16, 0, 0)));
+            AddEvent(new Event(9, "title9", "desc9", new DateTime(2015, 06, 3, 16, 0, 0), new DateTime(2015, 06, 3, 17, 30, 0)));
+            AddEvent(new Event(10, "title10", "desc10", new DateTime(2015, 06, 3, 18, 0, 0), new DateTime(2015, 06, 3, 19, 0, 0)));
         }
 
         public Dictionary<uint, Event> GetEvents()
