@@ -10597,7 +10597,7 @@ input[type="submit"].link:active {
       -ms-user-select: none;
           user-select: none;
   overflow: visible;
-  width: 70px;
+  width: 90px;
   height: 70px;
 }
 .tile-small:hover {
