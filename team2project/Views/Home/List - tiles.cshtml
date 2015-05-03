@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "List - tiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h1>@ViewBag.Title</h1>
+    @{
+        List<string> colors = new List<string>();
+        colors.Add("#673ab7");
+        colors.Add("#00bcd4");
+        colors.Add("#8bc34a");
+        var random = new Random();
+    }
+    @foreach (var curEvent in ViewBag.list)
+    {
+        var evnt = curEvent.Value;
+        int ind = random.Next(0, colors.Count);
+        <div class="tile-wide" style="background-color:@colors.ElementAt(ind);" onclick="window.location='Details/@evnt.id'">
+            <div class="tile-content">
+                <h3>
+                    @evnt.title
+                </h3>
+                <p class="description-list">@evnt.desc</p>
+                <p>Date: @evnt.from.ToString("dd MMMM yy")</p>
+                <p>Time: @evnt.from.ToString("hh:mm") - @evnt.to.ToString("hh:mm")</p>
+                <p>Location: @evnt.location</p>
+            </div>
+        </div>
+    }
+</div>

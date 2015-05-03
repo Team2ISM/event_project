@@ -4,32 +4,59 @@
     var evnt = ViewBag.curEvent;
 }
 
-<div class="grid" style="margin:auto">
+<link href="@Url.Content("../../Content/Home/Details.css")" rel="stylesheet" />
+
+<div class="grid">
     <div class="row cells12">
-        <div class="cell">
+        <div class="cell colspan2">
             <div class="tile-small">
                 <h4>@evnt.from.ToString("dd")</h4>
                 <p>@evnt.from.ToString("MMMM")</p>
             </div>
         </div>
-        <div class="cell colspan11">
+        <div class="cell colspan10">
             <h2>@evnt.title</h2>
         </div>
-        <div class="row">
-            <div class="cell">
-                <p>From: @evnt.from</p>
-            </div>
-            <div class="cell">
-                <p>To: @evnt.to</p>
-            </div>
-            <div class="cell">
-                <p>Location: @evnt.location</p>
-            </div>
+    </div>
+    <div class="row">
+        <div class="cell colspan2">
+            <button class="button danger loading-pulse text-shadow">Join Event</button>
         </div>
-        <div class="row cells4">
-            <div class="cell colspan3">
+    </div>
+    <hr />
+    <div class="row">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Date:</td>
+                    <td>@evnt.from.ToString("dd MMMM yyyy")</td>
+                </tr>
+                <tr>
+                    <td>From:</td>
+                    <td>@evnt.from.ToString("hh:mm")</td>
+                </tr>
+                <tr>
+                    <td>To:</td>
+                    <td>@evnt.to.ToString("hh:mm")</td>
+                </tr>
+                <tr>
+                    <td>Location:</td>
+                    <td>@evnt.location</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr />
+    <div class="row description">
+        <div class="cell">
+            @if (@evnt.longDesc.Length>0)
+            {
+                <p>@evnt.longDesc</p>
+            }
+            else
+            {
                 <p>@evnt.desc</p>
-            </div>
+            }
         </div>
     </div>
 </div>

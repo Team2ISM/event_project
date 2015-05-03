@@ -1,0 +1,19 @@
+﻿body {
+    position: relative;
+}
+
+.grid {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.description-list {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+tbody tr{
+    cursor:pointer;
+}

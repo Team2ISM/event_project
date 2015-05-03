@@ -12,7 +12,6 @@ p, div{
     padding-left:10px;
 }
 
-
 /* Styles for basic forms
 -----------------------------------------------------------*/
 fieldset {
@@ -61,10 +60,4 @@ textarea {
 
 .validation-summary-valid {
     display: none;
-}
-
-.description-list {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }

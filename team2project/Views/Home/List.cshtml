@@ -3,29 +3,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div>
+<link href="@Url.Content("../../Content/Home/List.css")" rel="stylesheet" />
+
+<div class="grid">
     <h1>@ViewBag.Title</h1>
-    @{
-        List<string> colors = new List<string>();
-        colors.Add("#673ab7");
-        colors.Add("#00bcd4");
-        colors.Add("#8bc34a");
-        var random = new Random();
-    }
-    @foreach (var curEvent in ViewBag.list)
-    {
-        var evnt = curEvent.Value;
-        int ind = random.Next(0, colors.Count);
-        <div class="tile-wide" style="background-color:@colors.ElementAt(ind);" onclick="window.location='Details/@evnt.id'">
-            <div class="tile-content">
-                <h3>
-                    @evnt.title
-                </h3>
-                <p class="description-list">@evnt.desc</p>
-                <p>Date: @evnt.from.ToString("dd MMMM yy")</p>
-                <p>Time: @evnt.from.ToString("hh:mm") - @evnt.to.ToString("hh:mm")</p>
-                <p>Location: @evnt.location</p>
-            </div>
-        </div>
-    }
+    <table class="table hovered cell-hovered striped border bordered sortable-markers-on-left">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var curEvent in ViewBag.list)
+            {
+                var evnt = curEvent.Value;
+                <tr onclick="window.location='Details/@evnt.id'">
+                    <td>@evnt.title</td>
+                    <td>@evnt.desc</td>
+                    <td>@evnt.from.ToString("dd MMMM yy")</td>
+                    <td>@evnt.from.ToString("hh:mm") - @evnt.to.ToString("hh:mm")</td>
+                    <td>@evnt.location</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
