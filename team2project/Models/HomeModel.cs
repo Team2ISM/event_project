@@ -34,11 +34,20 @@ namespace team2project.Models
         public HomeModel()
         {
             this.eventList = new Dictionary<uint, Event>();
-            AddEvent(new Event(1, "title1", "desc1", new DateTime(2015, 06, 1, 12, 0, 0), new DateTime(2015, 06, 1, 13, 0, 0), "zt", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"));
-            AddEvent(new Event(2, "title2", "desc2", new DateTime(2015, 06, 1, 13, 0, 0), new DateTime(2015, 06, 1, 14, 0, 0)));
-            AddEvent(new Event(3, "title3", "desc3", new DateTime(2015, 06, 1, 14, 0, 0), new DateTime(2015, 06, 1, 15, 0, 0), "zt", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"));
-            AddEvent(new Event(4, "title4", "desc4", new DateTime(2015, 06, 1, 15, 0, 0), new DateTime(2015, 06, 1, 16, 0, 0)));
-            AddEvent(new Event(5, "title5", "desc5", new DateTime(2015, 06, 1, 16, 0, 0), new DateTime(2015, 06, 1, 17, 0, 0)));
+            AddEvent(new Event(1, "Cleaning before May holidays", "garbage collection on a large scale, as well as landscaping the adjacent territory",
+                new DateTime(2015, 05, 4, 9, 0, 0), new DateTime(2015, 05, 4, 9, 0, 0),"Zhytomyr, gathering at the main entrance to the water park",
+                "All who wish to purify our water park from garbage, or help green the water park, priglashayutsya !!! We gather at the main entrance to the water park You will be divided into 2 groups - one to pick up trash, plant trees and gardens and the other near the territorrii hydro. Please bring gloves, garbage bags, work clothes, as well as attitude to work .Orudie work and a light lunch provided.eum fugiat quo voluptas nulla pariatur"));
+            AddEvent(new Event(2, "Tour History of Zhytomyr", "Tour of the historic sites of the city of Zhytomyr", new DateTime(2015, 06, 1, 13, 0, 0),
+                new DateTime(2015, 06, 1, 16, 0, 0),
+                "Zhitomir, gathering at the base of the monument Zhitomir, then home church of Justice, the Transfiguration Cathedral, St. Michael Street"));
+            AddEvent(new Event(3, "Quest Scrabble", "the quest for those who  want to show their knowleadge or simply have fun",
+                new DateTime(2015, 09, 1, 15, 0, 0), new DateTime(2015, 06, 1, 19, 0, 0),
+                "Zhytomyr, gathering at the monument to Korolev S.P., then park named after Yuri Gagarin"));
+           AddEvent(new Event(4, "Meeting of entomologists","Meeting of entomologists who live Zhytomyr and people who are interested in insects",
+                new DateTime(2015, 09, 5, 9, 0, 0), new DateTime(2015, 09, 5, 11, 0, 0),
+                "Zhitomir, gathering at the main entrance to the water park, then the forest beyond the waterpark"));
+            AddEvent(new Event(5, "Quiz The Smartest","Quiz for fans of the game Most intelligent or simply educated people",
+                new DateTime(2015, 10, 15, 13, 0, 0), new DateTime(2015, 06, 1, 17, 0, 0),"Zhytomyr, caffee Druz³ i Cava"));
             AddEvent(new Event(6, "title6", "desc6", new DateTime(2015, 06, 2, 12, 0, 0), new DateTime(2015, 06, 2, 13, 0, 0)));
             AddEvent(new Event(7, "title7", "desc7", new DateTime(2015, 06, 2, 13, 0, 0), new DateTime(2015, 06, 2, 15, 0, 0)));
             AddEvent(new Event(8, "title8", "desc8", new DateTime(2015, 06, 2, 15, 0, 0), new DateTime(2015, 06, 2, 16, 0, 0)));
