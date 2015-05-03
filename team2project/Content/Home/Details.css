@@ -1,0 +1,55 @@
+﻿
+body {
+    position: relative;
+}
+
+.grid {
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.tile-small {
+    margin-left:0;
+    padding: 0;
+}
+
+    .tile-small h4 {
+        text-align: center;
+    }
+
+    .tile-small p {
+        padding: 0;
+        text-align: center;
+    }
+
+    .tile-small:hover {
+       outline: none;
+    }
+
+.description {
+    padding-left: 0;
+}
+
+    .description > .cell {
+        padding-left: 0;
+    }
+
+.row > .cell {
+    margin-left: 0;
+}
+
+tr td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+    tr td:first-child {
+        text-align: right;
+    }
+
+    tr td:nth-child(2n) {
+        text-align: left;
+        padding-left: 15px;
+    }
