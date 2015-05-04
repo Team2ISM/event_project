@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using team2project.Models;
+using System.Globalization;
 
 namespace team2project.Controllers
 {
@@ -21,16 +22,15 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult List(HomeModel homeModel)
         {
-            ViewBag.list = homeModel.GetEvents();
-            return View();
+            //ViewBag.list = homeModel.GetEvents();
+            return View(homeModel.GetEvents());
         }
 
         // GET: /Home/List
         [HttpGet]
         public ActionResult Details(uint id, HomeModel homeModel)
-        {
-            ViewBag.curEvent = homeModel.GetById(id);
-            return View();
+        {            
+            return View(homeModel.GetById(id));
         }
     }
 }

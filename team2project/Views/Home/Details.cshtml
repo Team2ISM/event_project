@@ -1,21 +1,22 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var evnt = ViewBag.curEvent;
 }
 
+@model team2project.Models.Event
 @Styles.Render("~/Content/Home/Details.css")
+@using System.Globalization
 
 <div class="grid">
     <div class="row cells12">
         <div class="cell colspan2">
             <div class="tile-small">
-                <h4>@evnt.from.ToString("dd")</h4>
-                <p>@evnt.from.ToString("MMMM")</p>
+                <h4>@Model.from.ToString("dd")</h4>
+                <p>@Model.from.ToString("MMMM", new CultureInfo("en"))</p>
             </div>
         </div>
         <div class="cell colspan10">
-            <h2>@evnt.title</h2>
+            <h2>@Model.title</h2>
         </div>
     </div>
     <div class="row">
@@ -29,19 +30,19 @@
             <tbody>
                 <tr>
                     <td>Date:</td>
-                    <td>@evnt.from.ToString("dd MMMM yyyy")</td>
+                    <td>@Model.from.ToString("dd MMMM yyyy", new CultureInfo("en"))</td>
                 </tr>
                 <tr>
                     <td>From:</td>
-                    <td>@evnt.from.ToString("hh:mm")</td>
+                    <td>@Model.from.ToString("hh:mm")</td>
                 </tr>
                 <tr>
                     <td>To:</td>
-                    <td>@evnt.to.ToString("hh:mm")</td>
+                    <td>@Model.to.ToString("hh:mm")</td>
                 </tr>
                 <tr>
                     <td>Location:</td>
-                    <td>@evnt.location</td>
+                    <td>@Model.location</td>
                 </tr>
             </tbody>
         </table>
@@ -49,13 +50,13 @@
     <hr />
     <div class="row description">
         <div class="cell">
-            @if (@evnt.longDesc.Length>0)
+            @if (@Model.longDesc.Length > 0)
             {
-                <p>@evnt.longDesc</p>
+                <p>@Model.longDesc</p>
             }
             else
             {
-                <p>@evnt.desc</p>
+                <p>@Model.desc</p>
             }
         </div>
     </div>

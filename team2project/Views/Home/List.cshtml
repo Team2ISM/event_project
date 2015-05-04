@@ -2,6 +2,8 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model System.Collections.Generic.Dictionary<uint,team2project.Models.Event>
+@using System.Globalization
 @Styles.Render("~/Content/Home/List.css")
 
 <div class="grid">
@@ -17,13 +19,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var curEvent in ViewBag.list)
+            @foreach (var curEvent in Model)
             {
                 var evnt = curEvent.Value;
                 <tr onclick="window.location='Details/@evnt.id'">
                     <td>@evnt.title</td>
                     <td>@evnt.desc</td>
-                    <td>@evnt.from.ToString("dd MMMM yy")</td>
+                    <td>@evnt.from.ToString("dd MMMM yyyy", new CultureInfo("en"))</td>
                     <td>@evnt.from.ToString("hh:mm") - @evnt.to.ToString("hh:mm")</td>
                     <td>@evnt.location</td>
                 </tr>
