@@ -22,12 +22,12 @@
             @foreach (var curEvent in Model)
             {
                 var evnt = curEvent.Value;
-                <tr onclick="window.location='Details/@evnt.Id'">
-                    <td>@evnt.Title</td>
-                    <td>@evnt.Desc</td>
-                    <td>@evnt.From.ToString("dd MMMM yyyy", new CultureInfo("en"))</td>
-                    <td>@evnt.From.ToString("hh:mm") - @evnt.To.ToString("hh:mm")</td>
-                    <td>@evnt.Location</td>
+                <tr>
+                    <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id})</td>
+                    <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id })</td>
+                    <td>@Html.ActionLink(evnt.From.ToString("dd MMMM yyyy", new CultureInfo("en")), "Details", new { evnt.Id })</td>
+                    <td>@Html.ActionLink(evnt.From.ToString("hh:mm") + @evnt.To.ToString("hh:mm"), "Details", new { evnt.Id })</td>
+                    <td>@Html.ActionLink(evnt.Location, "Details", new { evnt.Id })</td>
                 </tr>
             }
         </tbody>
