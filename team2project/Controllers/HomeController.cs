@@ -22,7 +22,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            var model = new HomeModel().GetEvents();
+            var model = new DataProvider().GetEvents();
             return View(model);
         }
 
@@ -30,7 +30,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Details(uint id)
         {
-            var model = new HomeModel().GetById(id);
+            var model = new DataProvider().GetById(id);
             return View(model);
         }
     }

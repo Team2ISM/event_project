@@ -6,13 +6,13 @@ using System.Web;
 namespace team2project.Models
 {
   
-    public class HomeModel
+    public class DataProvider
     {
         private Dictionary<uint, Event> eventList;
         public void AddEvent(Event obj) {
             eventList.Add(obj.Id, obj);
         }
-        public HomeModel()
+        public DataProvider()
         {
             this.eventList = new Dictionary<uint, Event>();
             AddEvent(new Event(1, "Cleaning before May holidays", "garbage collection on a large scale, as well as landscaping the adjacent territory",
