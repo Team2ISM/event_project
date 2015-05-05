@@ -1,12 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/metro")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("css", false);
+
 </head>
 <body>
     <header>

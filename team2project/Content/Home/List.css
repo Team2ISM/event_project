@@ -14,12 +14,22 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-tbody tr{
-    cursor:pointer;
+
+tbody tr {
+    cursor: pointer;
 }
 
-td a:link,td a:visited,
-td a:hover,td a:active {
-    color:black;
+.table tbody td {
+    padding: 0;
+}
+
+    .table tbody td a {
+        display:block;
+        padding: 0.625rem 0.85rem;
+    }
+
+td a:link, td a:visited,
+td a:hover, td a:active {
+    color: black;
     text-decoration: none;
 }
