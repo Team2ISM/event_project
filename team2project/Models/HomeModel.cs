@@ -7,29 +7,29 @@ namespace team2project.Models
 {
     public class Event
     {
-        public uint id { get; set; }
-        public string title { get; set; }
-        public string desc { get; set; }
-        public DateTime from { get; set; }
-        public DateTime to { get; set; }
-        public string location { get; set; }
-        public string longDesc { get; set; }
+        public uint Id { get; set; }
+        public string Title { get; set; }
+        public string Desc { get; set; }
+        public DateTime From { get; set; }
+        public DateTime To { get; set; }
+        public string Location { get; set; }
+        public string LongDesc { get; set; }
         public Event(uint id, string title, string desc, DateTime from, DateTime to, string location="zt", string longDesc = "")
         {
-            this.id = id;
-            this.title = title;
-            this.desc = desc;
-            this.from = from;
-            this.to = to;
-            this.location = location;
-            this.longDesc = longDesc;
+            Id = id;
+            Title = title;
+            Desc = desc;
+            From = from;
+            To = to;
+            Location = location;
+            LongDesc = longDesc;
         }
     }
     public class HomeModel
     {
         private Dictionary<uint, Event> eventList;
         public void AddEvent(Event obj) {
-            eventList.Add(obj.id, obj);
+            eventList.Add(obj.Id, obj);
         }
         public HomeModel()
         {

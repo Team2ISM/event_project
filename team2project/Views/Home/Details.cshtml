@@ -11,12 +11,12 @@
     <div class="row cells12">
         <div class="cell colspan2">
             <div class="tile-small">
-                <h4>@Model.from.ToString("dd")</h4>
-                <p>@Model.from.ToString("MMMM", new CultureInfo("en"))</p>
+                <h4>@Model.From.ToString("dd")</h4>
+                <p>@Model.From.ToString("MMMM", new CultureInfo("en"))</p>
             </div>
         </div>
         <div class="cell colspan10">
-            <h2>@Model.title</h2>
+            <h2>@Model.Title</h2>
         </div>
     </div>
     <div class="row">
@@ -30,19 +30,19 @@
             <tbody>
                 <tr>
                     <td>Date:</td>
-                    <td>@Model.from.ToString("dd MMMM yyyy", new CultureInfo("en"))</td>
+                    <td>@Model.From.ToString("dd MMMM yyyy", new CultureInfo("en"))</td>
                 </tr>
                 <tr>
                     <td>From:</td>
-                    <td>@Model.from.ToString("hh:mm")</td>
+                    <td>@Model.From.ToString("hh:mm")</td>
                 </tr>
                 <tr>
                     <td>To:</td>
-                    <td>@Model.to.ToString("hh:mm")</td>
+                    <td>@Model.To.ToString("hh:mm")</td>
                 </tr>
                 <tr>
                     <td>Location:</td>
-                    <td>@Model.location</td>
+                    <td>@Model.Location</td>
                 </tr>
             </tbody>
         </table>
@@ -50,13 +50,13 @@
     <hr />
     <div class="row description">
         <div class="cell">
-            @if (@Model.longDesc.Length > 0)
+            @if (@Model.LongDesc.Length > 0)
             {
-                <p>@Model.longDesc</p>
+                <p>@Model.LongDesc</p>
             }
             else
             {
-                <p>@Model.desc</p>
+                <p>@Model.Desc</p>
             }
         </div>
     </div>
