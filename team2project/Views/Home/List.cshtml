@@ -23,7 +23,6 @@
         <tbody>
             @foreach (var evnt in Model)
             {
-                //var evnt = curEvent.Value;
                 <tr>
                     <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id })</td>
                     <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id })</td>

@@ -21,11 +21,14 @@ tbody tr {
 
 .table tbody td {
     padding: 0;
+    position:relative;
 }
 
     .table tbody td a {
         display:block;
         padding: 0.625rem 0.85rem;
+        width:100%;
+        height:100%;
     }
 
 td a:link, td a:visited,
