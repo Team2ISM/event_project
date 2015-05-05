@@ -20,17 +20,18 @@ namespace team2project.Controllers
 
         // GET: /Home/List
         [HttpGet]
-        public ActionResult List(HomeModel homeModel)
+        public ActionResult List()
         {
-            //ViewBag.list = homeModel.GetEvents();
-            return View(homeModel.GetEvents());
+            var model = new HomeModel().GetEvents();
+            return View(model);
         }
 
         // GET: /Home/List
         [HttpGet]
-        public ActionResult Details(uint id, HomeModel homeModel)
-        {            
-            return View(homeModel.GetById(id));
+        public ActionResult Details(uint id)
+        {
+            var model = new HomeModel().GetById(id);
+            return View(model);
         }
     }
 }
