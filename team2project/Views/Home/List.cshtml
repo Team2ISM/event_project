@@ -2,7 +2,7 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model System.Collections.Generic.Dictionary<uint, team2project.Models.Event>
+@model System.Collections.Generic.List<team2project.Models.Event>
 @using System.Globalization
 @Styles.Render("~/Content/Home/List.css")
 
@@ -19,9 +19,9 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var curEvent in Model)
+            @foreach (var evnt in Model)
             {
-                var evnt = curEvent.Value;
+                //var evnt = curEvent.Value;
                 <tr>
                     <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id })</td>
                     <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id })</td>

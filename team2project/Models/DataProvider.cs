@@ -8,13 +8,13 @@ namespace team2project.Models
   
     public class DataProvider
     {
-        private Dictionary<uint, Event> eventList;
+        private List<Event> eventList;
         public void AddEvent(Event obj) {
-            eventList.Add(obj.Id, obj);
+            eventList.Add(obj);
         }
         public DataProvider()
         {
-            this.eventList = new Dictionary<uint, Event>();
+            this.eventList = new List<Event>(10);
             AddEvent(new Event(1, "Cleaning before May holidays", "garbage collection on a large scale, as well as landscaping the adjacent territory",
                 new DateTime(2015, 05, 4, 9, 0, 0), new DateTime(2015, 05, 4, 9, 0, 0),"Zhytomyr, gathering at the main entrance to the water park",
                 "All who wish to purify our water park from garbage, or help green the water park, priglashayutsya !!! We gather at the main entrance to the water park You will be divided into 2 groups - one to pick up trash, plant trees and gardens and the other near the territorrii hydro. Please bring gloves, garbage bags, work clothes, as well as attitude to work .Orudie work and a light lunch provided.eum fugiat quo voluptas nulla pariatur"));
@@ -36,14 +36,14 @@ namespace team2project.Models
             AddEvent(new Event(10, "title10", "desc10", new DateTime(2015, 06, 3, 18, 0, 0), new DateTime(2015, 06, 3, 19, 0, 0)));
         }
 
-        public Dictionary<uint, Event> GetEvents()
+        public List<Event> GetEvents( )
         {
             return this.eventList;
         }
 
         public Event GetById(uint id)
         {
-            return this.eventList[id];
+            return this.eventList.Find(x => x.Id == id);
         }
     }
 }
