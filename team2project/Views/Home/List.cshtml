@@ -2,7 +2,7 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model System.Collections.Generic.Dictionary<uint,team2project.Models.Event>
+@model System.Collections.Generic.Dictionary<uint, team2project.Models.Event>
 @using System.Globalization
 @Styles.Render("~/Content/Home/List.css")
 
@@ -23,10 +23,10 @@
             {
                 var evnt = curEvent.Value;
                 <tr>
-                    <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id})</td>
+                    <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id })</td>
                     <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id })</td>
                     <td>@Html.ActionLink(evnt.From.ToString("dd MMMM yyyy", new CultureInfo("en")), "Details", new { evnt.Id })</td>
-                    <td>@Html.ActionLink(evnt.From.ToString("hh:mm") + @evnt.To.ToString("hh:mm"), "Details", new { evnt.Id })</td>
+                    <td>@Html.ActionLink(evnt.From.ToString("hh:mm") + " - " + @evnt.To.ToString("hh:mm"), "Details", new { evnt.Id })</td>
                     <td>@Html.ActionLink(evnt.Location, "Details", new { evnt.Id })</td>
                 </tr>
             }
