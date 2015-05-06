@@ -1,0 +1,37 @@
+﻿body {
+	font-family: 'Courgette', cursive;
+}
+body{
+	background:#ffffff;
+}	
+.wrap{
+	width:100%;
+}
+.logo h1{
+	font-size:120px;
+	color:#8F8E8C;
+	text-align:center;
+	margin:70px 0 0 0;
+	text-shadow:1px 1px 6px #fff;
+}	
+.logo p{
+	rgb:(140, 129, 131);
+	font-size:15px;
+	margin-top:1px;
+	text-align:center;
+}	
+.logo p span{
+	color:lightgreen;
+}	
+.sub a{
+	color:white;
+	background:#8F8E8C;
+	text-decoration:none;
+	padding:5px 80px;
+	font-size:13px;
+	font-family: arial, serif;
+	font-weight:bold;
+	-webkit-border-radius:3em;
+	-moz-border-radius:.1em;
+	-border-radius:.1em;
+}	
