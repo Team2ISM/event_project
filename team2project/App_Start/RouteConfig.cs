@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
 namespace team2project
 {
     public class RouteConfig
@@ -35,6 +34,11 @@ namespace team2project
                 url: "Details/{id}",
                 defaults: new { controller = "Home", action = "details"},
                 constraints: new { id = @"\d+" }
+            );
+            routes.MapRoute(
+                name: "Default",
+                url: "{*url}",
+                defaults: new { controller = "Home", action = "err" }
             );
         }
     }
