@@ -1,10 +1,12 @@
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @model team2project.Models.Event
-@Styles.Render("~/Content/Home/Details.css")
+@section css
+    {
+    Styles.Render("~/Content/Home/Details.css")
+}
 @using System.Globalization
 
 <div class="grid">
@@ -50,7 +52,7 @@
     <hr />
     <div class="row description">
         <div class="cell">
-            @if (@Model.LongDesc.Length > 0)
+            @if (@Model.LongDesc.IsEmpty())
             {
                 <p>@Model.LongDesc</p>
             }
