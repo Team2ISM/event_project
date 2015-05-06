@@ -31,6 +31,8 @@ namespace team2project.Controllers
         public ActionResult Details(uint id)
         {
             var model = new DataProvider().GetById(id);
+            if (id> 10)
+                return HttpNotFound();
             return View(model);
         }
     }
