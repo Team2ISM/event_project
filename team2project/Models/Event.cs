@@ -13,7 +13,7 @@ namespace team2project.Models
         public DateTime From { get; set; }
         public DateTime To { get; set; }
         public string Location { get; set; }
-        public string? LongDesc { get; set; }
+        public string LongDesc { get; set; }
         public Event(uint id, string title, string desc, DateTime from, DateTime to, string location = "zt", string longDesc = "")
         {
             Id = id;
