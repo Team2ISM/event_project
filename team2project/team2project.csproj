@@ -130,8 +130,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\DataProvider.cs" />
+    <Compile Include="DataProviders\DataProvider.cs" />
+    <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
