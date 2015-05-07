@@ -192,6 +192,9 @@
   <ItemGroup>
     <Content Include="Views\Event\List - tiles.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\Page404.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

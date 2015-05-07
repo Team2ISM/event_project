@@ -13,26 +13,30 @@ namespace team2project
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                 name: "Home",
+                 url: "",
+                 defaults: new { controller = "Home", action = "Index" }
+             );
+
+            routes.MapRoute(
                 name: "EventList",
                 url: "eventsList",
                 defaults: new { controller = "Event", action = "Index" }
             );
+
             routes.MapRoute(
                 name: "EventDetails",
                 url: "eventDetails/{id}",
                 defaults: new { controller = "Event", action = "Details" },
                 constraints: new { id = @"\d+" }
             );
+            
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}",
-                defaults: new { controller = "Home", action = "Index" }
+                "NotFound",
+                "{*url}",
+             new { controller = "Error", action = "Index" }
             );
-            routes.MapRoute(
-                name: "Error",
-                url: "{*url}",
-                defaults: new { controller = "Error", action = "Index" }
-            );
+            
         }
     }
 }

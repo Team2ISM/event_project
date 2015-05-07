@@ -10,9 +10,10 @@ namespace team2project.Controllers
     {
         //
         // GET: /Error/
+        [HttpGet]
         public ActionResult Index()
         {
-            return HttpNotFound();
+            return View("~/Views/Error/Page404.cshtml");
         }
 
     }

@@ -17,10 +17,5 @@ namespace team2project.Controllers
         {
             return View();
         }
-
-        protected override void HandleUnknownAction(string actionName) {
-            var result = new ViewResult { ViewName = "Page404" };
-            result.ExecuteResult(ControllerContext);
-        }
     }
 }
