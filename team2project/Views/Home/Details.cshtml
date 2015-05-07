@@ -4,7 +4,9 @@
 
 @model team2project.Models.Event
 @using System.Globalization
-
+@section css{
+    @Styles.Render("~/Content/Home/Details.css")
+}
 <div class="grid">
     <div class="row cells12">
         <div class="cell colspan2">
