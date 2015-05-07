@@ -18,28 +18,6 @@ namespace team2project.Controllers
             return View();
         }
 
-        // GET: /Home/List
-        [HttpGet]
-        public ActionResult List()
-        {
-            var model = new DataProvider().GetEvents();
-            return View(model);
-        }
-
-        // GET: /Home/List
-        [HttpGet]
-        public ActionResult Details(uint id)
-        {
-            var model = new DataProvider().GetById(id);
-            if (id > 10)
-                return HttpNotFound();
-            return View(model);
-        }
-        [HttpGet]
-        public ActionResult Page404()
-        {
-            return View();
-        }
         protected override void HandleUnknownAction(string actionName) {
             var result = new ViewResult { ViewName = "Page404" };
             result.ExecuteResult(ControllerContext);
