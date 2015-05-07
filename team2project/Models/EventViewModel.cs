@@ -5,7 +5,7 @@ using System.Web;
 
 namespace team2project.Models
 {
-    public class Event
+    public class EventViewModel
     {
         public uint Id { get; set; }
         public string Title { get; set; }
@@ -14,7 +14,7 @@ namespace team2project.Models
         public DateTime To { get; set; }
         public string Location { get; set; }
         public string LongDesc { get; set; }
-        public Event(uint id, string title, string desc, DateTime from, DateTime to, string location = "zt", string longDesc = "")
+        public EventViewModel(uint id, string title, string desc, DateTime from, DateTime to, string location = "zt", string longDesc = "")
         {
             Id = id;
             Title = title;
