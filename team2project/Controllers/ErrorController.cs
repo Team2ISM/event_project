@@ -12,7 +12,7 @@ namespace team2project.Controllers
         // GET: /Error/
         public ActionResult Index()
         {
-            return View();
+            return HttpNotFound();
         }
 
     }

@@ -16,17 +16,17 @@ namespace team2project
                 name: "EventList",
                 url: "eventsList",
                 defaults: new { controller = "Event", action = "Index" }
-                );
+            );
             routes.MapRoute(
                 name: "EventDetails",
                 url: "eventDetails/{id}",
-                defaults: new { controller = "Event", action = "Details"},
+                defaults: new { controller = "Event", action = "Details" },
                 constraints: new { id = @"\d+" }
             );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}",
-                defaults: new { controller = "Home", action = "Index"}
+                defaults: new { controller = "Home", action = "Index" }
             );
             routes.MapRoute(
                 name: "Error",

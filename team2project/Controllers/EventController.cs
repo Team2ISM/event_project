@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using team2project.Models;
 using System.Globalization;
+using System.Web.Routing;
 
 namespace team2project.Controllers
 {
@@ -24,8 +25,10 @@ namespace team2project.Controllers
         public ActionResult Details(uint id)
         {
             var model = new DataProvider().GetById(id);
-            if (id > 10)
-                return HttpNotFound();
+            if (model == null)
+            {
+                return RedirectToRoute("Error");
+            }
             return View(model);
         }
 
