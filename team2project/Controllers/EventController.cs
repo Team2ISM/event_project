@@ -27,7 +27,7 @@ namespace team2project.Controllers
             var model = new DataProvider().GetById(id);
             if (model == null)
             {
-                return RedirectToRoute("Error");
+                return RedirectToAction("Index", new { controller = "Error", action = "Index" });
             }
             return View(model);
         }
