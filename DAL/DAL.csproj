@@ -74,6 +74,7 @@
     </Content>
     <Content Include="NHibernateCore\Configuration\hibernate.cfg.xml" />
     <Content Include="NHibernateCore\Mappings\EventModel.hbm.xml" />
+    <Content Include="Scripts\dbo.Event.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -137,7 +138,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\" />
     <Folder Include="SQL Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
