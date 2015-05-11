@@ -8,7 +8,7 @@ namespace team2project.Controllers
 {
     public class EventController : Controller
     {
-        BusinessLogicLayer <EventViewModel, EventModel> Bll;
+        BusinessLogicLayer<EventViewModel, EventModel> Bll;
 
 
         [HttpGet]
@@ -18,13 +18,22 @@ namespace team2project.Controllers
             return View("List", Bll.GetList());
         }
 
-        
+
         [HttpGet]
         public ActionResult Details(string id)
         {
             Bll = new BusinessLogicLayer<EventViewModel, EventModel>();
-            EventViewModel Event = Bll.GetById(id);
-            return View(Event);
+
+            var Event = Bll.GetById(id);
+            if (!(Event == null))
+            {
+                return View(Event);
+            }
+            else
+            {
+                return View("EventNotFound");
+            }
+
         }
 
 
@@ -50,17 +59,5 @@ namespace team2project.Controllers
                 return View();
             }
         }
-
-        //[HttpGet]
-        //public ActionResult Details(uint id)
-        //{
-        //    var model = new DataProvider().GetById(id);
-        //    if (model == null)
-        //    {
-        //        return RedirectToAction("Index", new { controller = "Error", action = "Index" });
-        //    }
-        //    return View(model);
-        //}
-
     }
 }
