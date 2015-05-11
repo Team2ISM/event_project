@@ -22,12 +22,11 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Details(string id)
         {
+            Bll = new BusinessLogicLayer<EventViewModel, EventModel>();
             EventViewModel Event = Bll.GetById(id);
-            return View();
+            return View(Event);
         }
 
-        //
-        // GET: /EmployeeInfo/Create
 
         [HttpGet]
         public ActionResult Create()
@@ -36,23 +35,20 @@ namespace team2project.Controllers
             return View(Event);
         }
 
-        //
-        // POST: /EmployeeInfo/Create
-
         [HttpPost]
         public ActionResult Create(EventViewModel evnt)
         {
-            //try
-            //{
+            try
+            {
                 evnt.Id = Guid.NewGuid().ToString();
                 Bll = new BusinessLogicLayer<Models.EventViewModel, EventModel>();
                 Bll.Create(evnt);
                 return RedirectToAction("Index");
-            //}
-            /*catch
+            }
+            catch
             {
                 return View();
-            }*/
+            }
         }
 
         //[HttpGet]

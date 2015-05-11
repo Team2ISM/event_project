@@ -33,8 +33,7 @@ namespace team2project
             routes.MapRoute(
                 name: "EventDetails",
                 url: "eventDetails/{id}",
-                defaults: new { controller = "Event", action = "Details" },
-                constraints: new { id = @"\d+" }
+                defaults: new { controller = "Event", action = "Details" }
             );
             
             routes.MapRoute(

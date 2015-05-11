@@ -2,6 +2,7 @@
     ViewBag.Title = "Details";
 }
 
+
 @model team2project.Models.EventViewModel
 @using System.Globalization
 @section css{
@@ -11,8 +12,15 @@
     <div class="row cells12">
         <div class="cell colspan2">
             <div class="tile-small">
-                <h4>@Model.From.ToString("dd")</h4>
-                <p>@Model.From.ToString("MMMM")</p>
+                @if (@Model.From != null)
+                {
+                    <h4>@Model.From.Value.ToString("dd")</h4>
+                    <p>@Model.From.Value.ToString("MMMM")</p>
+                }
+                else
+                {
+                   <p>n/a</p>
+                }
             </div>
         </div>
         <div class="cell colspan10">
@@ -30,15 +38,15 @@
             <tbody>
                 <tr>
                     <td>Date:</td>
-                    <td>@Model.From.ToString("dd MMMM yyyy")</td>
+                    @CheckDateIfNull(Model.From, "dd MMMM yyyy")
                 </tr>
                 <tr>
                     <td>From:</td>
-                    <td>@Model.From.ToString("hh:mm")</td>
+                    @CheckDateIfNull(Model.From, "dd MMMM hh:mm")
                 </tr>
                 <tr>
                     <td>To:</td>
-                    <td>@Model.To.ToString("hh:mm")</td>
+                    @CheckDateIfNull(Model.To, "dd MMMM hh:mm")
                 </tr>
                 <tr>
                     <td>Location:</td>
@@ -50,9 +58,6 @@
     <hr />
     <div class="row description">
         <div class="cell">
-            @{
-                Model.LongDescription = null;
-            }
             @if (!@String.IsNullOrEmpty(Model.LongDescription))
             {
                 <p>@Model.LongDescription</p>
@@ -64,3 +69,14 @@
         </div>
     </div>
 </div>
+
+@helper CheckDateIfNull(DateTime? date, string format) { 
+    if (date != null)
+    {
+        <td>@date.Value.ToString(format)</td>
+    }
+    else
+    {
+        <td>n/a</td>
+    }
+}
