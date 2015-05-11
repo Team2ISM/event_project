@@ -10,9 +10,9 @@ namespace team2project.Models
 
         public string Description { get; set; }
 
-        public DateTime From { get; set; }
+        public DateTime? From { get; set; }
 
-        public DateTime To { get; set; }
+        public DateTime? To { get; set; }
 
         public string Location { get; set; }
 
