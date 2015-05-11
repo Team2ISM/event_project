@@ -12,7 +12,7 @@
         <div class="cell colspan2">
             <div class="tile-small">
                 <h4>@Model.From.ToString("dd")</h4>
-                <p>@Model.From.ToString("MMMM", new CultureInfo("en"))</p>
+                <p>@Model.From.ToString("MMMM")</p>
             </div>
         </div>
         <div class="cell colspan10">
@@ -30,7 +30,7 @@
             <tbody>
                 <tr>
                     <td>Date:</td>
-                    <td>@Model.From.ToString("dd MMMM yyyy", new CultureInfo("en"))</td>
+                    <td>@Model.From.ToString("dd MMMM yyyy")</td>
                 </tr>
                 <tr>
                     <td>From:</td>
@@ -50,13 +50,16 @@
     <hr />
     <div class="row description">
         <div class="cell">
-            @if (@Model.LongDesc.IsEmpty())
+            @{
+                Model.LongDescription = null;
+            }
+            @if (!@String.IsNullOrEmpty(Model.LongDescription))
             {
-                <p>@Model.LongDesc</p>
+                <p>@Model.LongDescription</p>
             }
             else
             {
-                <p>@Model.Desc</p>
+                <p>@Model.Description</p>
             }
         </div>
     </div>

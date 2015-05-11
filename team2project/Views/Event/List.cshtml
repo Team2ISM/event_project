@@ -1,6 +1,7 @@
 @{
     ViewBag.Title = "List";
 }
+
 @model System.Collections.Generic.List<team2project.Models.EventViewModel>
 @using System.Globalization
 @section css{
@@ -25,7 +26,7 @@
                 <tr>
                     <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id })</td>
                     <td>@Html.ActionLink(evnt.Title, "Details", new { evnt.Id })</td>
-                    <td>@Html.ActionLink(evnt.From.ToString("dd MMMM yyyy", new CultureInfo("en")), "Details", new { evnt.Id })</td>
+                    <td>@Html.ActionLink(evnt.From.ToString("dd MMMM yyyy"), "Details", new { evnt.Id })</td>
                     <td>@Html.ActionLink(evnt.From.ToString("hh:mm") + " - " + @evnt.To.ToString("hh:mm"), "Details", new { evnt.Id })</td>
                     <td>@Html.ActionLink(evnt.Location, "Details", new { evnt.Id })</td>
                 </tr>
