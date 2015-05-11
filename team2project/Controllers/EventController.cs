@@ -1,36 +1,68 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using team2project.Models;
-using System.Globalization;
-using System.Web.Routing;
+using DAL.Models;
+using BLL.Classes;
 
 namespace team2project.Controllers
 {
     public class EventController : Controller
     {
-        //
-        // GET: /Event/
+        BusinessLogicLayer <EventViewModel, EventModel> Bll;
 
+
+        [HttpGet]
         public ActionResult Index()
         {
-            var model = new DataProvider().GetEvents();
-            return View("~/Views/Event/List.cshtml", model);
+            Bll = new BusinessLogicLayer<Models.EventViewModel, EventModel>();
+            return View("List", Bll.GetList());
         }
 
-        // GET: /Home/List
+        
         [HttpGet]
-        public ActionResult Details(uint id)
+        public ActionResult Details(int id)
         {
-            var model = new DataProvider().GetById(id);
-            if (model == null)
-            {
-                return RedirectToAction("Index", new { controller = "Error", action = "Index" });
-            }
-            return View(model);
+            return View();
         }
+
+        //
+        // GET: /EmployeeInfo/Create
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var Event = new EventViewModel();
+            return View(Event);
+        }
+
+        //
+        // POST: /EmployeeInfo/Create
+
+        [HttpPost]
+        public ActionResult Create(EventViewModel evnt)
+        {
+            try
+            {
+                evnt.Id = Guid.NewGuid().ToString();
+                Bll.Create(evnt);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //[HttpGet]
+        //public ActionResult Details(uint id)
+        //{
+        //    var model = new DataProvider().GetById(id);
+        //    if (model == null)
+        //    {
+        //        return RedirectToAction("Index", new { controller = "Error", action = "Index" });
+        //    }
+        //    return View(model);
+        //}
 
     }
 }
