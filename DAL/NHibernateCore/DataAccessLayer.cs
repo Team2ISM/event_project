@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Cfg;
+using System.IO;
 
 namespace DAL.NHibernateCore
 {
@@ -17,12 +18,9 @@ namespace DAL.NHibernateCore
             {
                 if (sessionFactory == null)
                 {
-
                     var cgf = new Configuration();
-                    var data = cgf.Configure("C:\\Users\\milbro\\Source\\Repos\\team2project\\DAL\\NHibernateCore\\Configuration\\hibernate.cfg.xml");
-                    //var data = cgf.Configure(HttpContext.Current.Server.MapPath(@"~/Models/NHibernate/hibernate.cfg.xml"));
-
-                    cgf.AddDirectory(new System.IO.DirectoryInfo("C:\\Users\\milbro\\Source\\Repos\\team2project\\DAL\\NHibernateCore\\Mappings"));
+                    var data = cgf.Configure(System.AppDomain.CurrentDomain.BaseDirectory + "..\\DAL\\NHibernateCore\\Configuration\\hibernate.cfg.xml");
+                    cgf.AddDirectory(new System.IO.DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory + "..\\DAL\\NHibernateCore\\Mappings"));
                     sessionFactory = data.BuildSessionFactory();
                 }
 
