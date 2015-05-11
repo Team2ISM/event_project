@@ -25,6 +25,12 @@ namespace team2project
             );
 
             routes.MapRoute(
+                name: "CreateEvent",
+                url: "createEvent",
+                defaults: new { controller = "Event", action = "Create" }
+            );
+
+            routes.MapRoute(
                 name: "EventDetails",
                 url: "eventDetails/{id}",
                 defaults: new { controller = "Event", action = "Details" },
