@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Cfg;
-using System.IO;
 
 namespace DAL.NHibernateCore
 {
@@ -36,7 +35,7 @@ namespace DAL.NHibernateCore
                 }
             }
 
-            public TModel GetById(int Id)
+            public TModel GetById(string Id)
             {
                 TModel Model;
                 using (ISession session = OpenSession())

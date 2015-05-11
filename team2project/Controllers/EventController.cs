@@ -14,14 +14,15 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            Bll = new BusinessLogicLayer<Models.EventViewModel, EventModel>();
+            Bll = new BusinessLogicLayer<EventViewModel, EventModel>();
             return View("List", Bll.GetList());
         }
 
         
         [HttpGet]
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
+            EventViewModel Event = Bll.GetById(id);
             return View();
         }
 

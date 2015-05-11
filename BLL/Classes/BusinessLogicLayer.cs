@@ -30,5 +30,11 @@ namespace BLL.Classes
             TModel model = AutoMapper.Mapper.Map<TModel>(viewModel);
             Model.Create(model);
         }
+
+        public TViewModel GetById(string id)
+        { 
+            AutoMapper.Mapper.CreateMap<TModel, TViewModel>();
+            return AutoMapper.Mapper.Map<TViewModel>(Model.GetById(id));
+        }
     }
 }
