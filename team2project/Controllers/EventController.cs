@@ -41,16 +41,17 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Create(EventViewModel evnt)
         {
-            try
-            {
+            //try
+            //{
                 evnt.Id = Guid.NewGuid().ToString();
+                Bll = new BusinessLogicLayer<Models.EventViewModel, EventModel>();
                 Bll.Create(evnt);
                 return RedirectToAction("Index");
-            }
-            catch
+            //}
+            /*catch
             {
                 return View();
-            }
+            }*/
         }
 
         //[HttpGet]

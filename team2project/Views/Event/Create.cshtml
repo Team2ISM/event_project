@@ -1,0 +1,42 @@
+@{
+    ViewBag.Title = "Create event";
+}
+
+@model team2project.Models.EventViewModel
+@using System.Globalization
+@section css{
+    @Styles.Render("~/Content/Home/List.css")
+}
+
+<div >
+    <h1>@ViewBag.Title</h1>
+    @using (Html.BeginForm("Create", "EventController", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.Id)
+        <p>
+            @Html.LabelFor(m => m.Title, "Title")<br>
+            @Html.EditorFor(m => m.Title)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Description, "Description")<br>
+            @Html.EditorFor(m => m.Description)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.From, "From")<br>
+            @Html.EditorFor(m => m.From)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.To, "To")<br>
+            @Html.EditorFor(m => m.To)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Location, "Location")<br>
+            @Html.EditorFor(m => m.Location)
+        </p>
+        <p>
+            <label for="LongDescription">LongDescription</label><br>
+            <input class="text-box" id="LongDescription" name="LongDescription" type="textarea" value="">
+        </p>
+        <input type="submit" value="Create" />
+    }
+</div>
