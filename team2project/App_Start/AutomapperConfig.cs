@@ -10,6 +10,7 @@ namespace team2project
         public static void RegisterMaps()
         {
             AutoMapper.Mapper.CreateMap<DAL.Models.EventModel, Models.EventViewModel>();
+            AutoMapper.Mapper.CreateMap<Models.EventViewModel, DAL.Models.EventModel>();
         }
     }
 }
