@@ -4,6 +4,10 @@ namespace team2project.Models
 {
     public class EventViewModel
     {
+        public EventViewModel() 
+        {
+            Id = Guid.NewGuid().ToString();        
+        }
         public string Id { get; set; }
 
         public string Title { get; set; }
