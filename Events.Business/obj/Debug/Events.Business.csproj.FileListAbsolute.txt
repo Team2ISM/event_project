@@ -1,0 +1,14 @@
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\BLL.dll
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\BLL.pdb
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\AutoMapper.dll
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\DAL.dll
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\NHibernate.dll
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\Iesi.Collections.dll
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\DAL.pdb
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\AutoMapper.xml
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\NHibernate.xml
+C:\Users\milbro\Source\Repos\team2project\BLL\bin\Debug\Iesi.Collections.xml
+C:\Users\milbro\Source\Repos\team2project\BLL\obj\Debug\Events.Business.csprojResolveAssemblyReference.cache
+C:\Users\milbro\Source\Repos\team2project\BLL\obj\Debug\Events.Business.csproj.ResolveComReference.cache
+C:\Users\milbro\Source\Repos\team2project\BLL\obj\Debug\BLL.dll
+C:\Users\milbro\Source\Repos\team2project\BLL\obj\Debug\BLL.pdb
