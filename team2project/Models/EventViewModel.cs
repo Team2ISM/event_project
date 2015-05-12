@@ -6,7 +6,9 @@ namespace team2project.Models
     {
         public EventViewModel() 
         {
-            Id = Guid.NewGuid().ToString();        
+            Id = Guid.NewGuid().ToString();
+            From = DateTime.Now.AddDays(1);
+            To = DateTime.Now.AddDays(1);
         }
         public string Id { get; set; }
 
