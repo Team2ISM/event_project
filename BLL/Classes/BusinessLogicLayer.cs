@@ -14,14 +14,9 @@ namespace BLL.Classes
 
         public IList<TViewModel> GetList()
         {
-            var ListModels = Model.GetList();
-            List<TViewModel> ListViewModels = new List<TViewModel>();
+            var listModels = Model.GetList();
             AutoMapper.Mapper.CreateMap<TModel, TViewModel>();
-            foreach (var item in ListModels)
-            {
-                ListViewModels.Add(AutoMapper.Mapper.Map<TViewModel>(item));
-            }
-            return ListViewModels;
+            return AutoMapper.Mapper.Map <List<TViewModel>>(listModels);    
         }
 
         public void Create(TViewModel viewModel)

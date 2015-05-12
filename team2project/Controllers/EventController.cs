@@ -8,34 +8,33 @@ namespace team2project.Controllers
 {
     public class EventController : Controller
     {
-        BusinessLogicLayer<EventViewModel, EventModel> Bll;
+        BusinessLogicLayer<EventViewModel, EventModel> BusinesLogicLayer;
 
         [HttpGet]
         public ActionResult Index()
         {
-            Bll = new BusinessLogicLayer<EventViewModel, EventModel>();
-            return View("List", Bll.GetList());
+            BusinesLogicLayer = new BusinessLogicLayer<EventViewModel, EventModel>();
+            return View("List", BusinesLogicLayer.GetList());
         }
 
         [HttpGet]
         public ActionResult Details(string id)
         {
-            Bll = new BusinessLogicLayer<EventViewModel, EventModel>();
+            BusinesLogicLayer = new BusinessLogicLayer<EventViewModel, EventModel>();
 
-            var Event = Bll.GetById(id);
-            if (Event == null)
+            var evnt = BusinesLogicLayer.GetById(id);
+            if (evnt == null)
             {
                 return View("EventNotFound");
             }
 
-            return View(Event);
+            return View(evnt);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            var Event = new EventViewModel();
-            return View(Event);
+            return View();
         }
 
         [HttpPost]
@@ -43,9 +42,8 @@ namespace team2project.Controllers
         {
             try
             {
-                evnt.Id = Guid.NewGuid().ToString();
-                Bll = new BusinessLogicLayer<Models.EventViewModel, EventModel>();
-                Bll.Create(evnt);
+                BusinesLogicLayer = new BusinessLogicLayer<Models.EventViewModel, EventModel>();
+                BusinesLogicLayer.Create(evnt);
                 return RedirectToAction("Index");
             }
             catch
