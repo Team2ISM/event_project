@@ -8,3 +8,15 @@ C:\Users\milbro\Source\Repos\team2project\DAL\obj\Debug\Events.NHibernateDataPro
 C:\Users\milbro\Source\Repos\team2project\DAL\obj\Debug\Events.NHibernateDataProvider.csproj.ResolveComReference.cache
 C:\Users\milbro\Source\Repos\team2project\DAL\obj\Debug\DAL.dll
 C:\Users\milbro\Source\Repos\team2project\DAL\obj\Debug\DAL.pdb
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\DAL.dll
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\DAL.pdb
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\Iesi.Collections.dll
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\NHibernate.dll
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\Iesi.Collections.xml
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\NHibernate.xml
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\obj\Debug\Events.NHibernateDataProvider.csprojResolveAssemblyReference.cache
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\obj\Debug\Events.NHibernateDataProvider.csproj.ResolveComReference.cache
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\obj\Debug\DAL.dll
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\obj\Debug\DAL.pdb
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\App_Data\MyDB.mdf
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\App_Data\MyDB_log.ldf

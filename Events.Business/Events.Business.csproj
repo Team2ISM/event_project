@@ -87,7 +87,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\Events.NHibernateDataProvider.csproj">
+    <ProjectReference Include="..\Events.NHibernateDataProvider\Events.NHibernateDataProvider.csproj">
       <Project>{5340697e-46cc-41dd-aa45-9850f9055f97}</Project>
       <Name>Events.NHibernateDataProvider</Name>
     </ProjectReference>

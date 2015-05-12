@@ -65,7 +65,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="NHibernateCore\Configuration\hibernate.cfg.xml" />
+    <Content Include="App_Data\MyDB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\MyDB_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>MyDB.mdf</DependentUpon>
+    </Content>
+    <Content Include="NHibernateCore\Configuration\hibernate.cfg.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="NHibernateCore\Mappings\EventModel.hbm.xml" />
     <Content Include="Scripts\dbo.Event.sql" />
   </ItemGroup>
