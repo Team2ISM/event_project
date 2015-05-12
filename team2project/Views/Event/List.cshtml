@@ -27,7 +27,7 @@
                     <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
                     <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
                     <td>@Html.RouteLink(evnt.From != null ? evnt.From.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
-                        @if (evnt.To != null && ( evnt.From != null || evnt.To.Value.DayOfYear != evnt.From.Value.DayOfYear )) {
+                        @if (evnt.To != null && ( evnt.From == null || evnt.To.Value.DayOfYear != evnt.From.Value.DayOfYear )) {
                             @Html.RouteLink(evnt.To.Value.ToString("dd MMMM yyyy"), "EventDetails", new { evnt.Id })
                         }
                     </td>
