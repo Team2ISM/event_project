@@ -34,7 +34,8 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            var evnt = new EventViewModel();
+            return View(evnt);
         }
 
         [HttpPost]
