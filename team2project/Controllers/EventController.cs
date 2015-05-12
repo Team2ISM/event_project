@@ -10,7 +10,6 @@ namespace team2project.Controllers
     {
         BusinessLogicLayer<EventViewModel, EventModel> Bll;
 
-
         [HttpGet]
         public ActionResult Index()
         {
@@ -18,24 +17,19 @@ namespace team2project.Controllers
             return View("List", Bll.GetList());
         }
 
-
         [HttpGet]
         public ActionResult Details(string id)
         {
             Bll = new BusinessLogicLayer<EventViewModel, EventModel>();
 
             var Event = Bll.GetById(id);
-            if (!(Event == null))
-            {
-                return View(Event);
-            }
-            else
+            if (Event == null)
             {
                 return View("EventNotFound");
             }
 
+            return View(Event);
         }
-
 
         [HttpGet]
         public ActionResult Create()

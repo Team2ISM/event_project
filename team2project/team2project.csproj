@@ -204,13 +204,13 @@
     <Content Include="Views\Error\Page404.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BLL\BLL.csproj">
+    <ProjectReference Include="..\BLL\Events.Business.csproj">
       <Project>{c68a6f0d-aae7-4639-8867-6fd26f0bfb2b}</Project>
-      <Name>BLL</Name>
+      <Name>Events.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
+    <ProjectReference Include="..\DAL\Events.NHibernateDataProvider.csproj">
       <Project>{5340697e-46cc-41dd-aa45-9850f9055f97}</Project>
-      <Name>DAL</Name>
+      <Name>Events.NHibernateDataProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
