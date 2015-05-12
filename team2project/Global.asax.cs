@@ -18,6 +18,7 @@ namespace team2project
         {
             AreaRegistration.RegisterAllAreas();
             MyCultureConfig.SetCulture("en");
+            AutomapperConfig.RegisterMaps();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
