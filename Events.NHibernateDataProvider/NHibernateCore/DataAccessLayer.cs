@@ -18,7 +18,7 @@ namespace DAL.NHibernateCore
                 if (sessionFactory == null)
                 {
                     var cgf = new Configuration();
-                    var data = cgf.Configure(System.AppDomain.CurrentDomain.BaseDirectory + @"..\Events.NHibernateDataProvider\NHibernateCore\Configuration\hibernate.cfg.xml");
+                    var data = cgf.Configure();
                     cgf.AddDirectory(new System.IO.DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory + @"..\Events.NHibernateDataProvider\NHibernateCore\Mappings"));
                     sessionFactory = data.BuildSessionFactory();
                 }

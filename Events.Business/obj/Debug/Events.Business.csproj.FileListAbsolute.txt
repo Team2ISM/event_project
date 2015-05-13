@@ -26,5 +26,3 @@ C:\Users\milbro\Source\Repos\team2project\Events.Business\bin\Debug\DAL.pdb
 C:\Users\milbro\Source\Repos\team2project\Events.Business\bin\Debug\AutoMapper.xml
 C:\Users\milbro\Source\Repos\team2project\Events.Business\bin\Debug\NHibernate.xml
 C:\Users\milbro\Source\Repos\team2project\Events.Business\bin\Debug\Iesi.Collections.xml
-C:\Users\milbro\Source\Repos\team2project\Events.Business\bin\Debug\App_Data\MyDB.mdf
-C:\Users\milbro\Source\Repos\team2project\Events.Business\bin\Debug\App_Data\MyDB_log.ldf
