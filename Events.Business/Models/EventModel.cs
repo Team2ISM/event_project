@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DAL.Models
+namespace BLL.Models
 {
     public class EventModel
     {

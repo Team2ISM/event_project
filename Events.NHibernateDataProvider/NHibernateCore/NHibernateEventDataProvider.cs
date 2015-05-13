@@ -1,46 +1,26 @@
 ﻿using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Cfg;
-
+using BLL;
 namespace DAL.NHibernateCore
 {
-        public class DataAccessLayer<TModel>
+    public class NHibernateEventDataProvider<TModel> : IEventDataProvider<TModel>
         {
-            //Define the session factory, this is per database 
-            ISessionFactory sessionFactory;
-
-            /// <summary>
-            /// Method to create session and manage entities
-            /// </summary>
-            /// <returns></returns>
-            ISession OpenSession()
-            {
-                if (sessionFactory == null)
-                {
-                    var cgf = new Configuration();
-                    var data = cgf.Configure();
-                    cgf.AddDirectory(new System.IO.DirectoryInfo(System.AppDomain.CurrentDomain.BaseDirectory + @"..\Events.NHibernateDataProvider\NHibernateCore\Mappings"));
-                    sessionFactory = data.BuildSessionFactory();
-                }
-
-                return sessionFactory.OpenSession();
-            }
-
             public IList<TModel> GetList()
             {
-                using (ISession session = OpenSession())
+                using (ISession session = Helper.OpenSession())
                 {
                     var criteria = session.CreateCriteria(typeof(TModel));
                     return criteria.List<TModel>();
                 }
             }
 
-            public TModel GetById(string Id)
+            public TModel GetById(string id)
             {
                 TModel Model;
-                using (ISession session = OpenSession())
+                using (ISession session = Helper.OpenSession())
                 {
-                    Model = session.Get<TModel>(Id);
+                    Model = session.Get<TModel>(id);
                 }
                 return Model;
             }
@@ -49,7 +29,7 @@ namespace DAL.NHibernateCore
             {
                 int EmpNo = 0;
 
-                using (ISession session = OpenSession())
+                using (ISession session = Helper.OpenSession())
                 {
                     //Perform transaction
                     using (ITransaction tran = session.BeginTransaction())
@@ -64,7 +44,7 @@ namespace DAL.NHibernateCore
 
             public void Update(TModel model)
             {
-                using (ISession session = OpenSession())
+                using (ISession session = Helper.OpenSession())
                 {
                     using (ITransaction tran = session.BeginTransaction())
                     {
@@ -76,7 +56,7 @@ namespace DAL.NHibernateCore
 
             public void Delete(TModel model)
             {
-                using (ISession session = OpenSession())
+                using (ISession session = Helper.OpenSession())
                 {
                     using (ITransaction tran = session.BeginTransaction())
                     {

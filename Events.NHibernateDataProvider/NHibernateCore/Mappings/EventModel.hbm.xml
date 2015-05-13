@@ -1,25 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping
  xmlns="urn:nhibernate-mapping-2.2"
- assembly="DAL"
- namespace="DAL.Models"
+ assembly="BLL"
+ namespace="BLL.Models"
  auto-import="true">
-
-  <class name="DAL.Models.EventModel,DAL" table="Event">
-    <id name="Id" access="property" column="Id" type="string">
+  <class name="BLL.Models.EventModel, BLL" table="Event">
+    <id name="Id" access="property" type="string">
       <generator class="assigned"></generator>
     </id>
-    <property name="Title" access="property"
-     column="Title" type="string"></property>
-    <property name="Description" access="property"
-     column="Description" type="string"></property>
-    <property name="LongDescription" access="property"
-     column="LongDescription" type="string"></property>
-    <property name="From" access="property"
-     column="FromDate" type="datetime"></property>
-    <property name="To" access="property"
- column="ToDate" type="datetime"></property>
-    <property name="Location" access="property"
-column="Location" type="string"></property>
+    <property name="Title" access="property" type="string"></property>
+    <property name="Description" access="property" type="string"></property>
+    <property name="LongDescription" access="property" type="string"></property>
+    <property name="From" access="property" column="FromDate" type="datetime"></property>
+    <property name="To" access="property" column="ToDate" type="datetime"></property>
+    <property name="Location" access="property" type="string"></property>
   </class>
 </hibernate-mapping>

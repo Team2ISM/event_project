@@ -1,28 +1,31 @@
 ﻿using System;
 using System.Web.Mvc;
 using team2project.Models;
-using DAL.Models;
+using BLL.Models;
 using BLL.Classes;
-
+using Business;
 namespace team2project.Controllers
 {
     public class EventController : Controller
     {
-        BusinessLogicLayer<EventViewModel, EventModel> BusinesLogicLayer;
+       
+        IBusiness<EventViewModel, EventModel> Business;
 
-        [HttpGet]
+        public EventController(IBusiness<EventViewModel, EventModel> business)
+        {
+            Business = business;
+        }
+
+         [HttpGet]
         public ActionResult Index()
         {
-            BusinesLogicLayer = new BusinessLogicLayer<EventViewModel, EventModel>();
-            return View("List", BusinesLogicLayer.GetList());
+            return View("List", Business.GetList());
         }
 
         [HttpGet]
         public ActionResult Details(string id)
         {
-            BusinesLogicLayer = new BusinessLogicLayer<EventViewModel, EventModel>();
-
-            var evnt = BusinesLogicLayer.GetById(id);
+            var evnt = Business.GetById(id);
             if (evnt == null)
             {
                 return View("EventNotFound");
@@ -44,8 +47,7 @@ namespace team2project.Controllers
             if (!ModelState.IsValid) return View(evnt);
             try
             {
-                BusinesLogicLayer = new BusinessLogicLayer<Models.EventViewModel, EventModel>();
-                BusinesLogicLayer.Create(evnt);
+                Business.Create(evnt);
                 return RedirectToAction("Index");
             }
             catch

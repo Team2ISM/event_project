@@ -18,3 +18,9 @@ C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\obj\Debu
 C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\obj\Debug\Events.NHibernateDataProvider.csproj.ResolveComReference.cache
 C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\obj\Debug\DAL.dll
 C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\obj\Debug\DAL.pdb
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\BLL.dll
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\Business.dll
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\AutoMapper.dll
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\BLL.pdb
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\Business.pdb
+C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\bin\Debug\AutoMapper.xml

@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\BusinessLogicLayer.cs" />
+    <Compile Include="Classes\EventsBusiness.cs" />
+    <Compile Include="IEventDataProvider.cs" />
+    <Compile Include="Models\EventModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,9 +89,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Events.NHibernateDataProvider\Events.NHibernateDataProvider.csproj">
-      <Project>{5340697e-46cc-41dd-aa45-9850f9055f97}</Project>
-      <Name>Events.NHibernateDataProvider</Name>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{87a37089-f4af-4165-b196-25cc9ad0f3cf}</Project>
+      <Name>Business</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
