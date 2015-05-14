@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using NHibernate;
 using NHibernate.Cfg;
+using BLL.Models;
 namespace DAL.NHibernateCore
 {
     class Helper
@@ -16,9 +17,9 @@ namespace DAL.NHibernateCore
         {
             if (sessionFactory == null)
             {
-                var cgf = new Configuration();
-                var data = cgf.Configure();
-                cgf.AddDirectory(new System.IO.DirectoryInfo(@"C:\Users\milbro\Source\Repos\team2project\Events.NHibernateDataProvider\NHibernateCore\Mappings"));
+                var config = new Configuration();
+                var data = config.Configure();
+                config.AddAssembly(typeof(EventModel).Assembly);
                 sessionFactory = data.BuildSessionFactory();
             }
 
