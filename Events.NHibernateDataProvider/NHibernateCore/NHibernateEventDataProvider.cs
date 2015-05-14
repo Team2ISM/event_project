@@ -2,6 +2,8 @@
 using NHibernate;
 using NHibernate.Cfg;
 using BLL;
+using BLL.Interfaces;
+
 namespace DAL.NHibernateCore
 {
     public class NHibernateEventDataProvider<TModel> : IEventDataProvider<TModel>

@@ -169,7 +169,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\EventViewModel.cs" />
-    <Compile Include="NHibernate\ManagedWebSessionContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -259,10 +258,6 @@
     <Content Include="Fonts\packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Business\Business.csproj">
-      <Project>{87a37089-f4af-4165-b196-25cc9ad0f3cf}</Project>
-      <Name>Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Events.Business\Events.Business.csproj">
       <Project>{c68a6f0d-aae7-4639-8867-6fd26f0bfb2b}</Project>
       <Name>Events.Business</Name>
@@ -270,6 +265,10 @@
     <ProjectReference Include="..\Events.NHibernateDataProvider\Events.NHibernateDataProvider.csproj">
       <Project>{5340697e-46cc-41dd-aa45-9850f9055f97}</Project>
       <Name>Events.NHibernateDataProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RuntimeCacheManager\RuntimeCache.csproj">
+      <Project>{f9d2cf50-3299-47c3-bea6-d8ebb683f442}</Project>
+      <Name>RuntimeCache</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

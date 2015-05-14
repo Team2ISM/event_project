@@ -3,15 +3,14 @@ using System.Web.Mvc;
 using team2project.Models;
 using BLL.Models;
 using BLL.Classes;
-using Business;
 namespace team2project.Controllers
 {
     public class EventController : Controller
     {
-       
-        IBusiness<EventViewModel, EventModel> Business;
 
-        public EventController(IBusiness<EventViewModel, EventModel> business)
+        EventsBusiness<EventViewModel, EventModel> Business;
+
+        public EventController(EventsBusiness<EventViewModel, EventModel> business)
         {
             Business = business;
         }
@@ -47,7 +46,7 @@ namespace team2project.Controllers
             if (!ModelState.IsValid) return View(evnt);
             try
             {
-                Business.Create(evnt);
+                Business.Create(evnt.Id, evnt);
                 return RedirectToAction("Index");
             }
             catch
