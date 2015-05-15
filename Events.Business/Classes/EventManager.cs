@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using BLL.Interfaces;
-using BLL.Models;
+using Events.Business.Interfaces;
+using Events.Business.Models;
 
-namespace BLL.Classes
+namespace Events.Business.Classes
 {
     public class EventManager
     {

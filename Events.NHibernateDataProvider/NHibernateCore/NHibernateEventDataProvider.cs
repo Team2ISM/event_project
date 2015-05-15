@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using NHibernate;
-using NHibernate.Cfg;
-using BLL;
-using BLL.Interfaces;
-using BLL.Models;
+using Events.Business.Interfaces;
+using Events.Business.Models;
 
-namespace DAL.NHibernateCore
+namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateEventDataProvider : IEventDataProvider
     {

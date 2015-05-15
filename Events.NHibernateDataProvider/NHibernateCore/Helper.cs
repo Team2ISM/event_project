@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using NHibernate;
+﻿using NHibernate;
 using NHibernate.Cfg;
-using BLL.Models;
-namespace DAL.NHibernateCore
+
+namespace Events.NHibernateDataProvider.NHibernateCore
 {
     class Helper
     {

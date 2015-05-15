@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BLL.Models;
+﻿using System.Collections.Generic;
+using Events.Business.Models;
 
-namespace BLL.Interfaces
+namespace Events.Business.Interfaces
 {
     public interface IEventDataProvider
     {

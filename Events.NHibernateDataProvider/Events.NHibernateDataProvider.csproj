@@ -7,8 +7,8 @@
     <ProjectGuid>{5340697E-46CC-41DD-AA45-9850F9055F97}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DAL</RootNamespace>
-    <AssemblyName>DAL</AssemblyName>
+    <RootNamespace>Events.NHibernateDataProvider</RootNamespace>
+    <AssemblyName>Events.NHibernateDataProvider</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -69,7 +69,9 @@
     <Content Include="NHibernateCore\Configuration\hibernate.cfg.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="NHibernateCore\Mappings\EventModel.hbm.xml" />
+    <EmbeddedResource Include="NHibernateCore\Mappings\EventModel.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Scripts\dbo.Event.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -139,7 +141,6 @@
       <Name>Events.Business</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

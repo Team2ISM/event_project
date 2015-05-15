@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BLL.Models
+namespace Events.Business.Models
 {
     public class EventModel
     {

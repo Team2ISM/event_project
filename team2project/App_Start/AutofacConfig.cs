@@ -1,14 +1,12 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using BLL;
-using BLL.Classes;
-using BLL.Models;
-using DAL.NHibernateCore;
+using Events.Business.Classes;
+using Events.NHibernateDataProvider.NHibernateCore;
 using System.Web.Mvc;
-using team2project.Models;
 using RuntimeCache;
-using BLL.Interfaces;
-using Events.EntityFrameworkDataProvider;
+using Events.Business.Interfaces;
+using Events.Business;
+
 namespace team2project
 {
     public class AutofacConfig

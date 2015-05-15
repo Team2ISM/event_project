@@ -1,7 +1,5 @@
-﻿using AutoMapper;
-using BLL.Classes;
-using BLL.Models;
-using System;
+﻿using Events.Business.Classes;
+using Events.Business.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using team2project.Models;

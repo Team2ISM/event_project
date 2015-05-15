@@ -7,8 +7,8 @@
     <ProjectGuid>{C68A6F0D-AAE7-4639-8867-6FD26F0BFB2B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BLL</RootNamespace>
-    <AssemblyName>BLL</AssemblyName>
+    <RootNamespace>Events.Business</RootNamespace>
+    <AssemblyName>Events.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
