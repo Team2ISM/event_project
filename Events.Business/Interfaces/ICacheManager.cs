@@ -10,5 +10,6 @@ namespace BLL.Interfaces
     {
         TValue FromCache<TValue>(string key, Func<TValue> function);
         CacheItem ToCache<TValue>(string key, Func<TValue> function);
+        void RemoveEventsList();
     }
 }

@@ -21,38 +21,38 @@ namespace team2project.Controllers
             return View("List", Business.GetList());
         }
 
-        [HttpGet]
-        public ActionResult Details(string id)
-        {
-            var evnt = Business.GetById(id);
-            if (evnt == null)
-            {
-                return View("EventNotFound");
-            }
+         [HttpGet]
+         public ActionResult Details(string id)
+         {
+             var evnt = Business.GetById(id);
+             if (evnt == null)
+             {
+                 return View("EventNotFound");
+             }
 
-            return View(evnt);
-        }
+             return View(evnt);
+         }
 
-        [HttpGet]
-        public ActionResult Create()
-        {
-            var evnt = new EventViewModel();
-            return View(evnt);
-        }
+         [HttpGet]
+         public ActionResult Create()
+         {
+             var evnt = new EventViewModel();
+             return View(evnt);
+         }
 
-        [HttpPost]
-        public ActionResult Create(EventViewModel evnt)
-        {
-            if (!ModelState.IsValid) return View(evnt);
-            try
-            {
-                Business.Create(evnt.Id, evnt);
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+         [HttpPost]
+         public ActionResult Create(EventViewModel evnt)
+         {
+             if (!ModelState.IsValid) return View(evnt);
+             try
+             {
+                 Business.Create(evnt.Id, evnt);
+                 return RedirectToAction("Index");
+             }
+             catch
+             {
+                 return View();
+             }
+         }
     }
 }

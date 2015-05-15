@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using team2project.Models;
 using RuntimeCache;
 using BLL.Interfaces;
+using Events.EntityFrameworkDataProvider;
 namespace team2project
 {
     public class AutofacConfig

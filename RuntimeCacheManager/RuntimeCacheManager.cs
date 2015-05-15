@@ -33,5 +33,14 @@ namespace RuntimeCache
             }
             return cacheItem;
         }
+
+        public void RemoveEventsList() 
+        {
+            CacheItem cacheItem = cache.GetCacheItem("eventsList");
+            if (cacheItem != null)
+            {
+                MemoryCache.Default.Remove(cacheItem.Key);
+            }
+        }
     }
 }

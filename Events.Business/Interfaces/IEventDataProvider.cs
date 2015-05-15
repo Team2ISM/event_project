@@ -14,8 +14,8 @@ namespace BLL.Interfaces
 
         int Create(TModel model);
 
-        void Update(TModel model);
+        //void Update(TModel model);
 
-        void Delete(TModel model);
+        //void Delete(TModel model);
     }
 }

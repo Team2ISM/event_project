@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.NHibernateDataProvid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuntimeCache", "RuntimeCacheManager\RuntimeCache.csproj", "{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.EntityFrameworkDataProvider", "Events.EntityFrameworkDataProvider\Events.EntityFrameworkDataProvider.csproj", "{402FBD66-1D81-40C7-8583-8D10A6239D20}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{402FBD66-1D81-40C7-8583-8D10A6239D20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{402FBD66-1D81-40C7-8583-8D10A6239D20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{402FBD66-1D81-40C7-8583-8D10A6239D20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{402FBD66-1D81-40C7-8583-8D10A6239D20}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
