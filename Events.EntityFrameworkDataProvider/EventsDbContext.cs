@@ -8,15 +8,14 @@ using System.Data.Entity;
 
 namespace Events.EntityFrameworkDataProvider
 {
-     public partial class EventsDbContext<TModel>: DbContext
-         where TModel : class
+     public partial class EventsDbContext: DbContext
     {
          public EventsDbContext()
              : base("name=EntityFrameworkConnection")
         {
         }
 
-         public virtual DbSet<TModel> Event { get; set; }
+         public virtual DbSet<EventModel> Event { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

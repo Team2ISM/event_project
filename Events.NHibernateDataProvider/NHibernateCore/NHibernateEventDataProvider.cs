@@ -3,31 +3,32 @@ using NHibernate;
 using NHibernate.Cfg;
 using BLL;
 using BLL.Interfaces;
+using BLL.Models;
 
 namespace DAL.NHibernateCore
 {
-    public class NHibernateEventDataProvider<TModel> : IEventDataProvider<TModel>
+    public class NHibernateEventDataProvider : IEventDataProvider
     {
-        public IList<TModel> GetList()
+        public IList<EventModel> GetList()
         {
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria(typeof(TModel));
-                return criteria.List<TModel>();
+                var criteria = session.CreateCriteria(typeof(EventModel));
+                return criteria.List<EventModel>();
             }
         }
 
-        public TModel GetById(string id)
+        public EventModel GetById(string id)
         {
-            TModel Model;
+            EventModel Model;
             using (ISession session = Helper.OpenSession())
             {
-                Model = session.Get<TModel>(id);
+                Model = session.Get<EventModel>(id);
             }
             return Model;
         }
 
-        public int Create(TModel model)
+        public int Create(EventModel model)
         {
             int EmpNo = 0;
 
@@ -44,7 +45,7 @@ namespace DAL.NHibernateCore
         }
 
 
-        public void Update(TModel model)
+        public void Update(EventModel model)
         {
             using (ISession session = Helper.OpenSession())
             {
@@ -56,7 +57,7 @@ namespace DAL.NHibernateCore
             }
         }
 
-        public void Delete(TModel model)
+        public void Delete(EventModel model)
         {
             using (ISession session = Helper.OpenSession())
             {

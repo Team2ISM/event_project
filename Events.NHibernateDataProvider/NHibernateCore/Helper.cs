@@ -19,7 +19,7 @@ namespace DAL.NHibernateCore
             {
                 var config = new Configuration();
                 var data = config.Configure();
-                config.AddAssembly(typeof(EventModel).Assembly);
+                config.AddAssembly(typeof(Helper).Assembly);
                 sessionFactory = data.BuildSessionFactory();
             }
 

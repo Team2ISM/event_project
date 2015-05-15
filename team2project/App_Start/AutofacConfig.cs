@@ -17,9 +17,9 @@ namespace team2project
         {
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
-            builder.RegisterType<EventsBusiness<EventViewModel, EventModel>>();
-            builder.RegisterType<NHibernateEventDataProvider<EventModel>>()
-                .As<IEventDataProvider<EventModel>>();
+            builder.RegisterType<EventManager>();
+            builder.RegisterType<NHibernateEventDataProvider>()
+                .As<IEventDataProvider>();
             builder.RegisterType<RuntimeCacheManager>()
                 .As<ICacheManager>();
             var container = builder.Build();

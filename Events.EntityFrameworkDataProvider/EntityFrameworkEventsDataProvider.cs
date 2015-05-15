@@ -8,27 +8,27 @@ using BLL.Models;
 
 namespace Events.EntityFrameworkDataProvider
 {
-    public class EntityFrameworkEventsDataProvider<TModel> : IEventDataProvider<TModel> where TModel : class, new()
+    public class EntityFrameworkEventsDataProvider : IEventDataProvider
     {
 
-        public IList<TModel> GetList()
+        public IList<EventModel> GetList()
         {
-            IList<TModel> list;
-            using (EventsDbContext<TModel> db = new EventsDbContext<TModel>())
+            IList<EventModel> list;
+            using (EventsDbContext db = new EventsDbContext())
             {
-                list = (IList<TModel>)db.Event.ToList<TModel>();
+                list = db.Event.ToList<EventModel>();
             }
-            return (IList<TModel>)list;
+            return list;
         }
 
-        public TModel GetById(string id)
+        public EventModel GetById(string id)
         {
-            return new TModel();
+            return new EventModel();
         }
 
-        public int Create(TModel model)
+        public int Create(EventModel model)
         {
-            using (EventsDbContext<TModel> db = new EventsDbContext<TModel>())
+            using (EventsDbContext db = new EventsDbContext())
             {
                 db.Event.Add(model);
             }

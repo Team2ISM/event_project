@@ -1,58 +1,60 @@
-﻿using System;
+﻿using AutoMapper;
+using BLL.Classes;
+using BLL.Models;
+using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using team2project.Models;
-using BLL.Models;
-using BLL.Classes;
+
 namespace team2project.Controllers
 {
     public class EventController : Controller
     {
 
-        EventsBusiness<EventViewModel, EventModel> Business;
+        EventManager Manager;
 
-        public EventController(EventsBusiness<EventViewModel, EventModel> business)
+        public EventController(EventManager manager)
         {
-            Business = business;
+            Manager = manager;
         }
 
-         [HttpGet]
+        [HttpGet]
         public ActionResult Index()
         {
-            return View("List", Business.GetList());
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(Manager.GetList());
+            return View("List", list);
         }
 
-         [HttpGet]
-         public ActionResult Details(string id)
-         {
-             var evnt = Business.GetById(id);
-             if (evnt == null)
-             {
-                 return View("EventNotFound");
-             }
+        [HttpGet]
+        public ActionResult Details(string id)
+        {
+            var evnt = AutoMapper.Mapper.Map<EventViewModel>(Manager.GetById(id));
+            if (evnt == null)
+            {
+                return View("EventNotFound");
+            }
 
-             return View(evnt);
-         }
+            return View(evnt);
+        }
 
-         [HttpGet]
-         public ActionResult Create()
-         {
-             var evnt = new EventViewModel();
-             return View(evnt);
-         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var evnt = new EventViewModel();
+            return View(evnt);
+        }
 
-         [HttpPost]
-         public ActionResult Create(EventViewModel evnt)
-         {
-             if (!ModelState.IsValid) return View(evnt);
-             try
-             {
-                 Business.Create(evnt.Id, evnt);
-                 return RedirectToAction("Index");
-             }
-             catch
-             {
-                 return View();
-             }
-         }
+        [HttpPost]
+        public ActionResult Create(EventViewModel evnt)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(evnt);
+            }
+
+            var evntModel = AutoMapper.Mapper.Map<EventModel>(evnt);
+            Manager.Create(evntModel.Id, evntModel);
+            return RedirectToAction("Index");
+        }
     }
 }

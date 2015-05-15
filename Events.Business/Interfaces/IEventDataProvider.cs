@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BLL.Models;
 
 namespace BLL.Interfaces
 {
-    public interface IEventDataProvider<TModel>
+    public interface IEventDataProvider
     {
-        IList<TModel> GetList();
+        IList<EventModel> GetList();
 
-        TModel GetById(string id);
+        EventModel GetById(string id);
 
-        int Create(TModel model);
+        int Create(EventModel evnt);
 
         //void Update(TModel model);
 
