@@ -20,33 +20,33 @@ namespace team2project.Controllers
         {
             return View("List", Business.GetList());
         }
-
+        
         [HttpGet]
         public ActionResult Details(string id)
         {
-            var evnt = Business.GetById(id);
-            if (evnt == null)
+            var currentEvent = Business.GetById(id);
+            if (currentEvent == null)
             {
                 return View("EventNotFound");
             }
 
-            return View(evnt);
+            return View(currentEvent);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            var evnt = new EventViewModel();
-            return View(evnt);
+            var newEvent = new EventViewModel();
+            return View(newEvent);
         }
 
         [HttpPost]
-        public ActionResult Create(EventViewModel evnt)
+        public ActionResult Create(EventViewModel newEvent)
         {
-            if (!ModelState.IsValid) return View(evnt);
+            if (!ModelState.IsValid) return View(newEvent);
             try
             {
-                Business.Create(evnt.Id, evnt);
+                Business.Create(newEvent.Id, newEvent);
                 return RedirectToAction("Index");
             }
             catch
