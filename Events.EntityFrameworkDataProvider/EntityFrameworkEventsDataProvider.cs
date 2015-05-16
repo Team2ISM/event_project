@@ -8,26 +8,27 @@ namespace Events.EntityFrameworkDataProvider
     public class EntityFrameworkEventsDataProvider : IEventDataProvider
     {
 
-        public IList<EventModel> GetList()
+        public IList<Event> GetList()
         {
-            IList<EventModel> list;
+            IList<Event> list;
             using (EventsDbContext db = new EventsDbContext())
             {
-                list = db.Event.ToList<EventModel>();
+                list = db.Event.ToList<Event>();
             }
             return list;
         }
 
-        public EventModel GetById(string id)
+        public Event GetById(string id)
         {
-            return new EventModel();
+            return new Event();
         }
 
-        public int Create(EventModel model)
+        public int Create(Event model)
         {
             using (EventsDbContext db = new EventsDbContext())
             {
                 db.Event.Add(model);
+                db.SaveChanges();
             }
             return 1;
         }

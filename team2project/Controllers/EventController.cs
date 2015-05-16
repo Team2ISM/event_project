@@ -50,7 +50,7 @@ namespace team2project.Controllers
                 return View(evnt);
             }
 
-            var evntModel = AutoMapper.Mapper.Map<EventModel>(evnt);
+            var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             Manager.Create(evntModel.Id, evntModel);
             return RedirectToAction("Index");
         }

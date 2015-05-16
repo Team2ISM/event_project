@@ -16,19 +16,19 @@ namespace Events.Business.Classes
             CacheManager = cacheManager;
         }
 
-        public IList<EventModel> GetList()
+        public IList<Event> GetList()
         {
-            return CacheManager.FromCache<IList<EventModel>>("eventsList",
+            return CacheManager.FromCache<IList<Event>>("eventsList",
                 () =>
                 {
                     return DataProvider.GetList();
                 });
         }
 
-        public void Create(string key, EventModel model)
+        public void Create(string key, Event model)
         {
             DataProvider.Create(model);
-            CacheManager.ToCache<EventModel>(key,
+            CacheManager.ToCache<Event>(key,
                 () =>
                 {
                     return model;
@@ -37,9 +37,9 @@ namespace Events.Business.Classes
 
         }
 
-        public EventModel GetById(string id)
+        public Event GetById(string id)
         {
-            return CacheManager.FromCache<EventModel>(id,
+            return CacheManager.FromCache<Event>(id,
                 () =>
                 {
                     return DataProvider.GetById(id);

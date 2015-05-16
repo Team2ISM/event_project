@@ -5,11 +5,11 @@ namespace Events.Business.Interfaces
 {
     public interface IEventDataProvider
     {
-        IList<EventModel> GetList();
+        IList<Event> GetList();
 
-        EventModel GetById(string id);
+        Event GetById(string id);
 
-        int Create(EventModel evnt);
+        int Create(Event evnt);
 
         //void Update(TModel model);
 

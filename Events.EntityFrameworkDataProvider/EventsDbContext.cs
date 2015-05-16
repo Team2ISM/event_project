@@ -10,7 +10,7 @@ namespace Events.EntityFrameworkDataProvider
         {
         }
 
-         public virtual DbSet<EventModel> Event { get; set; }
+         public virtual DbSet<Event> Event { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

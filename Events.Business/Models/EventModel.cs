@@ -2,7 +2,7 @@
 
 namespace Events.Business.Models
 {
-    public class EventModel
+    public class Event
     {
         public virtual string Id { get; set; }
 

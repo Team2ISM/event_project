@@ -7,26 +7,26 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateEventDataProvider : IEventDataProvider
     {
-        public IList<EventModel> GetList()
+        public IList<Event> GetList()
         {
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria(typeof(EventModel));
-                return criteria.List<EventModel>();
+                var criteria = session.CreateCriteria(typeof(Event));
+                return criteria.List<Event>();
             }
         }
 
-        public EventModel GetById(string id)
+        public Event GetById(string id)
         {
-            EventModel Model;
+            Event Model;
             using (ISession session = Helper.OpenSession())
             {
-                Model = session.Get<EventModel>(id);
+                Model = session.Get<Event>(id);
             }
             return Model;
         }
 
-        public int Create(EventModel model)
+        public int Create(Event model)
         {
             int EmpNo = 0;
 
@@ -43,7 +43,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         }
 
 
-        public void Update(EventModel model)
+        public void Update(Event model)
         {
             using (ISession session = Helper.OpenSession())
             {
@@ -55,7 +55,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public void Delete(EventModel model)
+        public void Delete(Event model)
         {
             using (ISession session = Helper.OpenSession())
             {

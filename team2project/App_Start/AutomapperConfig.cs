@@ -7,8 +7,8 @@ namespace team2project
     {
         public static void RegisterMaps()
         {
-            AutoMapper.Mapper.CreateMap<EventModel, EventViewModel>();
-            AutoMapper.Mapper.CreateMap<EventViewModel, EventModel>();
+            AutoMapper.Mapper.CreateMap<Event, EventViewModel>();
+            AutoMapper.Mapper.CreateMap<EventViewModel, Event>();
         }
     }
 }

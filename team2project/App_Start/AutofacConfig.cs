@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using Events.Business.Classes;
 using Events.NHibernateDataProvider.NHibernateCore;
+using Events.EntityFrameworkDataProvider;
 using System.Web.Mvc;
 using RuntimeCache;
 using Events.Business.Interfaces;
@@ -16,7 +17,7 @@ namespace team2project
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<EventManager>();
-            builder.RegisterType<NHibernateEventDataProvider>()
+            builder.RegisterType<EntityFrameworkEventsDataProvider>()
                 .As<IEventDataProvider>();
             builder.RegisterType<RuntimeCacheManager>()
                 .As<ICacheManager>();
