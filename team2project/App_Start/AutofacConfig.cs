@@ -4,7 +4,7 @@ using Events.Business.Classes;
 using Events.NHibernateDataProvider.NHibernateCore;
 using Events.EntityFrameworkDataProvider;
 using System.Web.Mvc;
-using RuntimeCache;
+using Events.RuntimeCache;
 using Events.Business.Interfaces;
 using Events.Business;
 

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Business", "Events.B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.NHibernateDataProvider", "Events.NHibernateDataProvider\Events.NHibernateDataProvider.csproj", "{5340697E-46CC-41DD-AA45-9850F9055F97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RuntimeCache", "RuntimeCacheManager\RuntimeCache.csproj", "{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.RuntimeCache", "Events.RuntimeCache\Events.RuntimeCache.csproj", "{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.EntityFrameworkDataProvider", "Events.EntityFrameworkDataProvider\Events.EntityFrameworkDataProvider.csproj", "{402FBD66-1D81-40C7-8583-8D10A6239D20}"
 EndProject
