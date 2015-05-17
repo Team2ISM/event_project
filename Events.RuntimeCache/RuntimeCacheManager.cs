@@ -4,7 +4,7 @@ using Events.Business.Interfaces;
 
 namespace Events.RuntimeCache
 {
-    public class RuntimeCacheManager : ICacheManager
+    public class RuntimeCacheManager : ICacheManager 
     {
         ObjectCache cache = MemoryCache.Default;
 
