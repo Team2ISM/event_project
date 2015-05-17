@@ -9,24 +9,25 @@ namespace team2project.Controllers
     public class EventController : Controller
     {
 
-        EventManager Manager;
+        EventManager manager;
 
         public EventController(EventManager manager)
         {
-            Manager = manager;
+            this.manager = manager;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(Manager.GetList());
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetList());
             return View("List", list);
         }
 
         [HttpGet]
         public ActionResult Details(string id)
         {
-            var evnt = AutoMapper.Mapper.Map<EventViewModel>(Manager.GetById(id));
+            var evnt = AutoMapper.Mapper.Map<EventViewModel>(manager.GetById(id));
+
             if (evnt == null)
             {
                 return View("EventNotFound");
@@ -51,7 +52,7 @@ namespace team2project.Controllers
             }
 
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
-            Manager.Create(evntModel.Id, evntModel);
+            manager.Create(evntModel.Id, evntModel);
             return RedirectToAction("Index");
         }
     }

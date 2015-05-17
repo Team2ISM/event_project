@@ -20,12 +20,16 @@ namespace team2project
         {
             AreaRegistration.RegisterAllAreas();
             AutofacConfig.RegisterDependencies();
-            MyCultureConfig.SetCulture("en");
             AutomapperConfig.RegisterMaps();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_BeginRequest()
+        {
+            MyCultureConfig.SetCulture("en");
         }
     }
 }

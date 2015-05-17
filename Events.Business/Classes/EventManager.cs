@@ -6,9 +6,9 @@ namespace Events.Business.Classes
 {
     public class EventManager
     {
-        IEventDataProvider DataProvider;
+        IEventDataProvider DataProvider { get; private set; }
 
-        protected ICacheManager CacheManager { get; private set; }
+        ICacheManager CacheManager { get; private set; } 
 
         public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager)
         {

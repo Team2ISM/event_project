@@ -6,11 +6,15 @@ namespace Events.RuntimeCache
 {
     public class RuntimeCacheManager : ICacheManager 
     {
-        ObjectCache cache = MemoryCache.Default;
+        ObjectCache cache;
+
+        public RuntimeCacheManager() 
+        {
+            cache = MemoryCache.Default;
+        }
 
         public TValue FromCache<TValue>(string key, Func<TValue> function)
         {
-
             CacheItem cacheItem = ToCache<TValue>(key,
                 () =>
                 {
@@ -25,6 +29,7 @@ namespace Events.RuntimeCache
             if (cacheItem == null)
             {
                 CacheItemPolicy policy = new CacheItemPolicy();
+                policy.AbsoluteExpiration = DateTimeOffset.Now.AddHours(1);
                 cacheItem = new CacheItem(key, function());
                 cache.Set(cacheItem, policy);
             }

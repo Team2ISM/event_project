@@ -8,12 +8,14 @@ namespace Events.EntityFrameworkDataProvider
          public EventsDbContext()
              : base("name=EntityFrameworkConnection")
         {
+
         }
 
          public virtual DbSet<Event> Event { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
         }
     }
 }

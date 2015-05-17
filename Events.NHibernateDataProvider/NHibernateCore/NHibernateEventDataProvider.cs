@@ -42,7 +42,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return EmpNo;
         }
 
-
         public void Update(Event model)
         {
             using (ISession session = Helper.OpenSession())

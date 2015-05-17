@@ -69,7 +69,7 @@
     <Content Include="NHibernateCore\Configuration\hibernate.cfg.xml">
       <SubType>Designer</SubType>
     </Content>
-    <EmbeddedResource Include="NHibernateCore\Mappings\EventModel.hbm.xml">
+    <EmbeddedResource Include="NHibernateCore\Mappings\Event.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="Scripts\dbo.Event.sql" />
