@@ -6,43 +6,43 @@ namespace Events.Business.Classes
 {
     public class EventManager
     {
-        IEventDataProvider DataProvider { get; private set; }
+        IEventDataProvider dataProvider;
 
-        ICacheManager CacheManager { get; private set; } 
+        ICacheManager cacheManager; 
 
         public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager)
         {
-            DataProvider = dataProvider;
-            CacheManager = cacheManager;
+            this.dataProvider = dataProvider;
+            this.cacheManager = cacheManager;
         }
 
         public IList<Event> GetList()
         {
-            return CacheManager.FromCache<IList<Event>>("eventsList",
+            return cacheManager.FromCache<IList<Event>>("eventsList",
                 () =>
                 {
-                    return DataProvider.GetList();
+                    return dataProvider.GetList();
                 });
         }
 
         public void Create(string key, Event model)
         {
-            DataProvider.Create(model);
-            CacheManager.ToCache<Event>(key,
+            dataProvider.Create(model);
+            cacheManager.ToCache<Event>(key,
                 () =>
                 {
                     return model;
                 });
-            CacheManager.RemoveFromCache("eventsList");
+            cacheManager.RemoveFromCache("eventsList");
 
         }
 
         public Event GetById(string id)
         {
-            return CacheManager.FromCache<Event>(id,
+            return cacheManager.FromCache<Event>(id,
                 () =>
                 {
-                    return DataProvider.GetById(id);
+                    return dataProvider.GetById(id);
                 });
         }
     }
