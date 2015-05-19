@@ -17,8 +17,11 @@ namespace team2project
             var builder = new ContainerBuilder();
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<EventManager>();
+            builder.RegisterType<CommentManager>();
             builder.RegisterType<EntityFrameworkEventsDataProvider>()
                 .As<IEventDataProvider>();
+            builder.RegisterType<EntityFrameworkCommentDataProvider>()
+                .As<ICommentDataProvider>();
             builder.RegisterType<RuntimeCacheManager>()
                 .As<ICacheManager>();
             var container = builder.Build();

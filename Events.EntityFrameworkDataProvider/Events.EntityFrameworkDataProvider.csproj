@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityFrameworkCommentDataProvider.cs" />
     <Compile Include="EntityFrameworkEventsDataProvider.cs" />
+    <Compile Include="CommentDbContext.cs" />
     <Compile Include="EventsDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
