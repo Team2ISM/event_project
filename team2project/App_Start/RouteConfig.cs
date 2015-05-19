@@ -25,6 +25,30 @@ namespace team2project
             );
 
             routes.MapRoute(
+                name: "Registration",
+                url: "User/Registration",
+                defaults: new { controller = "User", action = "Registration" }
+            );
+
+            routes.MapRoute(
+                name: "Login",
+                url: "User/Login",
+                defaults: new { controller = "User", action = "Login" }
+            );
+
+            routes.MapRoute(
+                name: "Logout",
+                url: "User/Logout",
+                defaults: new { controller = "User", action = "Logout" }
+            );
+
+            routes.MapRoute(
+                name: "Update",
+                url: "User/Update",
+                defaults: new { controller = "User", action = "Update" }
+            );
+
+            routes.MapRoute(
                 name: "CreateEvent",
                 url: "createEvent",
                 defaults: new { controller = "Event", action = "Create" }

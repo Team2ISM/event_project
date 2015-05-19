@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Events.RuntimeCache;
 using Events.Business.Interfaces;
 using Events.Business;
+using Users.NHibernateDataProvider;
+using Users.Business.Interfaces;
 
 namespace team2project
 {
@@ -21,6 +23,8 @@ namespace team2project
                 .As<IEventDataProvider>();
             builder.RegisterType<NHibernateCommentDataProvider>()
                 .As<ICommentDataProvider>();
+            builder.RegisterType<NHibernateUserDataProvider>()
+                .As<IUserDataProvider>();
             builder.RegisterType<RuntimeCacheManager>()
                 .As<ICacheManager>();
             var container = builder.Build();

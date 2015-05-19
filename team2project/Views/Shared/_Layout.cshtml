@@ -21,6 +21,32 @@
                 <li>
                     @Html.RouteLink("List", "EventList")
                 </li>
+                <li>
+                    @Html.RouteLink("Registration", "Registration")
+                </li>
+                @{
+                    if (User.Identity.IsAuthenticated == false)
+                    {
+                        <li>
+                            @Html.RouteLink("Login", "Login")
+                        </li>   
+                    }
+                 }
+                
+                @{ 
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            @Html.RouteLink("Logout", "Logout")
+                        </li>
+                        <li>
+                            @Html.RouteLink("Change password", "Update")
+                        </li>
+                        <li>
+                            @User.Identity.Name
+                        </li>
+                    }
+                }
             </ul>
         </nav>
     </header>

@@ -63,6 +63,9 @@
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleCrypto">
+      <HintPath>..\packages\SimpleCrypto.0.3.30.26\lib\SimpleCrypto.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Collections" />
     <Reference Include="System.ComponentModel" />
@@ -168,11 +171,13 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +221,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\User\Registration.cshtml" />
+    <Content Include="Views\User\Update.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -273,6 +282,14 @@
     <ProjectReference Include="..\Events.RuntimeCache\Events.RuntimeCache.csproj">
       <Project>{f9d2cf50-3299-47c3-bea6-d8ebb683f442}</Project>
       <Name>Events.RuntimeCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Users.Business\Users.Business.csproj">
+      <Project>{cd9e97ac-7aec-4ec2-8546-fa2b4287d70c}</Project>
+      <Name>Users.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Users.NHibernateDataProvider\Users.NHibernateDataProvider.csproj">
+      <Project>{ce4aa938-0809-4982-8d4a-e799d16dd890}</Project>
+      <Name>Users.NHibernateDataProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
