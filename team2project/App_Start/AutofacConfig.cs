@@ -18,9 +18,9 @@ namespace team2project
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterType<EventManager>();
             builder.RegisterType<CommentManager>();
-            builder.RegisterType<EntityFrameworkEventsDataProvider>()
+            builder.RegisterType<NHibernateEventDataProvider>()
                 .As<IEventDataProvider>();
-            builder.RegisterType<EntityFrameworkCommentDataProvider>()
+            builder.RegisterType<NHibernateCommentDataProvider>()
                 .As<ICommentDataProvider>();
             builder.RegisterType<RuntimeCacheManager>()
                 .As<ICacheManager>();
