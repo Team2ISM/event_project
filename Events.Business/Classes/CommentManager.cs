@@ -34,7 +34,7 @@ namespace Events.Business.Classes
                     return model;
                 });
             cacheManager.RemoveFromCache("commentsList");
-
+            // remove comments to flkdsjgirdshgjjsduoghwsrdhgbsjhfdgjkrdshkuyea
         }
 
         public Comment GetById(string id)

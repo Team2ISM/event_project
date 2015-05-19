@@ -9,13 +9,11 @@ namespace team2project.Controllers
 {
     public class EventController : Controller
     {
-        CommentManager commentManager;
         EventManager eventManager;
 
-        public EventController(EventManager eventManager, CommentManager commentManager)
+        public EventController(EventManager eventManager)
         {
             this.eventManager = eventManager;
-            this.commentManager = commentManager;
         }
 
         [HttpGet]
@@ -38,39 +36,11 @@ namespace team2project.Controllers
             return View(evnt);
         }
 
-        [HttpPost]
-        public string Comments(string id)
-        {
-            var evnt = AutoMapper.Mapper.Map<EventViewModel>(eventManager.GetById(id));
-
-            if (evnt == null)
-            {
-                return "null";
-            }
-            
-            var comments = commentManager.GetByEventId(id);
-
-            return new JavaScriptSerializer().Serialize(comments);
-        }
-
         [HttpGet]
         public ActionResult Create()
         {
             var evnt = new EventViewModel();
             return View(evnt);
-        }
-
-        [HttpPost]
-        public ActionResult AddComment(Comment comment)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-            var commentModel = AutoMapper.Mapper.Map<Comment>(comment);
-            commentManager.Create(commentModel.Id, commentModel);
-            return View();
         }
 
         [HttpPost]
