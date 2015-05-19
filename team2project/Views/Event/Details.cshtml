@@ -13,10 +13,10 @@
     <div class="row cells12">
         <div class="cell colspan2">
             <div class="tile-small">
-                @if (@Model.From != null)
+                @if (@Model.FromDate != null)
                 {
-                    <h4>@Model.From.Value.ToString("dd")</h4>
-                    <p>@Model.From.Value.ToString("MMMM")</p>
+                    <h4>@Model.FromDate.Value.ToString("dd")</h4>
+                    <p>@Model.FromDate.Value.ToString("MMMM")</p>
                 }
                 else
                 {
@@ -39,15 +39,15 @@
             <tbody>
                 <tr>
                     <td>Date:</td>
-                    @CheckDateIfNull(Model.From, "dd MMMM yyyy")
+                    @CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")
                 </tr>
                 <tr>
                     <td>From:</td>
-                    @CheckDateIfNull(Model.From, "dd MMMM hh:mm")
+                    @CheckDateIfNull(Model.FromDate, "dd MMMM hh:mm")
                 </tr>
                 <tr>
                     <td>To:</td>
-                    @CheckDateIfNull(Model.To, "dd MMMM hh:mm")
+                    @CheckDateIfNull(Model.ToDate, "dd MMMM hh:mm")
                 </tr>
                 <tr>
                     <td>Location:</td>

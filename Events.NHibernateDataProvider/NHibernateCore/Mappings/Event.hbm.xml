@@ -4,15 +4,15 @@
  assembly="Events.NHibernateDataProvider"
  namespace="Events.Business.Models"
  auto-import="true">
-  <class name="EventModel, Events.Business" table="Event">
+  <class name="Event, Events.Business" table="Events">
     <id name="Id" access="property" type="string">
       <generator class="assigned"></generator>
     </id>
     <property name="Title" access="property" type="string"></property>
     <property name="Description" access="property" type="string"></property>
     <property name="LongDescription" access="property" type="string"></property>
-    <property name="From" access="property" column="FromDate" type="datetime"></property>
-    <property name="To" access="property" column="ToDate" type="datetime"></property>
+    <property name="FromDate" access="property" type="datetime"></property>
+    <property name="ToDate" access="property" type="datetime"></property>
     <property name="Location" access="property" type="string"></property>
   </class>
 </hibernate-mapping>

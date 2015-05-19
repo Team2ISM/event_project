@@ -8,8 +8,8 @@ namespace team2project.Models
         public EventViewModel() 
         {
             Id = Guid.NewGuid().ToString();
-            From = DateTime.Now.AddDays(1);
-            To = DateTime.Now.AddDays(1);
+            FromDate = DateTime.Now.AddDays(1);
+            ToDate = DateTime.Now.AddDays(1);
         }
 
         [ScaffoldColumn(false)]
@@ -24,10 +24,10 @@ namespace team2project.Models
         public string Description { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime? From { get; set; }
+        public DateTime? FromDate { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime? To { get; set; }
+        public DateTime? ToDate { get; set; }
 
         [Required (ErrorMessage = "This field is required")]
         public string Location { get; set; }

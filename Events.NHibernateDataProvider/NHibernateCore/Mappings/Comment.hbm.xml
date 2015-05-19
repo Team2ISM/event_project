@@ -4,7 +4,7 @@
  assembly="Events.NHibernateDataProvider"
  namespace="Events.Business.Models"
  auto-import="true">
-  <class name="CommentModel, Events.Business" table="Comment">
+  <class name="Comment, Events.Business" table="Comments">
     <id name="Id" access="property" type="string">
       <generator class="assigned"></generator>
     </id>

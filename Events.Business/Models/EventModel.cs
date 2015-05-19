@@ -12,9 +12,9 @@ namespace Events.Business.Models
 
         public virtual string LongDescription { get; set; }
 
-        public virtual DateTime? From { get; set; }
+        public virtual DateTime? FromDate { get; set; }
 
-        public virtual DateTime? To { get; set; }
+        public virtual DateTime? ToDate { get; set; }
 
         public virtual string Location { get; set; }
     }

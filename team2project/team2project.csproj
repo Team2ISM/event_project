@@ -269,6 +269,10 @@
       <Project>{402fbd66-1d81-40c7-8583-8d10a6239d20}</Project>
       <Name>Events.EntityFrameworkDataProvider</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Events.NHibernateDataProvider\Events.NHibernateDataProvider.csproj">
+      <Project>{5340697e-46cc-41dd-aa45-9850f9055f97}</Project>
+      <Name>Events.NHibernateDataProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Events.RuntimeCache\Events.RuntimeCache.csproj">
       <Project>{f9d2cf50-3299-47c3-bea6-d8ebb683f442}</Project>
       <Name>Events.RuntimeCache</Name>
