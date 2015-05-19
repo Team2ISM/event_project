@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web.UI;
-using System.Windows.Forms;
 namespace team2project.Models
 {
     public class EventViewModel
@@ -10,13 +9,8 @@ namespace team2project.Models
         public EventViewModel() 
         {
             Id = Guid.NewGuid().ToString();
-<<<<<<< HEAD
             FromDate = DateTime.Now.AddDays(1);
             ToDate = DateTime.Now.AddDays(1);
-=======
-           // From = new DateTime();
-            //To = DateTime.Now.AddDays(1);
->>>>>>> origin/master
         }
 
         [ScaffoldColumn(false)]
@@ -31,21 +25,12 @@ namespace team2project.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-<<<<<<< HEAD
+        [Required(ErrorMessage = "This field is required")]
         [DataType(DataType.DateTime)]
         public DateTime? FromDate { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime? ToDate { get; set; }
-=======
-        [Required(ErrorMessage = "This field is required")]
-        [DataType(DataType.Date)]
-        public DateTime? From { get; set; }
-
-        [Required(ErrorMessage = "This field is required")]
-        [DataType(DataType.Date)]
-        public DateTime? To { get; set; }
->>>>>>> origin/master
 
         [Required (ErrorMessage = "This field is required")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Lenght must be between 2 and 50")]
