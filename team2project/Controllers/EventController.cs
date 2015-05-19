@@ -1,5 +1,6 @@
 ﻿using Events.Business.Classes;
 using Events.Business.Models;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using team2project.Models;
@@ -10,7 +11,6 @@ namespace team2project.Controllers
     {
 
         EventManager manager;
-
         public EventController(EventManager manager)
         {
             this.manager = manager;
@@ -46,11 +46,11 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Create(EventViewModel evnt)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || evnt.To <= evnt.From)
             {
                 return View(evnt);
             }
-
+            
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             manager.Create(evntModel.Id, evntModel);
             return RedirectToAction("Index");
