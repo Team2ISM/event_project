@@ -164,6 +164,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -264,6 +265,10 @@
     <ProjectReference Include="..\Events.Business\Events.Business.csproj">
       <Project>{c68a6f0d-aae7-4639-8867-6fd26f0bfb2b}</Project>
       <Name>Events.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Events.EntityFrameworkDataProvider\Events.EntityFrameworkDataProvider.csproj">
+      <Project>{402fbd66-1d81-40c7-8583-8d10a6239d20}</Project>
+      <Name>Events.EntityFrameworkDataProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\Events.NHibernateDataProvider\Events.NHibernateDataProvider.csproj">
       <Project>{5340697e-46cc-41dd-aa45-9850f9055f97}</Project>
