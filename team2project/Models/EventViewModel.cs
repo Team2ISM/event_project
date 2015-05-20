@@ -25,11 +25,13 @@ namespace team2project.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+       
         [Required(ErrorMessage = "This field is required")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public DateTime? FromDate { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
+        [Required(ErrorMessage = "This field is required")]
         public DateTime? ToDate { get; set; }
 
         [Required (ErrorMessage = "This field is required")]

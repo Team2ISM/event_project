@@ -46,7 +46,7 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Create(EventViewModel evnt)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || evnt.FromDate >= evnt.ToDate)
             {
                 return View(evnt);
             }
