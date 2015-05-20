@@ -10,6 +10,7 @@ namespace Events.Business.Classes
 
         ICacheManager cacheManager; 
 
+
         public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager)
         {
             this.dataProvider = dataProvider;
@@ -44,6 +45,16 @@ namespace Events.Business.Classes
                 {
                     return dataProvider.GetById(id);
                 });
+        }
+
+        public void ToggleButtonStatusActive(string id)
+        {
+            dataProvider.ToggleButtonStatusActive(id);
+        }
+
+        public void ToggleButtonStatusChecked(string id, bool status)
+        {
+            dataProvider.ToggleButtonStatusChecked(id, status);
         }
     }
 }
