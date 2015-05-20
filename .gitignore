@@ -15,6 +15,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+.nuGet/
 
 # Roslyn cache directories
 *.ide/

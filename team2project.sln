@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "team2project", "team2project\team2project.csproj", "{8590242F-A4E4-4B63-9C10-AB580DEBA028}"
 EndProject
@@ -14,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.Business", "Users.Business\Users.Business.csproj", "{CD9E97AC-7AEC-4EC2-8546-FA2B4287D70C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.NHibernateDataProvider", "Users.NHibernateDataProvider\Users.NHibernateDataProvider.csproj", "{CE4AA938-0809-4982-8D4A-E799D16DD890}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comments.Business", "Comments.Business\Comments.Business.csproj", "{4156E99C-3BD8-48C5-86E6-3E3B010E56D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comments.NHibernateDataProvider", "Comments.NHibernateDataProvider\Comments.NHibernateDataProvider.csproj", "{CED9AD31-0A14-4B3F-971D-F0C6A51BC69A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{CE4AA938-0809-4982-8D4A-E799D16DD890}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE4AA938-0809-4982-8D4A-E799D16DD890}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE4AA938-0809-4982-8D4A-E799D16DD890}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4156E99C-3BD8-48C5-86E6-3E3B010E56D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4156E99C-3BD8-48C5-86E6-3E3B010E56D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4156E99C-3BD8-48C5-86E6-3E3B010E56D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4156E99C-3BD8-48C5-86E6-3E3B010E56D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CED9AD31-0A14-4B3F-971D-F0C6A51BC69A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED9AD31-0A14-4B3F-971D-F0C6A51BC69A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED9AD31-0A14-4B3F-971D-F0C6A51BC69A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED9AD31-0A14-4B3F-971D-F0C6A51BC69A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

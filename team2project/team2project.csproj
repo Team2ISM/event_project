@@ -277,6 +277,14 @@
     <Content Include="Fonts\packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Comments.Business\Comments.Business.csproj">
+      <Project>{4156e99c-3bd8-48c5-86e6-3e3b010e56d1}</Project>
+      <Name>Comments.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Comments.NHibernateDataProvider\Comments.NHibernateDataProvider.csproj">
+      <Project>{ced9ad31-0a14-4b3f-971d-f0c6a51bc69a}</Project>
+      <Name>Comments.NHibernateDataProvider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Events.Business\Events.Business.csproj">
       <Project>{c68a6f0d-aae7-4639-8867-6fd26f0bfb2b}</Project>
       <Name>Events.Business</Name>

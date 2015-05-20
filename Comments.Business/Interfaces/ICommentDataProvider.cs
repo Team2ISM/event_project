@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Events.Business.Models;
+using Comments.Business.Models;
 
-namespace Events.Business.Interfaces
+namespace Comments.Business.Interfaces
 {
-    interface ICommentDataProvider
+    public interface ICommentDataProvider
     {
         IList<Comment> GetAll();
 

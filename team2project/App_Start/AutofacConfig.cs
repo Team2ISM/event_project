@@ -5,7 +5,9 @@ using Events.NHibernateDataProvider.NHibernateCore;
 using System.Web.Mvc;
 using Events.RuntimeCache;
 using Events.Business.Interfaces;
-using Events.Business;
+using Comments.Business.Interfaces;
+using Comments.Business.Classes;
+using Comments.NHibernateDataProvider;
 using Users.NHibernateDataProvider;
 using Users.Business.Interfaces;
 

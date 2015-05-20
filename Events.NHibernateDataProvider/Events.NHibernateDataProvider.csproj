@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NHibernateCore\NHibernateEventDataProvider.cs" />
-    <Compile Include="NHibernateCore\NHibernateCommentDataProvider.cs" />
     <Compile Include="NHibernateCore\Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,13 +74,9 @@
     <Content Include="NHibernateCore\Configuration\hibernate.cfg.xml">
       <SubType>Designer</SubType>
     </Content>
-    <EmbeddedResource Include="NHibernateCore\Mappings\Comment.hbm.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="NHibernateCore\Mappings\Event.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <Content Include="Scripts\dbo.Comment.sql" />
     <Content Include="Scripts\dbo.Event.sql" />
   </ItemGroup>
   <ItemGroup>

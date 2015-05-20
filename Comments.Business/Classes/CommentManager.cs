@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using Comments.Business.Interfaces;
+using Comments.Business.Models;
 using Events.Business.Interfaces;
-using Events.Business.Models;
 
-namespace Events.Business.Classes
+namespace Comments.Business.Classes
 {
     public class CommentManager
     {
@@ -34,12 +35,12 @@ namespace Events.Business.Classes
                     return model;
                 });
             cacheManager.RemoveFromCache("commentsList");
-
+            // remove comments to flkdsjgirdshgjjsduoghwsrdhgbsjhfdgjkrdshkuyea
         }
 
         public Comment GetById(string id)
         {
-            return cacheManager.FromCache<Comment>(id,
+            return cacheManager.FromCache<Comment>("comment/"+id,
                 () =>
                 {
                     return dataProvider.GetById(id);

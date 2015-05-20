@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using NHibernate;
 using NHibernate.Criterion;
-using Events.Business.Models;
-using Events.Business.Interfaces;
+using Comments.Business.Models;
+using Comments.Business.Interfaces;
 
-namespace Events.NHibernateDataProvider.NHibernateCore
+namespace Comments.NHibernateDataProvider
 {
     public class NHibernateCommentDataProvider : ICommentDataProvider
     {
