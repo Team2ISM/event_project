@@ -9,6 +9,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateEventDataProvider : IEventDataProvider
     {
+
         public IList<Event> GetList()
         {
             using (ISession session = Helper.OpenSession())
@@ -43,6 +44,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 session.Update(evnt);
             }
+            
         }
 
         public void ToggleButtonStatusChecked(string id, bool status)

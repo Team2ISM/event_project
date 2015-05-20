@@ -23,6 +23,15 @@ namespace team2project.Controllers
             return View("ManagerPage", list);
         }
 
+        public void ToggleButtonStatusActive(string id)
+        {
+            manager.ToggleButtonStatusActive(id);
+        }
+
+        public void ToggleButtonStatusChecked(string id, bool status)
+        {
+            manager.ToggleButtonStatusChecked(id, status);
+        }
 
     }
 }
