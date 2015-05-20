@@ -31,11 +31,8 @@
                 <tr>
                     <td>@evnt.Title</td>
                     <td>@evnt.Title</td>
-                    <td>@(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a")
-                        @if (evnt.ToDate != null && (evnt.FromDate == null || evnt.ToDate.Value.DayOfYear != evnt.FromDate.Value.DayOfYear))
-                        {
-                            @evnt.ToDate.Value.ToString("dd MMMM yyyy")
-                        }
+                    <td>
+                        @Date(evnt.FromDate, evnt.ToDate)
                     </td>
                     <td>@(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a")</td>
                     <td>@(evnt.FromDate != null ? evnt.ToDate.Value.ToString("hh:mm") : "n/a")</td>
@@ -56,3 +53,11 @@
         </tbody>
     </table>
 </div>
+@helper Date(DateTime? FromDate, DateTime? ToDate)
+{
+    @(FromDate != null ? FromDate.Value.ToString("dd MMMM yyyy") : "n/a")
+                        if (ToDate != null && (FromDate == null || ToDate.Value.DayOfYear != FromDate.Value.DayOfYear))
+                        {
+                            @ToDate.Value.ToString("dd MMMM yyyy")
+                        }
+}
