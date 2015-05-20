@@ -12,19 +12,17 @@ namespace Cities.NHibernateDataProvider
         {
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria<City>();
-                return criteria.List<City>();
+                return session.CreateCriteria< City>().List<City>();
             }
         }
 
         public City GetById(int id)
         {
-            City Model;
+            
             using (ISession session = Helper.OpenSession())
             {
-                Model = session.Get<City>(id);
+               return session.Get<City>(id);
             }
-            return Model;
         }
 
         public int Create(City model)
@@ -33,17 +31,9 @@ namespace Cities.NHibernateDataProvider
 
             using (ISession session = Helper.OpenSession())
             {
-                //Perform transaction
-                using (ITransaction tran = session.BeginTransaction())
-                {
-                    session.Save(model);
-                    tran.Commit();
-                }
+                session.Save(model);
             }
             return EmpNo;
         }
-
-       
-
     }
 }
