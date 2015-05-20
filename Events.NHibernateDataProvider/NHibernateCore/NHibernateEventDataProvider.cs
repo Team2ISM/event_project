@@ -4,6 +4,7 @@ using Events.Business.Interfaces;
 using Events.Business.Models;
 using Events.Business.Classes;
 using System;
+using NHibernate.Criterion;
 
 
 namespace Events.NHibernateDataProvider.NHibernateCore
@@ -32,7 +33,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 {
                     session.EnableFilter("effectiveDate").SetParameter("asOfDate", DateTime.Now);
                 }
-                return session.CreateCriteria<Event>().List<Event>();
+                return session.CreateCriteria<Event>().AddOrder(Order.Asc("FromDate")).List<Event>();
             }
         }
 
