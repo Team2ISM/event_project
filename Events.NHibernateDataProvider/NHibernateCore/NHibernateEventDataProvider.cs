@@ -3,6 +3,7 @@ using NHibernate;
 using Events.Business.Interfaces;
 using Events.Business.Models;
 using Events.Business.Classes;
+using System;
 
 
 namespace Events.NHibernateDataProvider.NHibernateCore
@@ -10,12 +11,28 @@ namespace Events.NHibernateDataProvider.NHibernateCore
     public class NHibernateEventDataProvider : IEventDataProvider
     {
 
-        public IList<Event> GetList()
+        public IList<Event> GetList(string location, string nDaysToEvent)
         {
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria(typeof(Event));
-                return criteria.List<Event>();
+                if (nDaysToEvent != null && location != null)
+                {
+                    session.EnableFilter("equalDate").SetParameter("chosenDate", DateTime.Now.AddDays(Convert.ToDouble(nDaysToEvent)));
+                    session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
+                }
+                else if (nDaysToEvent != null)
+                {
+                    session.EnableFilter("equalDate").SetParameter("chosenDate", DateTime.Now.AddDays(Convert.ToDouble(nDaysToEvent)));
+                }
+                else if (location != null)
+                {
+                    session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
+                }
+                else
+                {
+                    session.EnableFilter("effectiveDate").SetParameter("asOfDate", DateTime.Now);
+                }
+                return session.CreateCriteria<Event>().List<Event>();
             }
         }
 

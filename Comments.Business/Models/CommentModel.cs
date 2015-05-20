@@ -8,6 +8,8 @@ namespace Comments.Business.Models
 
         public virtual string EventId { get; set; }
 
+        public virtual string AuthorId { get; set; }
+
         public virtual string Text { get; set; }
 
         public virtual string AuthorName { get; set; }

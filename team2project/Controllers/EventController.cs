@@ -24,6 +24,13 @@ namespace team2project.Controllers
         }
 
         [HttpGet]
+        public ActionResult Filters(string loc, string days)
+        {
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(loc, days));
+            return View("List", list);
+        }
+
+        [HttpGet]
         public ActionResult Details(string id)
         {
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(eventManager.GetById(id));

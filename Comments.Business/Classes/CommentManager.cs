@@ -55,5 +55,14 @@ namespace Comments.Business.Classes
                     return dataProvider.GetByEventId(eventId);
                 });
         }
+
+        public IList<Comment> GetByAuthorId(string authorId)
+        {
+            return cacheManager.FromCache<IList<Comment>>("commentsByUser/" + authorId,
+                () =>
+                {
+                    return dataProvider.GetByAuthorId(authorId);
+                });
+        }
     }
 }

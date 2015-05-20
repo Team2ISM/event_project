@@ -26,6 +26,15 @@ namespace Events.Business.Classes
                 });
         }
 
+        public IList<Event> GetList(string location, string nDaysToEvent)
+        {
+            return cacheManager.FromCache<IList<Event>>(nDaysToEvent + " : " + location + " events",
+                () =>
+                {
+                    return dataProvider.GetList(location, nDaysToEvent);
+                });
+        }
+
         public void Create(string key, Event model)
         {
             dataProvider.Create(model);
