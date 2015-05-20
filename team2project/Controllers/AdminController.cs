@@ -23,5 +23,6 @@ namespace team2project.Controllers
             return View("ManagerPage", list);
         }
 
+
     }
 }

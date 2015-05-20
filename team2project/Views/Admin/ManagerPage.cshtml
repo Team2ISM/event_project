@@ -1,16 +1,13 @@
 ﻿@{
     ViewBag.Title = "Manager Page";
 }
-
 @model System.Collections.Generic.List<team2project.Models.EventViewModel>
 @using System.Globalization
 @section css{
     @Styles.Render("~/Content/Home/List.css")
 }
-
 <div class="grid">
     <h1>@ViewBag.Title</h1>
-
     <table class="table hovered striped border bordered sortable-markers-on-left">
         <thead>
             <tr>
@@ -25,10 +22,9 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach (var evnt in Model)
             {
-                
+
                 <tr>
                     <td>@evnt.Title</td>
                     <td>@evnt.Title</td>
@@ -39,33 +35,40 @@
                     <td>@(evnt.FromDate != null ? evnt.ToDate.Value.ToString("hh:mm") : "n/a")</td>
                     <td>@evnt.Location</td>
                     <td>
-                        @if (evnt.Active)
+                        @if (evnt.Checked)
                         {
-                            <input type="button" class="visibility" value="Видимый" />
+                            if (evnt.Active)
+                            {
+                                <button class="visibility" value="Активировать" >@Html.ActionLink("","")</button>
+                            }
+                            else
+                            {
+                                <input type="button" class="visibility" value="Деактивировать" />
+                            }
                         }
                         else
                         {
-                            <input type="button" class="visibility" value="Невидимый" />
+                            <input type="button" value="Подтвердить" />
                         }
-                        <input type="button" id="GoodIvent" value="Подтвердить" />
                     </td>
-                    <td><input type="button" id="delete" value="удалить" /></td>
+                    <td>
+                        <input type="button" value="Удалить" />
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-
 <script type="text/javascript">
     $("#delete").click(function () {
-        
+
     });
 </script>
 @helper Date(DateTime? FromDate, DateTime? ToDate)
 {
     @(FromDate != null ? FromDate.Value.ToString("dd MMMM yyyy") : "n/a")
-                        if (ToDate != null && (FromDate == null || ToDate.Value.DayOfYear != FromDate.Value.DayOfYear))
-                        {
-                            @ToDate.Value.ToString("dd MMMM yyyy")
-                        }
+    if (ToDate != null && (FromDate == null || ToDate.Value.DayOfYear != FromDate.Value.DayOfYear))
+    {
+        @ToDate.Value.ToString("dd MMMM yyyy")
+    }
 }

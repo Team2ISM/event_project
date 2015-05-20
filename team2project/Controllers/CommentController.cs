@@ -43,7 +43,6 @@ namespace team2project.Controllers
             {
                 return View();
             }
-
             var commentModel = AutoMapper.Mapper.Map<Comment>(comment);
             commentManager.Create(commentModel.Id, commentModel);
             return View();
