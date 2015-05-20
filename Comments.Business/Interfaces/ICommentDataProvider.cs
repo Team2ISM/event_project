@@ -11,6 +11,8 @@ namespace Comments.Business.Interfaces
 
         IList<Comment> GetByEventId(string eventId);
 
+        IList<Comment> GetByAuthorId(string authorId);
+
         int Create(Comment comment);
     }
 }

@@ -9,6 +9,7 @@
       <generator class="assigned"></generator>
     </id>
     <property name="EventId" access="property" type="string"></property>
+    <property name="AuthorId" access="property" type="string"></property>
     <property name="Text" access="property" type="string"></property>
     <property name="AuthorName" access="property" type="string"></property>
     <property name="PostingTime" access="property" type="datetime"></property>

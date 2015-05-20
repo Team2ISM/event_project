@@ -31,7 +31,17 @@ namespace Comments.NHibernateDataProvider
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria<Comment>();
-                criteria.Add(Expression.Eq("eventId", eventId));
+                criteria.Add(Expression.Eq("EventId", eventId));
+                return criteria.List<Comment>();
+            }
+        }
+
+        public IList<Comment> GetByAuthorId(string authorId)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                var criteria = session.CreateCriteria<Comment>();
+                criteria.Add(Expression.Eq("AuthorId", authorId));
                 return criteria.List<Comment>();
             }
         }
