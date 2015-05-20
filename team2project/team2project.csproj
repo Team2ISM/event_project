@@ -190,6 +190,7 @@
     <Content Include="Content\materialize\materialize.min.css" />
     <Content Include="Content\metro.css" />
     <Content Include="Content\metro.min.css" />
+    <Content Include="Content\User\user.css" />
     <Content Include="Fonts\metro.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -234,6 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

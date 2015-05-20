@@ -7,39 +7,44 @@
 }
 
 @section css{
-    @Styles.Render("~/Content/Home/Details.css")
+    @Styles.Render("~/Content/User/user.css")
 }
 
-<div class="grid">
-    <h2>Registration</h2>
-    @using (Html.BeginForm("Registration", "User", FormMethod.Post))
-    {
+
+@using (Html.BeginForm("Registration", "User", FormMethod.Post, new { @class = "container z-depth-3" }))
+{    <h5>Регистрация участников</h5>
+    <div class="row">
         @Html.ValidationSummary(true)
-        <div class="input-field col s6">
-            @Html.LabelFor(m => m.Login, "Login")<br>
+        <div class="input-field col s12 m6">
+            @Html.LabelFor(m => m.Login, "Имя")<br>
             @Html.EditorFor(m => m.Login)
             @Html.ValidationMessageFor(m => m.Login)
         </div>
-        <div class="input-field col s6">
-            @Html.LabelFor(m => m.Email, "Email")<br>
+        <div class="input-field col s12 m6">
+            @Html.LabelFor(m => m.Login, "Фамилия")<br>
+            @Html.EditorFor(m => m.Login)
+            @Html.ValidationMessageFor(m => m.Login)
+        </div>
+        <div class="input-field col s12 m12 12">
+            @Html.LabelFor(m => m.Email, "Электронная почта")<br>
             @Html.EditorFor(m => m.Email)
             @Html.ValidationMessageFor(m => m.Email)
         </div>
         <div class="input-field col s12">
-            @Html.LabelFor(m => m.Location, "Location")<br>
+            @Html.LabelFor(m => m.Location, "Город")<br>
             @Html.EditorFor(m => m.Location)
             @Html.ValidationMessageFor(m => m.Location)
         </div>
         <div class="input-field col s12">
-            @Html.LabelFor(m => m.Password, "Password")<br>
+            @Html.LabelFor(m => m.Password, "Пароль")<br>
             @Html.PasswordFor(m => m.Password)
             @Html.ValidationMessageFor(m => m.Password)
         </div>
         <div class="input-field col s12">
-            @Html.LabelFor(m => m.RepeatPassword, "Repeat")<br>
+            @Html.LabelFor(m => m.RepeatPassword, "Повторите пароль")<br>
             @Html.PasswordFor(m => m.RepeatPassword)
             @Html.ValidationMessageFor(m => m.RepeatPassword)
         </div>
-        <button class="btn waves-effect waves-light" type="submit">Sign Up</button>
-    }
-</div>
+        <button class="btn waves-effect waves-light" type="submit">Зарегистрировать меня</button>
+    </div>
+}
