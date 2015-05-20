@@ -6,30 +6,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @section css{
-    @Styles.Render("~/Content/Home/Details.css")
+    @Styles.Render("~/Content/User/user.css")
 }
 
-<div class="grid">
-    <h2>Login</h2>
-    @using (Html.BeginForm("Login", "User", FormMethod.Post))
-    {
-        
-            @Html.ValidationSummary(true)
+@using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "container z-depth-3" }))
+{
 
-    <div class="input-field col s6">
-        @Html.LabelFor(m => m.Email, "Email")<br>
+    @Html.ValidationSummary(true)
+    <h5>Вход на сайт</h5>
+    <div class="input-field col s12 m12">
+        @Html.LabelFor(m => m.Email, "Электронная почта")<br>
         @Html.EditorFor(m => m.Email)
         @Html.ValidationMessageFor(m => m.Email)
     </div>
-    <div class="input-field col s6">
-        @Html.LabelFor(m => m.Password, "Password")<br>
+    <div class="input-field col s12 m12">
+        @Html.LabelFor(m => m.Password, "Пароль")<br>
         @Html.PasswordFor(m => m.Password)
         @Html.ValidationMessageFor(m => m.Password)
     </div>
 
-    <button class="btn waves-effect waves-light" type="submit">Login</button>
-    <div>
-        @ViewBag.Error
-    </div>
-    }
-</div>
+    <button class="btn waves-effect waves-light" type="submit">Вход</button>
+}
