@@ -89,13 +89,23 @@ namespace team2project
                 url: "admin",
                 defaults: new { controller = "Admin", action = "ManagerPage" }
             );
-            
+            routes.MapRoute(
+                name: "SetEventChecked",
+                url: "SetEventChecked/{id}",
+                defaults: new { controller = "Admin", action = "ToggleButtonStatusChecked" }
+            );
+            routes.MapRoute(
+                name: "ToogleIsActiveEvent",
+                url: "ToogleIsActiveEvent/{id}",
+                defaults: new { controller = "Admin", action = "ToggleButtonStatusActive" }
+            );
+
             routes.MapRoute(
                 "NotFound",
                 "{*url}",
              new { controller = "Error", action = "Index" }
             );
-            
+
         }
     }
 }

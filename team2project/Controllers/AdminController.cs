@@ -23,14 +23,16 @@ namespace team2project.Controllers
             return View("ManagerPage", list);
         }
 
-        public void ToggleButtonStatusActive(string id)
+        public ActionResult ToggleButtonStatusActive(string id)
         {
             manager.ToggleButtonStatusActive(id);
+            return RedirectToRoute("ManagerPage");
         }
 
-        public void ToggleButtonStatusChecked(string id, bool status)
+        public ActionResult ToggleButtonStatusChecked(string id)
         {
-            manager.ToggleButtonStatusChecked(id, status);
+            manager.ToggleButtonStatusChecked(id);
+            return RedirectToRoute("ManagerPage");
         }
 
     }

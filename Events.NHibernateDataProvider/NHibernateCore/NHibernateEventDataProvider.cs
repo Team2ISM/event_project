@@ -44,15 +44,13 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 session.Update(evnt);
             }
-            
+
         }
 
-        public void ToggleButtonStatusChecked(string id, bool status)
+        public void ToggleButtonStatusChecked(string id)
         {
             Event evnt = GetById(id);
-            if (status == false) evnt.Checked = false;
-            else
-                evnt.Checked = true;
+            evnt.Checked = true;
             using (ISession session = Helper.OpenSession())
             {
                 session.Update(evnt);

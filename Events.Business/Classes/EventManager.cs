@@ -52,9 +52,9 @@ namespace Events.Business.Classes
             dataProvider.ToggleButtonStatusActive(id);
         }
 
-        public void ToggleButtonStatusChecked(string id, bool status)
+        public void ToggleButtonStatusChecked(string id)
         {
-            dataProvider.ToggleButtonStatusChecked(id, status);
+            dataProvider.ToggleButtonStatusChecked(id);
         }
     }
 }

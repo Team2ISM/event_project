@@ -39,16 +39,16 @@
                         {
                             if (evnt.Active)
                             {
-                                <button class="visibility" value="Активировать" >@Html.ActionLink("","")</button>
+                                @Html.RouteLink("Активировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
                             }
                             else
                             {
-                                <input type="button" class="visibility" value="Деактивировать" />
+                                @Html.RouteLink("Подтвердить", "ToogleIsActiveEvent", new { @id = evnt.Id })
                             }
                         }
                         else
                         {
-                            <input type="button" value="Подтвердить" />
+                            @Html.RouteLink("Подтвердить", "SetEventChecked", new { @id = evnt.Id })
                         }
                     </td>
                     <td>
