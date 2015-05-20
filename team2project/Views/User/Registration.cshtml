@@ -15,22 +15,16 @@
 {    <h5>Регистрация участников</h5>
     <div class="row">
         @Html.ValidationSummary(true)
-<<<<<<< HEAD
-        <div class="input-field col s6">
-            @Html.LabelFor(m => m.Name, "Name")<br>
+
+        <div class="input-field col s12 m6">
+            @Html.LabelFor(m => m.Name, "Имя")<br>
             @Html.EditorFor(m => m.Name)
             @Html.ValidationMessageFor(m => m.Name)
-=======
-        <div class="input-field col s12 m6">
-            @Html.LabelFor(m => m.Login, "Имя")<br>
-            @Html.EditorFor(m => m.Login)
-            @Html.ValidationMessageFor(m => m.Login)
->>>>>>> origin/master
         </div>
         <div class="input-field col s12 m6">
-            @Html.LabelFor(m => m.Login, "Фамилия")<br>
-            @Html.EditorFor(m => m.Login)
-            @Html.ValidationMessageFor(m => m.Login)
+            @Html.LabelFor(m => m.Surname, "Фамилия")<br>
+            @Html.EditorFor(m => m.Surname)
+            @Html.ValidationMessageFor(m => m.Surname)
         </div>
         <div class="input-field col s12 m12 12">
             @Html.LabelFor(m => m.Email, "Электронная почта")<br>
