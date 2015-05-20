@@ -15,7 +15,25 @@
     <h1>@ViewBag.Title</h1>
     
     <!-- Dropdown Trigger -->
-    
+    <div class="ui-widget">
+        <label>Город: </label>
+        <select id="combobox">
+            <option value="">Все</option>
+            <option value="1">Kyiv</option>
+            <option value="2">Lviv</option>
+            <option value="Zhytomyr">Zhytomyr</option>
+            <option value="4">Zmerinka</option>
+        </select>
+    </div>
+    <div>
+        <select id="datefilter" style="display:inline-block">
+            <option value="">Все</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
     <table class="striped" >
         <thead>
             <tr>
@@ -50,5 +68,5 @@
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
-    @Scripts.Render("~/Scripts/script.js")
+    @Scripts.Render("~/Scripts/listScript.js")
 }
