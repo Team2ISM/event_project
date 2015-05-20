@@ -4,6 +4,7 @@
 
 @model System.Collections.Generic.List<team2project.Models.EventViewModel>
 @using System.Globalization
+@using team2project.Models
 @section css{
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/jquery-ui.min.css")
@@ -19,10 +20,9 @@
         <label>Город: </label>
         <select id="combobox">
             <option value="">Все</option>
-            <option value="1">Kyiv</option>
-            <option value="2">Lviv</option>
-            <option value="Zhytomyr">Zhytomyr</option>
-            <option value="4">Zmerinka</option>
+            @foreach(var city in ViewBag.cities){
+                <option value=@city.Name>@city.Name</option>
+            }
         </select>
     </div>
     <div>
