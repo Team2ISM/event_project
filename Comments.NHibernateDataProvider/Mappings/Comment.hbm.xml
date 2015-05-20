@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping
  xmlns="urn:nhibernate-mapping-2.2"
- assembly="Events.NHibernateDataProvider"
- namespace="Events.Business.Models"
+ assembly="Comments.NHibernateDataProvider"
+ namespace="Comments.Business.Models"
  auto-import="true">
-  <class name="Comment, Events.Business" table="Comments">
+  <class name="Comment, Comments.Business" table="Comments">
     <id name="Id" access="property" type="string">
       <generator class="assigned"></generator>
     </id>

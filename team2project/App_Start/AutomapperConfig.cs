@@ -1,6 +1,7 @@
 ﻿using Events.Business.Models;
 using team2project.Models;
 using Users.Business;
+using Comments.Business.Models;
 
 namespace team2project
 {
@@ -12,6 +13,8 @@ namespace team2project
             AutoMapper.Mapper.CreateMap<EventViewModel, Event>();
             AutoMapper.Mapper.CreateMap<UserViewModel, User>();
             AutoMapper.Mapper.CreateMap<User, UserViewModel>();
+            AutoMapper.Mapper.CreateMap<CommentViewModel, Comment>();
+            AutoMapper.Mapper.CreateMap<Comment, CommentViewModel>();
         }
     }
 }

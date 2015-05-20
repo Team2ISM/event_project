@@ -7,9 +7,10 @@ namespace team2project.Models
     {
         public CommentViewModel(string eventId) 
         {
-            Id = Guid.NewGuid().ToString();
+            this.Id = Guid.NewGuid().ToString();
             PostingTime = DateTime.Now;
             EventId = eventId;
+            AuthorId = "id";
         }
 
         [ScaffoldColumn(false)]
@@ -21,6 +22,8 @@ namespace team2project.Models
         [StringLength(50)]
         [DataType(DataType.Text)]
         public string AuthorName { get; set; }
+
+        public virtual string AuthorId { get; set; }
 
         [Required (ErrorMessage = "This field is required")]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Lenght must be between 2 and 50")]
