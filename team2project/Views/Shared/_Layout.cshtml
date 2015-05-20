@@ -6,7 +6,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/metro")
-    @*@Scripts.Render("~/bundles/modernizr")*@
+    @Styles.Render("~/Content/materialize/materialize.css")
     @RenderSection("css", false)
 </head>
 <body>
@@ -50,7 +50,8 @@
     </header>
     @RenderBody()
 
-    @*@Scripts.Render("~/bundles/jquery")*@
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/materialize/materialize.js")
     @Scripts.Render("~/Scripts/metro")
     @RenderSection("scripts", required: false)
 </body>

@@ -5,23 +5,28 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section css{
+    @Styles.Render("~/Content/Home/Details.css")
+}
 
-<h2>Login</h2>
-@using (Html.BeginForm("Login", "User", FormMethod.Post))
+<div class="grid">
+    <h2>Login</h2>
+    @using (Html.BeginForm("Login", "User", FormMethod.Post))
     {
-        <p>
+        
             @Html.ValidationSummary(true)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Email, "Email")<br>
-            @Html.EditorFor(m => m.Email)
-            @Html.ValidationMessageFor(m => m.Email)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Password, "Password")<br>
-            @Html.PasswordFor(m => m.Password)
-            @Html.ValidationMessageFor(m => m.Password)
-        </p>
-    
-        <input type="submit" value="Login" />
+
+    <div class="input-field col s6">
+        @Html.LabelFor(m => m.Email, "Email")<br>
+        @Html.EditorFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="input-field col s6">
+        @Html.LabelFor(m => m.Password, "Password")<br>
+        @Html.PasswordFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+
+    <button class="btn waves-effect waves-light" type="submit">Login</button>
     }
+</div>

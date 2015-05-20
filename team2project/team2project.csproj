@@ -186,8 +186,8 @@
   <ItemGroup>
     <Content Include="Content\Home\Details.css" />
     <Content Include="Content\Home\List.css" />
-    <Content Include="Content\metro-icons.css" />
-    <Content Include="Content\metro-icons.min.css" />
+    <Content Include="Content\materialize\materialize.css" />
+    <Content Include="Content\materialize\materialize.min.css" />
     <Content Include="Content\metro.css" />
     <Content Include="Content\metro.min.css" />
     <Content Include="Fonts\metro.svg" />
@@ -207,6 +207,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\materialize\materialize.js" />
+    <Content Include="Scripts\materialize\materialize.min.js" />
     <Content Include="Scripts\metro.js" />
     <Content Include="Scripts\metro.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
