@@ -116,13 +116,18 @@ namespace team2project.Controllers
                 data.UpdateUser(user);
                 FormsAuthentication.SetAuthCookie(user.Email, false);
                 UserViewModel model = AutoMapper.Mapper.Map<UserViewModel>(user);
-                return View(model);
+                return RedirectToRoute("Welcome", "User");
             }
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public ActionResult Update()
+        {
+            return View();
+        }
+
+        public ActionResult Welcome()
         {
             return View();
         }
