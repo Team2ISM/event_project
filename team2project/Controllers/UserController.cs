@@ -98,8 +98,10 @@ namespace team2project.Controllers
                 //client.UseDefaultCredentials = false;
 
                 //client.Send(msg);
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
+            return View();
+           
         }
 
         [HttpGet]

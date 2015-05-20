@@ -184,8 +184,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\angular-material\angular-material.css" />
-    <Content Include="Content\angular-material\angular-material.min.css" />
     <Content Include="Content\Home\Details.css" />
     <Content Include="Content\Home\List.css" />
     <Content Include="Content\metro-icons.css" />
@@ -195,19 +193,7 @@
     <Content Include="Fonts\metro.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\angular-animate.js" />
-    <Content Include="Scripts\angular-animate.min.js" />
-    <Content Include="Scripts\angular-aria.js" />
-    <Content Include="Scripts\angular-aria.min.js" />
-    <Content Include="Scripts\angular-material.js" />
-    <Content Include="Scripts\angular-material.min.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-aria.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
@@ -240,13 +226,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Update.cshtml" />
     <Content Include="Views\Admin\ManagerPage.cshtml" />
+    <None Include="Views\User\Registration.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\AngularScripts\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

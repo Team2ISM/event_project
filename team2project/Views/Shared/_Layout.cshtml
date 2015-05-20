@@ -4,12 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/metro")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/modernizr")*@
     @RenderSection("css", false)
-
 </head>
 <body>
     <header>
@@ -25,7 +23,7 @@
                     @Html.RouteLink("Registration", "Registration")
                 </li>
                 @{
-                    if (User.Identity.IsAuthenticated == false)
+                    if (!User.Identity.IsAuthenticated)
                     {
                         <li>
                             @Html.RouteLink("Login", "Login")
@@ -52,7 +50,7 @@
     </header>
     @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/jquery")*@
     @Scripts.Render("~/Scripts/metro")
     @RenderSection("scripts", required: false)
 </body>

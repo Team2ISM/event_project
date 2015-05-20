@@ -6,37 +6,40 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Registration</h2>
-@using (Html.BeginForm("Registration", "User", FormMethod.Post))
+@section css{
+    @Styles.Render("~/Content/Home/Details.css")
+}
+
+<div class="grid">
+    <h2>Registration</h2>
+    @using (Html.BeginForm("Registration", "User", FormMethod.Post))
     {
-        <p>
-            @Html.ValidationSummary(true)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Login, "Login")<br>
-            @Html.EditorFor(m => m.Login)
-            @Html.ValidationMessageFor(m => m.Login)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Email, "Email")<br>
-            @Html.EditorFor(m => m.Email)
-            @Html.ValidationMessageFor(m => m.Email)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Location, "Location")<br>
-            @Html.EditorFor(m => m.Location)
-            @Html.ValidationMessageFor(m => m.Location)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Password, "Password")<br>
-            @Html.PasswordFor(m => m.Password)
-            @Html.ValidationMessageFor(m => m.Password)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.RepeatPassword, "Repeat")<br>
-            @Html.PasswordFor(m => m.RepeatPassword)
-            @Html.ValidationMessageFor(m => m.RepeatPassword)
-        </p>
-    
-        <input type="submit" value="Create" />
+        @Html.ValidationSummary(true)
+                <p>
+                    @Html.LabelFor(m => m.Login, "Login")<br>
+                    @Html.EditorFor(m => m.Login)
+                    @Html.ValidationMessageFor(m => m.Login)
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.Email, "Email")<br>
+                    @Html.EditorFor(m => m.Email)
+                    @Html.ValidationMessageFor(m => m.Email)
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.Location, "Location")<br>
+                    @Html.EditorFor(m => m.Location)
+                    @Html.ValidationMessageFor(m => m.Location)
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.Password, "Password")<br>
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </p>
+                <p>
+                    @Html.LabelFor(m => m.RepeatPassword, "Repeat")<br>
+                    @Html.PasswordFor(m => m.RepeatPassword)
+                    @Html.ValidationMessageFor(m => m.RepeatPassword)
+                </p>
+    <input type="submit" value="Sign up"/>
     }
+</div>
