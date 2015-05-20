@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+
 using System.Net;
 using System.Net.Mail;
 using Users.Business;
@@ -64,6 +65,58 @@ namespace team2project.Controllers
 
         [HttpGet]
         public ActionResult Registration()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ForgotPassword(string email)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = data.GetByMail(email);
+                if (user != null)
+                {
+                    var crypto = new SimpleCrypto.PBKDF2();
+
+                    string newPassword = GeneratePassword();
+                    
+                    var encrPass = crypto.Compute(newPassword);
+
+                    user.Password = encrPass;
+                    user.PasswordSalt = crypto.Salt;
+
+                    data.UpdateUser(user);
+
+                    MailMessage msg = new MailMessage();
+
+                    string body = user.Name + ", your password is:\n" + newPassword;
+
+                    msg.From = new MailAddress("team2project222@gmail.com");
+                    msg.To.Add(user.Email);
+                    msg.Subject = "Remind password";
+                    msg.Body = body;
+                    msg.Priority = MailPriority.High;
+
+                    SmtpClient client = new SmtpClient();
+
+                    client.Send(msg);
+                }
+                else
+                {
+                    return RedirectToAction("NoSuchUser", "User");
+                }
+            }
+            return View();
+        }
+
+        public ActionResult NoSuchUser()
         {
             return View();
         }
@@ -177,6 +230,20 @@ namespace team2project.Controllers
             }
 
             return isValid;
+        }
+
+        private string GeneratePassword()
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[8];
+            var random = new Random();
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            return new String(stringChars);
         }
 
     }
