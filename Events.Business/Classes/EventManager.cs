@@ -8,7 +8,7 @@ namespace Events.Business.Classes
     {
         IEventDataProvider dataProvider;
 
-        ICacheManager cacheManager; 
+        ICacheManager cacheManager;
 
 
         public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager)
@@ -56,6 +56,11 @@ namespace Events.Business.Classes
         public void ToggleButtonStatusChecked(string id)
         {
             dataProvider.ToggleButtonStatusChecked(id);
+            cacheManager.RemoveFromCache("eventsList");
+        }
+        public void Delete(string id)
+        {
+            dataProvider.Delete(dataProvider.GetById(id));
             cacheManager.RemoveFromCache("eventsList");
         }
     }

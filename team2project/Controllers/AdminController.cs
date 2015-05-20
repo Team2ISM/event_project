@@ -34,6 +34,11 @@ namespace team2project.Controllers
             manager.ToggleButtonStatusChecked(id);
             return RedirectToRoute("ManagerPage");
         }
+        public ActionResult DeleteEvent(string id)
+        {
+            manager.Delete(id);
+            return RedirectToRoute("ManagerPage");
+        }
 
     }
 }

@@ -52,7 +52,7 @@
                         }
                     </td>
                     <td>
-                        <input type="button" value="Удалить" />
+                        @Html.RouteLink("Удалить", "DeleteEvent", new { @id = evnt.Id })
                     </td>
                 </tr>
             }
