@@ -8,13 +8,40 @@
     <id name="Id" access="property" type="string">
       <generator class="assigned"></generator>
     </id>
+    
     <property name="Title" access="property" type="string"></property>
+    
     <property name="Description" access="property" type="string"></property>
+    
     <property name="LongDescription" access="property" type="string"></property>
+    
     <property name="FromDate" access="property" type="datetime"></property>
+    
     <property name="ToDate" access="property" type="datetime"></property>
+    
     <property name="Location" access="property" type="string"></property>
+    
     <property name="Active" access="property" type="bool"></property>
+    
     <property name="Checked" access="property" type="bool"></property>
+    
+    <filter name ="effectiveDate" condition ="ToDate >= :asOfDate"/>
+    
+    <filter name ="equalLocation" condition ="Location = :chosenLocation"/>
+
+    <filter name ="equalDate" condition =":chosenDate >= FromDate AND ToDate >= :chosenDate"/>
   </class>
+
+  <filter-def name = "effectiveDate">
+    <filter-param name ="asOfDate" type ="System.DateTime"/>
+  </filter-def>
+
+  <filter-def name ="equalLocation">
+    <filter-param name ="chosenLocation" type ="System.String"/>
+  </filter-def>
+
+  <filter-def name ="equalDate">
+    <filter-param name ="chosenDate" type ="System.DateTime"/>
+  </filter-def>
+  
 </hibernate-mapping>

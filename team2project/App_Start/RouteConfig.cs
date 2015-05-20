@@ -20,9 +20,29 @@ namespace team2project
 
             routes.MapRoute(
                 name: "EventList",
-                url: "eventsList",
+                url: "Events",
                 defaults: new { controller = "Event", action = "Index" }
             );
+
+            routes.MapRoute(
+              name: "by-Location-Days",
+              url: "Events/{loc}/{days}",
+              defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
+              constraints: new { days = @"\d+" }
+          );
+
+            routes.MapRoute(
+                 name: "by-Days",
+                 url: "Events/{days}",
+                 defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
+                 constraints: new { days = @"\d+" }
+             );
+
+            routes.MapRoute(
+                 name: "by-Location",
+                 url: "Events/{loc}",
+                 defaults: new { controller = "Event", action = "Filters", loc = UrlParameter.Optional }
+             );
 
             routes.MapRoute(
                 name: "Activate",
@@ -80,7 +100,7 @@ namespace team2project
 
             routes.MapRoute(
                 name: "EventDetails",
-                url: "eventDetails/{id}",
+                url: "Details/{id}",
                 defaults: new { controller = "Event", action = "Details" }
             );
 
