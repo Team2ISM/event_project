@@ -10,7 +10,9 @@ namespace Users.Business
     {
         public virtual string Id { get; set; }
 
-        public virtual string Login { get; set; }
+        public virtual string Name { get; set; }
+
+        public virtual string Surname { get; set; }
 
         public virtual string Email { get; set; }
 
@@ -21,5 +23,6 @@ namespace Users.Business
         public virtual string Location { get; set; }
 
         public virtual bool IsActive { get; set; }
+
     }
 }
