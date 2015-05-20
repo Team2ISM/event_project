@@ -7,8 +7,8 @@
     <ProjectGuid>{CED9AD31-0A14-4B3F-971D-F0C6A51BC69A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ClassLibrary1</RootNamespace>
-    <AssemblyName>ClassLibrary1</AssemblyName>
+    <RootNamespace>Comments.NHibernateDataProvider</RootNamespace>
+    <AssemblyName>Comments.NHibernateDataProvider</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

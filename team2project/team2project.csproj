@@ -229,6 +229,7 @@
     <Content Include="Views\Admin\ManagerPage.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\User\NoSuchUser.cshtml" />
+    <Content Include="Views\Comment\Create.cshtml" />
     <None Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Welcome.cshtml" />
   </ItemGroup>
@@ -267,7 +268,7 @@
     <Content Include="Views\Event\List - tiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Event\Error\Page404.cshtml" />
+    <Content Include="Views\Error\Page404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\Create.cshtml" />

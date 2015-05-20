@@ -69,7 +69,12 @@
             }
         </div>
     </div>
+    @Html.Partial("~/Views/Comment/Create.cshtml", new team2project.Models.CommentViewModel(Model.Id))
 </div>
+
+
+
+
 
 @helper CheckDateIfNull(DateTime? date, string format) { 
     if (date != null)

@@ -41,11 +41,16 @@ namespace team2project.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                if (comment.EventId==null)
+                {
+                    return RedirectToRoute("eventDetails");
+                }
+                return RedirectToRoute("eventDetails", new { @id = comment.EventId });
+
             }
             var commentModel = AutoMapper.Mapper.Map<Comment>(comment);
             commentManager.Create(commentModel.Id, commentModel);
-            return View();
+            return RedirectToRoute("eventDetails", new { @id=comment.EventId });
         }
 
     }
