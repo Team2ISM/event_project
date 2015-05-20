@@ -6,10 +6,23 @@
 @using System.Globalization
 @section css{
     @Styles.Render("~/Content/Home/List.css")
+    @Styles.Render("~/Content/jquery-ui.min.css")
+    @Styles.Render("~/Content/jquery-ui.theme.min.css")
+    @Styles.Render("~/Content/jquery-ui.structure.min.css")
 }
 
 <div >
     <h1>@ViewBag.Title</h1>
+    <div class="ui-widget">
+          <label>Cities: </label>
+          <select id="combobox">
+            <option value="">Select one...</option>
+            <option value="1">Kyiv</option>
+            <option value="2">Lviv</option>
+            <option value="3">Zhytomyr</option>
+            <option value="4">Zmerinka</option>
+          </select>
+        </div>
     @using (Html.BeginForm("Create", "EventController", FormMethod.Post))
     {
         @Html.HiddenFor(m => m.Id)
@@ -49,3 +62,8 @@
         <input type="submit" value="Create" />
     }
 </div>
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.js")
+    @Scripts.Render("~/Scripts/jquery-ui.js")
+    @Scripts.Render("~/Scripts/script.js")
+}
