@@ -21,6 +21,7 @@
                 <th>To</th>
                 <th>Location</th>
                 <th>Property</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -40,19 +41,26 @@
                     <td>
                         @if (evnt.Active)
                         {
-                            <input type="button" class="visibility" value="visible" />
+                            <input type="button" class="visibility" value="Видимый" />
                         }
                         else
                         {
-                            <input type="button" class="visibility" value="invisible" />
+                            <input type="button" class="visibility" value="Невидимый" />
                         }
-                        <input type="button" id="delete" value="delete" />      
+                        <input type="button" id="GoodIvent" value="Подтвердить" />
                     </td>
+                    <td><input type="button" id="delete" value="удалить" /></td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
+
+<script type="text/javascript">
+    $("#delete").click(function () {
+        
+    });
+</script>
 @helper Date(DateTime? FromDate, DateTime? ToDate)
 {
     @(FromDate != null ? FromDate.Value.ToString("dd MMMM yyyy") : "n/a")

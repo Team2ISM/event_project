@@ -2,6 +2,8 @@
 using NHibernate;
 using Events.Business.Interfaces;
 using Events.Business.Models;
+using Events.Business.Classes;
+
 
 namespace Events.NHibernateDataProvider.NHibernateCore
 {
@@ -27,11 +29,28 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         }
 
 
-        public void ToggleButtonStatus(Event evnt)
+        public void ToggleButtonStatusActive(string id)
         {
-            if (evnt.Active == true) evnt.Active = false;
+            Event evnt = GetById(id);
+            if (evnt.Active == true)
+            {
+                evnt.Active = false;
+                evnt.Checked = true;
+            }
             else
                 evnt.Active = true;
+            using (ISession session = Helper.OpenSession())
+            {
+                session.Update(evnt);
+            }
+        }
+
+        public void ToggleButtonStatusChecked(string id, bool status)
+        {
+            Event evnt = GetById(id);
+            if (status == false) evnt.Checked = false;
+            else
+                evnt.Checked = true;
             using (ISession session = Helper.OpenSession())
             {
                 session.Update(evnt);

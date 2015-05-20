@@ -15,5 +15,6 @@
     <property name="ToDate" access="property" type="datetime"></property>
     <property name="Location" access="property" type="string"></property>
     <property name="Active" access="property" type="bool"></property>
+    <property name="Checked" access="property" type="bool"></property>
   </class>
 </hibernate-mapping>
