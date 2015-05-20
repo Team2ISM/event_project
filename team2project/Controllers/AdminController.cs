@@ -19,7 +19,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult ManagerPage()
         {
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetList());
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
             return View("ManagerPage", list);
         }
 

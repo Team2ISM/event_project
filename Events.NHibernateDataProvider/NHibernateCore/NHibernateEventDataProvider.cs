@@ -11,7 +11,15 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateEventDataProvider : IEventDataProvider
     {
-
+        public IList<Event> GetAllEvents()
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                var criteria = session.CreateCriteria<Event>();
+                criteria.AddOrder(Order.Asc("FromDate"));
+                return criteria.List<Event>();
+            }
+        }
         public IList<Event> GetList(string location, string nDaysToEvent)
         {
             using (ISession session = Helper.OpenSession())
@@ -33,7 +41,11 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 {
                     session.EnableFilter("effectiveDate").SetParameter("asOfDate", DateTime.Now);
                 }
-                return session.CreateCriteria<Event>().AddOrder(Order.Asc("FromDate")).List<Event>();
+                var criteria = session.CreateCriteria<Event>();
+                criteria.Add(Restrictions.Eq("Active", true));
+                criteria.Add(Restrictions.Eq("Checked", true));
+                criteria.AddOrder(Order.Asc("FromDate"));
+                return criteria.List<Event>();
             }
         }
 

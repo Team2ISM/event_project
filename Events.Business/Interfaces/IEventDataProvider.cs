@@ -16,5 +16,7 @@ namespace Events.Business.Interfaces
         void ToggleButtonStatusActive(string id);
 
         int Create(Event evnt);
+
+        IList<Event> GetAllEvents();
     }
 }

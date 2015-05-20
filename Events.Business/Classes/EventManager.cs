@@ -17,6 +17,14 @@ namespace Events.Business.Classes
             this.cacheManager = cacheManager;
         }
 
+        public IList<Event> GetAllEvents()
+        {
+            return cacheManager.FromCache<IList<Event>>("allEvents",
+                    () =>
+                    {
+                        return dataProvider.GetAllEvents();
+                    });
+        }
         public IList<Event> GetList()
         {
             return cacheManager.FromCache<IList<Event>>("eventsList",

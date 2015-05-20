@@ -267,7 +267,7 @@
     <Content Include="Views\Event\List - tiles.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Error\Page404.cshtml" />
+    <Content Include="Views\Event\Error\Page404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\Create.cshtml" />
