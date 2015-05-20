@@ -178,6 +178,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CitiesViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
