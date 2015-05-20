@@ -21,12 +21,14 @@
                 <th>To</th>
                 <th>Location</th>
                 <th>Property</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
 
             @foreach (var evnt in Model)
             {
+                
                 <tr>
                     <td>@evnt.Title</td>
                     <td>@evnt.Title</td>
@@ -39,38 +41,31 @@
                     <td>
                         @if (evnt.Active)
                         {
-                            <input type="button" class="visibility" value="visible" />
+                            <input type="button" class="visibility" value="Видимый" />
                         }
                         else
                         {
-                            <input type="button" class="visibility" value="invisible" />
+                            <input type="button" class="visibility" value="Невидимый" />
                         }
-                        <input type="button" id="delete" value="delete" />
+                        <input type="button" id="GoodIvent" value="Подтвердить" />
                     </td>
+                    <td><input type="button" id="delete" value="удалить" /></td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-<script>
-    $(document).ready(function () {
-        $('form').submit(function () {
-            var form = $(this);
-            var url = form.attr('action');
-            var formData = form.serialize();
-            $.post(url, formData, function (result) {
-                // Do something with result
-            });
 
-            return false;
-        });
+<script type="text/javascript">
+    $("#delete").click(function () {
+        
     });
 </script>
 @helper Date(DateTime? FromDate, DateTime? ToDate)
 {
     @(FromDate != null ? FromDate.Value.ToString("dd MMMM yyyy") : "n/a")
-    if (ToDate != null && (FromDate == null || ToDate.Value.DayOfYear != FromDate.Value.DayOfYear))
-    {
-        @ToDate.Value.ToString("dd MMMM yyyy")
-    }
+                        if (ToDate != null && (FromDate == null || ToDate.Value.DayOfYear != FromDate.Value.DayOfYear))
+                        {
+                            @ToDate.Value.ToString("dd MMMM yyyy")
+                        }
 }

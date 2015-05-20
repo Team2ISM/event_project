@@ -45,5 +45,7 @@ namespace team2project.Models
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
         public bool Active { get; set; }
 
+        [Required(ErrorMessage = "This field is required")]
+        public bool Checked { get; set; }
     }
 }

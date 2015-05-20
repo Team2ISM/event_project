@@ -19,5 +19,7 @@ namespace Events.Business.Models
         public virtual string Location { get; set; }
 
         public virtual bool Active { get; set; }
+
+        public virtual bool Checked { get; set; }
     }
 }

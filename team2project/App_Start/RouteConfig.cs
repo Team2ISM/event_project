@@ -31,6 +31,12 @@ namespace team2project
             );
 
             routes.MapRoute(
+                name: "Welcome",
+                url: "User/Welcome",
+                defaults: new { controller = "User", action = "Welcome" }
+            );
+
+            routes.MapRoute(
                 name: "Registration",
                 url: "User/Registration",
                 defaults: new { controller = "User", action = "Registration" }

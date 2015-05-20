@@ -73,34 +73,41 @@ namespace team2project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var crypto = new SimpleCrypto.PBKDF2();
+                try
+                {
+                    var crypto = new SimpleCrypto.PBKDF2();
 
-                var encrPass = crypto.Compute(user.Password);
+                    var encrPass = crypto.Compute(user.Password);
 
-                User newUser = AutoMapper.Mapper.Map<User>(user);
-                newUser.Password = encrPass;
-                newUser.PasswordSalt = crypto.Salt;
-                newUser.IsActive = false;
+                    User newUser = AutoMapper.Mapper.Map<User>(user);
+                    newUser.Password = encrPass;
+                    newUser.PasswordSalt = crypto.Salt;
+                    newUser.IsActive = false;
 
-                data.CreateUser(newUser);
+                    data.CreateUser(newUser);
 
-                MailMessage msg = new MailMessage();
+                    MailMessage msg = new MailMessage();
 
-                string userMail = user.Email;
-                string activationLink = "http://localhost:7161/User/Activate/" + user.Id;
-                string body = "Dear " + user.Name + ", thank you for registration\n";
-                body += "To activate your account click on the link below\n";
-                body += activationLink;
-                msg.From = new MailAddress("team2project222@gmail.com");
-                msg.To.Add(user.Email);
-                msg.Subject = "Registration confirm";
-                msg.Body = body;
-                msg.Priority = MailPriority.High;
+                    string userMail = user.Email;
+                    string activationLink = "http://localhost:7161/User/Activate/" + user.Id;
+                    string body = "Dear " + user.Name + ", thank you for registration\n";
+                    body += "To activate your account click on the link below\n";
+                    body += activationLink;
+                    msg.From = new MailAddress("team2project222@gmail.com");
+                    msg.To.Add(user.Email);
+                    msg.Subject = "Registration confirm";
+                    msg.Body = body;
+                    msg.Priority = MailPriority.High;
 
-                SmtpClient client = new SmtpClient();
+                    SmtpClient client = new SmtpClient();
 
-                client.Send(msg);
-                ViewBag.RegistrationSuccess = "Please, confirm your registration by follow the link on your mail";
+                    client.Send(msg);
+                    ViewBag.RegistrationSuccess = "Please, confirm your registration by follow the link on your mail";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.DuplicateMailError = "User with this email already registered";
+                }
             }
             return View();
 
@@ -116,13 +123,18 @@ namespace team2project.Controllers
                 data.UpdateUser(user);
                 FormsAuthentication.SetAuthCookie(user.Email, false);
                 UserViewModel model = AutoMapper.Mapper.Map<UserViewModel>(user);
-                return View(model);
+                return RedirectToRoute("Welcome", "User");
             }
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
         public ActionResult Update()
+        {
+            return View();
+        }
+
+        public ActionResult Welcome()
         {
             return View();
         }
