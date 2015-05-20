@@ -26,6 +26,18 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return Model;
         }
 
+
+        public void ToggleButtonStatus(Event evnt)
+        {
+            if (evnt.Active == true) evnt.Active = false;
+            else
+                evnt.Active = true;
+            using (ISession session = Helper.OpenSession())
+            {
+                session.Update(evnt);
+            }
+        }
+
         public int Create(Event model)
         {
             int EmpNo = 0;

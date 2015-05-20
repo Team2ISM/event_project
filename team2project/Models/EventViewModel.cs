@@ -42,5 +42,8 @@ namespace team2project.Models
         [DataType(DataType.MultilineText)]
         public string LongDescription { get; set; }
 
+        [Required(ErrorMessage = "This field is required")]
+        public bool Active { get; set; }
+
     }
 }

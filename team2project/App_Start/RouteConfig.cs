@@ -59,6 +59,12 @@ namespace team2project
                 url: "eventDetails/{id}",
                 defaults: new { controller = "Event", action = "Details" }
             );
+
+            routes.MapRoute(
+                name: "ManagerPage",
+                url: "admin",
+                defaults: new { controller = "Admin", action = "ManagerPage" }
+            );
             
             routes.MapRoute(
                 "NotFound",

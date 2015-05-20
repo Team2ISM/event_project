@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Manager Page";
+}
+
+@model System.Collections.Generic.List<team2project.Models.EventViewModel>
+@using System.Globalization
+@section css{
+    @Styles.Render("~/Content/Home/List.css")
+}
+
+<div class="grid">
+    <h1>@ViewBag.Title</h1>
+
+    <table class="table hovered striped border bordered sortable-markers-on-left">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Location</th>
+                <th>Property</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var evnt in Model)
+            {
+                
+                <tr>
+                    <td>@evnt.Title</td>
+                    <td>@evnt.Title</td>
+                    <td>@(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a")
+                        @if (evnt.ToDate != null && (evnt.FromDate == null || evnt.ToDate.Value.DayOfYear != evnt.FromDate.Value.DayOfYear))
+                        {
+                            @evnt.ToDate.Value.ToString("dd MMMM yyyy")
+                        }
+                    </td>
+                    <td>@(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a")</td>
+                    <td>@(evnt.FromDate != null ? evnt.ToDate.Value.ToString("hh:mm") : "n/a")</td>
+                    <td>@evnt.Location</td>
+                    <td>
+                        @if (evnt.Active)
+                        {
+                            <input type="button" class="visibility" value="visible" />
+                        }
+                        else
+                        {
+                            <input type="button" class="visibility" value="invisible" />
+                        }
+                        <input type="button" id="delete" value="delete" />      
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

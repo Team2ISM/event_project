@@ -9,6 +9,10 @@ namespace Events.Business.Interfaces
 
         Event GetById(string id);
 
+        void Delete(Event model);
+
+        void ToggleButtonStatus(Event evnt);
+
         int Create(Event evnt);
     }
 }
