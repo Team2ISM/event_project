@@ -16,9 +16,14 @@
     {
         @Html.ValidationSummary(true)
         <div class="input-field col s6">
-            @Html.LabelFor(m => m.Login, "Login")<br>
-            @Html.EditorFor(m => m.Login)
-            @Html.ValidationMessageFor(m => m.Login)
+            @Html.LabelFor(m => m.Name, "Login")<br>
+            @Html.EditorFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="input-field col s6">
+            @Html.LabelFor(m => m.Surname, "Surname")<br>
+            @Html.EditorFor(m => m.Surname)
+            @Html.ValidationMessageFor(m => m.Surname)
         </div>
         <div class="input-field col s6">
             @Html.LabelFor(m => m.Email, "Email")<br>
@@ -41,5 +46,8 @@
             @Html.ValidationMessageFor(m => m.RepeatPassword)
         </div>
         <button class="btn waves-effect waves-light" type="submit">Sign Up</button>
+        <div>
+            @ViewBag.RegistrationSuccess
+        </div>
     }
 </div>

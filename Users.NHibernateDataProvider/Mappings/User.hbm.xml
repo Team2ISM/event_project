@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <hibernate-mapping
  xmlns="urn:nhibernate-mapping-2.2"
  auto-import="true"
@@ -6,7 +6,8 @@
  namespace="Users.Business">
   <class name="User" table="Users">
     <id name="Id"></id>
-    <property name="Login"/>
+    <property name="Name"/>
+    <property name="Surname"/>
     <property name="Email"/>
     <property name="Password"/>
     <property name="PasswordSalt"/>
