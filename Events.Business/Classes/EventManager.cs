@@ -50,11 +50,13 @@ namespace Events.Business.Classes
         public void ToggleButtonStatusActive(string id)
         {
             dataProvider.ToggleButtonStatusActive(id);
+            cacheManager.RemoveFromCache("eventsList");
         }
 
         public void ToggleButtonStatusChecked(string id)
         {
             dataProvider.ToggleButtonStatusChecked(id);
+            cacheManager.RemoveFromCache("eventsList");
         }
     }
 }

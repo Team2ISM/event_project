@@ -39,11 +39,11 @@
                         {
                             if (evnt.Active)
                             {
-                                @Html.RouteLink("Активировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
+                                @Html.RouteLink("Деактивировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
                             }
                             else
                             {
-                                @Html.RouteLink("Подтвердить", "ToogleIsActiveEvent", new { @id = evnt.Id })
+                                @Html.RouteLink("Активировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
                             }
                         }
                         else

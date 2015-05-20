@@ -33,28 +33,19 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         public void ToggleButtonStatusActive(string id)
         {
             Event evnt = GetById(id);
-            if (evnt.Active == true)
+            evnt.Active=!evnt.Active;
+            if (!evnt.Checked)
             {
-                evnt.Active = false;
                 evnt.Checked = true;
             }
-            else
-                evnt.Active = true;
-            using (ISession session = Helper.OpenSession())
-            {
-                session.Update(evnt);
-            }
-
+            this.Update(evnt);
         }
 
         public void ToggleButtonStatusChecked(string id)
         {
             Event evnt = GetById(id);
             evnt.Checked = true;
-            using (ISession session = Helper.OpenSession())
-            {
-                session.Update(evnt);
-            }
+            this.Update(evnt);
         }
 
         public int Create(Event model)
