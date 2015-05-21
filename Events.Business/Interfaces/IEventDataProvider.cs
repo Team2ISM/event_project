@@ -17,6 +17,7 @@ namespace Events.Business.Interfaces
 
         int Create(Event evnt);
 
+
         IList<Event> GetAllEvents();
     }
 }

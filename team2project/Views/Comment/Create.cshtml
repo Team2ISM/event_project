@@ -10,10 +10,8 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.EventId)
         @Html.HiddenFor(m => m.AuthorId)
-        @Html.HiddenFor(m => m.PostingTime)
         @{
     if (!User.Identity.IsAuthenticated)
     {

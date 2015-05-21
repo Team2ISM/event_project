@@ -6,6 +6,7 @@ using Comments.Business.Classes;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using team2project.Models;
+using System;
 
 
 namespace team2project.Controllers
@@ -37,19 +38,19 @@ namespace team2project.Controllers
             return new JavaScriptSerializer().Serialize(comments);
         }
         [HttpPost]
-        public ActionResult AddComment(Comment comment)
+        public ActionResult AddComment(CommentViewModel commentModel)
         {
             if (!ModelState.IsValid)
             {
-                if (comment.EventId==null)
+                if (commentModel.EventId == null)
                 {
                     return RedirectToRoute("eventDetails");
                 }
-                return RedirectToRoute("eventDetails", new { @id = comment.EventId });
-
+                return RedirectToRoute("eventDetails", new { @id = commentModel.EventId });
             }
-            var commentModel = AutoMapper.Mapper.Map<Comment>(comment);
-            commentManager.Create(commentModel.Id, commentModel);
+            var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
+            comment.PostingTime = DateTime.Now;
+            commentManager.Create(comment);
             return RedirectToRoute("eventDetails", new { @id=comment.EventId });
         }
 
