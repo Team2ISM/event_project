@@ -41,12 +41,12 @@
         </p>
         <p>
             @Html.LabelFor(m => m.FromDate, "От")<br>
-            @Html.EditorFor(m => m.FromDate)
+            <input id="datetimepicker1" name="FromDate" type="text" >
             @Html.ValidationMessageFor(m => m.FromDate)
         </p>
         <p>
             @Html.LabelFor(m => m.ToDate, "До")<br>
-            @Html.EditorFor(m => m.ToDate)
+            <input id="datetimepicker2" name="ToDate" type="text" >
             @Html.ValidationMessageFor(m => m.ToDate)
         </p>
         <p>
@@ -62,8 +62,11 @@
         <input type="submit" value="Create" />
     }
 </div>
+
+@Styles.Render("~/Content/jquery.datetimepicker.css")
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
-    @Scripts.Render("~/Scripts/script.js")
+    @Scripts.Render("~/Scripts/jquery.datetimepicker.js")
+    @Scripts.Render("~/Scripts/createScript.js")
 }

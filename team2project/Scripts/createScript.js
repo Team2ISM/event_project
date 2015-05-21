@@ -133,4 +133,15 @@ $(function () {
     $("#toggle").click(function () {
         $("#combobox").toggle();
     });
+    jQuery('#datetimepicker1').datetimepicker({
+        timepicker: true,
+        startDate: '+1971/05/01',
+        lang:'ru',
+        mask: true
+    });
+    jQuery('#datetimepicker2').datetimepicker({
+        timepicker: true,
+        lang: 'ru',
+        mask: true
+    });
 });
