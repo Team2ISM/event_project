@@ -43,13 +43,6 @@
             @Html.LabelFor(m => m.Location, "Город")<br>
             <div class="ui-widget">
                 @Html.DropDownListFor(m => m.Location, AvailableLocations, new { id = "combobox" })
-                @* <select id="combobox" name="Location">
-                    <option value="">Все</option>
-                    @foreach (var city in ViewBag.cities)
-                    {
-                        <option value=@city.Name>@city.Name</option>
-                    }
-                </select>*@
             </div>
             @Html.ValidationMessageFor(m => m.Location)
             <input id="location" name="Location" style="height: 0; padding: 0; margin: 0; border: none;">
