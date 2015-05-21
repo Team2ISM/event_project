@@ -35,6 +35,7 @@ namespace Comments.Business.Classes
                     return model;
                 });
             cacheManager.RemoveFromCache("commentsList");
+            cacheManager.DisposeCache();
             // remove comments to flkdsjgirdshgjjsduoghwsrdhgbsjhfdgjkrdshkuyea
         }
 

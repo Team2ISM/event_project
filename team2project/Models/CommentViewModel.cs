@@ -12,22 +12,17 @@ namespace team2project.Models
                 this.Id = Guid.NewGuid().ToString();
             }
 
-            if (PostingTime == null)
-            {
-                PostingTime = DateTime.Now;
-            }
             if (AuthorId == null)
             {
-                AuthorId = "id";
+                AuthorId = "anon";
             }
         }
 
         public CommentViewModel(string eventId)
         {
             this.Id = Guid.NewGuid().ToString();
-            PostingTime = DateTime.Now;
             EventId = eventId;
-            AuthorId = "id";
+            AuthorId = "anon";
         }
 
         [ScaffoldColumn(false)]
@@ -46,9 +41,6 @@ namespace team2project.Models
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Lenght must be between 2 and 50")]
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
-
-        [ScaffoldColumn(false)]
-        public DateTime PostingTime { get; set; }
 
     }
 }
