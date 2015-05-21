@@ -30,8 +30,8 @@
     <filter name ="effectiveDate" condition ="ToDate >= :asOfDate"/>
     
     <filter name ="equalLocation" condition ="Location = :chosenLocation"/>
-
-    <filter name ="equalDate" condition =":chosenDate >= FromDate AND ToDate >= :chosenDate"/>
+    
+    <filter name ="equalDate" condition ="FromDate >= :nowaday AND :chosenDate >= FromDate"/>
   </class>
 
   <filter-def name = "effectiveDate">
@@ -44,6 +44,7 @@
 
   <filter-def name ="equalDate">
     <filter-param name ="chosenDate" type ="System.DateTime"/>
+    <filter-param name ="nowaday" type ="System.DateTime"/>
   </filter-def>
   
 </hibernate-mapping>
