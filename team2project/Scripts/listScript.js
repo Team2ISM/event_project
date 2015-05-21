@@ -38,10 +38,10 @@
                     var url = location.protocol + '//' + location.host + '/', path = location.pathname.split('/');
                     url += path[1];
                     if (ui.item.value && ui.item.option.value !== '-1') {
-                        url += '/' + ui.item.option.value;
+                        url += '/' + ui.item.value;
                     }
-                    if (isSecondDays) url += '/' + path[2];
-                    else if (path[3]) url += '/' + path[3];
+                    var days = date.find('option:selected').val();
+                    if (days && days !== '-1') url += '/' + days;
                     document.location.href = url;
                     setTimeout(function () {
                         document.location.href = url;
@@ -139,14 +139,18 @@
         }
     });
 })(jQuery);
-
+var date = $("#datefilter"), combobox = $("#combobox");
 $(function () {
-    var combobox = $("#combobox"), date = $("#datefilter"),
-        path = location.pathname.split('/');
+    var path = location.pathname.split('/'), city = '-1';
 
-    if (isSecondDays) date.find('option[value="' + (path[2]) + '"]').attr('selected', 'selected');
-    else date.find('option[value="' + (path[3] ? path[3] : '') + '"]').attr('selected', 'selected');
-    combobox.find('option[value="' + (path[2] ? path[2] : '') + '"]').attr('selected', 'selected');
+    if (path[2]) {
+        var arr = combobox.children();
+        arr.each(function (i, val) {
+            if (val.innerText === path[2]) {val.setAttribute('selected', 'selected');city = val.value;}
+        });
+    }
+    if (city && city !== '-1') date.find('option[value="' + (path[3]) + '"]').attr('selected', 'selected');
+    else date.find('option[value="' + (path[2] ? path[2] : '') + '"]').attr('selected', 'selected');
 
     combobox.combobox();
     $("#toggle").click(function () {

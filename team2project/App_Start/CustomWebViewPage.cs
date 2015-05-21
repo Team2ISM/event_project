@@ -39,7 +39,7 @@ namespace team2project.App_Start
             get {
                 var cities = cityManager.GetList();
                 var list = new List<SelectListItem>(cities.Count+1);
-                list.Add(new SelectListItem() { Text = "Все", Value = "" });
+                list.Add(new SelectListItem() { Text = "Все", Value = "-1" });
                 foreach (var city in cities) {
                     list.Add(new SelectListItem() { Text = city.Name, Value = city.Id.ToString() });
                 }
