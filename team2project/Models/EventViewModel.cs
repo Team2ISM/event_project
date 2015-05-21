@@ -48,5 +48,8 @@ namespace team2project.Models
 
         [Required(ErrorMessage = "This field is required")]
         public bool Checked { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? DateOfCreation { get; set; }
     }
 }

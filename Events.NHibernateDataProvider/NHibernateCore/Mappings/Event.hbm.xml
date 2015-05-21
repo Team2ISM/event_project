@@ -25,6 +25,8 @@
     
     <property name="Checked" access="property" type="bool"></property>
     
+    <property name="DateOfCreation" access="property" type="datetime"></property>
+    
     <filter name ="effectiveDate" condition ="ToDate >= :asOfDate"/>
     
     <filter name ="equalLocation" condition ="Location = :chosenLocation"/>
