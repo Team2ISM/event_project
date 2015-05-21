@@ -26,6 +26,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.isSecondDays = 0;
             ViewBag.cities = cityManager.GetList();
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList());
             return View("List", list);
@@ -35,6 +36,8 @@ namespace team2project.Controllers
         public ActionResult Filters(string loc, string days)
         {
             ViewBag.cities = cityManager.GetList();
+            if (days != null && loc == null) ViewBag.isSecondDays = 1;
+            else ViewBag.isSecondDays = 0;
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(loc, days));
             return View("List", list);
         }

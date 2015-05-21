@@ -19,7 +19,7 @@
     <div class="ui-widget">
         <label>Город: </label>
         <select id="combobox">
-            <option value="">Все</option>
+            <option value="-1">Все</option>
             @foreach(var city in ViewBag.cities){
                 <option value=@city.Name>@city.Name</option>
             }
@@ -27,7 +27,7 @@
     </div>
     <div>
         <select id="datefilter" style="display:inline-block">
-            <option value="">Все</option>
+            <option value="-1">Все</option>
             <option value="0">Сегодня</option>
             <option value="1">Завтра</option>
             <option value="3">Через 3 дня</option>
@@ -68,6 +68,9 @@
 
 </div>
 @section scripts{
+    <script>
+        var isSecondDays = 1 == @ViewBag.isSecondDays
+    </script>
     @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/listScript.js")

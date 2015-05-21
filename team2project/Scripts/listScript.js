@@ -37,12 +37,11 @@
                     
                     var url = location.protocol + '//' + location.host + '/', path = location.pathname.split('/');
                     url += path[1];
-                    path[1] = '';
-                    if (ui.item.value) {
-                        url += '/' + ui.item.value + '/' + path.pop();
-                    } else {
-                        url += + '/' + path.pop();
+                    if (ui.item.value && ui.item.option.value !== '-1') {
+                        url += '/' + ui.item.option.value;
                     }
+                    if (isSecondDays) url += '/' + path[2];
+                    else if (path[3]) url += '/' + path[3];
                     document.location.href = url;
                     setTimeout(function () {
                         document.location.href = url;
@@ -145,7 +144,8 @@ $(function () {
     var combobox = $("#combobox"), date = $("#datefilter"),
         path = location.pathname.split('/');
 
-    date.find('option[value="' + (path[3] ? path[3] : '') + '"]').attr('selected', 'selected');
+    if (isSecondDays) date.find('option[value="' + (path[2]) + '"]').attr('selected', 'selected');
+    else date.find('option[value="' + (path[3] ? path[3] : '') + '"]').attr('selected', 'selected');
     combobox.find('option[value="' + (path[2] ? path[2] : '') + '"]').attr('selected', 'selected');
 
     combobox.combobox();
@@ -156,8 +156,8 @@ $(function () {
         var url = location.protocol + '//' + location.host + '/';
         url += path[1];
         var locat = path[2];
-        if(locat)url += '/' + locat;
-        if (date.val()) {
+        if (!isSecondDays && locat) url += '/' + locat;
+        if (date.val() && date.val()!=='-1') {
             url += '/' + date.val();
         }
         document.location.href = url;
