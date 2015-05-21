@@ -25,10 +25,8 @@
 
                 <tr>
                     <td>@evnt.Title</td>
-                    <td>@evnt.Title</td>
-                    <td>
-                        @Date(evnt.FromDate, evnt.ToDate)
-                    </td>
+                    <td>@evnt.Description</td>
+                    <td>@Date(evnt.FromDate, evnt.ToDate)</td>
                     <td>@(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a")</td>
                     <td>@(evnt.FromDate != null ? evnt.ToDate.Value.ToString("hh:mm") : "n/a")</td>
                     <td>@evnt.Location</td>

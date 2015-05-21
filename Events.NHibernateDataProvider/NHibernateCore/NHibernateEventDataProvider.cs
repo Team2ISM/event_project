@@ -43,7 +43,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 }
                 var criteria = session.CreateCriteria<Event>();
                 criteria.Add(Restrictions.Eq("Active", true));
-                criteria.Add(Restrictions.Eq("Checked", true));
+                //criteria.Add(Restrictions.Eq("Checked", true));
                 criteria.AddOrder(Order.Asc("FromDate"));
                 return criteria.List<Event>();
             }

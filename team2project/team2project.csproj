@@ -204,6 +204,7 @@
     <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery-ui.structure.min.css" />
     <Content Include="Content\jquery-ui.theme.min.css" />
+    <Content Include="Content\jquery.datetimepicker.css" />
     <Content Include="Content\materialize\materialize.css" />
     <Content Include="Content\materialize\materialize.min.css" />
     <Content Include="Content\metro.css" />
@@ -214,6 +215,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.datetimepicker.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
@@ -222,7 +224,7 @@
     <Content Include="Scripts\metro.js" />
     <Content Include="Scripts\metro.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\script.js" />
+    <Content Include="Scripts\createScript.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\listScript.js" />
     <Content Include="Web.config" />

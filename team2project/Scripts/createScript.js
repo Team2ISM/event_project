@@ -34,6 +34,9 @@
                     this._trigger("select", event, {
                         item: ui.item.option
                     });
+                    //My 
+                    locat.val(ui.item.value);
+                    locat.html(ui.item.value);
                 },
 
                 autocompletechange: "_removeIfInvalid"
@@ -127,10 +130,20 @@
         }
     });
 })(jQuery);
-
+var locat = $("#location");
 $(function () {
-    $("#combobox").combobox();
-    $("#toggle").click(function () {
-        $("#combobox").toggle();
+    var combobox = $("#combobox");
+    combobox.combobox();
+    jQuery('#datetimepicker1').datetimepicker({
+        timepicker: true,
+        minDate: '-1970/01/01',//
+        lang:'ru',
+        mask: true
+    });
+    jQuery('#datetimepicker2').datetimepicker({
+        timepicker: true,
+        minDate: '-1970/01/01',//
+        lang: 'ru',
+        mask: true
     });
 });

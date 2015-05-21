@@ -12,9 +12,15 @@
     @Styles.Render("~/Content/User/user.css")
 }
 
+<<<<<<< HEAD
 <div class="container z-depth-1">
     <h5>@ViewBag.Title</h5>
     <div class="ui-widget">
+=======
+<div >
+    <h1>@ViewBag.Title</h1>
+    <!--<div class="ui-widget">
+>>>>>>> 806d6a4bce4b5bdbd50596fdbb61cbe346cb7d64
         <label>Cities: </label>
         <select id="combobox">
             <option value="">Select one...</option>
@@ -23,7 +29,7 @@
             <option value="3">Zhytomyr</option>
             <option value="4">Zmerinka</option>
         </select>
-    </div>
+    </div>-->
     @using (Html.BeginForm("Create", "EventController", FormMethod.Post))
     {
         @Html.HiddenFor(m => m.Id)
@@ -40,13 +46,14 @@
         </div>
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.FromDate, "От")<br>
-            @Html.EditorFor(m => m.FromDate)
+            <input id="datetimepicker1" name="FromDate" type="text" >
             @Html.ValidationMessageFor(m => m.FromDate)
         </div>
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.ToDate, "До")<br>
-            @Html.EditorFor(m => m.ToDate)
+            <input id="datetimepicker2" name="ToDate" type="text" >
             @Html.ValidationMessageFor(m => m.ToDate)
+<<<<<<< HEAD
         </div>
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.Location, "Город")<br>
@@ -54,6 +61,21 @@
             @Html.ValidationMessageFor(m => m.Location)
         </div>
         <div class="input-field col s12 m12 l12">
+=======
+        </p>
+            <div class="ui-widget">
+                <label>Город: </label>
+                <select id="combobox" name="Location">
+                    <option value="">Все</option>
+                    @foreach(var city in ViewBag.cities){
+                        <option value=@city.Name>@city.Name</option>
+                    }
+                </select>
+            </div>
+            @Html.ValidationMessageFor(m => m.Location)
+            <input id="location" name="Location" style="height: 0; padding: 0; margin: 0; border: none;" >
+        <p>
+>>>>>>> 806d6a4bce4b5bdbd50596fdbb61cbe346cb7d64
             @Html.LabelFor(m => m.LongDescription, "Полное описание")<br>
             @Html.EditorFor(m => m.LongDescription)
             @Html.ValidationMessageFor(m => m.LongDescription)
@@ -61,8 +83,16 @@
         <button class="btn waves-effect waves-light" type="submit">Создать</button>
     }
 </div>
+
+@Styles.Render("~/Content/jquery.datetimepicker.css")
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
+<<<<<<< HEAD
     @Scripts.Render("~/Scripts/script.js")
 }
+=======
+    @Scripts.Render("~/Scripts/jquery.datetimepicker.js")
+    @Scripts.Render("~/Scripts/createScript.js")
+}
+>>>>>>> 806d6a4bce4b5bdbd50596fdbb61cbe346cb7d64
