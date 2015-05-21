@@ -6,26 +6,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Update</h2>
-@using (Html.BeginForm("Update", "User", FormMethod.Post))
-    {
-        <p>
-            @Html.ValidationSummary(true)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Password, "Password")<br>
-            @Html.EditorFor(m => m.Password)
-            @Html.ValidationMessageFor(m => m.Password)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Password, "newPassword")<br>
-            <input type="password" id="newPassword" name="newPassword" />
-            @Html.ValidationMessageFor(m => m.Password)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.RepeatPassword, "Repeat")<br>
-            <input type="password" id="repeatPassword" name="repeatPassword" />
-            @Html.ValidationMessageFor(m => m.RepeatPassword)
-        </p>
-        <input type="submit" value="Update" />
-    }
+@section css{
+    @Styles.Render("~/Content/User/user.css")
+}
+
+@using (Html.BeginForm("Update", "User", FormMethod.Post, new { @class = "container z-depth-3" }))
+{
+    <h5>Смена пароля</h5>
+    @Html.ValidationSummary(true)
+    <div class="input-field col s12 m12 12">
+        @Html.LabelFor(m => m.Password, "Старый пароль")<br>
+        @Html.EditorFor(m => m.Password)
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div class="input-field col s12 m12 12">
+        @Html.LabelFor(m => m.Password, "Новый пароль")<br>
+        <input type="password" id="newPassword" name="newPassword" />
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div class="input-field col s12 m12 12">
+        @Html.LabelFor(m => m.RepeatPassword, "Повторите новый пароль")<br>
+        <input type="password" id="repeatPassword" name="repeatPassword" />
+        @Html.ValidationMessageFor(m => m.RepeatPassword)
+    </div>
+    <button class="btn waves-effect waves-light" type="submit">Поменять пароль</button>
+}

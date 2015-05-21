@@ -26,12 +26,16 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 if (nDaysToEvent != null && location != null)
                 {
-                    session.EnableFilter("equalDate").SetParameter("chosenDate", DateTime.Now.AddDays(Convert.ToDouble(nDaysToEvent)));
+                    session.EnableFilter("equalDate")
+                    .SetParameter("chosenDate", DateTime.Now.AddDays(Convert.ToDouble(nDaysToEvent)))
+                    .SetParameter("nowaday", DateTime.Now);
                     session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
                 }
                 else if (nDaysToEvent != null)
                 {
-                    session.EnableFilter("equalDate").SetParameter("chosenDate", DateTime.Now.AddDays(Convert.ToDouble(nDaysToEvent)));
+                    session.EnableFilter("equalDate")
+                    .SetParameter("chosenDate", DateTime.Now.AddDays(Convert.ToDouble(nDaysToEvent)))
+                    .SetParameter("nowaday", DateTime.Now);
                 }
                 else if (location != null)
                 {
