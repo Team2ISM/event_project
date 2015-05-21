@@ -58,7 +58,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.cities = cityManager.GetList();
+           // ViewBag.cities = cityManager.GetList();
             var evnt = new EventViewModel();
             return View(evnt);
         }
@@ -68,7 +68,7 @@ namespace team2project.Controllers
         {
             if (!ModelState.IsValid || evnt.FromDate >= evnt.ToDate)
             {
-                ViewBag.cities = cityManager.GetList();
+                //ViewBag.cities = cityManager.GetList();
                 return View(evnt);
             }
 

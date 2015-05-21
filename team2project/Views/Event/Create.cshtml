@@ -16,8 +16,7 @@
 
 <div class="container z-depth-1">
     <h5>Создайте свое событие!</h5>
-    @using (Html.BeginForm("Create", "EventController", FormMethod.Post))
-    {
+    @using (Html.BeginForm("Create", "EventController", FormMethod.Post)) {
         @Html.HiddenFor(m => m.Id)
         @Html.ValidationSummary(true)
         <div class="input-field col s12 m12 l12">
@@ -47,20 +46,21 @@
         </div>
         <div class="input-field col s12 m12 l12">
             <div class="ui-widget">
-                <select id="combobox" name="Location">
+                @Html.DropDownListFor(m => m.Location, AvailableLocations, new { id = "combobox" })
+                @* <select id="combobox" name="Location">
                     <option value="">Все</option>
                     @foreach (var city in ViewBag.cities)
                     {
                         <option value=@city.Name>@city.Name</option>
                     }
-                </select>
+                </select>*@
             </div>
             @Html.ValidationMessageFor(m => m.Location)
             <input id="location" name="Location" style="height: 0; padding: 0; margin: 0; border: none;">
             <p>
                 @Html.LabelFor(m => m.LongDescription, "Полное описание")<br>
                 @Html.EditorFor(m => m.LongDescription)
-                @Html.ValidationMessageFor(m => m.LongDescription)
+            @Html.ValidationMessageFor(m => m.LongDescription)
         </div>
         <button class="btn waves-effect waves-light" type="submit">Создать</button>
     }
