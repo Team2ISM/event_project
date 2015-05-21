@@ -41,10 +41,6 @@
         </div>
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.Location, "Город")<br>
-            @Html.EditorFor(m => m.Location)
-            @Html.ValidationMessageFor(m => m.Location)
-        </div>
-        <div class="input-field col s12 m12 l12">
             <div class="ui-widget">
                 @Html.DropDownListFor(m => m.Location, AvailableLocations, new { id = "combobox" })
                 @* <select id="combobox" name="Location">
@@ -60,7 +56,7 @@
             <p>
                 @Html.LabelFor(m => m.LongDescription, "Полное описание")<br>
                 @Html.EditorFor(m => m.LongDescription)
-            @Html.ValidationMessageFor(m => m.LongDescription)
+                @Html.ValidationMessageFor(m => m.LongDescription)
         </div>
         <button class="btn waves-effect waves-light" type="submit">Создать</button>
     }
