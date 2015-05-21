@@ -141,17 +141,18 @@
 })(jQuery);
 var date = $("#datefilter"), combobox = $("#combobox");
 $(function () {
-    var path = location.pathname.split('/'), city = '-1';
+    var path = location.pathname.split('/'), city = { value: '-1' };
 
     if (path[2]) {
         var arr = combobox.children();
         arr.each(function (i, val) {
-            if (val.innerText === path[2]) {val.setAttribute('selected', 'selected');city = val.value;}
+            if (val.innerText === path[2]) {val.setAttribute('selected', 'selected');city = val;}
         });
     }
-    if (city && city !== '-1') date.find('option[value="' + (path[3]) + '"]').attr('selected', 'selected');
+    if (city.value && city.value !== '-1') date.find('option[value="' + (path[3]) + '"]').attr('selected', 'selected');
     else date.find('option[value="' + (path[2] ? path[2] : '') + '"]').attr('selected', 'selected');
 
+    combobox.html('<option value="-1">Все</option>' + combobox.html());
     combobox.combobox();
     $("#toggle").click(function () {
         combobox.toggle();
@@ -160,7 +161,7 @@ $(function () {
         var url = location.protocol + '//' + location.host + '/';
         url += path[1];
         var locat = path[2];
-        if (!isSecondDays && locat) url += '/' + locat;
+        if (city.value && city.value !== '-1') url += '/' + locat;
         if (date.val() && date.val()!=='-1') {
             url += '/' + date.val();
         }
