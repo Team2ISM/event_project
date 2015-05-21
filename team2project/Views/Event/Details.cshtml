@@ -5,13 +5,15 @@
 
 @model team2project.Models.EventViewModel
 @using System.Globalization
+@using team2project.Models
+@using System.Collections.Generic
 
 @section css{
     @Styles.Render("~/Content/Home/Details.css")
 }
-<div class="grid">
-    <div class="row cells12">
-        <div class="cell colspan2">
+<div class="container z-depth-1">
+    <div class="row">
+        <div class="col s2 m2 2">
             <div class="tile-small">
                 @if (@Model.FromDate != null)
                 {
@@ -20,16 +22,16 @@
                 }
                 else
                 {
-                   <p>n/a</p>
+                    <p>n/a</p>
                 }
             </div>
         </div>
-        <div class="cell colspan10">
+        <div class="col c10 m10 10">
             <h2>@Model.Title</h2>
         </div>
     </div>
     <div class="row">
-        <div class="cell colspan2">
+        <div class="col s2 m2 2">
             <button class="button danger loading-pulse text-shadow">Join Event</button>
         </div>
     </div>
@@ -39,15 +41,15 @@
             <tbody>
                 <tr>
                     <td>Date:</td>
-                    @CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")
+                    <td>@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</td>
                 </tr>
                 <tr>
                     <td>From:</td>
-                    @CheckDateIfNull(Model.FromDate, "dd MMMM hh:mm")
+                    <td>@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</td>
                 </tr>
                 <tr>
                     <td>To:</td>
-                    @CheckDateIfNull(Model.ToDate, "dd MMMM hh:mm")
+                    <td>@CheckDateIfNull(Model.ToDate, "dd MMMM yyyy")</td>
                 </tr>
                 <tr>
                     <td>Location:</td>
@@ -58,7 +60,7 @@
     </div>
     <hr />
     <div class="row description">
-        <div class="cell">
+        <div class="col">
             @if (!@String.IsNullOrEmpty(Model.LongDescription))
             {
                 <p>@Model.LongDescription</p>
@@ -69,20 +71,47 @@
             }
         </div>
     </div>
-    @Html.Partial("~/Views/Comment/Create.cshtml", new team2project.Models.CommentViewModel(Model.Id))
 </div>
 
+<div class="container z-depth-1">
+    @Html.Partial("~/Views/Comment/Create.cshtml", new CommentViewModel(Model.Id))
+</div>
+
+@{
+    var list = AutoMapper.Mapper.Map<IList<CommentViewModel>>(ViewData["Comments"]);
+    foreach (CommentViewModel item in list)
+    {
+        <div class="container z-depth-1 comment-body">
+            <div class="row">
+                <div class="col s12 m2 2">
+                    @item.AuthorName
+                </div>
+                <div class="col s12 m3 3">
+                    @item.PostingTime.ToString("dd MMMM yy hh:mm")
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col s12 m12 12">
+                    @item.Text
+                </div>
+            </div>
+        </div>
+    }
+}
 
 
 
 
-@helper CheckDateIfNull(DateTime? date, string format) { 
+
+@helper CheckDateIfNull(DateTime? date, string format)
+{
     if (date != null)
     {
-        <td>@date.Value.ToString(format)</td>
+        @date.Value.ToString(format)
     }
     else
     {
-        <td>n/a</td>
+        <span>n/a</span>
     }
 }

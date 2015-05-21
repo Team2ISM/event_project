@@ -6,9 +6,9 @@
 @section css{
     @Styles.Render("~/Content/Home/List.css")
 }
-<div class="grid">
+<div class="container">
     <h1>@ViewBag.Title</h1>
-    <table class="table hovered striped border bordered sortable-markers-on-left">
+    <table class="striped">
         <thead>
             <tr>
                 <th>Title</th>
@@ -59,11 +59,7 @@
         </tbody>
     </table>
 </div>
-<script type="text/javascript">
-    $("#delete").click(function () {
 
-    });
-</script>
 @helper Date(DateTime? FromDate, DateTime? ToDate)
 {
     @(FromDate != null ? FromDate.Value.ToString("dd MMMM yyyy") : "n/a")

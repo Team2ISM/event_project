@@ -3,6 +3,7 @@ using Events.Business.Classes;
 using Events.Business.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Comments.Business.Classes;
 using team2project.Models;
 
 namespace team2project.Controllers
@@ -10,10 +11,12 @@ namespace team2project.Controllers
     public class EventController : Controller
     {
         EventManager eventManager;
+        CommentManager commentManager;
 
-        public EventController(EventManager eventManager)
+        public EventController(EventManager eventManager, CommentManager commentManager)
         {
             this.eventManager = eventManager;
+            this.commentManager = commentManager;
         }
 
         [HttpGet]
@@ -39,7 +42,7 @@ namespace team2project.Controllers
             {
                 return View("EventNotFound");
             }
-
+            ViewData["Comments"] = commentManager.GetByEventId(id);
             return View(evnt);
         }
 

@@ -11,7 +11,7 @@ body {
 }
 
 .tile-small {
-    margin-left:0;
+    margin-left: 0;
     padding: 0;
 }
 
@@ -25,7 +25,7 @@ body {
     }
 
     .tile-small:hover {
-       outline: none;
+        outline: none;
     }
 
 .description {
@@ -47,9 +47,28 @@ tr td {
 
     tr td:first-child {
         text-align: right;
+        width: 100px;
     }
 
     tr td:nth-child(2n) {
         text-align: left;
         padding-left: 15px;
+    }
+
+.container {
+    padding: 5px;
+    margin-top: 15px;
+}
+
+    .container .comment-body {
+        margin-top: 10px;
+    }
+
+    .container.row:nth-child(2).col:nth-child(1) {
+        margin-top: 10px;
+        border-left: 3px solid grey;
+    }
+
+    .container form fieldset {
+        border: none;
     }
