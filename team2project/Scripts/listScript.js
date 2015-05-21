@@ -142,17 +142,20 @@
 })(jQuery);
 
 $(function () {
-    var combobox = $("#combobox"), date = $("#datefilter");
+    var combobox = $("#combobox"), date = $("#datefilter"),
+        path = location.pathname.split('/');
+
+    date.find('option[value="' + (path[3] ? path[3] : '') + '"]').attr('selected', 'selected');
+    combobox.find('option[value="' + (path[2] ? path[2] : '') + '"]').attr('selected', 'selected');
+
     combobox.combobox();
     $("#toggle").click(function () {
         combobox.toggle();
     });
     date.change(function () {
-        var url = location.protocol + '//' + location.host + '/', path = location.pathname.split('/');
+        var url = location.protocol + '//' + location.host + '/';
         url += path[1];
-        path[1] = '';
-        path.pop();
-        var locat = path.pop();
+        var locat = path[2];
         if(locat)url += '/' + locat;
         if (date.val()) {
             url += '/' + date.val();
