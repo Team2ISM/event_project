@@ -6,26 +6,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Update</h2>
+<h2>Сменить пароль</h2>
 @using (Html.BeginForm("Update", "User", FormMethod.Post))
     {
         <p>
             @Html.ValidationSummary(true)
         </p>
         <p>
-            @Html.LabelFor(m => m.Password, "Password")<br>
+            @Html.LabelFor(m => m.Password, "Старый пароль")<br>
             @Html.EditorFor(m => m.Password)
             @Html.ValidationMessageFor(m => m.Password)
         </p>
         <p>
-            @Html.LabelFor(m => m.Password, "newPassword")<br>
+            @Html.LabelFor(m => m.Password, "Новый пароль")<br>
             <input type="password" id="newPassword" name="newPassword" />
             @Html.ValidationMessageFor(m => m.Password)
         </p>
         <p>
-            @Html.LabelFor(m => m.RepeatPassword, "Repeat")<br>
+            @Html.LabelFor(m => m.RepeatPassword, "Повторите")<br>
             <input type="password" id="repeatPassword" name="repeatPassword" />
             @Html.ValidationMessageFor(m => m.RepeatPassword)
         </p>
-        <input type="submit" value="Update" />
+        <input type="submit" value="Сменить пароль" />
     }

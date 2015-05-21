@@ -37,10 +37,10 @@
                     if (User.Identity.IsAuthenticated)
                     {
                         <li>
-                            @Html.RouteLink("Logout", "Logout")
+                            @Html.RouteLink("Выйти", "Logout")
                         </li>
                         <li>
-                            @Html.RouteLink("Change password", "Update")
+                            @Html.RouteLink("Сменить пароль", "Update")
                         </li>
                         <li>
                             @User.Identity.Name
