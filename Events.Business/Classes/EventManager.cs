@@ -36,7 +36,7 @@ namespace Events.Business.Classes
 
         public IList<Event> GetList(string location, string nDaysToEvent)
         {
-            return cacheManager.FromCache<IList<Event>>(nDaysToEvent + " : " + location + " events",
+            return cacheManager.FromCache<IList<Event>>(nDaysToEvent + " : " + location,
                 () =>
                 {
                     return dataProvider.GetList(location, nDaysToEvent);
@@ -51,8 +51,8 @@ namespace Events.Business.Classes
                 {
                     return model;
                 });
-            cacheManager.RemoveFromCache("eventsList");
-
+            //cacheManager.RemoveFromCache("eventList");
+            cacheManager.DisposeCache();
         }
 
         public Event GetById(string id)
@@ -67,18 +67,21 @@ namespace Events.Business.Classes
         public void ToggleButtonStatusActive(string id)
         {
             dataProvider.ToggleButtonStatusActive(id);
-            cacheManager.RemoveFromCache("eventsList");
+            cacheManager.DisposeCache();
+            //cacheManager.RemoveFromCache("eventsList");
         }
 
         public void ToggleButtonStatusChecked(string id)
         {
             dataProvider.ToggleButtonStatusChecked(id);
-            cacheManager.RemoveFromCache("eventsList");
+            cacheManager.DisposeCache();
+            //cacheManager.RemoveFromCache("eventsList");
         }
         public void Delete(string id)
         {
             dataProvider.Delete(dataProvider.GetById(id));
-            cacheManager.RemoveFromCache("eventsList");
+            cacheManager.DisposeCache();
+            //cacheManager.RemoveFromCache("eventsList");
         }
     }
 }

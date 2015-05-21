@@ -4,6 +4,7 @@
 
 @model System.Collections.Generic.List<team2project.Models.EventViewModel>
 @using System.Globalization
+@using team2project.Models
 @section css{
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/jquery-ui.min.css")
@@ -15,7 +16,26 @@
     <h1>@ViewBag.Title</h1>
     
     <!-- Dropdown Trigger -->
-    
+    <div class="ui-widget">
+        <label>Город: </label>
+        <select id="combobox">
+            <option value="">Все</option>
+            @foreach(var city in ViewBag.cities){
+                <option value=@city.Name>@city.Name</option>
+            }
+        </select>
+    </div>
+    <div>
+        <select id="datefilter" style="display:inline-block">
+            <option value="">Все</option>
+            <option value="0">Сегодня</option>
+            <option value="1">Завтра</option>
+            <option value="3">Через 3 дня</option>
+            <option value="7">Через неделю</option>
+            <option value="31">Через месяц</option>
+            <option value="365">Через год</option>
+        </select>
+    </div>
     <table class="striped" >
         <thead>
             <tr>
@@ -50,5 +70,5 @@
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
-    @Scripts.Render("~/Scripts/script.js")
+    @Scripts.Render("~/Scripts/listScript.js")
 }

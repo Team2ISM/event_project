@@ -1,6 +1,8 @@
 ﻿using System.Web.Script.Serialization;
 using Events.Business.Classes;
 using Events.Business.Models;
+using Cities.Business.Classes;
+using Cities.Business.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Comments.Business.Classes;
@@ -12,16 +14,19 @@ namespace team2project.Controllers
     {
         EventManager eventManager;
         CommentManager commentManager;
+        CitiesManager cityManager;
 
-        public EventController(EventManager eventManager, CommentManager commentManager)
+        public EventController(EventManager eventManager, CommentManager commentManager, CitiesManager cityManager)
         {
             this.eventManager = eventManager;
             this.commentManager = commentManager;
+            this.cityManager = cityManager;
         }
 
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.cities = cityManager.GetList();
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList());
             return View("List", list);
         }
@@ -29,6 +34,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Filters(string loc, string days)
         {
+            ViewBag.cities = cityManager.GetList();
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(loc, days));
             return View("List", list);
         }
