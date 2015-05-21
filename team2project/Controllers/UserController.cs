@@ -50,8 +50,8 @@ namespace team2project.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Login or password is incorrect");
-                    @ViewBag.Error = "Login or password is incorrect";
+                    ModelState.AddModelError("", "Неправильный e-mail или пароль");
+                    @ViewBag.Error = "Неправильный e-mail или пароль";
                 }
             }
             return View();
@@ -96,11 +96,11 @@ namespace team2project.Controllers
 
                     MailMessage msg = new MailMessage();
 
-                    string body = user.Name + ", your password is:\n" + newPassword;
+                    string body = user.Name + ", ваш пароль: \n" + newPassword;
 
                     msg.From = new MailAddress("team2project222@gmail.com");
                     msg.To.Add(user.Email);
-                    msg.Subject = "Remind password";
+                    msg.Subject = "Новый пароль";
                     msg.Body = body;
                     msg.Priority = MailPriority.High;
 
@@ -143,19 +143,19 @@ namespace team2project.Controllers
 
                     string userMail = user.Email;
                     string activationLink = "http://localhost:7161/User/Activate/" + user.Id;
-                    string body = "Dear " + user.Name + ", thank you for registration\n";
-                    body += "To activate your account click on the link below\n";
+                    string body = user.Name + ", спасибо за регистрацию\n";
+                    body += "Для активации аккаунта перейдите по ссылке\n";
                     body += activationLink;
                     msg.From = new MailAddress("team2project222@gmail.com");
                     msg.To.Add(user.Email);
-                    msg.Subject = "Registration confirm";
+                    msg.Subject = "Подтверждение регистрации";
                     msg.Body = body;
                     msg.Priority = MailPriority.High;
 
                     SmtpClient client = new SmtpClient();
 
                     client.Send(msg);
-                    ViewBag.RegistrationSuccess = "Please, confirm your registration by follow the link on your mail";
+                    ViewBag.RegistrationSuccess = "Пожалуйста, подтвердите регистрацию перейдя по ссылке на вашей почте";
                 }
                 catch (Exception ex)
                 {

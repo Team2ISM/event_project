@@ -10,29 +10,29 @@ namespace team2project.Models
     {
         public string Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Введите ваше имя")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите вашу фамилию")]
         public string Surname { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Введите e-mail")]
         [EmailAddress]
         [StringLength(150)]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Введите пароль")]
         [DataType(DataType.Password)]
-        [StringLength(100, MinimumLength = 6)]
+        [StringLength(100, ErrorMessage="Пароль должен быть больше 6 символов", MinimumLength = 6)]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Подтвердите пароль")]
         [DataType(DataType.Password)]
-        [StringLength(100, MinimumLength = 6)]
-        [Compare("Password")]
+        [StringLength(100, ErrorMessage="Пароль должен быть больше 6 символов", MinimumLength = 6)]
+        [Compare("Password", ErrorMessage="Пароли не совпадают")]
         public string RepeatPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage="Введите город")]
         public string Location { get; set; }
 
         public UserViewModel()
