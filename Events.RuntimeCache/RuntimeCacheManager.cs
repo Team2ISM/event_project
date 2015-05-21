@@ -23,6 +23,17 @@ namespace Events.RuntimeCache
             return (TValue)cacheItem.Value;
         }
 
+        public void ClearCacheByRegion(string region)
+        {
+            foreach (var item in MemoryCache.Default)
+            {
+                if (item.Key.Contains(region))
+                {
+                    MemoryCache.Default.Remove(item.Key);
+                }
+            }
+        }
+
         public CacheItem ToCache<TValue>(string key, Func<TValue> function)
         {
             CacheItem cacheItem = cache.GetCacheItem(key);
