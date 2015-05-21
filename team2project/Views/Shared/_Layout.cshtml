@@ -37,10 +37,10 @@
                     if (User.Identity.IsAuthenticated)
                     {
                         <li>
-                            @Html.RouteLink("Logout", "Logout")
+                            @Html.RouteLink("Выход", "Logout")
                         </li>
                         <li>
-                            @Html.RouteLink("Change password", "Update")
+                            @Html.RouteLink("Поменять пароль", "Update")
                         </li>
                         <li>
                             @User.Identity.Name
@@ -54,6 +54,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/materialize/materialize.js")
     @Scripts.Render("~/Scripts/metro")
+    @Scripts.Render("~/Scripts/jquery.validate.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
