@@ -11,6 +11,7 @@ namespace team2project.Models
             Id = Guid.NewGuid().ToString();
             FromDate = DateTime.Now.AddDays(1);
             ToDate = DateTime.Now.AddDays(1);
+            Active = true;
         }
 
         [ScaffoldColumn(false)]
