@@ -26,17 +26,17 @@ namespace Comments.Business.Classes
                 });
         }
 
-        public void Create(string key, Comment model)
+        public void Create(Comment model)
         {
             dataProvider.Create(model);
-            cacheManager.ToCache<Comment>(key,
+            cacheManager.ToCache<Comment>("comment/" + model.Id,
                 () =>
                 {
                     return model;
                 });
+            cacheManager.RemoveFromCache("comment/" + model.Id);
             cacheManager.RemoveFromCache("commentsList");
-            cacheManager.DisposeCache();
-            // remove comments to flkdsjgirdshgjjsduoghwsrdhgbsjhfdgjkrdshkuyea
+            cacheManager.RemoveFromCache("commentsToEvent/" + model.EventId);
         }
 
         public Comment GetById(string id)

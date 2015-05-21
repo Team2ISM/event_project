@@ -50,7 +50,7 @@ namespace team2project.Controllers
             }
             var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
             comment.PostingTime = DateTime.Now;
-            commentManager.Create(commentModel.Id, comment);
+            commentManager.Create(comment);
             return RedirectToRoute("eventDetails", new { @id=comment.EventId });
         }
 
