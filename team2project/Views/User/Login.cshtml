@@ -10,9 +10,9 @@
 }
 
 @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "container z-depth-3" }))
-    {
-        
-            @Html.ValidationSummary(true)
+{
+
+    @Html.ValidationSummary(true)
     <h5>Вход на сайт</h5>
     <div class="input-field col s12 m12">
         @Html.LabelFor(m => m.Email, "Электронная почта")<br>
@@ -26,4 +26,4 @@
     </div>
 
     <button class="btn waves-effect waves-light" type="submit">Вход</button>
-    }
+}
