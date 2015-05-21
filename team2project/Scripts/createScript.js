@@ -135,12 +135,13 @@ $(function () {
     });
     jQuery('#datetimepicker1').datetimepicker({
         timepicker: true,
-        startDate: '+1971/05/01',
+        minDate: '-1970/01/01',//
         lang:'ru',
         mask: true
     });
     jQuery('#datetimepicker2').datetimepicker({
         timepicker: true,
+        minDate: '-1970/01/01',//
         lang: 'ru',
         mask: true
     });
