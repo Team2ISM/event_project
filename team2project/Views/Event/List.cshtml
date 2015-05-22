@@ -22,17 +22,14 @@
             @Html.DropDownList("City", AvailableLocations, new { id = "combobox" })
         </div>
     </div>
+
     <div>
-        <select id="datefilter" style="display:inline-block">
-            <option value="-1">Все</option>
-            <option value="0">Сегодня</option>
-            <option value="1">Завтра</option>
-            <option value="3">Через 3 дня</option>
-            <option value="7">Через неделю</option>
-            <option value="31">Через месяц</option>
-            <option value="365">Через год</option>
-        </select>
+        @Html.RouteLink("Все мероприятия", "EventList")
+        @ConstructLink("На сегодня", 0);
+        @ConstructLink("На 3 следующих дня", 3);
+        @ConstructLink("На следующую неделю", 7);
     </div>
+
     <table class="striped" >
         <thead>
             <tr>
@@ -64,6 +61,21 @@
     </table>
 
 </div>
+
+@helper ConstructLink(string linkName, int nOfDaysToEvent)
+{
+    var filters = Request.Url.AbsolutePath.Split('/');
+    
+    if(filters.Length == 3 && !filters[2].IsInt())
+    {
+       @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent })
+    }
+    else
+    {
+       @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent})
+    }
+}
+
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
