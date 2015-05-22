@@ -110,7 +110,7 @@ namespace team2project.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("NoSuchUser", "User");
+                    
                 }
             }
             return View();

@@ -63,12 +63,6 @@ namespace team2project
             );
 
             routes.MapRoute(
-                name: "NoSuchUser",
-                url: "User/NoSuchUser",
-                defaults: new { controller = "User", action = "NoSuchUser" }
-            );
-
-            routes.MapRoute(
                 name: "Login",
                 url: "User/Login",
                 defaults: new { controller = "User", action = "Login" }
