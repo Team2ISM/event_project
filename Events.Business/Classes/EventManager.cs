@@ -52,6 +52,7 @@ namespace Events.Business.Classes
                     return model;
                 });
             cacheManager.RemoveFromCache("eventList");
+            cacheManager.RemoveFromCache("allEvents");
             cacheManager.ClearCacheByRegion("Filter");
         }
 
@@ -67,20 +68,20 @@ namespace Events.Business.Classes
         public void ToggleButtonStatusActive(string id)
         {
             dataProvider.ToggleButtonStatusActive(id);
-            cacheManager.RemoveFromCache("eventList");
+            cacheManager.RemoveFromCache(id);
             cacheManager.ClearCacheByRegion("Filter");
         }
 
         public void ToggleButtonStatusChecked(string id)
         {
             dataProvider.ToggleButtonStatusChecked(id);
-            cacheManager.RemoveFromCache("eventList");
+            cacheManager.RemoveFromCache(id);
             cacheManager.ClearCacheByRegion("Filter");
         }
         public void Delete(string id)
         {
             dataProvider.Delete(dataProvider.GetById(id));
-            cacheManager.RemoveFromCache("eventList");
+            cacheManager.RemoveFromCache(id);
             cacheManager.ClearCacheByRegion("Filter");
         }
     }

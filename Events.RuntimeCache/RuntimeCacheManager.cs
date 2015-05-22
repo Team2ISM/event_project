@@ -55,11 +55,5 @@ namespace Events.RuntimeCache
                 MemoryCache.Default.Remove(cacheItem.Key);
             }
         }
-
-        public void DisposeCache()
-        {
-            MemoryCache.Default.Dispose();
-   
-        }
     }
 }
