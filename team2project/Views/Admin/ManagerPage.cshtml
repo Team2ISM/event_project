@@ -13,7 +13,6 @@
             <tr>
                 <th>Название</th>
                 <th>Описание</th>
-                <th>Дата</th>
                 <th>От</th>
                 <th>До</th>
                 <th>Город</th>
@@ -22,30 +21,27 @@
         <tbody>
             @foreach (var evnt in Model)
             {
+                    if(!evnt.Checked){
+                        Html.RenderAction("ToggleButtonStatusChecked", new { id = evnt.Id });
+                    }
 
                 <tr>
                     <td>@evnt.Title</td>
                     <td>@evnt.Description</td>
-                    <td>@Date(evnt.FromDate, evnt.ToDate)</td>
-                    <td>@(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a")</td>
-                    <td>@(evnt.FromDate != null ? evnt.ToDate.Value.ToString("hh:mm") : "n/a")</td>
+                    <!--<td>@Date(evnt.FromDate, evnt.ToDate)</td>-->
+                    <td>@(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy hh:mm") : "n/a")</td>
+                    <td>@(evnt.FromDate != null ? evnt.ToDate.Value.ToString("dd MMMM yyyy hh:mm") : "n/a")</td>
                     <td>@evnt.Location</td>
                     <td>
-                        @if (evnt.Checked)
-                        {
-                            if (evnt.Active)
+                            @if (evnt.Active)
                             {
+                                
                                 @Html.RouteLink("Деактивировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
                             }
                             else
                             {
                                 @Html.RouteLink("Активировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
                             }
-                        }
-                        else
-                        {
-                            @Html.RouteLink("Подтвердить", "SetEventChecked", new { @id = evnt.Id })
-                        }
                     </td>
                     <td>
                         @Html.RouteLink("Удалить", "DeleteEvent", new { @id = evnt.Id })

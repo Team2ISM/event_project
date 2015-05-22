@@ -29,10 +29,9 @@ namespace team2project.Controllers
             return RedirectToRoute("ManagerPage");
         }
 
-        public ActionResult ToggleButtonStatusChecked(string id)
+        public void ToggleButtonStatusChecked(string id)
         {
             manager.ToggleButtonStatusChecked(id);
-            return RedirectToRoute("ManagerPage");
         }
         public ActionResult DeleteEvent(string id)
         {

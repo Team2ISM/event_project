@@ -68,10 +68,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             Event evnt = GetById(id);
             evnt.Active=!evnt.Active;
-            if (!evnt.Checked)
-            {
-                evnt.Checked = true;
-            }
             this.Update(evnt);
         }
 
