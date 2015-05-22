@@ -36,11 +36,7 @@ namespace team2project.Models
         public DateTime? ToDate { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        public string Location { get; set; }
-
-        [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        [DataType(DataType.MultilineText)]
-        public string LongDescription { get; set; }
+        public string Location { get; set; }   
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
         public bool Active { get; set; }

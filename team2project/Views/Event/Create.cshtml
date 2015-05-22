@@ -46,10 +46,7 @@
                 @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
             </div>
             @Html.ValidationMessageFor(m => m.Location)
-            <p>
-                @Html.LabelFor(m => m.LongDescription, "Полное описание")<br>
-                @Html.EditorFor(m => m.LongDescription)
-                @Html.ValidationMessageFor(m => m.LongDescription)
+
         </div>
         <button class="btn waves-effect waves-light" type="submit">Создать</button>
     }
