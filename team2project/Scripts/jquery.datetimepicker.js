@@ -1024,9 +1024,9 @@
 					}
 
 					if ($.type(options.mask) === 'string') {
-						if (!isValidValue(options.mask, input.val())) {
+						/*if (!isValidValue(options.mask, input.val())) {
 							input.val(options.mask.replace(/[0-9]/g, '_'));
-						}
+						}*/
 
 						input.on('keydown.xdsoft', function (event) {
 							var val = this.value,
