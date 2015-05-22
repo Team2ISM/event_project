@@ -21,10 +21,6 @@
         <tbody>
             @foreach (var evnt in Model)
             {
-                    if(!evnt.Checked){
-                        Html.RenderAction("ToggleButtonStatusChecked", new { id = evnt.Id });
-                    }
-
                 <tr>
                     <td>@evnt.Title</td>
                     <td>@evnt.Description</td>
@@ -47,6 +43,10 @@
                         @Html.RouteLink("Удалить", "DeleteEvent", new { @id = evnt.Id })
                     </td>
                 </tr>
+                if (!evnt.Checked)
+                {
+                    Html.RenderAction("ToggleButtonStatusChecked", new { id = evnt.Id });
+                }
             }
         </tbody>
     </table>
