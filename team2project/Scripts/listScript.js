@@ -34,13 +34,12 @@
                     this._trigger("select", event, {
                         item: ui.item.option
                     });
-                    
+
                     var url = location.protocol + '//' + location.host + '/', path = location.pathname.split('/');
                     url += path[1];
                     if (ui.item.value && ui.item.option.value !== '-1') {
                         url += '/' + ui.item.value;
                     }
-                    var days = date.find('option:selected').val();
                     if (days && days !== '-1') url += '/' + days;
                     document.location.href = url;
                     setTimeout(function () {
@@ -139,19 +138,19 @@
         }
     });
 })(jQuery);
-var date = $("#datefilter"), combobox = $("#combobox");
+var combobox = $("#combobox");
+var days, city = { value: '-1' };
 $(function () {
-    var path = location.pathname.split('/'), city = { value: '-1' };
-
+    var path = location.pathname.split('/');
     if (path[2]) {
         var arr = combobox.children();
         arr.each(function (i, val) {
-            if (val.innerText === path[2]) {val.setAttribute('selected', 'selected');city = val;}
+            if (val.innerText === path[2]) { val.setAttribute('selected', 'selected'); city = val; }
         });
     }
-    if (city.value && city.value !== '-1') date.find('option[value="' + (path[3]) + '"]').attr('selected', 'selected');
-    else date.find('option[value="' + (path[2] ? path[2] : '') + '"]').attr('selected', 'selected');
-
+    if (city.value && city.value !== '-1') days = path[3];
+    else days = path[2];
+    if (!days) days = '-1';
     combobox.html('<option value="-1">Все</option>' + combobox.html());
     combobox.combobox();
     $("#toggle").click(function () {
@@ -162,7 +161,7 @@ $(function () {
         url += path[1];
         var locat = path[2];
         if (city.value && city.value !== '-1') url += '/' + locat;
-        if (date.val() && date.val()!=='-1') {
+        if (date.val() && date.val() !== '-1') {
             url += '/' + date.val();
         }
         document.location.href = url;
