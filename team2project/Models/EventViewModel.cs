@@ -36,7 +36,6 @@ namespace team2project.Models
         public DateTime? ToDate { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Длина должна быть от 2 до 50 символов")]
         public string Location { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
@@ -46,7 +45,7 @@ namespace team2project.Models
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
         public bool Active { get; set; }
 
-        [Required(ErrorMessage = "This field is required")]
+        [Required(ErrorMessage = "Это поле должно быть заполненым")]
         public bool Checked { get; set; }
 
         [DataType(DataType.Date)]
