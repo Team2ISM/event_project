@@ -5,8 +5,12 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @section css{
     @Styles.Render("~/Content/User/user.css")
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
 }
 
 @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "container z-depth-3" }))

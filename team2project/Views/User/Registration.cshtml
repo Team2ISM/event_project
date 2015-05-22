@@ -10,6 +10,9 @@
     @Styles.Render("~/Content/User/user.css")
 }
 
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
 @using (Html.BeginForm("Registration", "User", FormMethod.Post, new { @class = "container z-depth-3" }))
 {    <h5>Регистрация участников</h5>

@@ -16,6 +16,7 @@ namespace team2project.Controllers
             this.manager = manager;
         }
 
+        [Authorize(Users="team2project222@gmail.com")]
         [HttpGet]
         public ActionResult ManagerPage()
         {
@@ -33,6 +34,7 @@ namespace team2project.Controllers
         {
             manager.ToggleButtonStatusChecked(id);
         }
+
         public ActionResult DeleteEvent(string id)
         {
             manager.Delete(id);
