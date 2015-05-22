@@ -69,6 +69,7 @@ namespace Events.Business.Classes
         {
             dataProvider.ToggleButtonStatusActive(id);
             cacheManager.RemoveFromCache(id);
+            cacheManager.RemoveFromCache("allEvents");
             cacheManager.ClearCacheByRegion("Filter");
         }
 
