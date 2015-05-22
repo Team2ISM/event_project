@@ -5,8 +5,10 @@ using System.Web.Mvc;
 using team2project.Models;
 using System.Web.Helpers;
 
+
 namespace team2project.Controllers
 {
+    [Authorize(Users = "team2project222@gmail.com")]
     public class AdminController : Controller
     {
         EventManager manager;
@@ -16,7 +18,6 @@ namespace team2project.Controllers
             this.manager = manager;
         }
 
-        [Authorize(Users="team2project222@gmail.com")]
         [HttpGet]
         public ActionResult ManagerPage()
         {
