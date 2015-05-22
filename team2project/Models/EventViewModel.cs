@@ -6,11 +6,10 @@ namespace team2project.Models
 {
     public class EventViewModel
     {
-        public EventViewModel() 
+        public EventViewModel()
         {
             Id = Guid.NewGuid().ToString();
             Active = true;
-            DateOfCreation = DateTime.Now;
         }
 
         [ScaffoldColumn(false)]

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Events.Business.Interfaces;
 using Events.Business.Models;
+using System;
 
 namespace Events.Business.Classes
 {
@@ -45,6 +46,7 @@ namespace Events.Business.Classes
 
         public void Create(string key, Event model)
         {
+            model.DateOfCreation = DateTime.Now;
             dataProvider.Create(model);
             cacheManager.ToCache<Event>(key,
                 () =>

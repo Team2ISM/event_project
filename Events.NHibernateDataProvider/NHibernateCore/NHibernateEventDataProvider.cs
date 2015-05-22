@@ -16,7 +16,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria<Event>();
-                criteria.AddOrder(Order.Asc("FromDate"));
+                criteria.AddOrder(Order.Desc("DateOfCreation"));
                 return criteria.List<Event>();
             }
         }
@@ -96,6 +96,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public void Update(Event model)
         {
+            model.DateOfCreation = DateTime.Now;
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction tran = session.BeginTransaction())
