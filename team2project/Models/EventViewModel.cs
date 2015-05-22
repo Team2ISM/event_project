@@ -9,9 +9,8 @@ namespace team2project.Models
         public EventViewModel() 
         {
             Id = Guid.NewGuid().ToString();
-            FromDate = DateTime.Now.AddDays(1);
-            ToDate = DateTime.Now.AddDays(1);
             Active = true;
+            DateOfCreation = DateTime.Now;
         }
 
         [ScaffoldColumn(false)]
