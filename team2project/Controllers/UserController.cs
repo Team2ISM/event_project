@@ -161,11 +161,12 @@ namespace team2project.Controllers
                 {
                     ViewBag.DuplicateMailError = "User with this email already registered";
                 }
+                User.IsInRole("role");
             }
             return View();
 
         }
-
+       
         [HttpGet]
         public ActionResult Activate(string id)
         {
