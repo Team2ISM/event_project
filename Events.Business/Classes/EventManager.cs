@@ -86,6 +86,7 @@ namespace Events.Business.Classes
         {
             dataProvider.Delete(dataProvider.GetById(id));
             cacheManager.RemoveFromCache("eventList");
+            cacheManager.RemoveFromCache("allEvents");
             cacheManager.ClearCacheByRegion("Filter");
         }
     }
