@@ -31,6 +31,7 @@ namespace team2project.Models
         [ScaffoldColumn(false)]
         public string EventId { get; set; }
 
+        [Required(ErrorMessage = "Это поле должно быть заполненым")]
         [StringLength(50)]
         [DataType(DataType.Text)]
         public string AuthorName { get; set; }
