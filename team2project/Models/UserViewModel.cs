@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using Events.Business.Models;
 
 namespace team2project.Models
 {
@@ -34,6 +35,8 @@ namespace team2project.Models
 
         [Required(ErrorMessage = "Введите город")]
         public string Location { get; set; }
+
+        public IList<Role> Roles { get; set; }
 
         public UserViewModel()
         {

@@ -93,7 +93,7 @@ namespace team2project
             );
 
             routes.MapRoute(
-                name: "fateEvent",
+                name: "CreateEvent",
                 url: "createEvent",
                 defaults: new { controller = "Event", action = "Create" }
             );

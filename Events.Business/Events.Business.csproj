@@ -57,6 +57,7 @@
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Subscriber.cs" />
     <Compile Include="Models\Subscribing.cs" />

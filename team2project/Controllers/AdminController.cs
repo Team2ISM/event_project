@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using team2project.Models;
 using System.Web.Helpers;
-
+using Events.NHibernateDataProvider.NHibernateCore;
 
 namespace team2project.Controllers
 {
-    [Authorize(Users = "team2project222@gmail.com")]
+    //[Authorize(Users="team2project222@gmail.com")]
     public class AdminController : Controller
     {
         EventManager manager;
@@ -21,8 +21,14 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult ManagerPage()
         {
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
-            return View("ManagerPage", list);
+            NHibernateRoleProvider provider = new NHibernateRoleProvider();
+            if (provider.IsUserInRole(User.Identity.Name, "Admin"))
+            {
+                List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
+                return View("ManagerPage", list);
+            }
+            return RedirectToRoute("NotFound");
+
         }
 
         public ActionResult ToggleButtonStatusActive(string id)

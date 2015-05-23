@@ -18,6 +18,8 @@ fieldset {
     border: 1px solid #ddd;
     padding: 0 1.4em 1.4em 1.4em;
     margin: 0 0 1.5em 0;
+	resize: none;
+	margin-bottom: 10px;
 }
 
 legend {
@@ -27,6 +29,8 @@ legend {
 
 textarea {
     min-height: 75px;
+	resize: none;
+	margin-bottom: 10px;
 }
 
 .editor-label {
@@ -60,4 +64,9 @@ textarea {
 
 .validation-summary-valid {
     display: none;
+}
+
+.m-left
+{
+	margin-left: 50px;
 }
