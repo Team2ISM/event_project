@@ -25,6 +25,9 @@
                 <li>
                     @Html.RouteLink("Список событий", "EventList")
                 </li>
+               <li>
+                   @Html.RouteLink("Создать событие", "CreateEvent")
+               </li>
                 @{
                     if (!User.Identity.IsAuthenticated)
                     {
