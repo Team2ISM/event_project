@@ -6,9 +6,6 @@ using Events.Business.Classes;
 using Events.NHibernateDataProvider.NHibernateCore;
 using Events.Business.Interfaces;
 using Events.NHibernateDataProvider;
-using Cities.Business.Interfaces;
-using Cities.Business.Classes;
-using Cities.NHibernateDataProvider;
 
 namespace team2project
 {

@@ -43,14 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\CitiesManager.cs" />
     <Compile Include="Classes\CommentManager.cs" />
     <Compile Include="Classes\EventManager.cs" />
     <Compile Include="Interfaces\ICacheManager.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\ICitiesDataProvider.cs" />
     <Compile Include="Interfaces\ICommentDataProvider.cs" />
     <Compile Include="Interfaces\IEventDataProvider.cs" />
     <Compile Include="Interfaces\IUserDataProvider.cs" />
+    <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\User.cs" />

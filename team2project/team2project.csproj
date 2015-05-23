@@ -302,14 +302,6 @@
     <Content Include="Fonts\packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cities.Business\Cities.Business.csproj">
-      <Project>{77c8bb99-a254-44f2-aff6-c9f50e9ae543}</Project>
-      <Name>Cities.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cities.NHibernateCitiesDataProvider\Cities.NHibernateDataProvider.csproj">
-      <Project>{d0208d86-f7a8-4b21-9c40-81e1926bec83}</Project>
-      <Name>Cities.NHibernateDataProvider</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Events.Business\Events.Business.csproj">
       <Project>{c68a6f0d-aae7-4639-8867-6fd26f0bfb2b}</Project>
       <Name>Events.Business</Name>

@@ -1,8 +1,6 @@
 ﻿using System.Web.Script.Serialization;
 using Events.Business.Classes;
 using Events.Business.Models;
-using Cities.Business.Classes;
-using Cities.Business.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using team2project.Models;

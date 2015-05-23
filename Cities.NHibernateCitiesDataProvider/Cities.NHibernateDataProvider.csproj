@@ -57,12 +57,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cities.Business\Cities.Business.csproj">
-      <Project>{77c8bb99-a254-44f2-aff6-c9f50e9ae543}</Project>
-      <Name>Cities.Business</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Mappings\Cities.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
