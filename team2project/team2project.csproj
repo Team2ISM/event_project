@@ -253,6 +253,7 @@
     <Content Include="Views\Comment\Create.cshtml" />
     <None Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Welcome.cshtml" />
+    <Content Include="Views\User\ThankYouPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

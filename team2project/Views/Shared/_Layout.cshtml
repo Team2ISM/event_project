@@ -18,18 +18,15 @@
                 <li>
                     @Html.RouteLink("Список событий", "EventList")
                 </li>
-                <li>
-                    @Html.RouteLink("Регистрация", "Registration")
-                </li>
                 @{
                     if (!User.Identity.IsAuthenticated)
                     {
                         <li>
-                            @Html.RouteLink("Вход", "Login")
+                            @Html.RouteLink("Регистрация", "Registration")
                         </li>
                         <li>
-                            @Html.RouteLink("Забыли пароль?", "ForgotPassword")
-                        </li>      
+                            @Html.RouteLink("Вход", "Login")
+                        </li>   
                     }
                  }
                 
@@ -37,10 +34,10 @@
                     if (User.Identity.IsAuthenticated)
                     {
                         <li>
-                            @Html.RouteLink("Выйти", "Logout")
+                            @Html.RouteLink("Сменить пароль", "Update")
                         </li>
                         <li>
-                            @Html.RouteLink("Сменить пароль", "Update")
+                            @Html.RouteLink("Выйти", "Logout")
                         </li>
                         <li>
                             @User.Identity.Name

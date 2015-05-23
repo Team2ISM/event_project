@@ -20,17 +20,17 @@
     @Html.ValidationSummary(true)
     <div class="input-field col s12 m12 12">
         @Html.LabelFor(m => m.Password, "Старый пароль")<br>
+        <input type="password" id="oldPassword" name="oldPassword" />
+        @ViewBag.OldPasswordError
+    </div>
+    <div class="input-field col s12 m12 12">
+        @Html.LabelFor(m => m.Password, "Новый пароль")<br>
         @Html.EditorFor(m => m.Password)
         @Html.ValidationMessageFor(m => m.Password)
     </div>
     <div class="input-field col s12 m12 12">
-        @Html.LabelFor(m => m.Password, "Новый пароль")<br>
-        <input type="password" id="newPassword" name="newPassword" />
-        @Html.ValidationMessageFor(m => m.Password)
-    </div>
-    <div class="input-field col s12 m12 12">
         @Html.LabelFor(m => m.RepeatPassword, "Повторите пароль")<br>
-        <input type="password" id="repeatPassword" name="repeatPassword" />
+        @Html.EditorFor(m => m.RepeatPassword)
         @Html.ValidationMessageFor(m => m.RepeatPassword)
     </div>
     <button class="btn waves-effect waves-light" type="submit">Сменить пароль</button>

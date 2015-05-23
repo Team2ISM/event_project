@@ -10,29 +10,29 @@ namespace team2project.Models
     {
         public string Id { get; set; }
 
-        [Required(ErrorMessage="Введите ваше имя")]
+        [Required(ErrorMessage = "Введите ваше имя")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Введите вашу фамилию")]
         public string Surname { get; set; }
 
         [Required(ErrorMessage = "Введите e-mail")]
-        [EmailAddress]
-        [StringLength(150)]
+        [EmailAddress(ErrorMessage = "Введите e-mail")]
+        [StringLength(150, ErrorMessage = "Длина должна быть не больше 150 символов")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage="Введите пароль")]
+        [Required(ErrorMessage = "Введите пароль")]
         [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessage="Пароль должен быть больше 6 символов", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "Пароль должен быть больше 6 символов", MinimumLength = 6)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Подтвердите пароль")]
         [DataType(DataType.Password)]
-        [StringLength(100, ErrorMessage="Пароль должен быть больше 6 символов", MinimumLength = 6)]
-        [Compare("Password", ErrorMessage="Пароли не совпадают")]
+        [StringLength(100, ErrorMessage = "Пароль должен быть больше 6 символов", MinimumLength = 6)]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string RepeatPassword { get; set; }
 
-        [Required(ErrorMessage="Введите город")]
+        [Required(ErrorMessage = "Введите город")]
         public string Location { get; set; }
 
         public UserViewModel()

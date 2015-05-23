@@ -64,12 +64,6 @@ namespace team2project.Controllers
         }
 
         [HttpGet]
-        public ActionResult Registration()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public ActionResult ForgotPassword()
         {
             return View();
@@ -86,7 +80,7 @@ namespace team2project.Controllers
                     var crypto = new SimpleCrypto.PBKDF2();
 
                     string newPassword = GeneratePassword();
-                    
+
                     var encrPass = crypto.Compute(newPassword);
 
                     user.Password = encrPass;
@@ -97,26 +91,21 @@ namespace team2project.Controllers
                     MailMessage msg = new MailMessage();
 
                     string body = user.Name + ", ваш пароль: \n" + newPassword;
+                    string subject = "Новый пароль";
 
-                    msg.From = new MailAddress("team2project222@gmail.com");
-                    msg.To.Add(user.Email);
-                    msg.Subject = "Новый пароль";
-                    msg.Body = body;
-                    msg.Priority = MailPriority.High;
-
-                    SmtpClient client = new SmtpClient();
-
-                    client.Send(msg);
-                }
-                else
-                {
-                    
+                    EmailSender(user.Email, body, subject);
                 }
             }
+            return RedirectToAction("ThankYouPage", "User");
+        }
+
+        public ActionResult ThankYouPage()
+        {
             return View();
         }
 
-        public ActionResult NoSuchUser()
+        [HttpGet]
+        public ActionResult Registration()
         {
             return View();
         }
@@ -126,7 +115,8 @@ namespace team2project.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var userExist = data.GetByMail(user.Email);
+                if (userExist == null)
                 {
                     var crypto = new SimpleCrypto.PBKDF2();
 
@@ -139,33 +129,25 @@ namespace team2project.Controllers
 
                     data.CreateUser(newUser);
 
-                    MailMessage msg = new MailMessage();
+                    string host = Request.UrlReferrer.Authority;
+                    string activationLink = "http://" + host + Url.Action("Activate", new { controller = "User", action = "Activate", id = user.Id });
 
-                    string userMail = user.Email;
-                    string activationLink = "http://localhost:7161/User/Activate/" + user.Id;
                     string body = user.Name + ", спасибо за регистрацию\n";
-                    body += "Для активации аккаунта перейдите по ссылке\n";
-                    body += activationLink;
-                    msg.From = new MailAddress("team2project222@gmail.com");
-                    msg.To.Add(user.Email);
-                    msg.Subject = "Подтверждение регистрации";
-                    msg.Body = body;
-                    msg.Priority = MailPriority.High;
+                    body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
+                    string subject = "Подтверждение регистрации";
 
-                    SmtpClient client = new SmtpClient();
-
-                    client.Send(msg);
+                    EmailSender(user.Email, body, subject);
                     ViewBag.RegistrationSuccess = "Пожалуйста, подтвердите регистрацию перейдя по ссылке на вашей почте";
                 }
-                catch (Exception ex)
+                else
                 {
-                    ViewBag.DuplicateMailError = "User with this email already registered";
+                    ViewBag.DuplicateMailError = "Пользователь с такой почтой уже зарегистрирован";
                 }
             }
             return View();
 
         }
-       
+
         [HttpGet]
         public ActionResult Activate(string id)
         {
@@ -181,19 +163,19 @@ namespace team2project.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult Welcome()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Update()
         {
             return View();
         }
 
-        public ActionResult Welcome()
-        {
-            return View();
-        }
-
         [HttpPost]
-        public ActionResult Update(string password, string newPassword)
+        public ActionResult Update(string oldPassword, string password)
         {
             if (ModelState.IsValid)
             {
@@ -202,14 +184,18 @@ namespace team2project.Controllers
                 var mail = User.Identity.Name;
                 User user = data.GetByMail(mail);
 
-                if (user.Password == crypto.Compute(password, user.PasswordSalt))
+                if (user.Password == crypto.Compute(oldPassword, user.PasswordSalt))
                 {
-                    var encrPass = crypto.Compute(newPassword);
+                    var encrPass = crypto.Compute(password);
 
                     user.Password = encrPass;
                     user.PasswordSalt = crypto.Salt;
 
                     data.UpdateUser(user);
+                }
+                else
+                {
+                    ViewBag.OldPasswordError = "Неправильный старый пароль";
                 }
             }
             return View();
@@ -244,6 +230,21 @@ namespace team2project.Controllers
             }
 
             return new String(stringChars);
+        }
+
+        private void EmailSender(string userEmail, string body, string subject)
+        {
+            MailMessage msg = new MailMessage();
+
+            msg.From = new MailAddress("team2project222@gmail.com");
+            msg.To.Add(userEmail);
+            msg.Subject = subject;
+            msg.Body = body;
+            msg.Priority = MailPriority.High;
+
+            SmtpClient client = new SmtpClient();
+
+            client.Send(msg);
         }
 
     }
