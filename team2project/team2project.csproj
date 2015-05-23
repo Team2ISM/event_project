@@ -330,14 +330,6 @@
       <Project>{f9d2cf50-3299-47c3-bea6-d8ebb683f442}</Project>
       <Name>Events.RuntimeCache</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Users.Business\Users.Business.csproj">
-      <Project>{cd9e97ac-7aec-4ec2-8546-fa2b4287d70c}</Project>
-      <Name>Users.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Users.NHibernateDataProvider\Users.NHibernateDataProvider.csproj">
-      <Project>{ce4aa938-0809-4982-8d4a-e799d16dd890}</Project>
-      <Name>Users.NHibernateDataProvider</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

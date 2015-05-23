@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.NHibernateDataProvid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.RuntimeCache", "Events.RuntimeCache\Events.RuntimeCache.csproj", "{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.Business", "Users.Business\Users.Business.csproj", "{CD9E97AC-7AEC-4EC2-8546-FA2B4287D70C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Users.NHibernateDataProvider", "Users.NHibernateDataProvider\Users.NHibernateDataProvider.csproj", "{CE4AA938-0809-4982-8D4A-E799D16DD890}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comments.Business", "Comments.Business\Comments.Business.csproj", "{4156E99C-3BD8-48C5-86E6-3E3B010E56D1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Comments.NHibernateDataProvider", "Comments.NHibernateDataProvider\Comments.NHibernateDataProvider.csproj", "{CED9AD31-0A14-4B3F-971D-F0C6A51BC69A}"
@@ -43,14 +39,6 @@ Global
 		{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD9E97AC-7AEC-4EC2-8546-FA2B4287D70C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD9E97AC-7AEC-4EC2-8546-FA2B4287D70C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD9E97AC-7AEC-4EC2-8546-FA2B4287D70C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD9E97AC-7AEC-4EC2-8546-FA2B4287D70C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE4AA938-0809-4982-8D4A-E799D16DD890}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE4AA938-0809-4982-8D4A-E799D16DD890}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE4AA938-0809-4982-8D4A-E799D16DD890}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE4AA938-0809-4982-8D4A-E799D16DD890}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4156E99C-3BD8-48C5-86E6-3E3B010E56D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4156E99C-3BD8-48C5-86E6-3E3B010E56D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4156E99C-3BD8-48C5-86E6-3E3B010E56D1}.Release|Any CPU.ActiveCfg = Release|Any CPU

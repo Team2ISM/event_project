@@ -1,6 +1,6 @@
 ﻿using Events.Business.Models;
 using team2project.Models;
-using Users.Business;
+using Events.Business;
 using Comments.Business.Models;
 
 namespace team2project

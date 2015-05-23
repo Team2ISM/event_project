@@ -7,9 +7,9 @@ using System.Web.Security;
 
 using System.Net;
 using System.Net.Mail;
-using Users.Business;
-using Users.Business.Interfaces;
-using Users.NHibernateDataProvider;
+using Events.Business;
+using Events.Business.Interfaces;
+using Events.NHibernateDataProvider;
 using team2project.Models;
 
 namespace team2project.Controllers
@@ -192,6 +192,7 @@ namespace team2project.Controllers
                     user.PasswordSalt = crypto.Salt;
 
                     data.UpdateUser(user);
+                    ViewBag.PasswordSuccess = "Пароль изменен";
                 }
                 else
                 {

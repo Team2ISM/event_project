@@ -48,7 +48,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\IEventDataProvider.cs" />
+    <Compile Include="Interfaces\IUserDataProvider.cs" />
     <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

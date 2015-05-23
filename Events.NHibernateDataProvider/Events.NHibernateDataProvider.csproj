@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="NHibernateCore\NHibernateEventDataProvider.cs" />
     <Compile Include="NHibernateCore\Helper.cs" />
+    <Compile Include="NHibernateCore\NHibernateUserDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +79,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="NHibernateCore\Mappings\User.hbm.xml" />
     <Content Include="Scripts\dbo.Event.sql" />
   </ItemGroup>
   <ItemGroup>

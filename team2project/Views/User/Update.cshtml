@@ -18,6 +18,7 @@
 {
     <h5>Смена пароля</h5>
     @Html.ValidationSummary(true)
+    @ViewBag.PasswordSuccess
     <div class="input-field col s12 m12 12">
         @Html.LabelFor(m => m.Password, "Старый пароль")<br>
         <input type="password" id="oldPassword" name="oldPassword" />

@@ -11,8 +11,6 @@ using Comments.NHibernateDataProvider;
 using Cities.Business.Interfaces;
 using Cities.Business.Classes;
 using Cities.NHibernateDataProvider;
-using Users.NHibernateDataProvider;
-using Users.Business.Interfaces;
 
 namespace team2project
 {
