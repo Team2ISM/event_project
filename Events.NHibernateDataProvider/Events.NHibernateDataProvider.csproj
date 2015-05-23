@@ -57,8 +57,10 @@
       <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,6 +72,7 @@
     <Compile Include="NHibernateCore\NHibernateCommentDataProvider.cs" />
     <Compile Include="NHibernateCore\NHibernateEventDataProvider.cs" />
     <Compile Include="NHibernateCore\Helper.cs" />
+    <Compile Include="NHibernateCore\NHibernateRoleProvider.cs" />
     <Compile Include="NHibernateCore\NHibernateUserDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,6 +80,11 @@
     <Content Include="NHibernateCore\Configuration\hibernate.cfg.xml">
       <SubType>Designer</SubType>
     </Content>
+    <EmbeddedResource Include="NHibernateCore\Mappings\Role.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="Scripts\dbo.Role.sql" />
+    <Content Include="Scripts\dbo.UserRole.sql" />
     <EmbeddedResource Include="NHibernateCore\Mappings\Event.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>

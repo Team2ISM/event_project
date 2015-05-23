@@ -13,5 +13,9 @@
     <property name="PasswordSalt"/>
     <property name="Location"/>
     <property name="IsActive"/>
+    <bag name="Roles" table="UserRole" inverse="true">
+      <key column="UserId" />
+      <many-to-many column="RoleId" class="Events.Business.Models.Role" />
+    </bag>
   </class>
 </hibernate-mapping>
