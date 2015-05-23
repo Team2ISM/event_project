@@ -50,6 +50,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.4.0.0.4000\lib\net40\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -70,6 +74,7 @@
     <Compile Include="NHibernateCore\NHibernateCommentDataProvider.cs" />
     <Compile Include="NHibernateCore\NHibernateEventDataProvider.cs" />
     <Compile Include="NHibernateCore\Helper.cs" />
+    <Compile Include="NHibernateCore\NHibernateSubscribersDataProvider.cs" />
     <Compile Include="NHibernateCore\NHibernateUserDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -88,6 +93,7 @@
     <EmbeddedResource Include="NHibernateCore\Mappings\Cities.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <Content Include="NHibernateCore\Mappings\Subscribing.hbm.xml" />
     <Content Include="Scripts\dbo.Cities.sql" />
     <Content Include="Scripts\dbo.Comment.sql" />
     <Content Include="Scripts\dbo.Event.sql" />
@@ -167,6 +173,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

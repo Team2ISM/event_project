@@ -53,10 +53,13 @@
     <Compile Include="Interfaces\ICommentDataProvider.cs" />
     <Compile Include="Interfaces\IEventDataProvider.cs" />
     <Compile Include="Interfaces\IUserDataProvider.cs" />
+    <Compile Include="Interfaces\ISubscribersDataProvider.cs" />
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\EventModel.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Subscriber.cs" />
+    <Compile Include="Models\Subscribing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,8 @@ namespace team2project
                 .As<ICitiesDataProvider>();
             builder.RegisterType<NHibernateCommentDataProvider>()
                 .As<ICommentDataProvider>();
+            builder.RegisterType<NHibernateSubscribersDataProvider>()
+                .As<ISubscribersDataProvider>();
             builder.RegisterType<NHibernateUserDataProvider>()
                 .As<IUserDataProvider>();
             builder.RegisterType<RuntimeCacheManager>()
