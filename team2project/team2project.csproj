@@ -186,6 +186,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Events\CreatePage.css" />
     <Content Include="Content\Home\Details.css" />
     <Content Include="Content\Home\List.css" />
     <Content Include="Content\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
@@ -257,7 +258,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Events\" />
     <Folder Include="Content\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>

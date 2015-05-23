@@ -13,7 +13,8 @@
         _createAutocomplete: function () {
             var selected = this.element.children(":selected"),
               value = selected.val() ? selected.text() : "";
-
+            locat.val(selected.val() ? selected.val() : "");
+            locat.html(selected.val() ? selected.val() : "");
             this.input = $("<input>")
               .appendTo(this.wrapper)
               .val(value)
