@@ -19,17 +19,27 @@ tbody tr {
     cursor: pointer;
 }
 
+.container
+{
+	width: 100%;
+}
+
+.date-filters
+{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.m-left
+{
+	margin-left: 50px;
+}
+
 .table tbody td {
     padding: 0;
     position:relative;
 }
 
-    .table tbody td a {
-        display:block;
-        padding: 0.625rem 0.85rem;
-        width:100%;
-        height:100%;
-    }
 
 td a:link, td a:visited,
 td a:hover, td a:active {

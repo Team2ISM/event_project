@@ -13,24 +13,24 @@
 }
 
 <div class="container">
-    <h1>@ViewBag.Title</h1>
+    <h1 class ="center teal-text">Мероприятия</h1>
     
     <!-- Dropdown Trigger -->
     <div class="ui-widget">
-        <label>Город: </label>
-        <div class="ui-widget">
+        <label class="left">Город: </label>
+        <div class="ui-widget m-left"">
             @Html.DropDownList("City", AvailableLocations, new { id = "combobox" })
         </div>
     </div>
 
-    <div>
-        @Html.RouteLink("Все мероприятия", "EventList")
-        @ConstructLink("На сегодня", 0);
-        @ConstructLink("На 3 следующих дня", 3);
-        @ConstructLink("На следующую неделю", 7);
+    <div class ="date-filters">
+        @Html.RouteLink("Все мероприятия", "EventList", htmlAttributes: new { Class = "btn white-text" })
+        @ConstructLink("На сегодня", 0)
+        @ConstructLink("На 3 следующих дня", 3)
+        @ConstructLink("На следующую неделю", 7)
     </div>
 
-    <table class="striped" >
+    <table class="hoverable" >
         <thead>
             <tr>
                 <th>Заголовок</th>
@@ -68,11 +68,11 @@
     
     if(filters.Length == 3 && !filters[2].IsInt())
     {
-       @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent })
+       @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "btn white-text" })
     }
     else
     {
-       @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent})
+       @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent}, htmlAttributes: new { Class = "btn white-text" })
     }
 }
 
