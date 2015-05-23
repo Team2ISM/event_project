@@ -1,7 +1,6 @@
 ﻿using Events.Business.Models;
 using team2project.Models;
 using Events.Business;
-using Comments.Business.Models;
 
 namespace team2project
 {

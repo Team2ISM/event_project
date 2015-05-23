@@ -1,13 +1,11 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using Events.Business.Classes;
-using Events.NHibernateDataProvider.NHibernateCore;
 using System.Web.Mvc;
 using Events.RuntimeCache;
+using Events.Business.Classes;
+using Events.NHibernateDataProvider.NHibernateCore;
 using Events.Business.Interfaces;
-using Comments.Business.Interfaces;
-using Comments.Business.Classes;
-using Comments.NHibernateDataProvider;
+using Events.NHibernateDataProvider;
 using Cities.Business.Interfaces;
 using Cities.Business.Classes;
 using Cities.NHibernateDataProvider;

@@ -5,7 +5,6 @@ using Cities.Business.Classes;
 using Cities.Business.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Comments.Business.Classes;
 using team2project.Models;
 
 namespace team2project.Controllers

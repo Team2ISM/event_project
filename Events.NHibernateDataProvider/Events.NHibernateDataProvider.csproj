@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NHibernateCore\NHibernateCommentDataProvider.cs" />
     <Compile Include="NHibernateCore\NHibernateEventDataProvider.cs" />
     <Compile Include="NHibernateCore\Helper.cs" />
     <Compile Include="NHibernateCore\NHibernateUserDataProvider.cs" />
@@ -80,6 +81,10 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="NHibernateCore\Mappings\User.hbm.xml" />
+    <EmbeddedResource Include="NHibernateCore\Mappings\Comment.hbm.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <Content Include="Scripts\dbo.Comment.sql" />
     <Content Include="Scripts\dbo.Event.sql" />
   </ItemGroup>
   <ItemGroup>
