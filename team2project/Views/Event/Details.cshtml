@@ -30,44 +30,43 @@
                 }
         </div>
     </div>
-    <div class="row">
-       
+    <hr />
+    <div class="row" id ="info">
+        <div class ="vertical-spaces">
+            <strong>От:</strong>
+            <span class = "horizontal-spaces">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</span>
+        </div>
+
+        <div class ="vertical-spaces">
+             <strong>До:</strong>
+             <span class = "horizontal-spaces">@CheckDateIfNull(Model.ToDate, "dd MMMM yyyy")</span>
+        </div>
+
+        <div class ="vertical-spaces">
+             <strong>Город:</strong>
+             <span class = "horizontal-spaces">@Model.Location</span>
+        </div>
     </div>
     <hr />
-    <div class="row">
-        <table>
-            <tbody>
-                <tr>
-                    <td>От:</td>
-                    <td>@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</td>
-                </tr>
-                <tr>
-                    <td>До:</td>
-                    <td>@CheckDateIfNull(Model.ToDate, "dd MMMM yyyy")</td>
-                </tr>
-                <tr>
-                    <td>Город:</td>
-                    <td>@Model.Location</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <hr />
-    <div class="row description">
-        <div class="col">
-                <span>Описание:</span>
-                <p id ="desc">@Model.Description</p>
+    <div class="row" id="desc">
+        <div>
+                <strong>Описание:</strong>
+                <p>@Model.Description</p>
         </div>
     </div>
     <div class="row">
-         <div class="right col offset-s6">
-            <button class="button danger loading-pulse text-shadow">Присоедениться</button>
+         <div class="left">
+             @{
+                 <div class="left">Уже подписалось:</div>
+                 Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
+              }
+
+         </div>
+         <div class="right">
+            <button id="submit" class="button loading-pulse text-shadow blue">Присоедениться</button>
         </div>
     </div>
 </div>
-@{
-    Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
-}
 @{
     var list = AutoMapper.Mapper.Map<IList<CommentViewModel>>(ViewData["Comments"]);
     foreach (CommentViewModel item in list)

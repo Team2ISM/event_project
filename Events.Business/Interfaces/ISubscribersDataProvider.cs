@@ -10,5 +10,9 @@ namespace Events.Business.Interfaces
         List<Subscriber> GetAllSubscribers(string EventId);
 
         void SubscribeUser(Subscribing row);
+
+        void UnsubscribeUser(Subscribing row);
+
+        bool IsSubscribed(Subscribing row);
     }
 }

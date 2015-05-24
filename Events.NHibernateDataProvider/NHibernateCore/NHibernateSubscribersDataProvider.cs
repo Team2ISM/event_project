@@ -45,5 +45,25 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 }
             }
         }
+
+        public void UnsubscribeUser(Subscribing row) {
+            using (ISession session = Helper.OpenSession()) {
+                using (ITransaction tran = session.BeginTransaction()) {
+                    session.Delete(row);
+                    tran.Commit();
+                }
+            }
+        }
+
+        public bool IsSubscribed(Subscribing row) {
+            using (ISession session = Helper.OpenSession()) {
+                var criteria = session.CreateCriteria(typeof(Subscribing));
+                criteria.Add(Restrictions.Eq("EventId", row.EventId));
+                criteria.Add(Restrictions.Eq("EventId", row.UserId));
+                var list = criteria.List<Subscribing>();
+                if (list.Count == 0) return false;
+                return true;
+            }
+        }
     }
 }

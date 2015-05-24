@@ -13,7 +13,7 @@
 }
 
 <div class="container">
-    <h1 class ="center teal-text">Мероприятия</h1>
+    <h1 class ="center blue-text">Мероприятия</h1>
     
     <!-- Dropdown Trigger -->
     <div class="ui-widget">
@@ -24,7 +24,7 @@
     </div>
 
     <div class ="date-filters">
-        @ConstructLink("Все мероприятия", 999999)
+        @Html.RouteLink("Все мероприятия", "EventList", null, new { Class = "btn white-text blue" })
         @ConstructLink("На сегодня", 0)
         @ConstructLink("На 3 дня", 3)
         @ConstructLink("На неделю", 7)
@@ -62,24 +62,13 @@
 
 </div>
 
- <script>
-        06
-        var size = [document.documentElement.clientWidth,document.documentElement.clientHeight];
-        07
-        window.onresize = function(){
-            08
-            document.body.style.zoom=document.documentElement.clientWidth/size[0];
-            09
-        }
-    </script>
-
 @helper ConstructLink(string linkName, int nOfDaysToEvent)
 {
     var filters = Request.Url.AbsolutePath.Split('/');
 
     if (filters.Length == 3 && !filters[2].IsInt())
     {
-       @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "btn white-text" })
+       @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "btn white-text blue" })
     }
     else
         if (nOfDaysToEvent == 999999 && (filters.Length == 3 || filters.Length == 2))
@@ -88,7 +77,11 @@
     }
     else
     {
+<<<<<<< HEAD
        @Html.ActionLink(linkName, "Filters", new { days = nOfDaysToEvent }, htmlAttributes: new { Class = "btn white-text" })
+=======
+       @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent}, htmlAttributes: new { Class = "btn white-text blue" })
+>>>>>>> origin/master
     }
 }
 
