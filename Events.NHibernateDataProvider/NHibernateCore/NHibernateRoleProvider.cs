@@ -9,11 +9,14 @@ using NHibernate;
 using NHibernate.Criterion;
 using Events.Business;
 using System.Configuration.Provider;
+using System.Collections.Specialized;
 
 namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateRoleProvider : RoleProvider
     {
+        private string userNameColumn = "Email";
+
         private string _applicationName;
 
         public override string ApplicationName
@@ -36,6 +39,11 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 }
             }
             return role;
+        }
+
+        public override void Initialize(string name, NameValueCollection config)
+        {
+            base.Initialize(name, config);
         }
 
         public override void AddUsersToRoles(string[] usernames, string[] rolenames)
@@ -68,7 +76,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                         foreach (string rolename in rolenames)
                         {
                             usr = session.CreateCriteria(typeof(User))
-                                        .Add(NHibernate.Criterion.Restrictions.Eq("Name", username))
+                                        .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
                                         .UniqueResult<User>();
 
                             if (usr != null)
@@ -167,7 +175,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 {
 
                     usr = session.CreateCriteria(typeof(User))
-                                    .Add(NHibernate.Criterion.Restrictions.Eq("Name", username))
+                                    .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
                                     .UniqueResult<User>();
 
                     if (usr != null)
@@ -230,7 +238,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 using (ITransaction transaction = session.BeginTransaction())
                 {
                     usr = session.CreateCriteria(typeof(User))
-                                    .Add(NHibernate.Criterion.Restrictions.Eq("Email", username))
+                                    .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
                                     .UniqueResult<User>();
 
                     if (usr != null)
@@ -277,7 +285,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                     foreach (string username in usernames)
                     {
                         usr = session.CreateCriteria(typeof(User))
-                            .Add(NHibernate.Criterion.Restrictions.Eq("Name", username))
+                            .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
                             .UniqueResult<User>();
 
                         var Roletodelete = new List<Role>();

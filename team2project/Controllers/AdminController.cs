@@ -8,7 +8,7 @@ using Events.NHibernateDataProvider.NHibernateCore;
 
 namespace team2project.Controllers
 {
-    //[Authorize(Users="team2project222@gmail.com")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         EventManager manager;
@@ -21,14 +21,8 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult ManagerPage()
         {
-            NHibernateRoleProvider provider = new NHibernateRoleProvider();
-            if (provider.IsUserInRole(User.Identity.Name, "Admin"))
-            {
-                List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
-                return View("ManagerPage", list);
-            }
-            return RedirectToRoute("NotFound");
-
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
+            return View("ManagerPage", list);
         }
 
         public ActionResult ToggleButtonStatusActive(string id)
