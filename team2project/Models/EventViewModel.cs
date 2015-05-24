@@ -2,6 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web.UI;
+using Microsoft.Ajax.Utilities;
+using Foolproof;
 namespace team2project.Models
 {
     public class EventViewModel
@@ -31,6 +33,7 @@ namespace team2project.Models
 
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
+        [GreaterThanOrEqualTo("FromDate",ErrorMessage="Даты введены неправильно")]
         public DateTime? ToDate { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
