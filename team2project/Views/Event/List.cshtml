@@ -24,7 +24,7 @@
     </div>
 
     <div class ="date-filters">
-        @Html.RouteLink("Все мероприятия", "EventList", htmlAttributes: new { Class = "btn white-text" })
+        @Html.RouteLink("Все мероприятия", "EventList", null, new { Class = "btn white-text" })
         @ConstructLink("На сегодня", 0)
         @ConstructLink("На 3 дня", 3)
         @ConstructLink("На неделю", 7)

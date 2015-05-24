@@ -156,17 +156,4 @@ $(function () {
     $("#toggle").click(function () {
         combobox.toggle();
     });
-    date.change(function () {
-        var url = location.protocol + '//' + location.host + '/';
-        url += path[1];
-        var locat = path[2];
-        if (city.value && city.value !== '-1') url += '/' + locat;
-        if (date.val() && date.val() !== '-1') {
-            url += '/' + date.val();
-        }
-        document.location.href = url;
-        setTimeout(function () {
-            document.location.href = url;
-        }, 1000);
-    });
 });

@@ -2,7 +2,18 @@
     Layout = null;
 }
 @model int
+@Scripts.Render("~/Scripts/jquery.js")
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+<script type="text/javascript">
+    function OnSuccess(data) {
+        var results = $('#subscribers_list'); // получаем нужный элемент
+        results.empty(); //очищаем элемент
+        for (var i = 0; i < data.length; i++) {
+            results.append('<li>' + data[i].Surname + ' ' + data[i].Name + '</li>'); // добавляем данные в список
+        }
+    }
+</script>
 <div id="subscribers">
-    <div id="subscribers_count">@Model</div>
+    @Ajax.ActionLink(@Model.ToString(), "GetSubscribers", "Subscribers", new AjaxOptions {OnSuccess = "OnSuccess"})
     <div id="subscribers_list"></div>
 </div>

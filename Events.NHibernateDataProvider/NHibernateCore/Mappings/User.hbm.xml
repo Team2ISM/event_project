@@ -13,10 +13,9 @@
     <property name="PasswordSalt"/>
     <property name="Location"/>
     <property name="IsActive"/>
-    <!--<list name="Roles" table="UserRole" inverse="true" lazy="false">
+    <bag name="Roles" table="UserRole" inverse="true" lazy="false">
       <key column="UserId" />
-      <index column="Id"/>
       <many-to-many column="RoleId" class="Events.Business.Models.Role" />
-    </list>-->
+    </bag>
   </class>
 </hibernate-mapping>
