@@ -19,10 +19,15 @@ namespace team2project.Controllers
             Provider = new NHibernateSubscribersDataProvider();
         }
 
+        [HttpGet]
         public ActionResult Index(string EventId)
         {
             @ViewBag.EventId = EventId;
             return View(Provider.GetCount(EventId));
+        }
+        [HttpPost]
+        public JsonResult GetCount(string id) {
+            return Json(Provider.GetCount(id));
         }
 
         public JsonResult GetSubscribers(string id) {
@@ -36,11 +41,18 @@ namespace team2project.Controllers
             Provider.SubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
         }
+
         public JsonResult Unsubscribe(string id) {
             if (String.IsNullOrEmpty(User.Identity.Name)) return Json(false);
             var user = new NHibernateUserDataProvider().GetByMail(User.Identity.Name);
             Provider.UnsubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
+        }
+
+        public JsonResult IsSubscribed(string id) {
+            if (String.IsNullOrEmpty(User.Identity.Name)) return Json(false);
+            var user = new NHibernateUserDataProvider().GetByMail(User.Identity.Name);
+            return Json(Provider.IsSubscribed(new Subscribing(id, user.Id)));      
         }
     }
 }
