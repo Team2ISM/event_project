@@ -20,7 +20,7 @@ namespace team2project.Models
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        [StringLength(MinimumLength = 5, ErrorMessage = "Длина должна быть от 5 до 50 символов")]
+        [StringLength(6000,MinimumLength = 5, ErrorMessage = "Длина должна быть от 5 до 50 символов")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
