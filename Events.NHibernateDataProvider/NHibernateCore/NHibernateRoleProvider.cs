@@ -35,7 +35,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                     role = session.CreateCriteria(typeof(Role))
                         .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
                         .UniqueResult<Role>();
-                    IList<User> us = role.Users;
+                    ICollection<User> us = role.Users;
                 }
             }
             return role;
@@ -145,7 +145,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
-                    IList<Role> allRole = session.CreateCriteria(typeof(Role))
+                    ICollection<Role> allRole = session.CreateCriteria(typeof(Role))
                                     .List<Role>();
 
                     foreach (Role r in allRole)
@@ -167,7 +167,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         public override string[] GetRolesForUser(string username)
         {
             User usr = null;
-            IList<Role> usrRoles = null;
+            ICollection<Role> usrRoles = null;
             StringBuilder sb = new StringBuilder();
             using (ISession session = Helper.OpenSession())
             {
@@ -209,7 +209,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                                     .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
                                     .UniqueResult<Role>();
 
-                    IList<User> usrs = role.Users;
+                    ICollection<User> usrs = role.Users;
 
                     foreach (User u in usrs)
                     {
@@ -231,7 +231,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             bool userIsInRole = false;
             User usr = null;
-            IList<Role> usrRoles = null;
+            ICollection<Role> usrRoles = null;
             StringBuilder sb = new StringBuilder();
             using (ISession session = Helper.OpenSession())
             {
@@ -291,7 +291,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                         var Roletodelete = new List<Role>();
                         foreach (string rolename in rolenames)
                         {
-                            IList<Role> Role = usr.Roles;
+                            ICollection<Role> Role = usr.Roles;
                             foreach (Role r in Role)
                             {
                                 if (r.Name.Equals(rolename))
@@ -344,7 +344,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                                     .Add(NHibernate.Criterion.Restrictions.Eq("Name", this.ApplicationName))
                                     .UniqueResult<Role>();
 
-                    IList<User> User = role.Users;
+                    ICollection<User> User = role.Users;
                     if (User != null)
                     {
                         foreach (User u in User)

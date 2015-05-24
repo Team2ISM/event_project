@@ -46,7 +46,7 @@ namespace team2project.Controllers
                 if (user != null && user.IsActive && isValid(email, password))
                 {
                     FormsAuthentication.SetAuthCookie(email, false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Event");
                 }
                 else
                 {
