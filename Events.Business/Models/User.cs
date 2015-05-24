@@ -25,19 +25,19 @@ namespace Events.Business
 
         public virtual bool IsActive { get; set; }
 
-        public virtual IList<Role> Roles { get; set; }
+        //public virtual IList<Role> Roles { get; set; }
 
-        public virtual void AddRole(Role role)
-        {
-            role.Users.Add(this);
-            Roles.Add(role);
-        }
+        //public virtual void AddRole(Role role)
+        //{
+        //    role.Users.Add(this);
+        //    Roles.Add(role);
+        //}
 
-        public virtual void RemoveRole(Role role)
-        {
-            role.Users.Remove(this);
-            Roles.Remove(role);
-        }
+        //public virtual void RemoveRole(Role role)
+        //{
+        //    role.Users.Remove(this);
+        //    Roles.Remove(role);
+        //}
 
     }
 }
