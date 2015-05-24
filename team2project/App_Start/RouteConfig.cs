@@ -136,7 +136,11 @@ namespace team2project
                 "{*url}",
              new { controller = "Error", action = "Index" }
             );
-
+            routes.MapRoute(
+                name: "Count",
+                url: "getCount/{id}",
+                defaults: new { controller = "Subscribers", action = "Index" }
+            );
         }
     }
 }

@@ -65,7 +65,9 @@
         </div>
     </div>
 </div>
-
+@{
+    Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
+}
 <div class="container z-depth-1">
     @Html.Partial("~/Views/Comment/Create.cshtml", new CommentViewModel(Model.Id))
 </div>
