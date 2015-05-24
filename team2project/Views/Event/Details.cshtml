@@ -62,8 +62,9 @@
         </div>
     </div>
 </div>
-
-
+@{
+    Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
+}
 @{
     var list = AutoMapper.Mapper.Map<IList<CommentViewModel>>(ViewData["Comments"]);
     foreach (CommentViewModel item in list)
