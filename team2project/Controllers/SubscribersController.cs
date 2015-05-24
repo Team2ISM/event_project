@@ -22,7 +22,14 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index(string EventId)
         {
+            @ViewBag.EventId = EventId;
             return View(provider.GetCount(EventId));
+        }
+
+        [HttpGet]
+        public JsonResult GetSubscribers(string id) {
+            var res = provider.GetAllSubscribers(id);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
     }
 }
