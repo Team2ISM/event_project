@@ -89,3 +89,29 @@ textarea {
      border-bottom: 1px solid #2196f3;
      box-shadow: 0 1px 0 0 #2196f3;
    }
+
+nav li
+{
+	line-height: 63px;
+}
+
+nav li a
+{
+	color: yellow;
+	text-decoration: none;
+}
+
+#dropdown1 li
+{
+	width: 100px;
+}
+
+.dropdown-button
+{
+	width: 150px;
+}
+
+.active
+{
+	background-color: white;
+}
