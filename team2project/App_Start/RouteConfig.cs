@@ -136,14 +136,34 @@ namespace team2project
                 defaults: new { controller = "Subscribers", action = "GetSubscribers" }
             );
             routes.MapRoute(
+                name: "CountPost",
+                url: "getCount",
+                defaults: new { controller = "Subscribers", action = "GetCount" }
+            );
+            routes.MapRoute(
+                name: "CountGet",
+                url: "getCount/{id}",
+                defaults: new { controller = "Subscribers", action = "Index" }
+            );
+            routes.MapRoute(
+                name: "Subscribe",
+                url: "Subscribe",
+                defaults: new { controller = "Subscribers", action = "Subscribe" }
+            );
+            routes.MapRoute(
+                name: "Unsubscribe",
+                url: "Unsubscribe",
+                defaults: new { controller = "Subscribers", action = "Unsubscribe" }
+            );
+            routes.MapRoute(
+                name: "IsSubscribed",
+                url: "IsSubscribed",
+                defaults: new { controller = "Subscribers", action = "IsSubscribed" }
+            );
+            routes.MapRoute(
                 "NotFound",
                 "{*url}",
              new { controller = "Error", action = "Index" }
-            );
-            routes.MapRoute(
-                name: "Count",
-                url: "getCount/{id}",
-                defaults: new { controller = "Subscribers", action = "Index" }
             );
         }
     }
