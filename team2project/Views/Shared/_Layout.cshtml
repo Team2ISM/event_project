@@ -14,7 +14,7 @@
            
     </header>
 
-     <div class="row">
+     <div class="row" id ="nav">
 
       <div class="col s3">
         
@@ -73,5 +73,15 @@
     @Scripts.Render("~/Scripts/materialize/materialize.js")
     @Scripts.Render("~/Scripts/metro")
     @RenderSection("scripts", required: false)
+     <script>
+         06
+         var size = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+         07
+         window.onresize = function () {
+             08
+             document.body.style.zoom = document.documentElement.clientWidth / size[0];
+             09
+         }
+    </script>
 </body>
 </html>

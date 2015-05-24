@@ -11,18 +11,15 @@
 @section css{
     @Styles.Render("~/Content/Home/Details.css")
 }
-@section scripts{
-    @Scripts.Render("~/Scripts/jquery-1.8.2.min.js");
-    @Scripts.Render("~/Scripts/jquery.validate.min.js");
-    @Scripts.Render("~/Scripts/jquery.validate.unobtrusive.min.js");
-}
-
-
 <div class="container z-depth-1">
     <div class="row">
-        <div class="col s2 m2 2">
-            <div class="tile-small">
-                @if (@Model.FromDate != null)
+
+        <div id="event-name" class="col s6 ">
+            <h2>@Model.Title</h2>
+        </div>
+
+        <div id ="date" class="col s6">
+             @if (@Model.FromDate != null)
                 {
                     <h4>@Model.FromDate.Value.ToString("dd")</h4>
                     <p>@Model.FromDate.Value.ToString("MMMM")</p>
@@ -31,16 +28,10 @@
                 {
                     <p>n/a</p>
                 }
-            </div>
-        </div>
-        <div class="col c10 m10 10">
-            <h2>@Model.Title</h2>
         </div>
     </div>
     <div class="row">
-        <div class="col s2 m2 2">
-            <button class="button danger loading-pulse text-shadow">Присоедениться</button>
-        </div>
+       
     </div>
     <hr />
     <div class="row">
@@ -68,6 +59,11 @@
                 <p id ="desc">@Model.Description</p>
         </div>
     </div>
+    <div class="row">
+         <div class="right col offset-s6">
+            <button class="button danger loading-pulse text-shadow">Присоедениться</button>
+        </div>
+    </div>
 </div>
 @{
     Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
@@ -79,7 +75,10 @@
         <div class="container z-depth-1 comment-body">
             <div class="row">
                 <div class="col s12 m2 2">
-                    <strong>@item.AuthorName</strong>
+                    <div id ="user" class="valign-wrapper">
+                        <i  class="medium mdi-action-account-circle left"></i><strong class="m-left">@item.AuthorName</strong>
+                    </div>
+                    
                 </div>
                 <div class="col s12 m3 3"></div>
             </div>
@@ -108,5 +107,3 @@
         <span>n/a</span>
     }
 }
-
-

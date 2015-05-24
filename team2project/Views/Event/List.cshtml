@@ -24,7 +24,7 @@
     </div>
 
     <div class ="date-filters">
-        @Html.RouteLink("Все мероприятия", "EventList", htmlAttributes: new { Class = "btn white-text" })
+        @Html.RouteLink("Все мероприятия", "EventList", null, new { Class = "btn white-text" })
         @ConstructLink("На сегодня", 0)
         @ConstructLink("На 3 дня", 3)
         @ConstructLink("На неделю", 7)
@@ -61,6 +61,17 @@
     </table>
 
 </div>
+
+ <script>
+        06
+        var size = [document.documentElement.clientWidth,document.documentElement.clientHeight];
+        07
+        window.onresize = function(){
+            08
+            document.body.style.zoom=document.documentElement.clientWidth/size[0];
+            09
+        }
+    </script>
 
 @helper ConstructLink(string linkName, int nOfDaysToEvent)
 {
