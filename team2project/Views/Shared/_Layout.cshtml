@@ -18,43 +18,45 @@
 
       <div class="col s3">
         
-           <ul class ="side-nav fixed">
-                <li>
-                    @Html.RouteLink("Главная", "Home")
-                </li>
-                <li>
-                    @Html.RouteLink("Список событий", "EventList")
-                </li>
-               <li>
-                   @Html.RouteLink("Создать событие", "CreateEvent")
-               </li>
-                @{
-                    if (!User.Identity.IsAuthenticated)
-                    {
-                        <li>
-                            @Html.RouteLink("Регистрация", "Registration")
-                        </li>
-                        <li>
-                            @Html.RouteLink("Вход", "Login")
-                        </li>   
-                    }
-                 }
-                
-                @{ 
-                    if (User.Identity.IsAuthenticated)
-                    {
-                        <li>
-                            @Html.RouteLink("Сменить пароль", "Update")
-                        </li>
-                        <li>
-                            @Html.RouteLink("Выйти", "Logout")
-                        </li>
-                        <li>
-                            @User.Identity.Name
-                        </li>
-                    }
-                }
-            </ul>
+          <ul class="side-nav fixed">
+              <li>
+                  @Html.RouteLink("Главная", "Home")
+              </li>
+              <li>
+                  @Html.RouteLink("Список событий", "EventList")
+              </li>
+              <li>
+                  @Html.RouteLink("Создать событие", "CreateEvent")
+              </li>
+              @{
+                  if (!User.Identity.IsAuthenticated)
+                  {
+                      <li>
+                          @Html.RouteLink("Регистрация", "Registration")
+                      </li>
+                      <li>
+                          @Html.RouteLink("Вход", "Login")
+                      </li>
+                  }
+              }
+
+              @{
+                  if (User.Identity.IsAuthenticated)
+                  {
+                      <li>
+                          @Html.RouteLink("Сменить пароль", "Update")
+                      </li>
+                      <li>
+                          @Html.RouteLink("Выйти", "Logout")
+                      </li>
+                      <li>
+                          @User.Identity.Name
+                      </li>
+                  }
+              }
+          </ul>
+
+
 
 
       </div>
