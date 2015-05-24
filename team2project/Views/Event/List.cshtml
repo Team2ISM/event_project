@@ -62,6 +62,17 @@
 
 </div>
 
+ <script>
+        06
+        var size = [document.documentElement.clientWidth,document.documentElement.clientHeight];
+        07
+        window.onresize = function(){
+            08
+            document.body.style.zoom=document.documentElement.clientWidth/size[0];
+            09
+        }
+    </script>
+
 @helper ConstructLink(string linkName, int nOfDaysToEvent)
 {
     var filters = Request.Url.AbsolutePath.Split('/');
