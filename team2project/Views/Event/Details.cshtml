@@ -32,7 +32,7 @@
     </div>
     <div class="row">
         <div class="col s2 m2 2">
-            <button class="button danger loading-pulse text-shadow">Join Event</button>
+            <button class="button danger loading-pulse text-shadow">Присоедениться</button>
         </div>
     </div>
     <hr />
@@ -40,19 +40,15 @@
         <table>
             <tbody>
                 <tr>
-                    <td>Date:</td>
+                    <td>От:</td>
                     <td>@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</td>
                 </tr>
                 <tr>
-                    <td>From:</td>
-                    <td>@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</td>
-                </tr>
-                <tr>
-                    <td>To:</td>
+                    <td>До:</td>
                     <td>@CheckDateIfNull(Model.ToDate, "dd MMMM yyyy")</td>
                 </tr>
                 <tr>
-                    <td>Location:</td>
+                    <td>Город:</td>
                     <td>@Model.Location</td>
                 </tr>
             </tbody>
@@ -61,16 +57,12 @@
     <hr />
     <div class="row description">
         <div class="col">
+                <span>Описание:</span>
                 <p>@Model.Description</p>
         </div>
     </div>
 </div>
-@{
-    Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
-}
-<div class="container z-depth-1">
-    @Html.Partial("~/Views/Comment/Create.cshtml", new CommentViewModel(Model.Id))
-</div>
+
 
 @{
     var list = AutoMapper.Mapper.Map<IList<CommentViewModel>>(ViewData["Comments"]);
@@ -92,6 +84,10 @@
         </div>
     }
 }
+
+<div class="container z-depth-1">
+    @Html.Partial("~/Views/Comment/Create.cshtml", new CommentViewModel(Model.Id))
+</div>
 
 @helper CheckDateIfNull(DateTime? date, string format)
 {
