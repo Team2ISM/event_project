@@ -1,10 +1,10 @@
-﻿using System.Web.Script.Serialization;
-using Events.Business.Classes;
+﻿using Events.Business.Classes;
 using Events.Business.Models;
+using Events.NHibernateDataProvider.NHibernateCore;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using team2project.Models;
-using Events.NHibernateDataProvider.NHibernateCore;
 
 namespace team2project.Controllers
 {

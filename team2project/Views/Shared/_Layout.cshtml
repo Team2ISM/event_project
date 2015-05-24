@@ -8,6 +8,8 @@
     @Styles.Render("~/Content/materialize/materialize.css")
     @Styles.Render("~/Content/css")
     @RenderSection("css", false)
+    <script src="@Url.Content("~/Scripts/jquery.js")" type="text/javascript"> </script>
+
 </head>
 <body>
     <header>
@@ -72,13 +74,9 @@
     @Scripts.Render("~/Scripts/metro")
     @RenderSection("scripts", required: false)
      <script>
-         06
          var size = [document.documentElement.clientWidth, document.documentElement.clientHeight];
-         07
          window.onresize = function () {
-             08
              document.body.style.zoom = document.documentElement.clientWidth / size[0];
-             09
          }
     </script>
 </body>
