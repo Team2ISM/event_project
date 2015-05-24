@@ -76,14 +76,19 @@
 @helper ConstructLink(string linkName, int nOfDaysToEvent)
 {
     var filters = Request.Url.AbsolutePath.Split('/');
-    
-    if(filters.Length == 3 && !filters[2].IsInt())
+
+    if (filters.Length == 3 && !filters[2].IsInt())
     {
        @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "btn white-text" })
     }
     else
+        if (nOfDaysToEvent == 999999 && (filters.Length == 3 || filters.Length == 2))
     {
-       @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent}, htmlAttributes: new { Class = "btn white-text" })
+        @Html.RouteLink(linkName, "EventList", null, new { Class = "btn white-text" })
+    }
+    else
+    {
+       @Html.ActionLink(linkName, "Filters", new { days = nOfDaysToEvent }, htmlAttributes: new { Class = "btn white-text" })
     }
 }
 
