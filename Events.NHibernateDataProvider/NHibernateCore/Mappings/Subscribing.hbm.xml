@@ -2,11 +2,12 @@
 <hibernate-mapping
  xmlns="urn:nhibernate-mapping-2.2"
  auto-import="true"
- assembly="Events.NHibernateDataProvider"
+ assembly="Events.Business"
  namespace="Events.Business.Models">
   <class name="Subscribing, Events.Business" table="Subscribers">
-    <!--<id name="EventId" type="string"></id>-->
-    <property name="EventId"></property>
-    <property name="UserId"></property>
+    <id name="EventId" access="property" type="string">
+      <generator class="assigned"></generator>
+    </id>
+    <property name="UserId" access="property" type="string"></property>
   </class>
 </hibernate-mapping>

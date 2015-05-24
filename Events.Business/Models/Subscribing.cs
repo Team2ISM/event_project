@@ -8,6 +8,7 @@ namespace Events.Business.Models
 {
     public class Subscribing
     {
+        public Subscribing( ) { }
         public Subscribing(string EventId, string UserId) {
             this.EventId = EventId;
             this.UserId = UserId;
