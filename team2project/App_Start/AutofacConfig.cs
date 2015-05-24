@@ -1,18 +1,11 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
-using Events.Business.Classes;
-using Events.NHibernateDataProvider.NHibernateCore;
 using System.Web.Mvc;
 using Events.RuntimeCache;
+using Events.Business.Classes;
+using Events.NHibernateDataProvider.NHibernateCore;
 using Events.Business.Interfaces;
-using Comments.Business.Interfaces;
-using Comments.Business.Classes;
-using Comments.NHibernateDataProvider;
-using Cities.Business.Interfaces;
-using Cities.Business.Classes;
-using Cities.NHibernateDataProvider;
-using Users.NHibernateDataProvider;
-using Users.Business.Interfaces;
+using Events.NHibernateDataProvider;
 
 namespace team2project
 {
@@ -31,6 +24,8 @@ namespace team2project
                 .As<ICitiesDataProvider>();
             builder.RegisterType<NHibernateCommentDataProvider>()
                 .As<ICommentDataProvider>();
+            builder.RegisterType<NHibernateSubscribersDataProvider>()
+                .As<ISubscribersDataProvider>();
             builder.RegisterType<NHibernateUserDataProvider>()
                 .As<IUserDataProvider>();
             builder.RegisterType<RuntimeCacheManager>()

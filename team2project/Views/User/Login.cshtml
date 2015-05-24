@@ -28,6 +28,8 @@
         @Html.PasswordFor(m => m.Password)
         @Html.ValidationMessageFor(m => m.Password)
     </div>
-
+    <div>
+        @Html.RouteLink("Забыли пароль?", "ForgotPassword")           
+    </div>
     <button class="btn waves-effect waves-light" type="submit">Вход</button>
 }

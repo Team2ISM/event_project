@@ -3,7 +3,7 @@ using NHibernate.Cfg;
 
 namespace Events.NHibernateDataProvider.NHibernateCore
 {
-    class Helper
+    public class Helper
     {
         private static ISessionFactory sessionFactory;
 

@@ -11,11 +11,13 @@
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
     @Styles.Render("~/Content/User/user.css")
     @Styles.Render("~/Content/jquery.datetimepicker.css")
+    @Styles.Render("~/Content/Events/CreatePage.css")
+    @Styles.Render("~/Content/Site.css")
 }
 
 
 <div class="container z-depth-1">
-    <h5>Создайте свое событие!</h5>
+    <h5>Создайте собственное мероприятие!</h5>
     @using (Html.BeginForm("Create", "EventController", FormMethod.Post)) {
         @Html.HiddenFor(m => m.Id)
         @Html.ValidationSummary(true)
@@ -40,9 +42,9 @@
             @Html.ValidationMessageFor(m => m.ToDate)
         </div>
         <div class="input-field col s12 m12 l12">
-            @Html.LabelFor(m => m.Location, "Город")<br>
+            @Html.LabelFor(m => m.Location, "Город")
             <input id="location" name="Location" style="height: 0; padding: 0; margin: 0; border: none;">
-            <div class="ui-widget">
+            <div class="ui-widget left m-left">
                 @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
             </div>
             @Html.ValidationMessageFor(m => m.Location)

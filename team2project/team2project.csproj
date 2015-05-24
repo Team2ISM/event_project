@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>team2project</RootNamespace>
-    <AssemblyName>`</AssemblyName>
+    <AssemblyName>team2project</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -186,6 +186,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Events\CreatePage.css" />
     <Content Include="Content\Home\Details.css" />
     <Content Include="Content\Home\List.css" />
     <Content Include="Content\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
@@ -250,14 +251,13 @@
     <Content Include="Views\User\Update.cshtml" />
     <Content Include="Views\Admin\ManagerPage.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
-    <Content Include="Views\User\NoSuchUser.cshtml" />
     <Content Include="Views\Comment\Create.cshtml" />
     <None Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Welcome.cshtml" />
+    <Content Include="Views\User\ThankYouPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Events\" />
     <Folder Include="Content\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
@@ -302,22 +302,6 @@
     <Content Include="Fonts\packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cities.Business\Cities.Business.csproj">
-      <Project>{77c8bb99-a254-44f2-aff6-c9f50e9ae543}</Project>
-      <Name>Cities.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cities.NHibernateCitiesDataProvider\Cities.NHibernateDataProvider.csproj">
-      <Project>{d0208d86-f7a8-4b21-9c40-81e1926bec83}</Project>
-      <Name>Cities.NHibernateDataProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Comments.Business\Comments.Business.csproj">
-      <Project>{4156e99c-3bd8-48c5-86e6-3e3b010e56d1}</Project>
-      <Name>Comments.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Comments.NHibernateDataProvider\Comments.NHibernateDataProvider.csproj">
-      <Project>{ced9ad31-0a14-4b3f-971d-f0c6a51bc69a}</Project>
-      <Name>Comments.NHibernateDataProvider</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Events.Business\Events.Business.csproj">
       <Project>{c68a6f0d-aae7-4639-8867-6fd26f0bfb2b}</Project>
       <Name>Events.Business</Name>
@@ -329,14 +313,6 @@
     <ProjectReference Include="..\Events.RuntimeCache\Events.RuntimeCache.csproj">
       <Project>{f9d2cf50-3299-47c3-bea6-d8ebb683f442}</Project>
       <Name>Events.RuntimeCache</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Users.Business\Users.Business.csproj">
-      <Project>{cd9e97ac-7aec-4ec2-8546-fa2b4287d70c}</Project>
-      <Name>Users.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Users.NHibernateDataProvider\Users.NHibernateDataProvider.csproj">
-      <Project>{ce4aa938-0809-4982-8d4a-e799d16dd890}</Project>
-      <Name>Users.NHibernateDataProvider</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

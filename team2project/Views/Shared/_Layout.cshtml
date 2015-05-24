@@ -11,25 +11,32 @@
 </head>
 <body>
     <header>
-            <ul class="m-menu">
+           
+    </header>
+
+     <div class="row">
+
+      <div class="col s3">
+        
+           <ul class ="side-nav fixed">
                 <li>
                     @Html.RouteLink("Главная", "Home")
                 </li>
                 <li>
                     @Html.RouteLink("Список событий", "EventList")
                 </li>
-                <li>
-                    @Html.RouteLink("Регистрация", "Registration")
-                </li>
+               <li>
+                   @Html.RouteLink("Создать событие", "CreateEvent")
+               </li>
                 @{
                     if (!User.Identity.IsAuthenticated)
                     {
                         <li>
-                            @Html.RouteLink("Вход", "Login")
+                            @Html.RouteLink("Регистрация", "Registration")
                         </li>
                         <li>
-                            @Html.RouteLink("Забыли пароль?", "ForgotPassword")
-                        </li>      
+                            @Html.RouteLink("Вход", "Login")
+                        </li>   
                     }
                  }
                 
@@ -37,10 +44,10 @@
                     if (User.Identity.IsAuthenticated)
                     {
                         <li>
-                            @Html.RouteLink("Выйти", "Logout")
+                            @Html.RouteLink("Сменить пароль", "Update")
                         </li>
                         <li>
-                            @Html.RouteLink("Сменить пароль", "Update")
+                            @Html.RouteLink("Выйти", "Logout")
                         </li>
                         <li>
                             @User.Identity.Name
@@ -48,8 +55,17 @@
                     }
                 }
             </ul>
-    </header>
-    @RenderBody()
+
+
+      </div>
+
+      <div class="col s9" style ="float: right">
+        @RenderBody()
+      </div>
+
+    </div>
+
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/materialize/materialize.js")

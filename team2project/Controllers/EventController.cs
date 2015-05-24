@@ -1,12 +1,10 @@
 ﻿using System.Web.Script.Serialization;
 using Events.Business.Classes;
 using Events.Business.Models;
-using Cities.Business.Classes;
-using Cities.Business.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Comments.Business.Classes;
 using team2project.Models;
+using Events.NHibernateDataProvider.NHibernateCore;
 
 namespace team2project.Controllers
 {
@@ -27,6 +25,8 @@ namespace team2project.Controllers
         public ActionResult Index()
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList());
+            /*var provider = new NHibernateSubscribersDataProvider();
+            provider.SubscribeUser(new Subscribing("99974bdc-e120-4061-ba54-5b9474c87129", "a0c6a802-7dfd-4490-9450-84488396538f"));*/
             return View("List", list);
         }
 

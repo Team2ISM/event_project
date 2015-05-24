@@ -51,6 +51,12 @@ namespace team2project
             );
 
             routes.MapRoute(
+                name: "Thankyoupage",
+                url: "User/ThankYouPage",
+                defaults: new { controller = "User", action = "ThankYouPage" }
+            );
+
+            routes.MapRoute(
                 name: "Welcome",
                 url: "User/Welcome",
                 defaults: new { controller = "User", action = "Welcome" }
@@ -60,12 +66,6 @@ namespace team2project
                 name: "Registration",
                 url: "User/Registration",
                 defaults: new { controller = "User", action = "Registration" }
-            );
-
-            routes.MapRoute(
-                name: "NoSuchUser",
-                url: "User/NoSuchUser",
-                defaults: new { controller = "User", action = "NoSuchUser" }
             );
 
             routes.MapRoute(
@@ -93,7 +93,7 @@ namespace team2project
             );
 
             routes.MapRoute(
-                name: "fateEvent",
+                name: "CreateEvent",
                 url: "createEvent",
                 defaults: new { controller = "Event", action = "Create" }
             );

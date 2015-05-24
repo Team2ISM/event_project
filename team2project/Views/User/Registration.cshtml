@@ -19,7 +19,6 @@
     <div class="row">
         @Html.ValidationSummary(true)
         @ViewBag.RegistrationSuccess
-        @ViewBag.DuplicateMailError
         <div class="input-field col s12 m6">
             @Html.LabelFor(m => m.Name, "Имя")<br>
             @Html.EditorFor(m => m.Name)
@@ -34,6 +33,7 @@
             @Html.LabelFor(m => m.Email, "Электронная почта")<br>
             @Html.EditorFor(m => m.Email)
             @Html.ValidationMessageFor(m => m.Email)
+            @ViewBag.DuplicateMailError
         </div>
         <div class="input-field col s12">
             @Html.LabelFor(m => m.Location, "Город")<br>
