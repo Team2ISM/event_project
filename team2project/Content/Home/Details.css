@@ -30,6 +30,7 @@ body {
 
 .description {
     padding-left: 0;
+	border: 1px solid red;
 }
 
     .description > .cell {
@@ -82,6 +83,7 @@ textarea
 {
 	word-break:break-all;
 	word-wrap: break-word;
+	padding-right: 30px;
 }
 
 #user
@@ -100,4 +102,21 @@ textarea
 #event-name
 {
 	float: left;
+}
+
+
+.vertical-spaces
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.horizontal-spaces
+{
+	margin-left: 10px;
+}
+
+#submit
+{
+	margin-right: 50px;
 }
