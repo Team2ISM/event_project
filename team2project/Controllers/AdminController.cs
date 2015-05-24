@@ -8,8 +8,8 @@ using Events.NHibernateDataProvider.NHibernateCore;
 
 namespace team2project.Controllers
 {
-    //[Authorize(Roles = "Admin")]
-    [Authorize(Users="team2project222@gmail.com")]
+    [Authorize(Roles = "Admin")]
+    //[Authorize(Users="team2project222@gmail.com")]
     public class AdminController : Controller
     {
         EventManager manager;
