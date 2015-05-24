@@ -60,7 +60,7 @@ namespace team2project.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Event");
         }
 
         [HttpGet]
@@ -160,7 +160,7 @@ namespace team2project.Controllers
                 UserViewModel model = AutoMapper.Mapper.Map<UserViewModel>(user);
                 return RedirectToRoute("Welcome", "User");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Event");
         }
 
         public ActionResult Welcome()
