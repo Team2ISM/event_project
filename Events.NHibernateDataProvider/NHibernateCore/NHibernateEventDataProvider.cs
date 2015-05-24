@@ -11,19 +11,16 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateEventDataProvider : IEventDataProvider
     {
-        public IList<Event> GetAllEvents()
+        public IList<Event> GetList(string location, string nDaysToEvent, string onlyAvailableData)
         {
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria<Event>();
-                criteria.AddOrder(Order.Desc("DateOfCreation"));
-                return criteria.List<Event>();
-            }
-        }
-        public IList<Event> GetList(string location, string nDaysToEvent)
-        {
-            using (ISession session = Helper.OpenSession())
-            {
+                if (onlyAvailableData != null)
+                {
+                    return session.CreateCriteria<Event>()
+                        .AddOrder(Order.Desc("DateOfCreation"))
+                        .List<Event>();
+                }
                 if (nDaysToEvent != null && location != null)
                 {
                     session.EnableFilter("equalDate")
@@ -47,7 +44,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 }
                 var criteria = session.CreateCriteria<Event>();
                 criteria.Add(Restrictions.Eq("Active", true));
-                //criteria.Add(Restrictions.Eq("Checked", true));
                 criteria.AddOrder(Order.Asc("FromDate"));
                 return criteria.List<Event>();
             }
@@ -68,14 +64,14 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             Event evnt = GetById(id);
             evnt.Active=!evnt.Active;
-            this.Update(evnt);
+            this.Update(evnt, "Admin");
         }
 
         public void ToggleButtonStatusChecked(string id)
         {
             Event evnt = GetById(id);
             evnt.Checked = true;
-            this.Update(evnt);
+            this.Update(evnt, "Admin");
         }
 
         public int Create(Event model)
@@ -94,9 +90,9 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return EmpNo;
         }
 
-        public void Update(Event model)
+        public void Update(Event model, string admin = "NoAdmin")
         {
-            model.DateOfCreation = DateTime.Now;
+            if(admin == "NoAdmin")model.DateOfCreation = DateTime.Now;
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction tran = session.BeginTransaction())

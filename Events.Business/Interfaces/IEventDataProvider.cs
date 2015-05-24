@@ -5,7 +5,7 @@ namespace Events.Business.Interfaces
 {
     public interface IEventDataProvider
     {
-        IList<Event> GetList(string nDaysToEvent = null, string location = null);
+        IList<Event> GetList(string nDaysToEvent = null, string location = null, string onlyAvailableData = null);
 
         Event GetById(string id);
 
@@ -16,8 +16,5 @@ namespace Events.Business.Interfaces
         void ToggleButtonStatusActive(string id);
 
         int Create(Event evnt);
-
-
-        IList<Event> GetAllEvents();
     }
 }

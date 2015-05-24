@@ -7,9 +7,10 @@
   <class name="Role" table="Roles">
     <id name="Id"></id>
     <property name="Name"/>
-    <bag name="Users" table="UserRole" inverse="true">
+    <list name="Users" table="UserRole" inverse="true" lazy="false">
       <key column="RoleId" />
+      <index column="Id"/>
       <many-to-many column="UserId" class="Events.Business.User" />
-    </bag>
+    </list>
   </class>
 </hibernate-mapping>
