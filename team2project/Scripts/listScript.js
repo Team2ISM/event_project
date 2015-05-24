@@ -37,6 +37,17 @@
 
                     var url = location.protocol + '//' + location.host + '/', path = location.pathname.split('/');
                     url += path[1];
+                    var newArr = [];
+                    
+                    for (var i = 0; i < path.length; i++)
+                    {
+                        if (path[i] != "")
+                        {
+                            newArr.push(path[i])
+                        }
+                    }
+                    debugger;
+                    path = newArr;
                     if (ui.item.value && ui.item.option.value !== '-1') {
                         url += '/' + ui.item.value;
                     }
@@ -148,8 +159,8 @@ $(function () {
             if (val.innerText === path[2]) { val.setAttribute('selected', 'selected'); city = val; }
         });
     }
-    if (city.value && city.value !== '-1') days = path[3];
-    else days = path[2];
+    if (path[3]) days = path[3];
+    else days = '';
     if (!days) days = '-1';
     combobox.html('<option value="-1">Все</option>' + combobox.html());
     combobox.combobox();
