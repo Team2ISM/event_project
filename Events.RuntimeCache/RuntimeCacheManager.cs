@@ -30,6 +30,7 @@ namespace Events.RuntimeCache
                 if (item.Key.Contains(region))
                 {
                     MemoryCache.Default.Remove(item.Key);
+                
                 }
             }
         }

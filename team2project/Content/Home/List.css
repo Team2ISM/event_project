@@ -40,6 +40,13 @@ tbody tr {
     position:relative;
 }
 
+table td
+{
+	max-width: 30px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
 
 td a:link, td a:visited,
 td a:hover, td a:active {
