@@ -1,7 +1,13 @@
 ﻿body {
 }
 
-.container
+
+.left
 {
-	width: 
+	float: left;
+}
+
+#city
+{
+	margin-left: -10px;
 }

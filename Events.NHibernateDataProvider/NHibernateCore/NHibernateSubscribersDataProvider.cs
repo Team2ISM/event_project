@@ -14,10 +14,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateSubscribersDataProvider : ISubscribersDataProvider
     {
-        public NHibernateSubscribersDataProvider( ) {
-           /* AutoMapper.Mapper.CreateMap<User, Subscriber>();
-            AutoMapper.Mapper.CreateMap<Subscriber, User>();*/
-        }
         public int GetCount(string EventId) {
             using (ISession session = Helper.OpenSession()) {
                 var criteria = session.CreateCriteria(typeof(Subscribing));
