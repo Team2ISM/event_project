@@ -251,6 +251,7 @@
     <Content Include="Scripts\MvcFoolproofValidation.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\listScript.js" />
+    <Content Include="Views\Mails\email.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
