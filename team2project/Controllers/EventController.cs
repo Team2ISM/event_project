@@ -61,7 +61,7 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Create(EventViewModel evnt)
         {
-            if (!ModelState.IsValid || evnt.FromDate >= evnt.ToDate)
+            if (!ModelState.IsValid)
             {
                 //ViewBag.cities = cityManager.GetList();
                 return View(evnt);
