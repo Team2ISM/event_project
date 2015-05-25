@@ -43,9 +43,17 @@ tbody tr {
 table td
 {
 	max-width: 30px;
+	max-height: 10px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	font-family: Roboto;
+}
+
+table a
+{
+	display: inline-block;
+max-height: 1em;
+overflow: hidden;
 }
 
 
