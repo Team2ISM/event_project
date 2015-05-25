@@ -11,12 +11,20 @@
     <script src="@Url.Content("~/Scripts/materialize/materialize.min.js")" type="text/javascript"> </script>
     <script>
         $(document).ready(function () {
-            $(".dropdown-button").dropdown();
+            var butt = $(".dropdown-button"), drop = $("#dropdown1");
+            butt.on('click', function () {
+                drop.stop();
+                drop.show(150);
+            });
+            drop.mouseout(function () {
+                drop.stop();
+                drop.hide(150);
+            });
         });
     </script>
 </head>
 <body>
-  <ul id="dropdown1" class="dropdown-content">
+  <ul id="dropdown1" class="dropdown-content" style="display:none">
    @{
                     if (!User.Identity.IsAuthenticated)
                     {
