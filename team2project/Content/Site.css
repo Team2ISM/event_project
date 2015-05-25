@@ -127,3 +127,9 @@ nav li a
 {
 	text-align: center;
 }
+
+#logo
+{
+	font-size: 24px;
+	font-weight: bold;
+}

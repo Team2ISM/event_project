@@ -54,7 +54,8 @@
         </ul>
     <nav>
   <div class="nav-wrapper blue">
-    <a href="#!" class="brand-logo">Субботник</a>
+   
+    @Html.RouteLink("Субботник", "Index", htmlAttributes: new {Class = "white-text", Id = "logo"})
     <ul class="right hide-on-med-and-down">
             <li>
                 @Html.RouteLink("Список событий", "EventList", FormMethod.Post, new {@class ="white-text"})
