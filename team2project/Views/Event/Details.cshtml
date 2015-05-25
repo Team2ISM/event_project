@@ -63,7 +63,7 @@
 
          </div>
          <div class="right">
-            @if(Model.ToDate < DateTime.Now){
+            @if(Model.ToDate > DateTime.Now){
                 <button id="submit" class="button loading-pulse text-shadow blue">Подождите</button>
             }
         </div>
