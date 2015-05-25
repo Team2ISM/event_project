@@ -29,7 +29,7 @@
     
     <filter name ="equalLocation" condition ="Location = :chosenLocation"/>
     
-    <filter name ="equalDate" condition ="FromDate >= :nowaday AND :chosenDate >= FromDate"/>
+    <filter name ="equalDate" condition ="ToDate >= :nowaday AND :chosenDate >= FromDate"/>
   </class>
 
   <filter-def name = "effectiveDate">
