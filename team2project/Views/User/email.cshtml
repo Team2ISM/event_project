@@ -1,10 +1,16 @@
+﻿@{
+    ViewBag.Title = null;
+}
+
+@model string
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Really Simple HTML Email Template</title>
-<style>
+<style type="text/css">
 /* -------------------------------------
 		GLOBAL
 ------------------------------------- */
@@ -195,7 +201,7 @@ ul li, ol li {
 						<table>
 							<tr>
 								<td class="padding">
-									<p><a href="[siteURI]" class="btn-primary">Подтвердить регистрацию</a></p>
+									<p><a href=@Model class="btn-primary">Подтвердить регистрацию</a></p>
 								</td>
 							</tr>
 						</table>
