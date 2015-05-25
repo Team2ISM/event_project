@@ -26,8 +26,12 @@ tbody tr {
 
 .date-filters
 {
-	margin-top: 15px;
-	margin-bottom: 15px;
+	margin-left: 250px;
+}
+
+.date-filters a
+{
+	margin-left: 10px;
 }
 
 .m-left
