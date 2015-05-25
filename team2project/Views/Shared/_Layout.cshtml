@@ -21,10 +21,10 @@
                     if (!User.Identity.IsAuthenticated)
                     {
                         <li>
-                            @Html.RouteLink("Регистрация", "Registration", htmlAttributes: new {Class ="blue-text"})
+                            @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new {@class ="blue-text"})
                         </li>
                         <li>
-                            @Html.RouteLink("Вход", "Login", htmlAttributes: new {Class ="blue-text"})
+                            @Html.RouteLink("Вход", "Login", FormMethod.Post, new {@class ="blue-text"})
                         </li>   
                     }
                  }
@@ -33,10 +33,10 @@
                     if (User.Identity.IsAuthenticated)
                     {
                         <li>
-                            @Html.RouteLink("Сменить пароль", "Update", htmlAttributes: new {Class ="blue-text"})
+                            @Html.RouteLink("Сменить пароль", "Update", FormMethod.Post, new {@class ="blue-text"})
                         </li>
                         <li>
-                            @Html.RouteLink("Выйти", "Logout", htmlAttributes: new {Class ="blue-text"})
+                            @Html.RouteLink("Выйти", "Logout",  FormMethod.Post, new {@class ="blue-text"})
                         </li>
                         <li>
                             @User.Identity.Name
@@ -49,10 +49,10 @@
     <a href="#!" class="brand-logo">Субботник</a>
     <ul class="right hide-on-med-and-down">
             <li>
-                @Html.RouteLink("Список событий", "EventList", htmlAttributes: new {Class ="white-text"})
+                @Html.RouteLink("Список событий", "EventList", FormMethod.Post, new {@class ="white-text"})
             </li>
             <li>
-                @Html.RouteLink("Создать событие", "CreateEvent", htmlAttributes: new {Class ="white-text"})
+                @Html.RouteLink("Создать событие", "CreateEvent", FormMethod.Post, new {@class ="white-text"})
             </li>
         <li><a class="dropdown-button center" href="#!" data-activates="dropdown1"><i class="mdi-action-toc right white-text"></i></a></li>
     </ul>
