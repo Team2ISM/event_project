@@ -46,7 +46,7 @@ tbody tr {
 
 table td
 {
-	max-width: 30px;
+	max-width: 175px;
 	max-height: 10px;
 	text-overflow: ellipsis;
 	overflow: hidden;
