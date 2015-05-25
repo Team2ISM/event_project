@@ -6,20 +6,45 @@ using System.Web.Mvc;
 using System.Web.Security;
 
 using System.Net;
+using System.Net.Mime;
 using System.Net.Mail;
 using Events.Business;
 using Events.Business.Interfaces;
 using Events.NHibernateDataProvider;
 using team2project.Models;
 
+using System.IO;
+
 namespace team2project.Controllers
 {
-    public class UserController : Controller
+    public abstract class MyBaseController : Controller
+    {
+        protected string RenderPartialViewToString(string viewName, object model) {
+            if (string.IsNullOrEmpty(viewName))
+                viewName = ControllerContext.RouteData.GetRequiredString("action");
+
+            ViewData.Model = model;
+
+            using (StringWriter sw = new StringWriter()) {
+                ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
+                ViewContext viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
+                viewResult.View.Render(viewContext, sw);
+
+                return sw.GetStringBuilder().ToString();
+            }
+        }
+    }
+
+    public class UserController : MyBaseController
     {
         //
         // GET: /User/
 
         IUserDataProvider data;
+
+        
+
+
 
         public UserController(IUserDataProvider data)
         {
@@ -135,8 +160,9 @@ namespace team2project.Controllers
                     string body = user.Name + ", спасибо за регистрацию\n";
                     body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
                     string subject = "Подтверждение регистрации";
-
-                    EmailSender(user.Email, body, subject);
+                    string newBody = RenderPartialViewToString("email", activationLink);
+                    EmailSender(user.Email, newBody, subject);
+                    
                     ViewBag.RegistrationSuccess = "Пожалуйста, подтвердите регистрацию перейдя по ссылке на вашей почте";
                 }
                 else
@@ -144,7 +170,7 @@ namespace team2project.Controllers
                     ViewBag.DuplicateMailError = "Пользователь с такой почтой уже зарегистрирован";
                 }
             }
-            return View();
+            return View(new UserViewModel());
 
         }
 
@@ -240,7 +266,13 @@ namespace team2project.Controllers
             msg.From = new MailAddress("team2project222@gmail.com");
             msg.To.Add(userEmail);
             msg.Subject = subject;
+            msg.IsBodyHtml = true;
             msg.Body = body;
+
+            ContentType mimeType = new System.Net.Mime.ContentType("text/html");
+            AlternateView alternate = AlternateView.CreateAlternateViewFromString(body, mimeType);
+            msg.AlternateViews.Add(alternate);
+
             msg.Priority = MailPriority.High;
 
             SmtpClient client = new SmtpClient();
