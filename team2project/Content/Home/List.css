@@ -46,7 +46,7 @@ tbody tr {
 
 table td
 {
-	max-width: 30px;
+	max-width: 175px;
 	max-height: 10px;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -65,4 +65,9 @@ td a:link, td a:visited,
 td a:hover, td a:active {
     color: black;
     text-decoration: none;
+}
+
+.active
+{
+	font-weight: bold;
 }

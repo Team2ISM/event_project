@@ -15,6 +15,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
+                var now = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
                 if (onlyAvailableData != null)
                 {
                     return session.CreateCriteria<Event>()
@@ -24,15 +25,15 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 if (nDaysToEvent != null && location != null)
                 {
                     session.EnableFilter("equalDate")
-                    .SetParameter("chosenDate", DateTime.Now.AddDays(Convert.ToDouble(nDaysToEvent)))
-                    .SetParameter("nowaday", DateTime.Now);
+                    .SetParameter("chosenDate", now.AddDays(Convert.ToDouble(nDaysToEvent)))
+                    .SetParameter("nowaday", now);
                     session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
                 }
                 else if (nDaysToEvent != null)
                 {
                     session.EnableFilter("equalDate")
-                    .SetParameter("chosenDate", DateTime.Now.AddDays(Convert.ToDouble(nDaysToEvent)))
-                    .SetParameter("nowaday", DateTime.Now);
+                    .SetParameter("chosenDate", now.AddDays(Convert.ToDouble(nDaysToEvent)))
+                    .SetParameter("nowaday", now);
                 }
                 else if (location != null)
                 {
@@ -40,7 +41,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 }
                 else
                 {
-                    session.EnableFilter("effectiveDate").SetParameter("asOfDate", DateTime.Now);
+                    session.EnableFilter("effectiveDate").SetParameter("asOfDate", now);
                 }
                 var criteria = session.CreateCriteria<Event>();
                 criteria.Add(Restrictions.Eq("Active", true));
