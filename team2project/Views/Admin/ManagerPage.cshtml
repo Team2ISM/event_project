@@ -8,7 +8,7 @@
 }
 <div class="container">
     <h1>@ViewBag.Title</h1>
-    <table class="striped">
+    <table class="striped centered">
         <thead>
             <tr>
                 <th>Название</th>
@@ -27,13 +27,14 @@
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id }),
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
                         
-                        <br></br>
+                        <label>-</label>
                         
                     @if (evnt.ToDate != null && (evnt.FromDate == null || evnt.ToDate.Value.DayOfYear != evnt.FromDate.Value.DayOfYear))
                     {
                         @Html.RouteLink(evnt.ToDate.Value.ToString("dd MMMM yyyy"), "EventDetails", new { evnt.Id })
+                        <label>,</label>
                     }
-                        ,
+                        
                         @Html.RouteLink(evnt.FromDate != null ? @evnt.ToDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
                 </td>
                     <td>@evnt.Location</td>
@@ -41,11 +42,11 @@
                             @if (evnt.Active)
                             {
                                 
-                                @Html.RouteLink("Деактивировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
+                                @Html.RouteLink("Деактивировать", "ToogleIsActiveEvent", new { @id = evnt.Id }, new { @class = "waves-effect waves-light btn"})
                             }
                             else
                             {
-                                @Html.RouteLink("Активировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
+                                @Html.RouteLink("Активировать", "ToogleIsActiveEvent", new { @id = evnt.Id } , new { @class = "waves-effect waves-light btn"})
                             }
                     </td>
                     <td>

@@ -31,7 +31,7 @@
         @ConstructLink("На неделю", 7)
     </div>
 
-    <table class="hoverable" >
+    <table class="striped" >
         <thead>
             <tr>
                 <th>Заголовок</th>
@@ -49,13 +49,15 @@
                     <td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id }),
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
-                        <br></br>
+                        
+                        <label>-</label>
                         
                     @if (evnt.ToDate != null && (evnt.FromDate == null || evnt.ToDate.Value.DayOfYear != evnt.FromDate.Value.DayOfYear))
                     {
                         @Html.RouteLink(evnt.ToDate.Value.ToString("dd MMMM yyyy"), "EventDetails", new { evnt.Id })
+                        <label>,</label>
                     }
-                        ,
+                        
                         @Html.RouteLink(evnt.FromDate != null ? @evnt.ToDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
                 </td>
                 <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>

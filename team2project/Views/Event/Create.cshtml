@@ -26,21 +26,26 @@
             @Html.EditorFor(m => m.Title)
             @Html.ValidationMessageFor(m => m.Title)
         </div>
+        <br>
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.Description, "Описание")<br>
             @Html.EditorFor(m => m.Description)
             @Html.ValidationMessageFor(m => m.Description)
         </div>
-        <div class="input-field col s12 m12 l12">
-            @Html.LabelFor(m => m.FromDate, "От")<br>
-            <input id="datetimepicker1" name="FromDate" type="text">
-            @Html.ValidationMessageFor(m => m.FromDate)
+        <br />
+        <div class="row">
+            <div class="input-field col s12 m6">
+                @Html.LabelFor(m => m.FromDate, "От")<br>
+                <input id="datetimepicker1" name="FromDate" type="text">
+                @Html.ValidationMessageFor(m => m.FromDate)
+            </div>
+            <div class="input-field col s12 m6">
+                @Html.LabelFor(m => m.ToDate, "До")<br>
+                <input id="datetimepicker2" name="ToDate" type="text">
+                @Html.ValidationMessageFor(m => m.ToDate)
+            </div>
         </div>
-        <div class="input-field col s12 m12 l12">
-            @Html.LabelFor(m => m.ToDate, "До")<br>
-            <input id="datetimepicker2" name="ToDate" type="text">
-            @Html.ValidationMessageFor(m => m.ToDate)
-        </div>
+        
         <div class="input-field col s12 m12 l12">
             <div class="left" id ="city">@Html.LabelFor(m => m.Location, "Город")</div>
             <div class="ui-widget m-left">

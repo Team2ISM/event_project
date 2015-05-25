@@ -101,16 +101,16 @@ nav li a
 	text-decoration: none;
 }
 
-#dropdown1 li
-{
-	width: 100px;
-}
-
 .dropdown-button
 {
-	width: 150px;
-}
+	width: 50px;
 
+}
+.dropdown-content
+{
+    overflow: visible;
+    min-width: 200px;
+}
 .active
 {
 	background-color: white;
