@@ -158,3 +158,13 @@ $(function () {
         combobox.toggle();
     });
 });
+
+$(function () {                                      
+    $('.date-filters a').each(function () {            
+        var location = window.location.href; 
+        var link = this.href;               
+        if (location == link) {               
+            $(this).addClass('active'); 
+        }
+    });
+});
