@@ -40,14 +40,16 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Details(string id)
         {
-            var evnt = AutoMapper.Mapper.Map<EventViewModel>(eventManager.GetById(id));
+            var evntModel = eventManager.GetById(id);
 
-            if (evnt == null || !evnt.Active)
+            if (evntModel == null)
             {
                 return View("EventNotFound");
             }
+
+            var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             ViewData["Comments"] = commentManager.GetByEventId(id);
-            return View(evnt);
+            return View(evntViewModel);
         }
 
         [HttpGet]
