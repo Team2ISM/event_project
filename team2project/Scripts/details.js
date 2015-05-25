@@ -12,8 +12,7 @@ function subscribe() {
             button.on('click', unsubscribe);
         }
         else {
-            button.html('Присоедениться');
-            button.on('click', subscribe);
+            location.assign('/User/Login');
         }
         reloadCount();
     });
@@ -27,8 +26,7 @@ function unsubscribe() {
             button.on('click', subscribe);
         }
         else {
-            button.html('Покинуть');
-            button.on('click', unsubscribe);
+            location.assign('/User/Login');
         }
         reloadCount();
     });
