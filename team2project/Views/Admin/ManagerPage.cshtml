@@ -42,11 +42,11 @@
                             @if (evnt.Active)
                             {
                                 
-                                @Html.RouteLink("Деактивировать", "ToogleIsActiveEvent", new { @id = evnt.Id }, new { @class = "waves-effect waves-light btn"})
+                                @Html.RouteLink("Деактивировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
                             }
                             else
                             {
-                                @Html.RouteLink("Активировать", "ToogleIsActiveEvent", new { @id = evnt.Id } , new { @class = "waves-effect waves-light btn"})
+                                @Html.RouteLink("Активировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
                             }
                     </td>
                     <td>
