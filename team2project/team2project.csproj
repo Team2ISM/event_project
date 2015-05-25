@@ -273,6 +273,7 @@
     <Content Include="Views\Comment\Create.cshtml" />
     <Content Include="Views\Subscribers\GetSubscribers.cshtml" />
     <Content Include="Views\Subscribers\Index.cshtml" />
+    <Content Include="Views\User\email.cshtml" />
     <None Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Welcome.cshtml" />
     <Content Include="Views\User\ThankYouPage.cshtml" />
