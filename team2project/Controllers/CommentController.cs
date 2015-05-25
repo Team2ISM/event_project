@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using team2project.Models;
 using System;
 
-
+using Events.NHibernateDataProvider.NHibernateCore;
 namespace team2project.Controllers
 {
     public class CommentController : Controller
@@ -38,7 +38,12 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult AddComment(CommentViewModel commentModel)
         {
-            if (!ModelState.IsValid)
+            if (!String.IsNullOrEmpty(User.Identity.Name)) {
+                var user = new NHibernateUserDataProvider().GetByMail(User.Identity.Name);
+                commentModel.AuthorId = user.Id;
+                commentModel.AuthorName = user.Name + " " + user.Surname;
+            }
+            else if (!ModelState.IsValid)
             {
                 if (commentModel.EventId == null)
                 {
