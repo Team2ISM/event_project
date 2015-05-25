@@ -37,17 +37,7 @@
 
                     var url = location.protocol + '//' + location.host + '/', path = location.pathname.split('/');
                     url += path[1];
-                    var newArr = [];
-                    
-                    for (var i = 0; i < path.length; i++)
-                    {
-                        if (path[i] != "")
-                        {
-                            newArr.push(path[i])
-                        }
-                    }
-                    debugger;
-                    path = newArr;
+
                     if (ui.item.value && ui.item.option.value !== '-1') {
                         url += '/' + ui.item.value;
                     }
