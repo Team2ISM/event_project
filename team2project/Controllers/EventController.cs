@@ -42,7 +42,7 @@ namespace team2project.Controllers
         {
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(eventManager.GetById(id));
 
-            if (evnt == null)
+            if (evnt == null || !evnt.Active)
             {
                 return View("EventNotFound");
             }
