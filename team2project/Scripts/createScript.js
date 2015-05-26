@@ -133,8 +133,6 @@
 })(jQuery);
 var locat = $("#location");
 window.onload = function () {
-var locat;
-$(function () {
     var combobox = $("#combobox");
     locat = $("#location")
     combobox.combobox();
