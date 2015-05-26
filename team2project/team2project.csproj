@@ -234,7 +234,6 @@
     <Content Include="Content\materialize\materialize.css" />
     <Content Include="Content\materialize\materialize.min.css" />
     <Content Include="Content\metro.css" />
-    <Content Include="Content\metro.min.css" />
     <Content Include="Content\User\user.css" />
     <Content Include="Fonts\metro.svg" />
     <Content Include="Global.asax" />
@@ -298,15 +297,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Fonts\selection.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fonts\metro.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fonts\metro.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fonts\metro.eot" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />

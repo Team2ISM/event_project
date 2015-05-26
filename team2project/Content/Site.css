@@ -109,7 +109,10 @@ nav li a
 .dropdown-content
 {
     overflow: visible;
-    min-width: 200px;
+}
+#dropdown
+{
+    padding-left: 2px;
 }
 .active
 {
