@@ -41,9 +41,6 @@
             @Html.EditorFor(m => m.Email)
             @Html.ValidationMessageFor(m => m.Email)
         </div>
-        <div class="col s12 m12 12 reg-mess red-text">
-            @ViewBag.DuplicateMailError
-        </div>
         <div class="input-field col s12 m12 l12">
             <div class="left" id ="city">@Html.LabelFor(m => m.Location, "Город")</div>
             <div class="ui-widget m-left">
@@ -72,5 +69,6 @@
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/jquery.datetimepicker.js")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/register.js")
     @Scripts.Render("~/Scripts/createScript.js")
 }
