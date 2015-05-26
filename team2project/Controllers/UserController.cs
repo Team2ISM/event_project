@@ -168,7 +168,7 @@ namespace team2project.Controllers
                 }
                 else
                 {
-                    ViewBag.DuplicateMailError = "Пользователь с такой почтой уже зарегистрирован";
+                    ModelState.AddModelError("", "Пользователь с такой почтой уже зарегистрирован");                   
                 }
             }
             return View(new UserViewModel());

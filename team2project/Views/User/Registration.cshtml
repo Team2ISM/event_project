@@ -11,16 +11,22 @@
     @Styles.Render("~/Content/jquery-ui.min.css")
     @Styles.Render("~/Content/jquery-ui.theme.min.css")
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
+    @Styles.Render("~/Content/jquery.datetimepicker.css")
 }
 
 @using (Html.BeginForm("Registration", "User", FormMethod.Post, new { @class = "container z-depth-3" }))
 {    <h5>Регистрация участников</h5>
     <div class="row">
         @Html.ValidationSummary(true)
-        <div class="col s12 m12 12 reg-mess green-text">
-            @ViewBag.RegistrationSuccess
-        </div>
-        <div class="input-field col s12 m6">
+        @if (ViewBag.RegistrationSuccess != null)
+        {
+            <div id="registrationSuccess" class="col s12 m12 12 reg-mess green-text">
+                @ViewBag.RegistrationSuccess
+            </div>
+        }
+        else
+        {
+            <div class="input-field col s12 m6">
             @Html.LabelFor(m => m.Name, "Имя")<br>
             @Html.EditorFor(m => m.Name)
             @Html.ValidationMessageFor(m => m.Name)
@@ -43,7 +49,7 @@
             <div class="ui-widget m-left">
                 @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
             </div>
-            <input id="location" name="Location" style="display:none;">
+            <input id="location" name="Location" style="height: 0; padding: 0; margin: 0; border: none;">
             @Html.ValidationMessageFor(m => m.Location)
         </div>
         <div class="input-field col s12">
@@ -57,11 +63,14 @@
             @Html.ValidationMessageFor(m => m.RepeatPassword)
         </div>
         <button class="btn waves-effect waves-light blue" type="submit">Зарегистрировать меня</button>
+        }
     </div>
 }
 
 @section scripts{
+    @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
+    @Scripts.Render("~/Scripts/jquery.datetimepicker.js")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/createScript.js")
 }
