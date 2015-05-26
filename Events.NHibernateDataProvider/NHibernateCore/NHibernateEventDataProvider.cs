@@ -94,6 +94,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         public void Update(Event model, string admin = "NoAdmin")
         {
             if(admin == "NoAdmin")model.DateOfCreation = DateTime.Now;
+            model.Active = true;
+            model.Checked = true;
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction tran = session.BeginTransaction())

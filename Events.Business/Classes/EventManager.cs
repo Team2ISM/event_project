@@ -57,6 +57,17 @@ namespace Events.Business.Classes
             cacheManager.ClearCacheByRegion("eventsList");
         }
 
+        public void Update(Event model) {
+            dataProvider.Update(model);
+            cacheManager.RemoveFromCache(model.Id);
+            cacheManager.ToCache<Event>(model.Id,
+                ( ) => {
+                    return model;
+                });
+            cacheManager.ClearCacheByRegion("Events");
+            cacheManager.ClearCacheByRegion("eventsList");
+        }
+
         public Event GetById(string id)
         {
             var evntModel = cacheManager.FromCache<Event>(id,
