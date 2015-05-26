@@ -56,8 +56,21 @@ namespace team2project.Controllers
         public ActionResult Create()
         {
            // ViewBag.cities = cityManager.GetList();
-            var evnt = new EventViewModel();
+            ViewBag.Title = "Создайте собственное событие";
+                var evnt = new EventViewModel();
             return View(evnt);
+        }
+        [HttpGet]
+        public ActionResult Update(string id)
+        {
+            var evntModel = eventManager.GetById(id);
+            if (evntModel == null)
+            {
+                return View("EventNotFound");
+            }
+            var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
+            ViewBag.Title = "Редактируйте своё событие";
+            return View("Create", evnt);
         }
 
         [HttpPost]
@@ -65,7 +78,7 @@ namespace team2project.Controllers
         {
             if (!ModelState.IsValid)
             {
-                //ViewBag.cities = cityManager.GetList();
+                ViewBag.Title = "Создайте собственное событие";
                 return View(evnt);
             }
 
