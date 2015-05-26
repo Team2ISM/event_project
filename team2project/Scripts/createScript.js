@@ -131,6 +131,8 @@
         }
     });
 })(jQuery);
+var locat = $("#location");
+window.onload = function () {
 var locat;
 $(function () {
     var combobox = $("#combobox");
@@ -150,4 +152,4 @@ $(function () {
         lang: 'ru',
         mask: true
     });
-});
+};
