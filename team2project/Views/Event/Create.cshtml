@@ -1,6 +1,4 @@
-@{
-    ViewBag.Title = "Create event";
-}
+
 
 @model team2project.Models.EventViewModel
 @using System.Globalization
@@ -17,7 +15,8 @@
 
 
 <div class="container z-depth-1">
-    <h5>Создайте собственное мероприятие!</h5>
+
+    <h5>@ViewBag.Title</h5>
     @using (Html.BeginForm("Create", "EventController", FormMethod.Post)) {
         @Html.HiddenFor(m => m.Id)
         @Html.ValidationSummary(true)
