@@ -57,14 +57,16 @@
   <div class="nav-wrapper blue">
    
     @Html.RouteLink("Субботник", "Index", htmlAttributes: new {Class = "white-text", Id = "logo"})
-    <ul class="hide-on-med-and-down right">
-            <li>
+    <ul class="hide-on-med-and-down right" id ="menu">
+        
+            <li class="menu-content">
                 @Html.RouteLink("Список событий", "EventList", FormMethod.Post, new {@class ="white-text"})
             </li>
-            <li>
+            <li class="menu-content">
                 @Html.RouteLink("Создать событие", "CreateEvent", FormMethod.Post, new {@class ="white-text"})
             </li>
         <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="mdi-action-toc right white-text"></i></a></li>
+        @ThisPage()
     </ul>
   </div>
 </nav>
@@ -87,3 +89,20 @@
     </script>
 </body>
 </html>
+@helper ThisPage()
+{
+    var filters = Request.Url.AbsolutePath.Split('/');
+    if(filters[1] == "Events")
+    {
+        <script>
+            $('.menu-content:eq(0)').addClass('active')
+        </script>
+    }
+    else
+    if (filters[1] == "createEvent")
+    {
+        <script>
+            $('.menu-content:eq(1)').addClass('active')
+        </script>
+    }
+}
