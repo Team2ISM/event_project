@@ -21,5 +21,7 @@ namespace Events.Business.Models
         public virtual bool Checked { get; set; }
 
         public virtual DateTime? DateOfCreation { get; set; }
+
+        public virtual string AuthorId { get; set; }
     }
 }

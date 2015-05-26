@@ -259,7 +259,7 @@
     <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js" />
     <Content Include="Scripts\MvcFoolproofJQueryValidation.min.js" />
     <Content Include="Scripts\MvcFoolproofValidation.min.js" />
-    <Content Include="Scripts\registration.js" />
+    <Content Include="Scripts\register.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\listScript.js" />
     <Content Include="Views\Mails\email.html" />
