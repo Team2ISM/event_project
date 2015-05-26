@@ -131,10 +131,18 @@
         }
     });
 })(jQuery);
+<<<<<<< HEAD
 var locat = $("#location");
 window.onload = function () {
+=======
+var locat;
+$(function () {
+>>>>>>> origin/master
     var combobox = $("#combobox");
+    locat = $("#location")
     combobox.combobox();
+    locat.val(combobox.children()[0].innerHTML);
+    //locat.html(combobox.children()[0].innerHTML);
     jQuery('#datetimepicker1').datetimepicker({
         timepicker: true,
         minDate: '-1970/01/01',//

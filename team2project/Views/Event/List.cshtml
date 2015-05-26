@@ -25,10 +25,10 @@
     </div>
 
     <div class ="date-filters">
-        @Html.RouteLink("Все мероприятия", "EventList", null, new { Class = "blue-text" })
-        @ConstructLink("На сегодня", 0)
-        @ConstructLink("На 3 дня", 3)
-        @ConstructLink("На неделю", 7)
+        @ConstructLink("Все мероприятия", null)
+        @ConstructLink("На сегодня","0")
+        @ConstructLink("На 3 дня", "3")
+        @ConstructLink("На неделю", "7")
     </div>
 
     <table class="striped" >
@@ -47,7 +47,8 @@
                     <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
                     <td>@Html.RouteLink(evnt.Description, "EventDetails", new { evnt.Id })</td>
                     <td>
-                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id }),
+                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
+                        @Html.RouteLink(",", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
                         
                 </td>
@@ -59,7 +60,7 @@
 
 </div>
 
-@helper ConstructLink(string linkName, int nOfDaysToEvent)
+@helper ConstructLink(string linkName, string nOfDaysToEvent)
 {
     var filters = Request.Url.AbsolutePath.Split('/');
 
@@ -68,7 +69,7 @@
        @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "blue-text" })
     }
     else
-        if (nOfDaysToEvent == 999999 && (filters.Length == 3 || filters.Length == 2))
+        if (nOfDaysToEvent == null  && (filters.Length == 3 || filters.Length == 2))
     {
         @Html.RouteLink(linkName, "EventList", null, new { Class = "blue-text" })
     }
