@@ -9,6 +9,12 @@ namespace Events.Business.Interfaces
 
         Event GetById(string id);
 
+        IList<Event> GetByAuthorMail(string email);
+
+        IList<Event> GetAuthorPastEvents(string email);
+
+        IList<Event> GetAuthorFutureEvents(string email);
+
         void Delete(Event model);
 
         void ToggleButtonStatusChecked(string id);
@@ -18,5 +24,6 @@ namespace Events.Business.Interfaces
         int Create(Event evnt);
 
         void Update(Event model, string admin = "NoAdmin");
+        
     }
 }

@@ -284,6 +284,9 @@
     <Content Include="Views\Subscribers\GetSubscribers.cshtml" />
     <Content Include="Views\Subscribers\Index.cshtml" />
     <Content Include="Views\User\email.cshtml" />
+    <Content Include="Views\User\MyEvents.cshtml" />
+    <Content Include="Views\User\MyPastEvents.cshtml" />
+    <Content Include="Views\User\MyFutureEvents.cshtml" />
     <None Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Welcome.cshtml" />
     <Content Include="Views\User\ThankYouPage.cshtml" />

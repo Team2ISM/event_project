@@ -83,6 +83,33 @@ namespace Events.Business.Classes
             return evntModel;
         }
 
+        public IList<Event> GetByAuthorMail(string email)
+        {
+            return cacheManager.FromCache<IList<Event>>("userEvents" + email,
+                () => 
+                {
+                    return dataProvider.GetByAuthorMail(email);
+                });
+        }
+
+        public IList<Event> GetAuthorPastEvents(string email)
+        {
+            return cacheManager.FromCache<IList<Event>>("userEvents" + email + "past",
+                () =>
+                {
+                    return dataProvider.GetAuthorPastEvents(email);
+                });
+        }
+
+        public IList<Event> GetAuthorFutureEvents(string email)
+        {
+            return cacheManager.FromCache<IList<Event>>("userEvents" + email + "future",
+                () =>
+                {
+                    return dataProvider.GetAuthorFutureEvents(email);
+                });
+        }
+
         public void ToggleButtonStatusActive(string id)
         {
             dataProvider.ToggleButtonStatusActive(id);
