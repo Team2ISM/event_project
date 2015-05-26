@@ -143,7 +143,6 @@ var combobox = $("#combobox");
 var days, city = { value: '-1' };
 $(function () {
     var path = location.pathname.split('/');
-    debugger;
     if (path[2]) {
         var arr = combobox.children();
         arr.each(function (i, val) {
