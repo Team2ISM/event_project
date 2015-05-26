@@ -132,7 +132,7 @@
     });
 })(jQuery);
 var locat = $("#location");
-$(function () {
+window.onload = function () {
     var combobox = $("#combobox");
     combobox.combobox();
     jQuery('#datetimepicker1').datetimepicker({
@@ -147,4 +147,4 @@ $(function () {
         lang: 'ru',
         mask: true
     });
-});
+};
