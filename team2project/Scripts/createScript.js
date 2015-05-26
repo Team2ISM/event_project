@@ -131,13 +131,10 @@
         }
     });
 })(jQuery);
-<<<<<<< HEAD
 var locat = $("#location");
 window.onload = function () {
-=======
 var locat;
 $(function () {
->>>>>>> origin/master
     var combobox = $("#combobox");
     locat = $("#location")
     combobox.combobox();
