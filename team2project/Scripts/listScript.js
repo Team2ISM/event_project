@@ -143,28 +143,31 @@ var combobox = $("#combobox");
 var days, city = { value: '-1' };
 $(function () {
     var path = location.pathname.split('/');
+    debugger;
     if (path[2]) {
         var arr = combobox.children();
         arr.each(function (i, val) {
-            if (val.innerText === path[2]) { val.setAttribute('selected', 'selected'); city = val; }
+            if (val.innerText === path[2]) { Val = val; val.setAttribute('selected', 'selected'); city = val; }
         });
     }
-    if (path[3]) days = path[3];
+    if (path[3]) {
+        days = path[3];
+    }
     else days = '';
     if (!days) days = '-1';
-    combobox.html('<option value="-1">Все</option>' + combobox.html());
+    combobox.html('<option value="0">Все</option>' + combobox.html());
     combobox.combobox();
     $("#toggle").click(function () {
         combobox.toggle();
     });
 });
 
-$(function () {                                      
-    $('.date-filters a').each(function () {            
-        var location = window.location.href; 
-        var link = this.href;               
-        if (location == link) {               
-            $(this).addClass('active'); 
+$(function () {
+    $('.date-filters a').each(function () {
+        var location = window.location.href;
+        var link = this.href;
+        if (location == link) {
+            $(this).addClass('active');
         }
     });
 });
