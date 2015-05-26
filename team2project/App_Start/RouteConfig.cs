@@ -100,7 +100,7 @@ namespace team2project
             //новий роут
             routes.MapRoute(
                 name: "UpdateEvent",
-                url: "Event/Update/{id}",
+                url: "eventUpdate/{id}",
                defaults: new { controller = "Event", action = "Update" }
             );
             routes.MapRoute(
