@@ -100,8 +100,8 @@ namespace team2project
             //новий роут
             routes.MapRoute(
                 name: "UpdateEvent",
-                url: "eventUpdate/{id}",
-               defaults: new { controller = "Event", action = "Update" }
+                url: "updateEvent/{id}",
+               defaults: new { controller = "Event", action = "Update", id = UrlParameter.Optional }
             );
             routes.MapRoute(
                name: "CreateComment",

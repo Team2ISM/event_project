@@ -26,7 +26,6 @@ namespace team2project.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
         [DataType(DataType.Date)]
         public DateTime? FromDate { get; set; }
