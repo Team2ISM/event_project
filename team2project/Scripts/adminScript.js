@@ -1,4 +1,4 @@
-﻿(function load() {
+﻿(function () {
     var url = "http://" + window.location.host;
 
     function EventModel(evnt, model) {
@@ -11,24 +11,20 @@
         this.active = ko.observable(evnt.Active);
         this.toogleText = ko.observable("");
 
-
-        changeToogleText();
-
-        function changeToogleText() {
+        self.changeToogleText = ko.computed(function () {
             if (self.active()) {
                 self.toogleText("Деактивировать");
             }
             else {
                 self.toogleText("Активировать");
             }
-        }
+        });
 
         self.toogleActive = function () {
             $.ajax({
                 url: url + "/ToogleIsActiveEvent/" + self.id(),
                 success: function (response) {
                     self.active(!self.active());
-                    changeToogleText();
                 },
                 error: function (er) {
                     console.dir(er);
