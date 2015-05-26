@@ -8,8 +8,17 @@
         this.title = ko.observable(evnt.Title);
         this.description = ko.observable(evnt.Description);
         this.location = ko.observable(evnt.Location);
+        debugger;
+        this.dateFrom = new Date(turnDate(evnt.FromDate));
+        this.dateTo = new Date(turnDate(evnt.ToDate));
         this.active = ko.observable(evnt.Active);
         this.toogleText = ko.observable("");
+
+        function turnDate(input) {
+            var date = input.slice(6);
+            date = date.slice(0, date.length - 2);
+            return parseInt(date);
+        }
 
         self.changeToogleText = ko.computed(function () {
             if (self.active()) {
@@ -18,6 +27,13 @@
             else {
                 self.toogleText("Активировать");
             }
+        });
+
+        self.dateAndTime = ko.computed(function () {
+            var date;
+            debugger;
+            date = self.dateFrom.getDay() + " " + self.dateFrom.getMonth().toString() + " " + self.dateFrom.getFullYear();
+            return date;
         });
 
         self.toogleActive = function () {
@@ -30,6 +46,10 @@
                     console.dir(er);
                 }
             });
+        }
+
+        self.goToDetails = function () {
+            window.location.replace(url + "/Details/" + self.id());
         }
     }
 
