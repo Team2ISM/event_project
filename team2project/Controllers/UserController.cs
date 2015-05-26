@@ -154,8 +154,9 @@ namespace team2project.Controllers
 
                     data.CreateUser(newUser);
 
-                    string host = Request.UrlReferrer.Authority;
-                    string activationLink = "http://" + host + Url.Action("Activate", new { controller = "User", action = "Activate", id = user.Id });
+                    string authority = Request.Url.Authority;
+                    string scheme = Request.Url.Scheme;
+                    string activationLink = scheme + "://" + authority + Url.Action("Activate", new { controller = "User", action = "Activate", id = user.Id });
 
                     string body = user.Name + ", спасибо за регистрацию\n";
                     body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
