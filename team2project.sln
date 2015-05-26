@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "team2project", "team2project\team2project.csproj", "{8590242F-A4E4-4B63-9C10-AB580DEBA028}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.Business", "Events.Business\Events.Business.csproj", "{C68A6F0D-AAE7-4639-8867-6FD26F0BFB2B}"
@@ -8,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.NHibernateDataProvider", "Events.NHibernateDataProvider\Events.NHibernateDataProvider.csproj", "{5340697E-46CC-41DD-AA45-9850F9055F97}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events.RuntimeCache", "Events.RuntimeCache\Events.RuntimeCache.csproj", "{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SolariCaptcha", "..\SolariCaptcha\SolariCaptcha\SolariCaptcha.csproj", "{C27DBE84-1EAB-4AAF-8B17-D1E994582376}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,10 @@ Global
 		{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9D2CF50-3299-47C3-BEA6-D8EBB683F442}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C27DBE84-1EAB-4AAF-8B17-D1E994582376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C27DBE84-1EAB-4AAF-8B17-D1E994582376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C27DBE84-1EAB-4AAF-8B17-D1E994582376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C27DBE84-1EAB-4AAF-8B17-D1E994582376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
