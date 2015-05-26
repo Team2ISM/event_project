@@ -6,6 +6,10 @@
 @section css{
     @Styles.Render("~/Content/Home/List.css")
 }
+@section scripts{
+    @Scripts.Render("~/bundles/knockout");
+    @Scripts.Render("~/Scripts/adminScript.js")
+    }
 <div class="container">
     <h1>@ViewBag.Title</h1>
     <table class="striped centered">
@@ -13,17 +17,15 @@
             <tr>
                 <th>Название</th>
                 <th>Описание</th>
-                <th>Дата, время</th>
+                @*<th>Дата, время</th>*@
                 <th>Город</th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var evnt in Model)
-            {
+        <tbody data-bind="foreach: events">
                 <tr>
-                    <td>@evnt.Title</td>
-                    <td>@evnt.Description</td>
-                    <td>
+                    <td data-bind="text: title"></td>
+                    <td data-bind="text: description"></td>
+                    @*<td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id }),
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
                         
@@ -36,37 +38,20 @@
                     }
                         
                         @Html.RouteLink(evnt.FromDate != null ? @evnt.ToDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
-                </td>
-                    <td>@evnt.Location</td>
-                    <td>
-                            @if (evnt.Active)
-                            {
-                                
-                                @Html.RouteLink("Деактивировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
-                            }
-                            else
-                            {
-                                @Html.RouteLink("Активировать", "ToogleIsActiveEvent", new { @id = evnt.Id })
-                            }
-                    </td>
-                    <td>
-                        @Html.RouteLink("Удалить", "DeleteEvent", new { @id = evnt.Id })
-                    </td>
+                </td>*@
+                    <td data-bind="text: location"></td>
+                    <td><button data-bind="text: toogleText, click: $data.toogleActive"></button></td>
+                    <td><button data-bind="click: function(){$root.deleteEvent($data)}">Удалить</button></td>
                 </tr>
-                if (!evnt.Checked)
-                {
-                    Html.RenderAction("ToggleButtonStatusChecked", new { id = evnt.Id });
-                }
-            }
         </tbody>
     </table>
 </div>
 
-@helper Date(DateTime? FromDate, DateTime? ToDate)
+@*@helper Date(DateTime? FromDate, DateTime? ToDate)
 {
     @(FromDate != null ? FromDate.Value.ToString("dd MMMM yyyy") : "n/a")
     if (ToDate != null && (FromDate == null || ToDate.Value.DayOfYear != FromDate.Value.DayOfYear))
     {
         @ToDate.Value.ToString("dd MMMM yyyy")
     }
-}
+}*@

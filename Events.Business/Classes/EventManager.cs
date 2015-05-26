@@ -20,7 +20,7 @@ namespace Events.Business.Classes
 
         public IList<Event> GetAllEvents()
         {
-            return cacheManager.FromCache<IList<Event>>("allEvents",
+            return cacheManager.FromCache<IList<Event>>("Events::allEvents",
                     () =>
                     {
                         return dataProvider.GetList(null, null, "Admin");
