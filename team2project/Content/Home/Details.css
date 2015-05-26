@@ -88,9 +88,12 @@ textarea
 
 #user
 {
-	margin-left: -20px;
+	
 }
-
+.marge
+{
+    margin-bottom: 0px;
+}
 #date
 {
 	text-align: right;
