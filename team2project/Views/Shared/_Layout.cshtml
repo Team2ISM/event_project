@@ -26,25 +26,25 @@
 <body>
   <ul id="dropdown1" class="dropdown-content">
    @{
-                    if (!User.Identity.IsAuthenticated)
-                    {
+       if (!User.Identity.IsAuthenticated)
+       {
                         <li>
-                            @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new {@class ="blue-text"})
+                            @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "blue-text" })
                         </li>
                         <li>
-                            @Html.RouteLink("Вход", "Login", FormMethod.Post, new {@class ="blue-text"})
+                            @Html.RouteLink("Вход", "Login", FormMethod.Post, new { @class = "blue-text" })
                         </li>   
-                    }
+       }
                  }
                 
                 @{ 
                     if (User.Identity.IsAuthenticated)
                     {
                         <li>
-                            @Html.RouteLink("Сменить пароль", "Update", FormMethod.Post, new {@class ="blue-text"})
+                            @Html.RouteLink("Сменить пароль", "Update", FormMethod.Post, new { @class = "blue-text" })
                         </li>
                         <li>
-                            @Html.RouteLink("Выйти", "Logout",  FormMethod.Post, new {@class ="blue-text"})
+                            @Html.RouteLink("Выйти", "Logout", FormMethod.Post, new { @class = "blue-text" })
                         </li>
                         <li class="divider"></li>
                     }
@@ -53,28 +53,27 @@
     <nav>
   <div class="nav-wrapper blue">
    
-    @Html.RouteLink("Субботник", "Index", htmlAttributes: new {Class = "white-text", Id = "logo"})
-    <ul class="hide-on-med-and-down right" id ="menu">
+    @Html.RouteLink("Субботник", "Index", htmlAttributes: new { Class = "white-text", Id = "logo" })
+    <ul class="hide-on-med-and-down right">
         
             <li class="menu-content">
-                @Html.RouteLink("Список событий", "EventList", FormMethod.Post, new {@class ="white-text"})
+                @Html.RouteLink("Список событий", "EventList", FormMethod.Post, new { @class = "white-text" })
             </li>
             <li class="menu-content">
-                @Html.RouteLink("Создать событие", "CreateEvent", FormMethod.Post, new {@class ="white-text"})
+                @Html.RouteLink("Создать событие", "CreateEvent", FormMethod.Post, new { @class = "white-text" })
             </li>
-<<<<<<< HEAD
-        <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="mdi-action-toc right white-text"></i></a></li>
-        @ThisPage()
-=======
         @if (User.Identity.IsAuthenticated)
         {
-             <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="white-text">@User.Identity.Name</i></a></li>
+            char[] n = new char[19];
+            string str = @User.Identity.Name;
+            str.CopyTo(0, n, 0, 16);
+             <li class="menu-content"><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="white-text" style="font-size: 1rem;">@foreach(var p in n){@p}...</i></a></li>
         }
         else
         {
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="mdi-action-toc right white-text"></i></a></li>
+            <li class="menu-content"><a class="dropdown-button white-text" href="#!" data-activates="dropdown1">Войти<i class="mdi-action-toc right white-text"></i></a></li>
         }
->>>>>>> origin/master
+        @ThisPage()
     </ul>
   </div>
 </nav>
@@ -100,17 +99,25 @@
 @helper ThisPage()
 {
     var filters = Request.Url.AbsolutePath.Split('/');
-    if(filters[1] == "Events")
+    if (filters[1] == "Events")
     {
         <script>
             $('.menu-content:eq(0)').addClass('active')
         </script>
     }
     else
-    if (filters[1] == "createEvent")
-    {
+        if (filters[1] == "createEvent")
+        {
         <script>
             $('.menu-content:eq(1)').addClass('active')
         </script>
-    }
+        }
+        else
+        if (filters[1] == "User")
+        {
+        <script>
+            $('.menu-content:eq(2)').addClass('active')
+        </script>
+        }
+        
 }
