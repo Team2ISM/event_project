@@ -13,6 +13,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria<Comment>();
+                criteria.AddOrder(Order.Desc("PostingTime"));
                 return criteria.List<Comment>();
             }
         }
@@ -32,6 +33,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 var criteria = session.CreateCriteria<Comment>();
                 criteria.Add(Expression.Eq("EventId", eventId));
+                criteria.AddOrder(Order.Desc("PostingTime"));
                 return criteria.List<Comment>();
             }
         }
@@ -42,6 +44,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 var criteria = session.CreateCriteria<Comment>();
                 criteria.Add(Expression.Eq("AuthorId", authorId));
+                criteria.AddOrder(Order.Desc("PostingTime"));
                 return criteria.List<Comment>();
             }
         }

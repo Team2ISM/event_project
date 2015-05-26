@@ -13,10 +13,12 @@ namespace team2project.Controllers
     public class AdminController : Controller
     {
         EventManager manager;
+        CommentManager commentManager;
 
-        public AdminController(EventManager manager)
+        public AdminController(EventManager manager, CommentManager commentManager)
         {
             this.manager = manager;
+            this.commentManager = commentManager;
         }
 
         [HttpGet]
@@ -39,7 +41,8 @@ namespace team2project.Controllers
 
         public ActionResult DeleteEvent(string id)
         {
-            manager.Delete(id);
+            commentManager.DeleteByEventId(id);
+            manager.Delete(id);            
             return RedirectToRoute("ManagerPage");
         }
 

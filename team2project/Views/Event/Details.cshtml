@@ -69,19 +69,26 @@
         </div>
     </div>
 </div>
+
+<div class="container z-depth-1">
+    @Html.Partial("~/Views/Comment/Create.cshtml", new CommentViewModel(Model.Id))
+</div>
 @{
     var list = AutoMapper.Mapper.Map<IList<CommentViewModel>>(ViewData["Comments"]);
     foreach (CommentViewModel item in list)
     {
-        <div class="container z-depth-1 comment-body">
+        <div class="padding20 container z-depth-1 comment-body">
             <div class="row">
-                <div class="col s12 m2 2">
-                    <div id ="user" class="valign-wrapper">
-                        <i  class="medium mdi-action-account-circle left"></i><strong class="m-left">@item.AuthorName</strong>
-                    </div>
-                    
+                <div class="col s12 m5 3">
+                    <i>@item.PostingTime.ToShortDateString(), @item.PostingTime.ToShortTimeString()</i>
                 </div>
-                <div class="col s12 m3 3"></div>
+            </div>
+            <div class="row">
+                <div class="col s12 m5 2">
+                    <div id="user" class="valign-wrapper">
+                        <i class="medium mdi-action-account-circle left"></i><strong>@item.AuthorName</strong>
+                    </div>
+                </div>
             </div>
             <hr />
             <div class="row">
@@ -92,11 +99,6 @@
         </div>
     }
 }
-
-<div class="container z-depth-1">
-    @Html.Partial("~/Views/Comment/Create.cshtml", new CommentViewModel(Model.Id))
-</div>
-
 @helper CheckDateIfNull(DateTime? date, string format)
 {
     if (date != null)

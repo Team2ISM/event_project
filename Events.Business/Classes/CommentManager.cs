@@ -64,5 +64,23 @@ namespace Events.Business.Classes
                     return dataProvider.GetByAuthorId(authorId);
                 });
         }
+
+        public void DeleteByEventId(string eventId)
+        {
+            var comments = cacheManager.FromCache<IList<Comment>>("commentsToEvent/" + eventId,
+                () =>
+                {
+                    return dataProvider.GetByEventId(eventId);
+                });
+   
+            foreach(var element in comments)
+            {
+                dataProvider.Delete(element);
+                cacheManager.RemoveFromCache("comment/" + element.Id);
+            }
+
+            cacheManager.RemoveFromCache("commentsList");
+            cacheManager.RemoveFromCache("commentsToEvent/" + eventId);
+        }
     }
 }

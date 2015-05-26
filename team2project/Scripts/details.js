@@ -32,7 +32,7 @@ function unsubscribe() {
     });
 }
 var button, id, link;
-$(function () {
+window.onload = function () {
     button = $('#submit');
     link = $('#subscribers a');
     id = location.pathname.split('/').pop();
@@ -46,4 +46,19 @@ $(function () {
             button.on('click', subscribe);
         }
     });
-});
+}
+/*$(function () {
+    button = $('#submit');
+    link = $('#subscribers a');
+    id = location.pathname.split('/').pop();
+    $.post("/IsSubscribed", {id:id}, function (data) {
+        if (data) {
+            button.html('Покинуть');
+            button.on('click', unsubscribe);
+        }
+        else {
+            button.html('Присоедениться');
+            button.on('click', subscribe);
+        }
+    });
+});*/

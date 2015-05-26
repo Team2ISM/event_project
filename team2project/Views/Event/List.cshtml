@@ -15,12 +15,12 @@
 
 <div class="container">
     <h1 class ="center blue-text">Мероприятия</h1>
-
+    
     <!-- Dropdown Trigger -->
     <div class="ui-widget left">
         <label class="left">Город: </label>
-        <div class="ui-widget m-left"">
-            @Html.DropDownList("City", AvailableLocations, new { id = "combobox" })
+        <div class="ui-widget m-left">
+            @Html.DropDownList("City", AvailableLocations, new { id = "combobox"})
         </div>
     </div>
 
@@ -31,7 +31,7 @@
         @ConstructLink("На неделю", 7)
     </div>
 
-    <table class="hoverable" >
+    <table class="striped" >
         <thead>
             <tr>
                 <th>Заголовок</th>
@@ -49,17 +49,19 @@
                     <td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id }),
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
-                        <br></br>
-
-                        @if (evnt.ToDate != null && (evnt.FromDate == null || evnt.ToDate.Value.DayOfYear != evnt.FromDate.Value.DayOfYear))
+                        
+                        <label>-</label>
+                        
+                    @if (evnt.ToDate != null && (evnt.FromDate == null || evnt.ToDate.Value.DayOfYear != evnt.FromDate.Value.DayOfYear))
                     {
-                            @Html.RouteLink(evnt.ToDate.Value.ToString("dd MMMM yyyy"), "EventDetails", new { evnt.Id })
+                        @Html.RouteLink(evnt.ToDate.Value.ToString("dd MMMM yyyy"), "EventDetails", new { evnt.Id })
+                        <label>,</label>
                     }
-                        ,
+                        
                         @Html.RouteLink(evnt.FromDate != null ? @evnt.ToDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
-                    </td>
-                    <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
-                </tr>
+                </td>
+                <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
+            </tr>
             }
         </tbody>
     </table>
@@ -72,16 +74,16 @@
 
     if (filters.Length == 3 && !filters[2].IsInt())
     {
-    @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "blue-text" })
+       @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "blue-text" })
     }
     else
         if (nOfDaysToEvent == 999999 && (filters.Length == 3 || filters.Length == 2))
     {
-    @Html.RouteLink(linkName, "EventList", null, new { Class = "blue-text" })
+        @Html.RouteLink(linkName, "EventList", null, new { Class = "blue-text" })
     }
     else
     {
-    @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent}, htmlAttributes: new { Class = "blue-text" })
+       @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent}, htmlAttributes: new { Class = "blue-text" })
     }
 }
 
