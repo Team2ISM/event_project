@@ -333,10 +333,6 @@
     <Content Include="Fonts\packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SolariCaptcha\SolariCaptcha\SolariCaptcha.csproj">
-      <Project>{c27dbe84-1eab-4aaf-8b17-d1e994582376}</Project>
-      <Name>SolariCaptcha</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Events.Business\Events.Business.csproj">
       <Project>{c68a6f0d-aae7-4639-8867-6fd26f0bfb2b}</Project>
       <Name>Events.Business</Name>
@@ -348,6 +344,10 @@
     <ProjectReference Include="..\Events.RuntimeCache\Events.RuntimeCache.csproj">
       <Project>{f9d2cf50-3299-47c3-bea6-d8ebb683f442}</Project>
       <Name>Events.RuntimeCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolariCaptcha\SolariCaptcha.csproj">
+      <Project>{c27dbe84-1eab-4aaf-8b17-d1e994582376}</Project>
+      <Name>SolariCaptcha</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
