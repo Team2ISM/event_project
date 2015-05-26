@@ -199,6 +199,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Captcha\0.png" />
+    <Content Include="Content\Captcha\1.png" />
+    <Content Include="Content\Captcha\2.png" />
+    <Content Include="Content\Captcha\3.png" />
+    <Content Include="Content\Captcha\4.png" />
+    <Content Include="Content\Captcha\5.png" />
+    <Content Include="Content\Captcha\6.png" />
+    <Content Include="Content\Captcha\7.png" />
+    <Content Include="Content\Captcha\8.png" />
+    <Content Include="Content\Captcha\9.png" />
     <Content Include="Content\Events\CreatePage.css" />
     <Content Include="Content\Home\Details.css" />
     <Content Include="Content\Home\List.css" />
@@ -280,7 +290,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -335,6 +344,10 @@
     <ProjectReference Include="..\Events.RuntimeCache\Events.RuntimeCache.csproj">
       <Project>{f9d2cf50-3299-47c3-bea6-d8ebb683f442}</Project>
       <Name>Events.RuntimeCache</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SolariCaptcha\SolariCaptcha.csproj">
+      <Project>{c27dbe84-1eab-4aaf-8b17-d1e994582376}</Project>
+      <Name>SolariCaptcha</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

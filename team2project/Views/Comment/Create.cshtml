@@ -1,6 +1,5 @@
 ﻿@model team2project.Models.CommentViewModel
-@using CaptchaMvc.HtmlHelpers
-@using CaptchaMvc.Models
+@using SolariCaptcha
 @using (Html.BeginForm("AddComment", "Comment", FormMethod.Post))
 {
    
@@ -34,18 +33,8 @@
             @Html.EditorFor(model => model.Text)
             @Html.ValidationMessageFor(model => model.Text)
         </div>
-        <div class="editor-label">
-            Вы робот?
-        </div>
-        <div class="editor-field">
-            <div class="switch">
-                <label>
-                    Да
-                    <input name="AntiBot" required type="checkbox">
-                    <span class="lever"></span>
-                    Нет
-                </label>
-            </div>
+        <div id="captcha">
+            @Html.Captcha(Request.Url.Authority)
         </div>
         <p>
             <input type="submit" value="Отправить" />
