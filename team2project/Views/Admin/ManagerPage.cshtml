@@ -29,16 +29,8 @@
                 <td data-bind="text: location"></td>
                 <td><button data-bind="text: toogleText, click: $data.toogleActive"></button></td>
                 <td><button data-bind="click: function(){$root.deleteEvent($data)}">Удалить</button></td>
-                <td><button data-bind="click:goToDetails">Перейти на страницу мероприятия</button></td>
+                <td><button data-bind="click:goToDetails">Перейти на страницу события</button></td>
             </tr>
         </tbody>
     </table>
 </div>
-@*@helper Date(DateTime? FromDate, DateTime? ToDate)
-    {
-        @(FromDate != null ? FromDate.Value.ToString("dd MMMM yyyy") : "n/a")
-        if (ToDate != null && (FromDate == null || ToDate.Value.DayOfYear != FromDate.Value.DayOfYear))
-        {
-            @ToDate.Value.ToString("dd MMMM yyyy")
-        }
-    }*@

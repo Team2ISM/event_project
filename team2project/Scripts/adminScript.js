@@ -1,5 +1,19 @@
 ﻿(function () {
     var url = "http://" + window.location.host;
+    var monthNames = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+
+    function turnDate(input) {
+        var date = input.slice(6);
+        date = date.slice(0, date.length - 2);
+        return parseInt(date);
+    }
+
+    function getDoubleCharacterValue(val) {
+        if (parseInt(val) < 9) {
+            return "0" + val + "";
+        }
+        return val;
+    }
 
     function EventModel(evnt, model) {
         var self = this;
@@ -8,17 +22,10 @@
         this.title = ko.observable(evnt.Title);
         this.description = ko.observable(evnt.Description);
         this.location = ko.observable(evnt.Location);
-        debugger;
         this.dateFrom = new Date(turnDate(evnt.FromDate));
         this.dateTo = new Date(turnDate(evnt.ToDate));
         this.active = ko.observable(evnt.Active);
         this.toogleText = ko.observable("");
-
-        function turnDate(input) {
-            var date = input.slice(6);
-            date = date.slice(0, date.length - 2);
-            return parseInt(date);
-        }
 
         self.changeToogleText = ko.computed(function () {
             if (self.active()) {
@@ -31,8 +38,14 @@
 
         self.dateAndTime = ko.computed(function () {
             var date;
-            debugger;
-            date = self.dateFrom.getDay() + " " + self.dateFrom.getMonth().toString() + " " + self.dateFrom.getFullYear();
+            date = self.dateFrom.getUTCDate() + " " + monthNames[self.dateFrom.getMonth()] + " " + self.dateFrom.getUTCFullYear() + ", " +
+            getDoubleCharacterValue(self.dateFrom.getHours()) + ":" + getDoubleCharacterValue(self.dateFrom.getMinutes()) + " - ";
+
+            if (self.dateFrom.getDay() != self.dateTo.getDay()) {
+                date += self.dateTo.getUTCDate() + " " + monthNames[self.dateTo.getMonth()] + " " + self.dateTo.getUTCFullYear() + ", ";
+            }
+            date += getDoubleCharacterValue(self.dateTo.getUTCHours()) + ":" + getDoubleCharacterValue(self.dateTo.getUTCMinutes());
+
             return date;
         });
 
