@@ -31,11 +31,13 @@
             $.ajax({
                 url: url + "/getEventsToAdminPage",
                 success: function (response) {
-                    
-                        var events = (JSON.parse(response));
+                    successHelper(response, function (response) {
+                        var events = response.Data;
                         for (var i in events) {
                             self.events.push(new EventModel(events[i], self));
                         }
+                    })
+                        
                   
                 },
                 error: function (er) {

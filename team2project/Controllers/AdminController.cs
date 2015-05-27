@@ -28,10 +28,18 @@ namespace team2project.Controllers
         }
 
         [HttpGet]
-        public string GetEvents()
+        public ActionResult GetEvents()
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
-            return new JavaScriptSerializer().Serialize(list);
+            return Json(
+                new JsonResultHelper()
+                {
+                    Data = list,
+                    Message = "Success: Get list of all events",
+                    Status = JsonResultHelper.StatusEnum.Success
+                },
+                JsonRequestBehavior .AllowGet
+                );
         }
 
         [HttpPost]
@@ -57,7 +65,7 @@ namespace team2project.Controllers
                 new JsonResultHelper()
                 {
                     Data = null,
-                    Message = "Success: Toogle Active Event",
+                    Message = "Success: Delete Event",
                     Status = JsonResultHelper.StatusEnum.Success
                 }
                 );
