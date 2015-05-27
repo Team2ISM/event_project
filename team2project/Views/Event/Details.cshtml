@@ -1,4 +1,4 @@
-@{
+п»ї@{
     ViewBag.Title = "Details";
 }
 
@@ -35,31 +35,31 @@
             <hr />
             <div class="row" id="info">
                 <div class="vertical-spaces">
-                    <strong>От:</strong>
+                    <strong>РћС‚:</strong>
                     <span class="horizontal-spaces">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</span>
                 </div>
 
                 <div class="vertical-spaces">
-                    <strong>До:</strong>
+                    <strong>Р”Рѕ:</strong>
                     <span class="horizontal-spaces">@CheckDateIfNull(Model.ToDate, "dd MMMM yyyy")</span>
                 </div>
 
                 <div class="vertical-spaces">
-                    <strong>Город:</strong>
+                    <strong>Р“РѕСЂРѕРґ:</strong>
                     <span class="horizontal-spaces">@Model.Location</span>
                 </div>
             </div>
             <hr />
             <div class="row" id="desc">
                 <div>
-                    <strong>Описание:</strong>
+                    <strong>РћРїРёСЃР°РЅРёРµ:</strong>
                     <p>@Model.Description</p>
                 </div>
             </div>
             <div class="row">
                 <div class="left">
                     @{
-                        <div class="left">Уже подписалось:</div>
+                        <div class="left">РЈР¶Рµ РїРѕРґРїРёСЃР°Р»РѕСЃСЊ:</div>
                         Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
                     }
 
@@ -67,7 +67,7 @@
                 <div class="right">
                     @if (Model.ToDate > DateTime.Now)
                     {
-                        <button id="submit" class="btn waves-effect waves-light blue right margin-right">Подождите</button>
+                        <button id="submit" class="btn waves-effect waves-light blue right margin-right">РџРѕРґРѕР¶РґРёС‚Рµ</button>
                     }
                 </div>
             </div>

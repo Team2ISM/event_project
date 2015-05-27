@@ -82,9 +82,13 @@ td a:hover, td a:active {
 
 #TdUpdate
 {
-    width: 215px;
+    width: 240px;
 }
 
+#TdUpdate button a
+{
+    color: white;
+}
 .text-white a
 {
     color: white;
@@ -93,4 +97,15 @@ td a:hover, td a:active {
 .active
 {
 	font-weight: bold;
+}
+
+.width80
+{
+    max-width: 85%;
+    margin: 0 auto;
+}
+
+#visibleButton
+{
+    width: 182px;
 }
