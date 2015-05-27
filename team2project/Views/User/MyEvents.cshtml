@@ -40,7 +40,7 @@
                     </td>
                     <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
                     <td id="TdUpdate"><button class="btn waves-effect waves-light blue white-text" type="submit">@Html.RouteLink("Изменить событие", "UpdateEvent", new { evnt.Id })</button></td>
-                    <td id="TdDell"><button class ="forBestFED Bogdan Semenets" type="submit">@Html.RouteLink("Удалить", "DeleteUserEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light white-text red" })</button></td>
+                    <td id="TdDell">@Html.RouteLink("Удалить", "DeleteUserEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light white-text red" })</td>
                 </tr>
             }
         </tbody>
