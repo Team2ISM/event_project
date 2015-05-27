@@ -25,14 +25,16 @@ namespace team2project.Controllers
         public ActionResult Index()
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList());
-            /*var provider = new NHibernateSubscribersDataProvider();
-            provider.SubscribeUser(new Subscribing("99974bdc-e120-4061-ba54-5b9474c87129", "a0c6a802-7dfd-4490-9450-84488396538f"));*/
             return View("List", list);
         }
 
         [HttpGet]
         public ActionResult Filters(string loc, string days)
         {
+            if (days == "-1")
+            {
+                return View("List", AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(loc, null)));
+            }
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(loc, days));
             return View("List", list);
         }
