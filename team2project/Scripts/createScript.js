@@ -134,8 +134,18 @@
 var locat = $("#location");
 window.onload = function(){
     var combobox = $("#combobox");
-    combobox.combobox();
     locat.val(combobox.children()[0].innerHTML);
+    if (city) {
+        var arr = combobox.children();
+        arr.each(function (i, val) {
+            if (val.innerHTML === city) {
+                val.setAttribute('selected', 'selected');
+                locat.val(city);
+                return false;
+            }
+        });
+    }
+    combobox.combobox();
     var pick1 = $('#datetimepicker1'), pick2 = $('#datetimepicker2');
     if (fDate) pick1.val(fDate);
     if (tDate) pick2.val(tDate);
