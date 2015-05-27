@@ -1,6 +1,7 @@
 ﻿
 body {
     position: relative;
+    padding-bottom: 20px;
 }
 
 .grid {
@@ -9,7 +10,10 @@ body {
     margin-right: auto;
     margin-top: 20px;
 }
-
+.margin-right
+{
+    margin-right: 10px;
+}
 .tile-small {
     margin-left: 0;
     padding: 0;
@@ -102,6 +106,10 @@ textarea
 	margin-top: 20px;	
 }
 
+#date p
+{
+    text-align: right;
+}
 #event-name
 {
 	float: left;
