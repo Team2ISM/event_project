@@ -17,21 +17,22 @@
     <h1 class ="center blue-text">Мероприятия</h1>
     
     <!-- Dropdown Trigger -->
-    <div class="ui-widget left">
-        <label class="left">Город: </label>
-        <div class="ui-widget m-left">
-            @Html.DropDownList("City", AvailableLocations, new { id = "combobox"})
+    <div class="width80">
+        <div class="ui-widget left">
+            <label class="left">Город: </label>
+            <div class="ui-widget m-left">
+                @Html.DropDownList("City", AvailableLocations, new { id = "combobox" })
+            </div>
+        </div>
+
+        <div class="date-filters">
+            @ConstructLink("Все мероприятия", null)
+            @ConstructLink("На сегодня", "0")
+            @ConstructLink("На 3 дня", "3")
+            @ConstructLink("На неделю", "7")
         </div>
     </div>
-
-    <div class ="date-filters">
-        @ConstructLink("Все мероприятия", null)
-        @ConstructLink("На сегодня","0")
-        @ConstructLink("На 3 дня", "3")
-        @ConstructLink("На неделю", "7")
-    </div>
-
-    <table class="striped" >
+    <table class="striped width80" >
         <thead>
             <tr>
                 <th>Заголовок</th>
