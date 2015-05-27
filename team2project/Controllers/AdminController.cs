@@ -1,11 +1,9 @@
 ﻿using Events.Business.Classes;
-using Events.Business.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using team2project.Models;
-using System.Web.Helpers;
-using Events.NHibernateDataProvider.NHibernateCore;
 using System.Web.Script.Serialization;
+using team2project.Helpers;
 
 namespace team2project.Controllers
 {
@@ -36,26 +34,33 @@ namespace team2project.Controllers
             return new JavaScriptSerializer().Serialize(list);
         }
 
-        [HttpGet]
-        public string ToggleButtonStatusActive(string id)
+        [HttpPost]
+        public ActionResult ToggleButtonStatusActive(string id)
         {
             manager.ToggleButtonStatusActive(id);
-            return "ok";
-        }
+            return Json(
+                new JsonResultHelper()
+                {
+                    Data = null,
+                    Message = "Success: Toogle Active Event",
+                    Status = JsonResultHelper.StatusEnum.Success
+                }
+                );
+        }  
 
-        [HttpGet]
-        public string ToggleButtonStatusChecked(string id)
-        {
-            manager.ToggleButtonStatusChecked(id);
-            return "ok";
-        }
-
-        [HttpGet]
-        public string DeleteEvent(string id)
+        [HttpPost]
+        public ActionResult DeleteEvent(string id)
         {
             commentManager.DeleteByEventId(id);
             manager.Delete(id);
-            return "ok";
+            return Json(
+                new JsonResultHelper()
+                {
+                    Data = null,
+                    Message = "Success: Toogle Active Event",
+                    Status = JsonResultHelper.StatusEnum.Success
+                }
+                );
         }
 
     }

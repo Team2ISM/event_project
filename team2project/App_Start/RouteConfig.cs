@@ -145,7 +145,7 @@ namespace team2project
             );
             routes.MapRoute(
                 name: "ToogleIsActiveEvent",
-                url: "ToogleIsActiveEvent/{id}",
+                url: "ToogleIsActiveEvent",
                 defaults: new { controller = "Admin", action = "ToggleButtonStatusActive" }
             );
              routes.MapRoute(
@@ -156,7 +156,7 @@ namespace team2project
             
             routes.MapRoute(
                 name: "DeleteEvent",
-                url: "DeleteEvent/{id}",
+                url: "DeleteEvent",
                 defaults: new { controller = "Admin", action = "DeleteEvent" }
             );
 

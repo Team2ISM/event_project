@@ -1,6 +1,65 @@
 ﻿(function () {
     var url = "http://" + window.location.host;
     var monthNames = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+    var adminAjaxHelper = new AdminAjaxHelper();
+
+    function AdminAjaxHelper() {
+
+        this.toogleActive = function (self) {
+            $.ajax({
+                url: url + "/ToogleIsActiveEvent/",
+                type: "POST",
+                data: {
+                    id: self.id()
+                },
+                success: function (response) {
+                    successHelper(response, function () {
+                        self.active(!self.active());
+                    })
+                },
+                error: function (er) {
+                    console.dir(er);
+                }
+            });
+        }
+
+        this.loadEvents = function(self) {
+            $.ajax({
+                url: url + "/getEventsToAdminPage",
+                success: function (response) {
+                    
+                        var events = (JSON.parse(response));
+                        for (var i in events) {
+                            self.events.push(new EventModel(events[i], self));
+                        }
+                  
+                },
+                error: function (er) {
+                    console.dir(er);
+                }
+            });
+        }
+
+        this.deleteEvent = function (data, self) {
+            $.ajax({
+                url: url + "/DeleteEvent",
+                type: "POST",
+                data: {
+                    id: data.id()
+                },
+                success: function (response) {
+                    successHelper(response, function () {
+                        var events = self.events();
+                        ko.utils.arrayRemoveItem(events, data);
+                        self.events(events);
+                    });
+                },
+                error: function (er) {
+                    console.dir(er);
+                }
+            });
+        }
+    }
 
     function turnDate(input) {
         var date = input.slice(6);
@@ -13,6 +72,19 @@
             return "0" + val + "";
         }
         return val;
+    }
+
+    function responseMessageHelper(response) {
+        return "Status: " + response.Status + "\n" + "Message: " + response.Message;
+    }
+
+    function successHelper(response, func) {
+        if (response.Status) {
+            func(response);
+        }
+        else {
+            console.dir(responseMessageHelper(response))
+        }
     }
 
     function EventModel(evnt, model) {
@@ -50,15 +122,7 @@
         });
 
         self.toogleActive = function () {
-            $.ajax({
-                url: url + "/ToogleIsActiveEvent/" + self.id(),
-                success: function (response) {
-                    self.active(!self.active());
-                },
-                error: function (er) {
-                    console.dir(er);
-                }
-            });
+            adminAjaxHelper.toogleActive(self);
         }
 
         self.goToDetails = function () {
@@ -66,39 +130,15 @@
         }
     }
 
-    function adminViewModel() {
+    function AdminViewModel(initFunc) {
         var self = this;
         self.events = ko.observableArray([]);
-        loadEvents(self);
+        initFunc(self);
 
         self.deleteEvent = function (data) {
-            $.ajax({
-                url: url + "/DeleteEvent/" + data.id(),
-                success: function (response) {
-                    var events = self.events();
-                    ko.utils.arrayRemoveItem(events, data);
-                    self.events(events);
-                },
-                error: function (er) {
-                    console.dir(er);
-                }
-            });
-        }
-
-        function loadEvents(self) {
-            $.ajax({
-                url: url + "/getEventsToAdminPage",
-                success: function (response) {
-                    var events = JSON.parse(response);
-                    for (var i in events) {
-                        self.events.push(new EventModel(events[i], self));
-                    }
-                },
-                error: function (er) {
-                    console.dir(er);
-                }
-            });
-        }
+            adminAjaxHelper.deleteEvent(data, self);
+        } 
     }
-    ko.applyBindings(new adminViewModel());
+
+    ko.applyBindings(new AdminViewModel(adminAjaxHelper.loadEvents));
 })();
