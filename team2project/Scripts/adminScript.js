@@ -2,7 +2,12 @@
     var url = "http://" + window.location.host;
     var monthNames = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
     var adminAjaxHelper = new AdminAjaxHelper();
-
+    $("body").addClass("loaded");
+    $(document).ajaxStart(function () {
+        $("body").toggleClass("loaded");
+    }).ajaxStop(function () {
+        $("body").toggleClass("loaded");
+    })
     function AdminAjaxHelper() {
 
         this.toogleActive = function (self) {

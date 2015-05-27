@@ -231,6 +231,7 @@
     <Content Include="Content\materialize\materialize.css" />
     <Content Include="Content\materialize\materialize.min.css" />
     <Content Include="Content\metro.css" />
+    <Content Include="Content\preloader.css" />
     <Content Include="Content\User\user.css" />
     <Content Include="Fonts\metro.svg" />
     <Content Include="Global.asax" />
