@@ -10,12 +10,13 @@
 @section scripts{
     @Scripts.Render("~/bundles/knockout");
     @Scripts.Render("~/Scripts/adminScript.js")
+    @Styles.Render("~/Content/jquery-ui.min.css")
 }
 <div class="container">
     <h2 class ="center blue-text">@ViewBag.Title</h2>
     <table class="striped centered">
         <thead>
-            <tr>
+            <tr class="table-hat">
                 <th>Название</th>
                 <th>Описание</th>
                 <th>Дата, время</th>
@@ -28,10 +29,25 @@
                 <td data-bind="text: description"></td>
                 <td data-bind="text: dateAndTime"></td>
                 <td data-bind="text: location"></td>
-                <td><button id="visibleButton" class="btn waves-effect waves-light blue white-text" data-bind="text: toogleText, click: $data.toogleActive"></button></td>
+                <td><button onclick="New(this)" id="visibleButton" class="btn waves-effect waves-light blue white-text" data-bind="text: toogleText, click: $data.toogleActive"></button></td>
                 <td><button class="btn waves-effect waves-light red white-text" data-bind="click: function(){$root.deleteEvent($data)}">Удалить</button></td>
                 <td><button class="btn waves-effect waves-light blue white-text" data-bind="click:goToDetails">Перейти на страницу события</button></td>
             </tr>
         </tbody>
     </table>
 </div>
+<script>
+    function New(r) {
+        alert($(r).text());
+        if ($(r).text() == 'Деактивировать') $(r).parent().parent().css('font-weight', 'lighter');
+        else
+            $(r).parent().parent().css('font-weight', 'normal');
+    }
+</script>
+
+@helper rety()
+{
+    <script>
+        alert(1);
+    </script>
+}

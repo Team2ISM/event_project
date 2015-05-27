@@ -109,3 +109,12 @@ td a:hover, td a:active {
 {
     width: 182px;
 }
+
+.table-hat
+{
+    font-size: larger;
+}
+.table-hat th
+{
+    font-weight: 600;
+}
