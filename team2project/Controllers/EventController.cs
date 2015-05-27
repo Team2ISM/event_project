@@ -74,6 +74,7 @@ namespace team2project.Controllers
             ViewBag.Button = "Редактировать";
             return View("Create", evnt);
         }
+
         [HttpPost]
         public ActionResult Update(EventViewModel evnt)
         {
@@ -83,11 +84,20 @@ namespace team2project.Controllers
                 ViewBag.Button = "Редактировать";
                 return View(evnt);
             }
-
+            evnt.AuthorId = User.Identity.Name;
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             eventManager.Update(evntModel);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public ActionResult DeleteEvent(string id)
+        {
+            commentManager.DeleteByEventId(id);
+            eventManager.Delete(id);
+            return RedirectToRoute("MyEvents");
+        }
+
         [HttpPost]
         public ActionResult Create(EventViewModel evnt)
         {

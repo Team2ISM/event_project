@@ -159,6 +159,13 @@ namespace team2project
                 url: "DeleteEvent/{id}",
                 defaults: new { controller = "Admin", action = "DeleteEvent" }
             );
+
+            routes.MapRoute(
+                name: "DeleteUserEvent",
+                url: "DeleteUserEvent/{id}",
+                defaults: new { controller = "Event", action = "DeleteEvent" }
+            );
+
             routes.MapRoute(
                 name: "Subscribers",
                 url: "subscribers/{id}",

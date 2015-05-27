@@ -38,7 +38,7 @@
                     </td>
                     <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
                     <td><button type="submit">@Html.RouteLink("Изменить событие", "UpdateEvent", new { evnt.Id })</button></td>
-                    <td><button type="submit" id="deleteEvent">Удалить</button></td>
+                    <td>@Html.RouteLink("УДАЛИТЬ", "DeleteUserEvent", new { evnt.Id})</td>
                 </tr>
             }
         </tbody>
