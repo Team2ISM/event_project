@@ -9,7 +9,6 @@
         $("body").toggleClass("loaded");
     })
     function AdminAjaxHelper() {
-
         this.toogleActive = function (self) {
             $.ajax({
                 url: url + "/ToogleIsActiveEvent/",
@@ -144,6 +143,18 @@
             adminAjaxHelper.deleteEvent(data, self);
         } 
     }
+
+    ko.bindingHandlers.descriminateActive = {
+        update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+            var isActive = bindingContext.$data.active();
+            if (isActive) {
+                $(element).css('font-weight', 'lighter')
+            }
+            else {
+                $(element).css('font-weight', 'normal')
+            }
+        }
+    };
 
     ko.applyBindings(new AdminViewModel(adminAjaxHelper.loadEvents));
 })();
