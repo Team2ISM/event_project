@@ -134,20 +134,32 @@
 var locat = $("#location");
 window.onload = function(){
     var combobox = $("#combobox");
+    var value;
+    if (city) {
+        var arr = combobox.children();
+        arr.each(function (i, val) {
+            if (val.innerHTML === city) {
+                val.setAttribute('selected', 'selected');
+                value = city;
+                return false;
+            }
+        });
+    }
     combobox.combobox();
     locat.val(combobox.children()[0].innerHTML);
-    //locat.html(combobox.children()[0].innerHTML);
-    jQuery('#datetimepicker1').datetimepicker({
-        timepicker: true,
+    if(value)locat.val(value);
+    var pick1 = $('#datetimepicker1'), pick2 = $('#datetimepicker2');
+    if (fDate) pick1.val(fDate);
+    if (tDate) pick2.val(tDate);
+    pick1.datetimepicker({
         minDate: '-1970/01/01',
-        startTime: fromDate.toString,
+        startDate: fDate ? fDate.split(' ')[0] : '',
         lang:'ru',
         mask: true
     });
-    jQuery('#datetimepicker2').datetimepicker({
-        timepicker: true,
-        startTime: toDate.toString,
+    pick2.datetimepicker({
         minDate: '-1970/01/01',//
+        startDate: tDate ? tDate.split(' ')[0] : '',
         lang: 'ru',
         mask: true
     });
