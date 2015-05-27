@@ -50,6 +50,38 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
+        public IList<Event> GetByAuthorMail(string email)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                var criteria = session.CreateCriteria(typeof(Event));
+                criteria.Add(Restrictions.Eq("AuthorId", email));
+                return criteria.List<Event>();
+            }
+        }
+
+        public IList<Event> GetAuthorPastEvents(string email)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                var criteria = session.CreateCriteria(typeof(Event));
+                criteria.Add(Restrictions.And(Restrictions.Eq("AuthorId", email), 
+                    Restrictions.Lt("FromDate", DateTime.Now)));
+                return criteria.List<Event>();
+            }
+        }
+
+        public IList<Event> GetAuthorFutureEvents(string email)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                var criteria = session.CreateCriteria(typeof(Event));
+                criteria.Add(Restrictions.And(Restrictions.Eq("AuthorId", email),
+                    Restrictions.Gt("FromDate", DateTime.Now)));
+                return criteria.List<Event>();
+            }
+        }
+
         public Event GetById(string id)
         {
             Event Model;

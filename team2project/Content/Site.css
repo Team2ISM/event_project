@@ -106,6 +106,11 @@ nav li a
 	width: 165px;
 
 }
+
+#city label
+{
+    top: 0rem;
+}
 .dropdown-content
 {
     overflow: visible;
@@ -126,6 +131,10 @@ nav li a
 
 }
 
+.input-field label
+{
+    top: 1rem;
+}
 .center
 {
 	text-align: center;

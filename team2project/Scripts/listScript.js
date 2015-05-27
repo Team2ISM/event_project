@@ -146,7 +146,7 @@ $(function () {
     if (path[2]) {
         var arr = combobox.children();
         arr.each(function (i, val) {
-            if ($(val).html() === path[2]) { Val = val; val.setAttribute('selected', 'selected'); city = val; }
+            if ($(val).html() === path[2]) {val.setAttribute('selected', 'selected'); city = val; return false}
         });
     }
     if (path[3]) {

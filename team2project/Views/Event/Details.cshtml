@@ -12,62 +12,67 @@
     @Styles.Render("~/Content/Home/Details.css")
 }
 <div class="container z-depth-1">
-    <div class="row">
+    <form>
+        <fieldset>
+            <div class="row">
 
-        <div id="event-name" class="col s6 ">
-            <h2>@Model.Title</h2>
-        </div>
+                <div id="event-name" class="col s6 ">
+                    <h2>@Model.Title</h2>
+                </div>
 
-        <div id ="date" class="col s6">
-             @if (@Model.FromDate != null)
-                {
-                    <h4>@Model.FromDate.Value.ToString("dd")</h4>
-                    <p>@Model.FromDate.Value.ToString("MMMM")</p>
-                }
-                else
-                {
-                    <p>n/a</p>
-                }
-        </div>
-    </div>
-    <hr />
-    <div class="row" id ="info">
-        <div class ="vertical-spaces">
-            <strong>От:</strong>
-            <span class = "horizontal-spaces">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</span>
-        </div>
+                <div id="date" class="col s6">
+                    @if (@Model.FromDate != null)
+                    {
+                        <h4>@Model.FromDate.Value.ToString("dd")</h4>
+                        <p>@Model.FromDate.Value.ToString("MMMM")</p>
+                    }
+                    else
+                    {
+                        <p>n/a</p>
+                    }
+                </div>
+            </div>
+            <hr />
+            <div class="row" id="info">
+                <div class="vertical-spaces">
+                    <strong>От:</strong>
+                    <span class="horizontal-spaces">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</span>
+                </div>
 
-        <div class ="vertical-spaces">
-             <strong>До:</strong>
-             <span class = "horizontal-spaces">@CheckDateIfNull(Model.ToDate, "dd MMMM yyyy")</span>
-        </div>
+                <div class="vertical-spaces">
+                    <strong>До:</strong>
+                    <span class="horizontal-spaces">@CheckDateIfNull(Model.ToDate, "dd MMMM yyyy")</span>
+                </div>
 
-        <div class ="vertical-spaces">
-             <strong>Город:</strong>
-             <span class = "horizontal-spaces">@Model.Location</span>
-        </div>
-    </div>
-    <hr />
-    <div class="row" id="desc">
-        <div>
-                <strong>Описание:</strong>
-                <p>@Model.Description</p>
-        </div>
-    </div>
-    <div class="row">
-         <div class="left">
-             @{
-                 <div class="left">Уже подписалось:</div>
-                 Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
-              }
+                <div class="vertical-spaces">
+                    <strong>Город:</strong>
+                    <span class="horizontal-spaces">@Model.Location</span>
+                </div>
+            </div>
+            <hr />
+            <div class="row" id="desc">
+                <div>
+                    <strong>Описание:</strong>
+                    <p>@Model.Description</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="left">
+                    @{
+                        <div class="left">Уже подписалось:</div>
+                        Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
+                    }
 
-         </div>
-         <div class="right">
-            @if(Model.ToDate > DateTime.Now){
-                <button id="submit" class="button loading-pulse text-shadow blue">Подождите</button>
-            }
-        </div>
-    </div>
+                </div>
+                <div class="right">
+                    @if (Model.ToDate > DateTime.Now)
+                    {
+                        <button class="btn waves-effect waves-light blue right margin-right">Подождите</button>
+                    }
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </div>
 
 <div class="container z-depth-1">
@@ -77,33 +82,33 @@
     var list = AutoMapper.Mapper.Map<IList<CommentViewModel>>(ViewData["Comments"]);
     foreach (CommentViewModel item in list)
     {
-        <div class="padding20 container z-depth-1 comment-body">
-            
-            <div class="row marge">
-                <div class="col s12 m5">
-                    <div id="user" class="valign-wrapper">
-                        <i class="medium mdi-action-account-circle left"></i><strong>@item.AuthorName</strong>
-                        <i class="right">@item.PostingTime.ToShortDateString(), @item.PostingTime.ToShortTimeString()</i>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s6 m12 2">
-                    @item.Text
+    <div class="padding20 container z-depth-1 comment-body">
+
+        <div class="row marge">
+            <div class="col s12 m5">
+                <div id="user" class="valign-wrapper">
+                    <i class="medium mdi-action-account-circle left"></i><strong>@item.AuthorName</strong>
+                    <i class="right">@item.PostingTime.ToShortDateString(), @item.PostingTime.ToShortTimeString()</i>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col s6 m12 2">
+                @item.Text
+            </div>
+        </div>
+    </div>
     }
 }
 @helper CheckDateIfNull(DateTime? date, string format)
 {
     if (date != null)
     {
-        @date.Value.ToString(format)
+    @date.Value.ToString(format)
     }
     else
     {
-        <span>n/a</span>
+    <span>n/a</span>
     }
 }
 @section scripts{

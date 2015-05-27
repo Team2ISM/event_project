@@ -1,0 +1,49 @@
+﻿@model System.Collections.Generic.List<team2project.Models.EventViewModel>
+
+@{
+    ViewBag.Title = "Текущие/будущие события";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    @Styles.Render("~/Content/Home/List.css")
+    @Styles.Render("~/Content/jquery-ui.min.css")
+    @Styles.Render("~/Content/jquery-ui.theme.min.css")
+    @Styles.Render("~/Content/jquery-ui.structure.min.css")
+}
+
+<div class="container">
+<h2>Текущие/будущие события</h2>
+    @Html.RouteLink("Мои события", "MyEvents", FormMethod.Post, new { @class = "blue-text" })
+    @Html.RouteLink("Прошедшие события", "PastEvents")
+<table class="striped" >
+        <thead>
+            <tr>
+                <th>Заголовок</th>
+                <th>Описание</th>
+                <th>Дата, время</th>
+                <th>Город</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evnt in Model)
+            {
+                <tr>
+                    <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
+                    <td>@Html.RouteLink(evnt.Description, "EventDetails", new { evnt.Id })</td>
+                    <td>
+                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
+                        @Html.RouteLink(",", "EventDetails", new { evnt.Id })
+                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })                        
+                    </td>
+                    <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/Scripts/jquery.js")
+    @Scripts.Render("~/Scripts/jquery-ui.js")
+}
