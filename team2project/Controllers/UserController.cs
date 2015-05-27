@@ -9,6 +9,8 @@ using System.Net;
 using System.Net.Mime;
 using System.Net.Mail;
 using Events.Business;
+using Events.Business.Classes;
+using Events.Business.Models;
 using Events.Business.Interfaces;
 using Events.NHibernateDataProvider;
 using team2project.Models;
@@ -41,14 +43,15 @@ namespace team2project.Controllers
         // GET: /User/
 
         IUserDataProvider data;
-
+        EventManager eventManager;
         
 
 
 
-        public UserController(IUserDataProvider data)
+        public UserController(IUserDataProvider data, EventManager eventManager)
         {
             this.data = data;
+            this.eventManager = eventManager;
         }
 
         public ActionResult Index()
@@ -154,8 +157,9 @@ namespace team2project.Controllers
 
                     data.CreateUser(newUser);
 
-                    string host = Request.UrlReferrer.Authority;
-                    string activationLink = "http://" + host + Url.Action("Activate", new { controller = "User", action = "Activate", id = user.Id });
+                    string authority = Request.Url.Authority;
+                    string scheme = Request.Url.Scheme;
+                    string activationLink = scheme + "://" + authority + Url.Action("Activate", new { controller = "User", action = "Activate", id = user.Id });
 
                     string body = user.Name + ", спасибо за регистрацию\n";
                     body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
@@ -167,7 +171,7 @@ namespace team2project.Controllers
                 }
                 else
                 {
-                    ViewBag.DuplicateMailError = "Пользователь с такой почтой уже зарегистрирован";
+                    ModelState.AddModelError("", "Пользователь с такой почтой уже зарегистрирован");                   
                 }
             }
             return View(new UserViewModel());
@@ -226,6 +230,36 @@ namespace team2project.Controllers
                 }
             }
             return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult MyEvents()
+        {
+            IList<Event> events = eventManager.GetByAuthorMail(User.Identity.Name);
+            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
+
+            return View(eventsModels);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult MyPastEvents()
+        {
+            IList<Event> events = eventManager.GetAuthorPastEvents(User.Identity.Name);
+            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
+
+            return View(eventsModels);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult MyFutureEvents()
+        {
+            IList<Event> events = eventManager.GetAuthorFutureEvents(User.Identity.Name);
+            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
+
+            return View(eventsModels);
         }
 
         private bool isValid(string email, string password)

@@ -238,6 +238,7 @@
     <Content Include="Fonts\metro.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\adminScript.js" />
     <Content Include="Scripts\details.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
@@ -248,8 +249,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.2.0.debug.js" />
-    <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\knockout-3.3.0.js" />
     <Content Include="Scripts\materialize\materialize.js" />
     <Content Include="Scripts\materialize\materialize.min.js" />
     <Content Include="Scripts\metro.js" />
@@ -259,6 +259,7 @@
     <Content Include="Scripts\mvcfoolproof.unobtrusive.min.js" />
     <Content Include="Scripts\MvcFoolproofJQueryValidation.min.js" />
     <Content Include="Scripts\MvcFoolproofValidation.min.js" />
+    <Content Include="Scripts\register.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\listScript.js" />
     <Content Include="Views\Mails\email.html" />
@@ -283,6 +284,9 @@
     <Content Include="Views\Subscribers\GetSubscribers.cshtml" />
     <Content Include="Views\Subscribers\Index.cshtml" />
     <Content Include="Views\User\email.cshtml" />
+    <Content Include="Views\User\MyEvents.cshtml" />
+    <Content Include="Views\User\MyPastEvents.cshtml" />
+    <Content Include="Views\User\MyFutureEvents.cshtml" />
     <None Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Welcome.cshtml" />
     <Content Include="Views\User\ThankYouPage.cshtml" />

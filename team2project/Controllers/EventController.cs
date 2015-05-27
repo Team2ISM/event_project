@@ -99,8 +99,10 @@ namespace team2project.Controllers
             }
 
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
+            evntModel.AuthorId = User.Identity.Name;
             eventManager.Create(evntModel.Id, evntModel);
             return RedirectToAction("Index");
         }
+
     }
 }

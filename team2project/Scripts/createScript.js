@@ -131,10 +131,9 @@
         }
     });
 })(jQuery);
-var locat;
-$(function () {
+var locat = $("#location");
+window.onload = function(){
     var combobox = $("#combobox");
-    locat = $("#location")
     combobox.combobox();
     locat.val(combobox.children()[0].innerHTML);
     //locat.html(combobox.children()[0].innerHTML);
@@ -152,4 +151,4 @@ $(function () {
         lang: 'ru',
         mask: true
     });
-});
+};

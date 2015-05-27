@@ -78,21 +78,17 @@
     foreach (CommentViewModel item in list)
     {
         <div class="padding20 container z-depth-1 comment-body">
-            <div class="row">
-                <div class="col s12 m5 3">
-                    <i>@item.PostingTime.ToShortDateString(), @item.PostingTime.ToShortTimeString()</i>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col s12 m5 2">
+            
+            <div class="row marge">
+                <div class="col s12 m5">
                     <div id="user" class="valign-wrapper">
                         <i class="medium mdi-action-account-circle left"></i><strong>@item.AuthorName</strong>
+                        <i class="right">@item.PostingTime.ToShortDateString(), @item.PostingTime.ToShortTimeString()</i>
                     </div>
                 </div>
             </div>
-            <hr />
             <div class="row">
-                <div class="col s12 m12 12">
+                <div class="col s6 m12 2">
                     @item.Text
                 </div>
             </div>

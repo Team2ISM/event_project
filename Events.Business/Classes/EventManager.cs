@@ -20,7 +20,7 @@ namespace Events.Business.Classes
 
         public IList<Event> GetAllEvents()
         {
-            return cacheManager.FromCache<IList<Event>>("allEvents",
+            return cacheManager.FromCache<IList<Event>>("Events::allEvents",
                     () =>
                     {
                         return dataProvider.GetList(null, null, "Admin");
@@ -81,6 +81,33 @@ namespace Events.Business.Classes
                 return null;
             }
             return evntModel;
+        }
+
+        public IList<Event> GetByAuthorMail(string email)
+        {
+            return cacheManager.FromCache<IList<Event>>("userEvents" + email,
+                () => 
+                {
+                    return dataProvider.GetByAuthorMail(email);
+                });
+        }
+
+        public IList<Event> GetAuthorPastEvents(string email)
+        {
+            return cacheManager.FromCache<IList<Event>>("userEvents" + email + "past",
+                () =>
+                {
+                    return dataProvider.GetAuthorPastEvents(email);
+                });
+        }
+
+        public IList<Event> GetAuthorFutureEvents(string email)
+        {
+            return cacheManager.FromCache<IList<Event>>("userEvents" + email + "future",
+                () =>
+                {
+                    return dataProvider.GetAuthorFutureEvents(email);
+                });
         }
 
         public void ToggleButtonStatusActive(string id)

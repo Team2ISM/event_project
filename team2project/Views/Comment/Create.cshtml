@@ -1,6 +1,6 @@
 ﻿@model team2project.Models.CommentViewModel
 @using SolariCaptcha
-@using (Html.BeginForm("AddComment", "Comment", FormMethod.Post))
+@using (Html.BeginForm("AddComment", "Comment", FormMethod.Post, new { onsubmit = "return confirmCaptcha(document.getElementById('cptchid').value)" }))
 {
    
 
@@ -34,7 +34,7 @@
             @Html.ValidationMessageFor(model => model.Text)
         </div>
         <div id="captcha">
-            @Html.Captcha(Request.Url.Authority)
+            @Html.Captcha(Request.Url.Authority, "cptchid")
         </div>
         <p>
             <input type="submit" value="Отправить" />

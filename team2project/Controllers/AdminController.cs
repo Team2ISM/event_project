@@ -5,11 +5,12 @@ using System.Web.Mvc;
 using team2project.Models;
 using System.Web.Helpers;
 using Events.NHibernateDataProvider.NHibernateCore;
+using System.Web.Script.Serialization;
 
 namespace team2project.Controllers
 {
+
     [Authorize(Roles = "Admin")]
-    //[Authorize(Users="team2project222@gmail.com")]
     public class AdminController : Controller
     {
         EventManager manager;
@@ -28,22 +29,33 @@ namespace team2project.Controllers
             return View("ManagerPage", list);
         }
 
-        public ActionResult ToggleButtonStatusActive(string id)
+        [HttpGet]
+        public string GetEvents()
+        {
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
+            return new JavaScriptSerializer().Serialize(list);
+        }
+
+        [HttpGet]
+        public string ToggleButtonStatusActive(string id)
         {
             manager.ToggleButtonStatusActive(id);
-            return RedirectToRoute("ManagerPage");
+            return "ok";
         }
 
-        public void ToggleButtonStatusChecked(string id)
+        [HttpGet]
+        public string ToggleButtonStatusChecked(string id)
         {
             manager.ToggleButtonStatusChecked(id);
+            return "ok";
         }
 
-        public ActionResult DeleteEvent(string id)
+        [HttpGet]
+        public string DeleteEvent(string id)
         {
             commentManager.DeleteByEventId(id);
-            manager.Delete(id);            
-            return RedirectToRoute("ManagerPage");
+            manager.Delete(id);
+            return "ok";
         }
 
     }
