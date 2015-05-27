@@ -36,18 +36,3 @@
         </tbody>
     </table>
 </div>
-<script>
-    function New(r) {
-        alert($(r).text());
-        if ($(r).text() == 'Деактивировать') $(r).parent().parent().css('font-weight', 'lighter');
-        else
-            $(r).parent().parent().css('font-weight', 'normal');
-    }
-</script>
-
-@helper rety()
-{
-    <script>
-        alert(1);
-    </script>
-}
