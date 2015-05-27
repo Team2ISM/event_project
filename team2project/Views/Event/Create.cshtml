@@ -59,8 +59,8 @@
 </div>
 <!--не работает-->
 <script>
-    var fDate = Model.fromDate;
-    var tDate = Model.toDate;
+    window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/d HH:mm") : " ") + "'");
+    window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm") : " ") + "'");
 </script>
 
 @section scripts{
