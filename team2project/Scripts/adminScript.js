@@ -148,10 +148,10 @@
         update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             var isActive = bindingContext.$data.active();
             if (isActive) {
-                $(element).css('font-weight', 'lighter')
+                $(element).css('font-weight', 'normal')
             }
             else {
-                $(element).css('font-weight', 'normal')
+                $(element).css('font-weight', 'lighter')
             }
         }
     };
