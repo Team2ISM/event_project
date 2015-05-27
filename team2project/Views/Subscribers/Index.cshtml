@@ -8,8 +8,8 @@
     function OnSuccess(data) {
         var results = $('#subscribers_list'); // получаем нужный элемент
         results.empty(); //очищаем элемент
-        for (var i = 0; i < data.length; i++) {
-            results.append('<li>' + data[i].Surname + ' ' + data[i].Name + '</li>'); // добавляем данные в список
+        if (data) for (var i = 0; i < data.length; i++) {
+            if (data[i]) results.append('<li>' + data[i].Surname + ' ' + data[i].Name + '</li>'); // добавляем данные в список
         }
     }
 </script>

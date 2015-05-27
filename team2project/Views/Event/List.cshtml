@@ -64,14 +64,13 @@
 {
     var filters = Request.Url.AbsolutePath.Split('/');
 
-    if (filters.Length == 3 && !filters[2].IsInt())
+    if (nOfDaysToEvent == null)
+    {
+        @Html.ActionLink(linkName, "Filters", new { days = -1 }, htmlAttributes: new { Class = "blue-text" }) //DIRTY HACK, remove fast as possible
+    }
+    else if (filters.Length == 3 && !filters[2].IsInt())
     {
        @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "blue-text" })
-    }
-    else
-        if (nOfDaysToEvent == null  && (filters.Length == 3 || filters.Length == 2))
-    {
-        @Html.RouteLink(linkName, "EventList", null, new { Class = "blue-text" })
     }
     else
     {

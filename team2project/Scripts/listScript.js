@@ -38,7 +38,7 @@
                     var url = location.protocol + '//' + location.host + '/', path = location.pathname.split('/');
                     url += path[1];
 
-                    if (ui.item.value && ui.item.option.value !== '-1') {
+                    if (ui.item.value && ui.item.option.value !== '-1' && ui.item.value !== "Все") {
                         url += '/' + ui.item.value;
                     }
                     if (days && days !== '-1') url += '/' + days;

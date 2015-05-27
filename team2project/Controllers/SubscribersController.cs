@@ -36,14 +36,14 @@ namespace team2project.Controllers
         }
 
         public JsonResult Subscribe(string id) {
-            if (String.IsNullOrEmpty(User.Identity.Name)) return Json(false);
+            if (!User.Identity.IsAuthenticated) return Json(false);
             var user = new NHibernateUserDataProvider().GetByMail(User.Identity.Name);      
             Provider.SubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
         }
 
         public JsonResult Unsubscribe(string id) {
-            if (String.IsNullOrEmpty(User.Identity.Name)) return Json(false);
+            if (!User.Identity.IsAuthenticated) return Json(false);
             var user = new NHibernateUserDataProvider().GetByMail(User.Identity.Name);
             Provider.UnsubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
