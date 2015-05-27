@@ -57,7 +57,11 @@
         <button class="btn waves-effect waves-light blue" type="submit">@ViewBag.Button</button>
     }
 </div>
-
+<!--не работает-->
+<script>
+    var fDate = Model.fromDate;
+    var tDate = Model.toDate;
+</script>
 
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.js")

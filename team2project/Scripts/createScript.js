@@ -140,12 +140,14 @@ $(function () {
     //locat.html(combobox.children()[0].innerHTML);
     jQuery('#datetimepicker1').datetimepicker({
         timepicker: true,
-        minDate: '-1970/01/01',//
+        minDate: '-1970/01/01',
+        startTime: fromDate.toString,
         lang:'ru',
         mask: true
     });
     jQuery('#datetimepicker2').datetimepicker({
         timepicker: true,
+        startTime: toDate.toString,
         minDate: '-1970/01/01',//
         lang: 'ru',
         mask: true
