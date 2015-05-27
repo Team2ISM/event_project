@@ -4,27 +4,29 @@
 {
    
 
-    <fieldset>
+    <fieldset>    
+    <h5 class="blue-text">
+        <p>Оставьте свой комментарий</p>
+    </h5>
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
         @Html.HiddenFor(m => m.EventId)
         @Html.HiddenFor(m => m.AuthorId)
         @{
-    if (!User.Identity.IsAuthenticated)
-    {
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AuthorName, "Автор")
-        </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.AuthorName)
-                @Html.ValidationMessageFor(model => model.AuthorName)
-            </div>
-    }
-    else
-    {
-        Model.AuthorName = User.Identity.Name;
-    }
-   
+            if (!User.Identity.IsAuthenticated)
+            {
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.AuthorName, "Автор")
+                </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.AuthorName)
+                        @Html.ValidationMessageFor(model => model.AuthorName)
+                    </div>
+            }
+            else
+            {
+                Model.AuthorName = User.Identity.Name;
+            }  
         }
         <div class="editor-label">
             @Html.LabelFor(model => model.Text, "Текст сообщения")
@@ -33,7 +35,7 @@
             @Html.EditorFor(model => model.Text)
             @Html.ValidationMessageFor(model => model.Text)
         </div>
-        <div id="captcha">
+        <div id="captcha" class="editor-label">
             @Html.Captcha(Request.Url.Authority, "cptchid")
         </div>
         <p>
