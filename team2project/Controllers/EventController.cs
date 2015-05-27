@@ -64,6 +64,7 @@ namespace team2project.Controllers
             return View(evnt);
         }
         [HttpGet]
+        [Authorize]
         public ActionResult Update(string id)
         {
             var evntModel = eventManager.GetById(id);
@@ -78,6 +79,7 @@ namespace team2project.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Update(EventViewModel evnt)
         {
             if (!ModelState.IsValid)
@@ -93,6 +95,7 @@ namespace team2project.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult DeleteEvent(string id)
         {
             commentManager.DeleteByEventId(id);
