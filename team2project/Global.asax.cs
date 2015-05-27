@@ -10,8 +10,6 @@ using System.Web.Routing;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Context;
-using CaptchaMvc.Infrastructure;
-using CaptchaMvc.Interface;
 
 namespace team2project
 {
@@ -22,40 +20,6 @@ namespace team2project
     {
         public const string MultipleParameterKey = "_multiple_";
 
-        private static readonly ConcurrentDictionary<int, ICaptchaManager> CaptchaManagers =
-            new ConcurrentDictionary<int, ICaptchaManager>();
-
-        private static ICaptchaManager GetCaptchaManager(IParameterContainer parameterContainer)
-        {
-            int numberOfCaptcha;
-            if (parameterContainer.TryGet(MultipleParameterKey, out numberOfCaptcha))
-                return CaptchaManagers.GetOrAdd(numberOfCaptcha, CreateCaptchaManagerByNumber);
-
-            //If not found parameter return default manager.
-            return CaptchaUtils.CaptchaManager;
-        }
-
-        private static ICaptchaManager CreateCaptchaManagerByNumber(int i)
-        {
-            var captchaManager = new DefaultCaptchaManager(new SessionStorageProvider());
-            captchaManager.ImageElementName += i;
-            captchaManager.InputElementName += i;
-            captchaManager.TokenElementName += i;
-            captchaManager.ImageUrlFactory = (helper, pair) =>
-            {
-                var dictionary = new RouteValueDictionary();
-                dictionary.Add(captchaManager.TokenParameterName, pair.Key);
-                dictionary.Add(MultipleParameterKey, i);
-                return helper.Action("Generate", "DefaultCaptcha", dictionary);
-            };
-            captchaManager.RefreshUrlFactory = (helper, pair) =>
-            {
-                var dictionary = new RouteValueDictionary();
-                dictionary.Add(MultipleParameterKey, i);
-                return helper.Action("Refresh", "DefaultCaptcha", dictionary);
-            };
-            return captchaManager;
-        }
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -65,7 +29,6 @@ namespace team2project
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            CaptchaUtils.CaptchaManagerFactory = GetCaptchaManager;
         }
 
         protected void Application_BeginRequest()
