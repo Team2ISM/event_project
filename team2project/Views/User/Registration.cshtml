@@ -27,17 +27,17 @@
         else
         {
             <div class="input-field col s12 m6">
-            @Html.LabelFor(m => m.Name, "Имя")<br>
+            @Html.LabelFor(m => m.Name, "Имя")
             @Html.EditorFor(m => m.Name)
             @Html.ValidationMessageFor(m => m.Name)
         </div>
         <div class="input-field col s12 m6">
-            @Html.LabelFor(m => m.Surname, "Фамилия")<br>
+            @Html.LabelFor(m => m.Surname, "Фамилия")
             @Html.EditorFor(m => m.Surname)
             @Html.ValidationMessageFor(m => m.Surname)
         </div>
         <div class="input-field col s12 m12 12">
-            @Html.LabelFor(m => m.Email, "Электронная почта")<br>
+            @Html.LabelFor(m => m.Email, "Электронная почта")
             @Html.EditorFor(m => m.Email)
             @Html.ValidationMessageFor(m => m.Email)
         </div>
@@ -50,12 +50,12 @@
             @Html.ValidationMessageFor(m => m.Location)
         </div>
         <div class="input-field col s12">
-            @Html.LabelFor(m => m.Password, "Пароль")<br>
+            @Html.LabelFor(m => m.Password, "Пароль")
             @Html.PasswordFor(m => m.Password)
             @Html.ValidationMessageFor(m => m.Password)
         </div>
         <div class="input-field col s12">
-            @Html.LabelFor(m => m.RepeatPassword, "Повторите пароль")<br>
+            @Html.LabelFor(m => m.RepeatPassword, "Повторите пароль")
             @Html.PasswordFor(m => m.RepeatPassword)
             @Html.ValidationMessageFor(m => m.RepeatPassword)
         </div>

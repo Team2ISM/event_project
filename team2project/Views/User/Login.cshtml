@@ -19,12 +19,12 @@
     @Html.ValidationSummary(true)
     <h5>Вход на сайт</h5>
     <div class="input-field col s12 m12">
-        @Html.LabelFor(m => m.Email, "Электронная почта")<br>
+        @Html.LabelFor(m => m.Email, "Электронная почта")
         @Html.EditorFor(m => m.Email)
         @Html.ValidationMessageFor(m => m.Email)
     </div>
     <div class="input-field col s12 m12">
-        @Html.LabelFor(m => m.Password, "Пароль")<br>
+        @Html.LabelFor(m => m.Password, "Пароль")
         @Html.PasswordFor(m => m.Password)
         @Html.ValidationMessageFor(m => m.Password)
     </div>

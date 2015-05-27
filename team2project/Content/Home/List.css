@@ -14,7 +14,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+.custom-combobox-input
+{
+    padding-left: 8px;
+}
 tbody tr {
     cursor: pointer;
 }
