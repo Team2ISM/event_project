@@ -13,10 +13,12 @@
 }
 
 <div class="container">
-<h2>Прошедшие события</h2>
-    @Html.RouteLink("Мои события", "MyEvents", FormMethod.Post, new { @class = "blue-text" })
-    @Html.RouteLink("Текущие/будущие события", "FutureEvents")
-<table class="striped" >
+<h2 class ="center blue-text">Прошедшие события</h2>
+    <div class="width80">
+        @Html.RouteLink("Мои события", "MyEvents", FormMethod.Post, new { @class = "blue-text" })
+        @Html.RouteLink("Текущие/будущие события", "FutureEvents")
+    </div>
+<table class="striped width80 centered" >
         <thead>
             <tr>
                 <th>Заголовок</th>
