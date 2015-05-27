@@ -9,7 +9,7 @@ function subscribe() {
     $.post("/Subscribe", { id: id }, function (data) {
         if (data) {
             button.html('Покинуть');
-            button.on('click', unsubscribe);
+            button.get()[0].onclick = unsubscribe;
         }
         else {
             location.assign('/User/Login');
@@ -23,7 +23,7 @@ function unsubscribe() {
     $.post("/Unsubscribe", { id: id }, function (data) {
         if (data) {
             button.html('Присоедениться');
-            button.on('click', subscribe);
+            button.get()[0].onclick = subscribe;
         }
         else {
             location.assign('/User/Login');
@@ -39,11 +39,11 @@ window.onload = function () {
     $.post("/IsSubscribed", {id:id}, function (data) {
         if (data) {
             button.html('Покинуть');
-            button.on('click', unsubscribe);
+            button.get()[0].onclick = unsubscribe;
         }
         else {
             button.html('Присоедениться');
-            button.on('click', subscribe);
+            button.get()[0].onclick = subscribe;
         }
     });
 }
