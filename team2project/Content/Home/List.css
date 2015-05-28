@@ -118,3 +118,8 @@ td a:hover, td a:active {
 {
     font-weight: 600;
 }
+
+#td-button-color td button
+{
+    font-weight: normal;
+}
