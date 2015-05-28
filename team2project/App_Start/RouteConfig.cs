@@ -39,13 +39,13 @@ namespace team2project
 
             routes.MapRoute(
                name: "EventDetails",
-               url: "event/details/{id}",
+               url: "events/details/{id}",
                defaults: new { controller = "Event", action = "Details" }
            );
 
             routes.MapRoute(
                 name: "DeleteUserEvent",
-                url: "event/delete/{id}",
+                url: "events/delete/{id}",
                 defaults: new { controller = "Event", action = "DeleteEvent" }
             );
 
@@ -158,7 +158,7 @@ namespace team2project
             );
             routes.MapRoute(
                 name: "SetEventChecked",
-                url: "admin/event/setchecked/{id}",
+                url: "admin/events/setchecked/{id}",
                 defaults: new { controller = "Admin", action = "ToggleButtonStatusChecked" }
             );
             routes.MapRoute(

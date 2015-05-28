@@ -134,7 +134,7 @@
         }
 
         self.goToDetails = function () {
-            window.location.replace(url + "/Details/" + self.id());
+            window.location = url + "/events/details/" + self.id();
         }
     }
 
