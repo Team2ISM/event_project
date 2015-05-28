@@ -20,26 +20,6 @@ namespace team2project
             );
 
             routes.MapRoute(
-              name: "by-Location-Days",
-              url: "events/{loc}/{days}",
-              defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
-              constraints: new { days = @"\d+" }
-          );
-
-            routes.MapRoute(
-                 name: "by-Days",
-                 url: "events/{days}",
-                 defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
-                 constraints: new { days = @"\d+" }
-             );
-
-            routes.MapRoute(
-                 name: "by-Location",
-                 url: "events/{loc}",
-                 defaults: new { controller = "Event", action = "Filters", loc = UrlParameter.Optional }
-             );
-
-            routes.MapRoute(
                name: "CreateEvent",
                url: "events/create",
                defaults: new { controller = "Event", action = "Create" }
@@ -62,6 +42,26 @@ namespace team2project
                 url: "event/delete/{id}",
                 defaults: new { controller = "Event", action = "DeleteEvent" }
             );
+
+            routes.MapRoute(
+                 name: "by-Days",
+                 url: "events/{days}",
+                 defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
+                 constraints: new { days = @"\d+" }
+             );
+
+            routes.MapRoute(
+                 name: "by-Location",
+                 url: "events/{loc}",
+                 defaults: new { controller = "Event", action = "Filters", loc = UrlParameter.Optional }
+             );
+
+            routes.MapRoute(
+              name: "by-Location-Days",
+              url: "events/{loc}/{days}",
+              defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
+              constraints: new { days = @"\d+" }
+          );
 
             #endregion
 
