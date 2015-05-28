@@ -84,7 +84,7 @@ namespace team2project.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Title = "Редактирование это событие";
+                ViewBag.Title = "Редактируйте это событие";
                 ViewBag.Button = "Редактировать";
                 return View(evnt);
             }
