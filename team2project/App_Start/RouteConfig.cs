@@ -12,6 +12,12 @@ namespace team2project
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(
+                name: "Home",
+                url: "",
+                defaults: new { controller = "Home", action = "Index" }
+            );
+
             #region Events map routes
             routes.MapRoute(
                 name: "EventList",
