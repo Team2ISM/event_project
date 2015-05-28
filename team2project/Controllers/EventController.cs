@@ -73,7 +73,7 @@ namespace team2project.Controllers
                 return View("EventNotFound");
             }
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
-            ViewBag.Title = "Редактирование это событие";
+            ViewBag.Title = "Редактируйте это событие";
             ViewBag.Button = "Редактировать";
             return View("Create", evnt);
         }
@@ -86,7 +86,7 @@ namespace team2project.Controllers
             {
                 ViewBag.Title = "Редактируйте это событие";
                 ViewBag.Button = "Редактировать";
-                return View(evnt);
+                return View("Create", evnt);
             }
             evnt.AuthorId = User.Identity.Name;
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
