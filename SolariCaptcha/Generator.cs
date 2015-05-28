@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace SolariCaptcha
 {
@@ -10,11 +11,15 @@ namespace SolariCaptcha
     {
         public static string GetCaptcha(int number, string url)
         {
-            var result = "";
+            var rand = new Random();
+            var crypto = new MD5CryptoServiceProvider();
+            var result = "";         
             var temp = number.ToString();
             foreach(var element in temp)
             {
-                result += "<img src=\"http://"+url+"/Content/Captcha/" + element + ".png\">";
+                var picName = BitConverter.ToInt32(crypto.ComputeHash(BitConverter.GetBytes(Convert.ToInt32(element))), 0);
+                var rotation = rand.Next(-30, 30);
+                result += "<img src=\"http://" + url + "/Content/Captcha/" + picName + ".png\" style=\"transform: rotate(" + rotation.ToString() + "deg)\">";
             }
             return result;
         }

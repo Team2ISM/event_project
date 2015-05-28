@@ -12,7 +12,7 @@ namespace SolariCaptcha
             var length = new Random().Next(4, 7);
             var idValidationMsg = Guid.NewGuid().ToString();
             var key = new Random().Next(int.MaxValue); 
-            int number = Generator.GetNumber(length);
+            var number = Generator.GetNumber(length);
             string numbersHtmlCode = Generator.GetCaptcha(number, url);
             string textbox = "<input type=\"text\" class=\"text-box single-line\" id=\"" + idInput + "\" oninput=\" document.getElementById('" + idValidationMsg + "').innerHTML = '';\" placeholder=\"Введите цифру с картинки\">";
             string validationspan = "<span class=\"field-validation-error\" id=\""+ idValidationMsg +"\"></span>";
