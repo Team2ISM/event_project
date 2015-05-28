@@ -13,7 +13,7 @@ namespace SolariCaptcha
         {
             var rand = new Random();
             var crypto = new MD5CryptoServiceProvider();
-            var result = "";         
+            var result = "<p style=\"background: url(http://" + url + "/Content/Captcha/bg.png) left repeat-x; display: inline-block;\">";         
             var temp = number.ToString();
             foreach(var element in temp)
             {
@@ -21,6 +21,7 @@ namespace SolariCaptcha
                 var rotation = rand.Next(-30, 30);
                 result += "<img src=\"http://" + url + "/Content/Captcha/" + picName + ".png\" style=\"transform: rotate(" + rotation.ToString() + "deg)\">";
             }
+            result += "</p>";
             return result;
         }
 
