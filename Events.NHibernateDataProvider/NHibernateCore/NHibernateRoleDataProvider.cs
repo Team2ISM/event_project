@@ -10,22 +10,15 @@ using NHibernate.Criterion;
 using Events.Business;
 using System.Configuration.Provider;
 using System.Collections.Specialized;
+using Events.Business.Interfaces;
 
 namespace Events.NHibernateDataProvider.NHibernateCore
 {
-    public class NHibernateRoleProvider : RoleProvider
+    public class NHibernateRoleDataProvider : INHibernateRoleDataProvider
     {
         private string userNameColumn = "Email";
 
-        private string _applicationName;
-
-        public override string ApplicationName
-        {
-            get { return _applicationName; }
-            set { _applicationName = value; }
-        }
-
-        private Role GetRole(string rolename)
+        public Role GetRole(string rolename)
         {
             Role role = null;
             using (ISession session = Helper.OpenSession())
@@ -41,31 +34,9 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return role;
         }
 
-        public override void Initialize(string name, NameValueCollection config)
-        {
-            base.Initialize(name, config);
-        }
-
-        public override void AddUsersToRoles(string[] usernames, string[] rolenames)
+        public void AddUsersToRoles(string[] usernames, string[] rolenames)
         {
             User usr = null;
-            foreach (string rolename in rolenames)
-            {
-                if (!RoleExists(rolename))
-                    throw new ProviderException(String.Format("Role name {0} not found.", rolename));
-            }
-
-            foreach (string username in usernames)
-            {
-                if (username.Contains(","))
-                    throw new ArgumentException(String.Format("User names {0} cannot contain commas.", username));
-
-                foreach (string rolename in rolenames)
-                {
-                    if (IsUserInRole(username, rolename))
-                        throw new ProviderException(String.Format("User {0} is already in role {1}.", username, rolename));
-                }
-            }
 
             using (ISession session = Helper.OpenSession())
             {
@@ -96,14 +67,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public override void CreateRole(string rolename)
+        public void CreateRole(string rolename)
         {
-            if (rolename.Contains(","))
-                throw new ArgumentException("Role names cannot contain commas.");
-
-            if (RoleExists(rolename))
-                throw new ProviderException("Role name already exists.");
-
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
@@ -116,15 +81,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public override bool DeleteRole(string rolename, bool throwOnPopulatedRole)
+        public void DeleteRole(string rolename)
         {
-            bool deleted = false;
-            if (!RoleExists(rolename))
-                throw new ProviderException("Role does not exist.");
-
-            if (throwOnPopulatedRole && GetUsersInRole(rolename).Length > 0)
-                throw new ProviderException("Cannot delete a populated role.");
-
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
@@ -134,41 +92,28 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                     transaction.Commit();
                 }
             }
-
-            return deleted;
         }
 
-        public override string[] GetAllRoles()
+        public ICollection<Role> GetAllRoles()
         {
-            StringBuilder sb = new StringBuilder();
+            ICollection<Role> allRole = null;
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
-                    ICollection<Role> allRole = session.CreateCriteria(typeof(Role))
+                    allRole = session.CreateCriteria(typeof(Role))
                                     .List<Role>();
-
-                    foreach (Role r in allRole)
-                    {
-                        sb.Append(r.Name + ",");
-                    }
                 }
             }
 
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-
-            return new string[0];
+            return allRole;
         }
 
-        public override string[] GetRolesForUser(string username)
+        public ICollection<Role> GetRolesForUser(string username)
         {
             User usr = null;
             ICollection<Role> usrRoles = null;
-            StringBuilder sb = new StringBuilder();
+
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
@@ -181,26 +126,16 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                     if (usr != null)
                     {
                         usrRoles = usr.Roles;
-                        foreach (Role r in usrRoles)
-                        {
-                            sb.Append(r.Name + ",");
-                        }
                     }
                 }
             }
 
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-
-            return new string[0];
+            return usrRoles;
         }
 
-        public override string[] GetUsersInRole(string rolename)
+        public ICollection<User> GetUsersInRole(string rolename)
         {
-            StringBuilder sb = new StringBuilder();
+            ICollection<User> usrs = null;
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
@@ -209,30 +144,18 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                                     .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
                                     .UniqueResult<Role>();
 
-                    ICollection<User> usrs = role.Users;
-
-                    foreach (User u in usrs)
-                    {
-                        sb.Append(u.Name + ",");
-                    }
+                    usrs = role.Users;
                 }
             }
 
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-
-            return new string[0];
+            return usrs;
         }
 
-        public override bool IsUserInRole(string username, string rolename)
+        public bool IsUserInRole(string username, string rolename)
         {
             bool userIsInRole = false;
             User usr = null;
             ICollection<Role> usrRoles = null;
-            StringBuilder sb = new StringBuilder();
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
@@ -259,23 +182,9 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return userIsInRole;
         }
 
-        public override void RemoveUsersFromRoles(string[] usernames, string[] rolenames)
+        public void RemoveUsersFromRoles(string[] usernames, string[] rolenames)
         {
             User usr = null;
-            foreach (string rolename in rolenames)
-            {
-                if (!RoleExists(rolename))
-                    throw new ProviderException(String.Format("Role name {0} not found.", rolename));
-            }
-
-            foreach (string username in usernames)
-            {
-                foreach (string rolename in rolenames)
-                {
-                    if (!IsUserInRole(username, rolename))
-                        throw new ProviderException(String.Format("User {0} is not in role {1}.", username, rolename));
-                }
-            }
 
             using (ISession session = Helper.OpenSession())
             {
@@ -312,7 +221,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         }
 
-        public override bool RoleExists(string rolename)
+        public bool RoleExists(string rolename)
         {
             bool exists = false;
 
@@ -332,34 +241,21 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return exists;
         }
 
-        public override string[] FindUsersInRole(string rolename, string usernameToMatch)
+        public ICollection<User> FindUsersInRole(string rolename)
         {
-            StringBuilder sb = new StringBuilder();
+            ICollection<User> User = null;
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction transaction = session.BeginTransaction())
                 {
 
                     Role role = session.CreateCriteria(typeof(Role))
-                                    .Add(NHibernate.Criterion.Restrictions.Eq("Name", this.ApplicationName))
+                                    .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
                                     .UniqueResult<Role>();
 
-                    ICollection<User> User = role.Users;
-                    if (User != null)
-                    {
-                        foreach (User u in User)
-                        {
-                            if (String.Compare(u.Name, usernameToMatch, true) == 0)
-                                sb.Append(u.Name + ",");
-                        }
-                    }
+                    User = role.Users;
                 }
-                if (sb.Length > 0)
-                {
-                    sb.Remove(sb.Length - 1, 1);
-                    return sb.ToString().Split(',');
-                }
-                return new string[0];
+                return User;
             }
         }
 

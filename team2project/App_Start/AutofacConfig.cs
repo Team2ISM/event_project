@@ -30,6 +30,8 @@ namespace team2project
                 .As<IUserDataProvider>();
             builder.RegisterType<RuntimeCacheManager>()
                 .As<ICacheManager>();
+            builder.RegisterType<NHibernateRoleDataProvider>().AsImplementedInterfaces();
+
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }

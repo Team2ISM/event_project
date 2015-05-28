@@ -76,7 +76,7 @@
     <Compile Include="NHibernateCore\NHibernateCommentDataProvider.cs" />
     <Compile Include="NHibernateCore\NHibernateEventDataProvider.cs" />
     <Compile Include="NHibernateCore\Helper.cs" />
-    <Compile Include="NHibernateCore\NHibernateRoleProvider.cs" />
+    <Compile Include="NHibernateCore\NHibernateRoleDataProvider.cs" />
     <Compile Include="NHibernateCore\NHibernateSubscribersDataProvider.cs" />
     <Compile Include="NHibernateCore\NHibernateUserDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
