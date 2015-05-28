@@ -12,37 +12,60 @@ namespace team2project
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                 name: "Home",
-                 url: "",
-                 defaults: new { controller = "Home", action = "Index" }
-             );
-
+            #region Events map routes
             routes.MapRoute(
                 name: "EventList",
-                url: "Events",
+                url: "events",
                 defaults: new { controller = "Event", action = "Index" }
             );
 
             routes.MapRoute(
               name: "by-Location-Days",
-              url: "Events/{loc}/{days}",
+              url: "events/{loc}/{days}",
               defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
               constraints: new { days = @"\d+" }
           );
 
             routes.MapRoute(
                  name: "by-Days",
-                 url: "Events/{days}",
+                 url: "events/{days}",
                  defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
                  constraints: new { days = @"\d+" }
              );
 
             routes.MapRoute(
                  name: "by-Location",
-                 url: "Events/{loc}",
+                 url: "events/{loc}",
                  defaults: new { controller = "Event", action = "Filters", loc = UrlParameter.Optional }
              );
+
+            routes.MapRoute(
+               name: "CreateEvent",
+               url: "events/create",
+               defaults: new { controller = "Event", action = "Create" }
+           );
+
+            routes.MapRoute(
+                name: "UpdateEvent",
+                url: "events/update/{id}",
+               defaults: new { controller = "Event", action = "Update", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+               name: "EventDetails",
+               url: "event/details/{id}",
+               defaults: new { controller = "Event", action = "Details" }
+           );
+
+            routes.MapRoute(
+                name: "DeleteUserEvent",
+                url: "event/delete/{id}",
+                defaults: new { controller = "Event", action = "DeleteEvent" }
+            );
+
+            #endregion
+
+            #region User map routes
 
             routes.MapRoute(
                 name: "PastEvents",
@@ -64,74 +87,63 @@ namespace team2project
 
             routes.MapRoute(
                 name: "Activate",
-                url: "User/Activate/{id}",
+                url: "user/activate/{id}",
                 defaults: new { controller = "User", action = "Activate" }
             );
 
             routes.MapRoute(
                 name: "Thankyoupage",
-                url: "User/ThankYouPage",
+                url: "user/thankyoupage",
                 defaults: new { controller = "User", action = "ThankYouPage" }
             );
 
             routes.MapRoute(
                 name: "Welcome",
-                url: "User/Welcome",
+                url: "user/welcome",
                 defaults: new { controller = "User", action = "Welcome" }
             );
 
             routes.MapRoute(
                 name: "Registration",
-                url: "User/Registration",
+                url: "user/registration",
                 defaults: new { controller = "User", action = "Registration" }
             );
 
             routes.MapRoute(
                 name: "Login",
-                url: "User/Login",
+                url: "user/login",
                 defaults: new { controller = "User", action = "Login" }
             );
 
             routes.MapRoute(
                 name: "ForgotPassword",
-                url: "User/ForgotPassword",
+                url: "user/forgotpassword",
                 defaults: new { controller = "User", action = "ForgotPassword" }
             );
 
             routes.MapRoute(
                 name: "Logout",
-                url: "User/Logout",
+                url: "user/logout",
                 defaults: new { controller = "User", action = "Logout" }
             );
 
             routes.MapRoute(
                 name: "Update",
-                url: "User/Update",
+                url: "user/update",
                 defaults: new { controller = "User", action = "Update" }
             );
+            #endregion
 
-            routes.MapRoute(
-                name: "CreateEvent",
-                url: "createEvent",
-                defaults: new { controller = "Event", action = "Create" }
-            );
-            //новий роут
-            routes.MapRoute(
-                name: "UpdateEvent",
-                url: "updateEvent/{id}",
-               defaults: new { controller = "Event", action = "Update", id = UrlParameter.Optional }
-            );
+            #region Comments map routes
+
             routes.MapRoute(
                name: "CreateComment",
-               url: "CreateComment",
+               url: "comments/create",
                defaults: new { controller = "Comment", action = "AddComment" }
            );
+            #endregion
 
-            routes.MapRoute(
-                name: "EventDetails",
-                url: "Details/{id}",
-                defaults: new { controller = "Event", action = "Details" }
-            );
+            #region Admin map routes
 
             routes.MapRoute(
                 name: "ManagerPage",
@@ -140,32 +152,29 @@ namespace team2project
             );
             routes.MapRoute(
                 name: "SetEventChecked",
-                url: "SetEventChecked/{id}",
+                url: "admin/event/setchecked/{id}",
                 defaults: new { controller = "Admin", action = "ToggleButtonStatusChecked" }
             );
             routes.MapRoute(
                 name: "ToogleIsActiveEvent",
-                url: "ToogleIsActiveEvent",
+                url: "admin/events/toggleactive",
                 defaults: new { controller = "Admin", action = "ToggleButtonStatusActive" }
             );
-             routes.MapRoute(
-                name: "getEventsToAdminPage",
-                url: "getEventsToAdminPage",
-                defaults: new { controller = "Admin", action = "GetEvents" }
-            );
-            
+            routes.MapRoute(
+               name: "getEventsToAdminPage",
+               url: "admin/events/getall",
+               defaults: new { controller = "Admin", action = "GetEvents" }
+           );
+
             routes.MapRoute(
                 name: "DeleteEvent",
-                url: "DeleteEvent",
+                url: "admin/events/delete",
                 defaults: new { controller = "Admin", action = "DeleteEvent" }
             );
 
-            routes.MapRoute(
-                name: "DeleteUserEvent",
-                url: "DeleteUserEvent/{id}",
-                defaults: new { controller = "Event", action = "DeleteEvent" }
-            );
+            #endregion
 
+            #region Subscribers map routes
             routes.MapRoute(
                 name: "Subscribers",
                 url: "subscribers/{id}",
@@ -173,29 +182,32 @@ namespace team2project
             );
             routes.MapRoute(
                 name: "CountPost",
-                url: "getCount",
+                url: "subscribers/getcount",
                 defaults: new { controller = "Subscribers", action = "GetCount" }
             );
             routes.MapRoute(
                 name: "CountGet",
-                url: "getCount/{id}",
+                url: "subscribers/getcount/{id}",
                 defaults: new { controller = "Subscribers", action = "Index" }
             );
             routes.MapRoute(
                 name: "Subscribe",
-                url: "Subscribe",
+                url: "subscribe",
                 defaults: new { controller = "Subscribers", action = "Subscribe" }
             );
             routes.MapRoute(
                 name: "Unsubscribe",
-                url: "Unsubscribe",
+                url: "unsubscribe",
                 defaults: new { controller = "Subscribers", action = "Unsubscribe" }
             );
             routes.MapRoute(
                 name: "IsSubscribed",
-                url: "IsSubscribed",
+                url: "issubscribed",
                 defaults: new { controller = "Subscribers", action = "IsSubscribed" }
             );
+
+            #endregion
+
             routes.MapRoute(
                 "NotFound",
                 "{*url}",

@@ -13,7 +13,7 @@
     function AdminAjaxHelper() {
         this.toogleActive = function (self) {
             $.ajax({
-                url: url + "/ToogleIsActiveEvent/",
+                url: url + "admin/events/toggleactive",
                 type: "POST",
                 data: {
                     id: self.id()
@@ -31,7 +31,7 @@
 
         this.loadEvents = function(self) {
             $.ajax({
-                url: url + "/getEventsToAdminPage",
+                url: url + "admin/events/getall",
                 success: function (response) {
                     successHelper(response, function (response) {
                         var events = response.Data;
@@ -50,7 +50,7 @@
 
         this.deleteEvent = function (data, self) {
             $.ajax({
-                url: url + "/DeleteEvent",
+                url: url + "admin/events/delete",
                 type: "POST",
                 data: {
                     id: data.id()
