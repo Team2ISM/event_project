@@ -55,6 +55,7 @@ namespace team2project.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult Create()
         {
            // ViewBag.cities = cityManager.GetList();
@@ -104,6 +105,7 @@ namespace team2project.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Create(EventViewModel evnt)
         {
             if (!ModelState.IsValid)
