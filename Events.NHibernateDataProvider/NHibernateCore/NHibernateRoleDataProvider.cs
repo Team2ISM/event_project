@@ -12,6 +12,8 @@ using System.Configuration.Provider;
 using System.Collections.Specialized;
 using Events.Business.Interfaces;
 
+
+
 namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateRoleDataProvider : INHibernateRoleDataProvider

@@ -75,7 +75,7 @@ namespace team2project.Controllers
             }
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             ViewBag.Title = "Редактируйте это событие";
-            ViewBag.Button = "Редактировать";
+            ViewBag.Button = "Сохнранить";
             return View("Create", evnt);
         }
 
@@ -86,7 +86,7 @@ namespace team2project.Controllers
             if (!ModelState.IsValid)
             {
                 ViewBag.Title = "Редактируйте это событие";
-                ViewBag.Button = "Редактировать";
+                ViewBag.Button = "Сохранить";
                 return View("Create", evnt);
             }
             evnt.AuthorId = User.Identity.Name;
