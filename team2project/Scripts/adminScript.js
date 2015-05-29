@@ -67,22 +67,6 @@
                 }
             });
         }
-
-        this.markAsSeen = function (data, self) {
-            $.ajax({
-                url: url + "/admin/events/mark",
-                type: "POST",
-                data: {
-                    id: data.id()
-                },
-                success: function (response) {
-                    console.dir("Event " + data.id  + " is mow marked as seen.");
-                },
-                error: function (er) {
-                    console.dir(er);
-                }
-            });
-        }
     }
 
     function turnDate(input) {
@@ -138,7 +122,6 @@
 
         self.isSeen = ko.computed(function () {
             var status = this.checked();
-            if (!status) adminAjaxHelper.markAsSeen(self);
             return status ? "seen" : "not-seen";
         }, self);
 
