@@ -1,8 +1,12 @@
 ﻿.container {
     max-width: 400px;
     padding: 10px;
+    margin-top: 10%;
 }
-
+.container-wide {
+    max-width: 650px;
+    padding: 10px;
+}
     .container button {
         margin: 0;
         margin-top: 10px;

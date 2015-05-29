@@ -9,7 +9,7 @@ namespace SolariCaptcha
     {
         public static IHtmlString Captcha(this HtmlHelper helper, string url, string idInput)
         {
-            var length = new Random().Next(4, 7);
+            var length = 5;
             var idValidationMsg = Guid.NewGuid().ToString();
             var key = new Random().Next(int.MaxValue); 
             var number = Generator.GetNumber(length);

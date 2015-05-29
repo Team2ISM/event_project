@@ -67,6 +67,22 @@
                 }
             });
         }
+
+        this.markAsSeen = function (data, self) {
+            $.ajax({
+                url: url + "/admin/events/mark",
+                type: "POST",
+                data: {
+                    id: data.id()
+                },
+                success: function (response) {
+                    console.dir("Event " + data.id  + " is mow marked as seen.");
+                },
+                error: function (er) {
+                    console.dir(er);
+                }
+            });
+        }
     }
 
     function turnDate(input) {
@@ -105,14 +121,39 @@
         this.dateFrom = new Date(turnDate(evnt.FromDate));
         this.dateTo = new Date(turnDate(evnt.ToDate));
         this.active = ko.observable(evnt.Active);
+        this.checked = ko.observable(evnt.Checked);
         this.toogleText = ko.observable("");
+
+        self.shortDescription = ko.computed(function () {
+            var words = self.description().split(' ');
+            if (words.length <= 10) return self.description();
+            else 
+            {
+                var result = "";
+                for (var i = 0; i != 10; i++)
+                    result += " " + words[i];
+                return result + "...";
+            }
+        }, self);
+
+        self.isSeen = ko.computed(function () {
+            var status = this.checked();
+            if (!status) adminAjaxHelper.markAsSeen(self);
+            return status ? "seen" : "not-seen";
+        }, self);
+
+        self.updateAccent = ko.computed(function () {
+            return this.active() ? "lighten-2" : "accent-3";
+        }, self);
 
         self.changeToogleText = ko.computed(function () {
             if (self.active()) {
                 self.toogleText("Деактивировать");
+                self.updateAccent();
             }
             else {
                 self.toogleText("Активировать");
+                self.updateAccent();
             }
         });
 
@@ -136,6 +177,8 @@
         self.goToDetails = function () {
             window.location = url + "/events/details/" + self.id();
         }
+
+        
     }
 
     function AdminViewModel(initFunc) {
@@ -144,7 +187,7 @@
         initFunc(self);
 
         self.deleteEvent = function (data) {
-            adminAjaxHelper.deleteEvent(data, self);
+            if (confirm("Вы действительно хотите удалить событие?")) adminAjaxHelper.deleteEvent(data, self);
         } 
     }
 
@@ -152,10 +195,10 @@
         update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             var isActive = bindingContext.$data.active();
             if (isActive) {
-                $(element).css('font-weight', 'normal')
+                $(element).removeClass("disabled");
             }
             else {
-                $(element).css('font-weight', 'lighter')
+                $(element).addClass("disabled");
             }
         }
     };

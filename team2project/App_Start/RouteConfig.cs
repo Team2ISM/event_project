@@ -171,7 +171,11 @@ namespace team2project
                url: "admin/events/getall",
                defaults: new { controller = "Admin", action = "GetEvents" }
            );
-
+            routes.MapRoute(
+                name: "MarkEvent",
+                url: "admin/events/mark",
+                defaults: new { controller = "Admin", action = "MarkEvent" }
+            );
             routes.MapRoute(
                 name: "DeleteEvent",
                 url: "admin/events/delete",

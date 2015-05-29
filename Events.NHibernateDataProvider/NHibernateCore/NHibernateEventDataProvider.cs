@@ -11,15 +11,17 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateEventDataProvider : IEventDataProvider
     {
-        public IList<Event> GetList(string location, string nDaysToEvent, string onlyAvailableData)
+        public IList<Event> GetList(string location, string nDaysToEvent, string onlyAvailableData, bool isForAdmin = false)
         {
             using (ISession session = Helper.OpenSession())
             {
                 var now = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
                 if (onlyAvailableData != null)
                 {
-                    return session.CreateCriteria<Event>()
-                        .AddOrder(Order.Desc("DateOfCreation"))
+                    var result = session.CreateCriteria<Event>();
+                    if (isForAdmin) result.AddOrder(Order.Asc("Checked"));
+                    return result
+                        .AddOrder(Order.Desc("DateOfCreation"))                        
                         .List<Event>();
                 }
                 if (nDaysToEvent != null && location != null)
@@ -66,7 +68,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 var criteria = session.CreateCriteria(typeof(Event));
                 criteria.Add(Restrictions.And(Restrictions.Eq("AuthorId", email), 
-                    Restrictions.Lt("FromDate", DateTime.Now)));
+                    Restrictions.Lt("ToDate", DateTime.Now.Date)));
                 return criteria.List<Event>();
             }
         }
@@ -77,7 +79,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 var criteria = session.CreateCriteria(typeof(Event));
                 criteria.Add(Restrictions.And(Restrictions.Eq("AuthorId", email),
-                    Restrictions.Gt("FromDate", DateTime.Now)));
+                    Restrictions.Gt("ToDate", DateTime.Now.Date)));
                 return criteria.List<Event>();
             }
         }
@@ -100,7 +102,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             this.Update(evnt, "Admin");
         }
 
-        public void ToggleButtonStatusChecked(string id)
+        public void MarkAsSeen(string id)
         {
             Event evnt = GetById(id);
             evnt.Checked = true;
@@ -125,7 +127,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public void Update(Event model, string admin = "NoAdmin")
         {
-            if(admin == "NoAdmin")model.DateOfCreation = DateTime.Now;
+            if(admin == "NoAdmin") model.DateOfCreation = DateTime.Now;
             model.Checked = true;
             using (ISession session = Helper.OpenSession())
             {

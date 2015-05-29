@@ -5,7 +5,7 @@ namespace Events.Business.Interfaces
 {
     public interface IEventDataProvider
     {
-        IList<Event> GetList(string nDaysToEvent = null, string location = null, string onlyAvailableData = null);
+        IList<Event> GetList(string nDaysToEvent = null, string location = null, string onlyAvailableData = null, bool isForAdmin = false);
 
         Event GetById(string id);
 
@@ -17,13 +17,12 @@ namespace Events.Business.Interfaces
 
         void Delete(Event model);
 
-        void ToggleButtonStatusChecked(string id);
-
         void ToggleButtonStatusActive(string id);
 
         int Create(Event evnt);
 
         void Update(Event model, string admin = "NoAdmin");
-        
+
+        void MarkAsSeen(string id);
     }
 }
