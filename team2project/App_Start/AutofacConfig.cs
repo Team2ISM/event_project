@@ -3,9 +3,9 @@ using Autofac.Integration.Mvc;
 using System.Web.Mvc;
 using Events.RuntimeCache;
 using Events.Business.Classes;
-using Events.NHibernateDataProvider.NHibernateCore;
 using Events.Business.Interfaces;
 using Events.NHibernateDataProvider;
+using Events.NHibernateDataProvider.NHibernateCore;
 
 namespace team2project
 {
