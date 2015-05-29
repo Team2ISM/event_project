@@ -124,6 +124,18 @@
         this.checked = ko.observable(evnt.Checked);
         this.toogleText = ko.observable("");
 
+        self.shortDescription = ko.computed(function () {
+            var words = self.description().split(' ');
+            if (words.length <= 10) return self.description();
+            else 
+            {
+                var result = "";
+                for (var i = 0; i != 10; i++)
+                    result += " " + words[i];
+                return result + "...";
+            }
+        }, self);
+
         self.isSeen = ko.computed(function () {
             var status = this.checked();
             if (!status) adminAjaxHelper.markAsSeen(self);
