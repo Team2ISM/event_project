@@ -33,7 +33,7 @@ namespace team2project
 
         protected void Application_BeginRequest()
         {
-            MyCultureConfig.SetCulture("en");
+            MyCultureConfig.SetCulture("ru");
         }
     }
 }
