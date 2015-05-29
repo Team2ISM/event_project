@@ -13,7 +13,7 @@
         }
     }
 </script>
-<div id="subscribers">
+<span id="subscribers">
     @Ajax.ActionLink(@Model.ToString(), "GetSubscribers", "Subscribers", new AjaxOptions {OnSuccess = "OnSuccess"})
     <div id="subscribers_list"></div>
-</div>
+</span>

@@ -4,7 +4,7 @@
     ViewBag.Title = "Прошедшие события";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@using team2project.Helpers
 @section css{
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/jquery-ui.min.css")
@@ -32,7 +32,7 @@
             {
                 <tr>
                     <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
-                    <td>@Html.RouteLink(evnt.Description, "EventDetails", new { evnt.Id })</td>
+                    <td>@Html.RouteLink(evnt.Description.Cut(), "EventDetails", new { evnt.Id })</td>
                     <td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(",", "EventDetails", new { evnt.Id })

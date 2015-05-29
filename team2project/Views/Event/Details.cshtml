@@ -14,55 +14,32 @@
 <div class="container z-depth-1">
     <form onsubmit="return false">
         <fieldset>
-            <div class="row">
-
-                <div id="event-name" class="col s6 ">
-                    <h2>@Model.Title</h2>
-                </div>
-
-                <div id="date" class="col s6">
-                    @if (@Model.FromDate != null)
-                    {
-                        <h4>@Model.FromDate.Value.ToString("dd")</h4>
-                        <p>@Model.FromDate.Value.ToString("MMMM")</p>
-                    }
-                    else
-                    {
-                        <p>n/a</p>
-                    }
-                </div>
+            <div class="row center">
+                <h2 class="blue-text">@Model.Title</h2>
             </div>
-            <hr />
-            <div class="row" id="info">
-                <div class="vertical-spaces">
-                    <strong>От:</strong>
-                    <span class="horizontal-spaces">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy")</span>
-                </div>
-
-                <div class="vertical-spaces">
-                    <strong>До:</strong>
-                    <span class="horizontal-spaces">@CheckDateIfNull(Model.ToDate, "dd MMMM yyyy")</span>
-                </div>
-
-                <div class="vertical-spaces">
-                    <strong>Город:</strong>
-                    <span class="horizontal-spaces">@Model.Location</span>
-                </div>
+            <div class="row center">
+                <span class="text-bold large-font">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy, H:mm ")</span>
+                ―
+                <span class="text-bold large-font">@CheckDateIfNull(Model.ToDate, " dd MMMM yyyy, H:mm ")</span>
             </div>
-            <hr />
-            <div class="row" id="desc">
+            <div class="row center">
+                <span class="text-bold large-font">@Model.Location</span>
+            </div>
+            <div class="row medium-font" id="desc">
+                
                 <div>
-                    <strong>Описание:</strong>
                     <p>@Model.Description</p>
                 </div>
             </div>
-            <div class="row">
+            <div class="row medium-font">
                 <div class="left">
-                    @{
-                        <div class="left">Уже подписалось:</div>
-                        Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });   
-                    }
+                    <div class="left">
+                        Уже подписалось:
+                        @{
 
+                            Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });
+                        }
+                    </div>
                 </div>
                 <div class="right">
                     @if (Model.ToDate > DateTime.Now)

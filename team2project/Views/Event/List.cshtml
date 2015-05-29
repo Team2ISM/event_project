@@ -5,6 +5,7 @@
 @model System.Collections.Generic.List<team2project.Models.EventViewModel>
 @using System.Globalization
 @using team2project.Models
+@using team2project.Helpers
 @using System.Text.RegularExpressions
 @section css{
     @Styles.Render("~/Content/Home/List.css")
@@ -45,24 +46,9 @@
         <tbody>
             @foreach (var evnt in Model)
             {
-                var result = "";
-                var words = evnt.Description.Split(' ');
-                if (words.Length <= 10)
-                {
-                    result = evnt.Description; 
-                }
-                else
-                {
-                    for (var i = 0; i != 10; i++)
-                    {
-                        result += " " + words[i];
-                    }
-                    result += "...";
-                }
-            
                 <tr>
                     <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
-                    <td>@Html.RouteLink(result, "EventDetails", new { evnt.Id })</td>
+                    <td>@Html.RouteLink(evnt.Description.Cut(), "EventDetails", new { evnt.Id })</td>
                     <td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(",", "EventDetails", new { evnt.Id })
