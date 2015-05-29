@@ -24,12 +24,12 @@
             </tr>
         </thead>
         <tbody data-bind="foreach: events">
-            <tr data-bind="descriminateActive" id="td-button-color">
+            <tr data-bind="descriminateActive, css: isSeen" id="td-button-color">
                 <td data-bind="text: title"></td>
                 <td data-bind="text: description"></td>
                 <td data-bind="text: dateAndTime"></td>
                 <td data-bind="text: location"></td>
-                <td><button id="visibleButton" class="btn waves-effect waves-light blue white-text" data-bind="text: toogleText, click: $data.toogleActive"></button></td>
+                <td><button id="visibleButton" class="btn waves-effect waves-light blue white-text" data-bind="text: toogleText, click: $data.toogleActive, css: updateAccent"></button></td>
                 <td><button class="btn waves-effect waves-light red white-text" data-bind="click: function(){$root.deleteEvent($data)}">Удалить</button></td>
                 <td><button class="btn waves-effect waves-light blue white-text" data-bind="click:goToDetails">Перейти на страницу события</button></td>
             </tr>

@@ -62,8 +62,13 @@ table a
 
 overflow: hidden;
 }
-
-
+.seen {}
+.not-seen{
+    border: 1px solid gray;
+}
+tr.disabled{
+    color: rgb(200,200,200);
+}
 td a:link, td a:visited,
 td a:hover, td a:active {
     color: black;

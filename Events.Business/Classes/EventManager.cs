@@ -18,12 +18,12 @@ namespace Events.Business.Classes
             this.cacheManager = cacheManager;
         }
 
-        public IList<Event> GetAllEvents()
+        public IList<Event> GetAllEvents(bool isForAdmin)
         {
             return cacheManager.FromCache<IList<Event>>("Events::allEvents",
                     () =>
                     {
-                        return dataProvider.GetList(null, null, "Admin");
+                        return dataProvider.GetList(null, null, "Admin", isForAdmin);
                     });
         }
         public IList<Event> GetList()
@@ -118,9 +118,9 @@ namespace Events.Business.Classes
             cacheManager.ClearCacheByRegion("eventsList");
         }
 
-        public void ToggleButtonStatusChecked(string id)
+        public void MarkAsSeen(string id)
         {
-            dataProvider.ToggleButtonStatusChecked(id);
+            dataProvider.MarkAsSeen(id);
             cacheManager.RemoveFromCache(id);
             cacheManager.ClearCacheByRegion("Events");
             cacheManager.ClearCacheByRegion("eventsList");

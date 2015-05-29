@@ -23,14 +23,14 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult ManagerPage()
         {
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents(true));
             return View("ManagerPage", list);
         }
 
         [HttpGet]
         public ActionResult GetEvents()
         {
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents(true));
             return Json(
                 new JsonResultHelper()
                 {
@@ -71,5 +71,18 @@ namespace team2project.Controllers
                 );
         }
 
+        [HttpPost]
+        public ActionResult MarkEvent(string id)
+        {
+            manager.MarkAsSeen(id);
+            return Json(
+                new JsonResultHelper()
+                {
+                    Data = null,
+                    Message = "Success: Marking Event",
+                    Status = JsonResultHelper.StatusEnum.Success
+                }
+                );
+        }
     }
 }
