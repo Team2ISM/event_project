@@ -87,8 +87,8 @@ namespace team2project
 
             routes.MapRoute(
                 name: "MyEvents",
-                url: "user/myevents/{id}",
-                defaults: new { controller = "User", action = "MyEvents", id = UrlParameter.Optional }
+                url: "user/myevents",
+                defaults: new { controller = "User", action = "MyEvents"}
             );
 
             routes.MapRoute(
