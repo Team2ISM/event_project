@@ -88,7 +88,7 @@ namespace team2project.Controllers
 
                     FormsAuthentication.SetAuthCookie(email, false);
 
-                    if (string.IsNullOrEmpty(decodedUrl) == false)
+                    if (string.IsNullOrEmpty(decodedUrl) == false || decodedUrl.ToLower() != "/user/thankyoupage")
                     {
                         return Redirect(decodedUrl);
                     }
