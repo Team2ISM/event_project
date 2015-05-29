@@ -40,9 +40,6 @@
             if (User.Identity.IsAuthenticated)
             {
                 <li>
-                    @Html.RouteLink("Мои события", "MyEvents", FormMethod.Post, new { @class = "blue-text" })
-                </li>
-                <li>
                     @Html.RouteLink("Сменить пароль", "Update", FormMethod.Post, new { @class = "blue-text" })
                 </li>
                 <li>
@@ -61,16 +58,22 @@
                 <li class="menu-content">
                     @Html.RouteLink("Список событий", "EventList", FormMethod.Post, new { @class = "white-text" })
                 </li>
-                <li class="menu-content">
-                    @Html.RouteLink("Создать событие", "CreateEvent", FormMethod.Post, new { @class = "white-text" })
-                </li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="menu-content">
+                        @Html.RouteLink("Создать событие", "CreateEvent", FormMethod.Post, new { @class = "white-text" })
+                    </li>
+                    <li class="menu-content">
+                        @Html.RouteLink("Мои события", "MyEvents", FormMethod.Post, new { @class = "white-text" })
+                    </li>
+                }
                 <li class="menu-content">
                     <a class="dropdown-button" href="#!" data-activates="dropdown1">
                         @if (User.Identity.IsAuthenticated)
                         {
 
                             <i class="white-text" style="font-size: 1rem;">
-                                Вы вошли как @User.Identity.Name
+                                Здравствуйте, @User.Identity.Name
                                 <i class="mdi-action-toc right white-text"></i>
                             </i>
 
