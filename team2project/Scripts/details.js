@@ -22,7 +22,7 @@ function unsubscribe() {
     button.on('click', function () { });
     $.post("/unsubscribe", { id: id }, function (data) {
         if (data) {
-            button.html('Присоедениться');
+            button.html('Присоединиться');
             button.get()[0].onclick = subscribe;
         }
         else {
@@ -42,7 +42,7 @@ window.onload = function () {
             button.get()[0].onclick = unsubscribe;
         }
         else {
-            button.html('Присоедениться');
+            button.html('Присоединиться');
             button.get()[0].onclick = subscribe;
         }
     });
