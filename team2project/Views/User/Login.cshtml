@@ -28,6 +28,9 @@
         @Html.PasswordFor(m => m.Password)
         @Html.ValidationMessageFor(m => m.Password)
     </div>
+    <div style="display:none;">
+        <input type="text" id="returnUrl" name="returnUrl" value="@ViewBag.ReturnURL" />
+    </div>
     <div class="input-field col s12 m12">
         @Html.RouteLink("Забыли пароль?", "ForgotPassword")           
     </div>

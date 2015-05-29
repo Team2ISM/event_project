@@ -62,19 +62,40 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Login()
         {
+            string returnUrl = "";
+            if (Request.UrlReferrer != null)
+            {
+                returnUrl = Server.UrlEncode(Request.UrlReferrer.PathAndQuery);
+            }            
+            if (string.IsNullOrEmpty(returnUrl) == false)
+            {
+                ViewBag.ReturnUrl = returnUrl;
+            }
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string email, string password)
+        public ActionResult Login(string email, string password, string returnUrl)
         {
             if (ModelState.IsValid)
             {
                 var user = data.GetByMail(email);
                 if (user != null && user.IsActive && isValid(email, password))
                 {
+                    string decodedUrl = "";
+                    if (string.IsNullOrEmpty(returnUrl) == false)
+                        decodedUrl = Server.UrlDecode(returnUrl);
+
                     FormsAuthentication.SetAuthCookie(email, false);
-                    return RedirectToAction("Index", "Event");
+
+                    if (string.IsNullOrEmpty(decodedUrl) == false)
+                    {
+                        return Redirect(decodedUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Event");
+                    }                    
                 }
                 else
                 {
