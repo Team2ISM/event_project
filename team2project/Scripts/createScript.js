@@ -131,7 +131,7 @@
         }
     });
 })(jQuery);
-var locat = $("#location");
+var locat = $("#location"), editor;
 window.onload = function () {
     window.setTimeout(function () {
         var combobox = $("#combobox");
@@ -151,7 +151,16 @@ window.onload = function () {
         if (value) locat.val(value);
     }, 10);
     
-    var editor = CKEDITOR.inline('Description');
+    editor = CKEDITOR.inline('Description', { magicline_everywhere:true, elementMode: 3 });
+    var label = $('label[for="Description"]');
+    editor.on('blur', function (e) {
+        if (editor.getData().length > 0) return;
+        label.removeClass('active');
+    });
+    editor.on('focus', function () {
+        label.addClass('active');
+    });
+
     CKEDITOR.on('dialogDefinition', function (event) {
         var editor = event.editor;
         var dialogDefinition = event.data.definition;
