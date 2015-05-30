@@ -219,7 +219,7 @@ namespace team2project
             #endregion
 
             routes.MapRoute(
-                name: "Default",
+                name: "Filemanager",
                 url: "Scripts/filemanager/connectors/mvc/filemanager/{id}",
                 defaults: new { controller = "Filemanager", action = "Index", id = UrlParameter.Optional },
                 namespaces : new [] { "team2project.Areas.Filemanager"}
