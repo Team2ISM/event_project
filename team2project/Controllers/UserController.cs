@@ -80,27 +80,33 @@ namespace team2project.Controllers
             if (ModelState.IsValid)
             {
                 var user = data.GetByMail(email);
-                if (user != null && user.IsActive && isValid(email, password))
+                if (user != null && isValid(email, password))
                 {
-                    string decodedUrl = "";
-                    if (string.IsNullOrEmpty(returnUrl) == false)
-                        decodedUrl = Server.UrlDecode(returnUrl);
-
-                    FormsAuthentication.SetAuthCookie(email, false);
-
-                    if (string.IsNullOrEmpty(decodedUrl) == false || decodedUrl.ToLower() != "/user/thankyoupage")
+                    if (user.IsActive == true)
                     {
-                        return Redirect(decodedUrl);
+                        string decodedUrl = "";
+                        if (string.IsNullOrEmpty(returnUrl) == false)
+                            decodedUrl = Server.UrlDecode(returnUrl);
+
+                        FormsAuthentication.SetAuthCookie(email, false);
+
+                        if (string.IsNullOrEmpty(decodedUrl) == false && decodedUrl.ToLower() != "/user/thankyoupage")
+                        {
+                            return Redirect(decodedUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Event");
+                        }
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Event");
-                    }                    
+                        ModelState.AddModelError("", "Завершите регистрацию перейдя по ссылке на вашей почте");
+                    }
                 }
                 else
                 {
                     ModelState.AddModelError("", "Неправильный e-mail или пароль");
-                    @ViewBag.Error = "Неправильный e-mail или пароль";
                 }
             }
             return View();
