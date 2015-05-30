@@ -12,7 +12,9 @@ header, footer, nav, section {
 p, div{
     padding-left:10px;
 }
-
+.text-align-justify{
+    text-align: justify;
+}
 /* Styles for basic forms
 -----------------------------------------------------------*/
 fieldset {
@@ -22,7 +24,13 @@ fieldset {
 	resize: none;
 	margin-bottom: 10px;
 }
-
+.large-font
+{
+    font-size: large;
+}
+.medium-font{
+    font-size: medium;
+}
 legend {
     font-size: 1.2em;
     font-weight: bold;

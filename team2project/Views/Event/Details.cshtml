@@ -14,30 +14,35 @@
 <div class="container z-depth-1">
     <form onsubmit="return false">
         <fieldset>
-            <div class="row center">
-                <h2 class="blue-text">@Model.Title</h2>
-            </div>
-            <div class="row center">
-                <span class="text-bold large-font">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy, H:mm ")</span>
-                ―
-                <span class="text-bold large-font">@CheckDateIfNull(Model.ToDate, " dd MMMM yyyy, H:mm ")</span>
-            </div>
-            <div class="row center">
-                <span class="text-bold large-font">@Model.Location</span>
-            </div>
-            <div class="row medium-font" id="desc">
-                
-                <div>
-                    <p>@{
-                        var description = new HtmlString(Model.Description);
-                    }
-                        @description
-                    </p>
+            
+            <div class="row first-row">
+                <div class=" month-date-block left border-blue center no-padding">
+                    <div class="white-text bg-blue month">
+                        @CheckDateIfNull(Model.FromDate, "MMMM")
+                    </div>
+                    <div class="day color-blue">
+                        @CheckDateIfNull(Model.FromDate, "dd")
+                    </div>
                 </div>
-            </div>
-            <div class="row medium-font">
-                <div class="left">
-                    <div class="left">
+                <div class="title-date-block inline-block left">
+                    <div class="blue-text event-title inline-block"><h3 class="inline-block no-margin">@Model.Title</h3></div>
+                    <div></div>
+                    <div class="inline-block">
+                        <span class="text-bold large-font">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy года, H:mm ")</span>
+                        ―
+                        <span class="text-bold large-font">@CheckDateIfNull(Model.ToDate, " dd MMMM yyyy года, H:mm ")</span>
+                    </div>
+                    <div></div>
+                    <div class="bold left">
+                        <span class="text-bold large-font">@Model.Location</span>
+                    </div>
+                </div>
+                <div class="button-block right">
+                    @if (Model.ToDate > DateTime.Now)
+                    {
+                        <button id="submit" class="btn waves-effect waves-light blue right margin-right large-font">Подождите</button>
+                    }
+                    <div class="medium-font center subscribers">
                         Уже подписалось:
                         @{
 
@@ -45,11 +50,11 @@
                         }
                     </div>
                 </div>
-                <div class="right">
-                    @if (Model.ToDate > DateTime.Now)
-                    {
-                        <button id="submit" class="btn waves-effect waves-light blue right margin-right">Подождите</button>
-                    }
+                
+            </div>
+            <div class="row medium-font" id="desc">
+                <div>
+                    <p class="text-align-justify">@Model.Description</p>
                 </div>
             </div>
         </fieldset>
