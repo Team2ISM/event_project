@@ -85,8 +85,7 @@ textarea
 
 #desc
 {
-	word-break:break-all;
-	word-wrap: break-word;
+	word-break: normal;
 	padding-right: 30px;
 }
 
@@ -126,10 +125,53 @@ textarea
 {
 	margin-left: 10px;
 }
-.large-font
+.border-blue
 {
-    font-size: large;
+    border-radius: 5px;
+    border: 3px solid #2196F3;
 }
-.medium-font{
-    font-size: medium;
+.month-date-block
+{
+    min-width: 120px;
+    height: 100%;
+    margin: 0 20px;
+}
+.color-blue
+{
+    color: #2196F3;
+}
+.bg-blue
+{
+    background: #2196F3;/*rgb(140,140,140);*/
+}
+.month,.day{
+    height: 50%;
+    text-transform: uppercase;
+    padding: 5px;
+    font-size: xx-large;
+}
+.no-margin{
+    margin: 0;
+}
+.button-block,.first-row{
+    margin-top: 10px;
+}
+.bold{
+    font-weight: bold;
+}
+.subscribers{
+    margin-top: 50px
+}
+.event-title{
+    line-height: normal;
+    margin-bottom: 10px;
+}
+.title-date-block{
+    max-width: 50%;
+}
+.button-block{
+    padding: 0;
+}
+.inline-block{
+    display: inline-block
 }
