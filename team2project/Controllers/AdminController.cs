@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using team2project.Models;
 using System.Web.Script.Serialization;
 using team2project.Helpers;
+using System.Runtime.Remoting.Messaging;
 
 namespace team2project.Controllers
 {
@@ -13,6 +14,7 @@ namespace team2project.Controllers
     {
         EventManager manager;
         CommentManager commentManager;
+        delegate bool mark();
 
         public AdminController(EventManager manager, CommentManager commentManager)
         {
@@ -31,10 +33,15 @@ namespace team2project.Controllers
         public ActionResult GetEvents()
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents(true));
-            foreach(var elem in manager.GetAllEvents(true))
+
+            //temporary bydlokod
+            mark func = MarkAsSeen;
+            func.BeginInvoke((ir) =>
             {
-                manager.MarkAsSeen(elem.Id);
-            }
+                var a = ((mark)(((AsyncResult)ir).AsyncDelegate)).EndInvoke(ir);
+            }, null);
+            //
+
             return Json(
                 new JsonResultHelper()
                 {
@@ -42,7 +49,7 @@ namespace team2project.Controllers
                     Message = "Success: Get list of all events",
                     Status = JsonResultHelper.StatusEnum.Success
                 },
-                JsonRequestBehavior .AllowGet
+                JsonRequestBehavior.AllowGet
                 );
         }
 
@@ -58,7 +65,7 @@ namespace team2project.Controllers
                     Status = JsonResultHelper.StatusEnum.Success
                 }
                 );
-        }  
+        }
 
         [HttpPost]
         public ActionResult DeleteEvent(string id)
@@ -75,6 +82,15 @@ namespace team2project.Controllers
                 );
         }
 
+        bool MarkAsSeen()
+        {
+            var list = manager.GetAllEvents(true);
+            foreach (var elem in list)
+            {
+                manager.MarkAsSeen(elem.Id);
+            }
+            return true;
+        }
         //[HttpPost]
         //public ActionResult MarkEvent(string id)
         //{
