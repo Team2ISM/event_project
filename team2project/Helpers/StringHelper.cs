@@ -31,5 +31,10 @@ namespace team2project.Helpers
             }
 
         }
+
+        public static IHtmlString ToHtmlString(this string data)
+        {
+            return new HtmlString(data);
+        }
     }
 }

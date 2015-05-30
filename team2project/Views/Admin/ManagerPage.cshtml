@@ -13,7 +13,7 @@
     @Styles.Render("~/Content/jquery-ui.min.css")
 }
 <div class="container">
-    <h2 class ="center blue-text">@ViewBag.Title</h2>
+    <h2 class ="center dark-text">@ViewBag.Title</h2>
     <table class="striped centered">
         <thead>
             <tr class="table-hat">
@@ -29,9 +29,9 @@
                 <td data-bind="text: shortDescription"></td>
                 <td data-bind="text: dateAndTime"></td>
                 <td data-bind="text: location"></td>
-                <td><button id="visibleButton" class="btn waves-effect waves-light blue white-text" data-bind="text: toogleText, click: $data.toogleActive, css: updateAccent"></button></td>
+                <td><button id="visibleButton" class="btn waves-effect waves-light dark-blue-grey white-text" data-bind="text: toogleText, click: $data.toogleActive, css: updateAccent"></button></td>
                 <td><button class="btn waves-effect waves-light red white-text" data-bind="click: function(){$root.deleteEvent($data)}">Удалить</button></td>
-                <td><button class="btn waves-effect waves-light blue white-text" data-bind="click:goToDetails">Перейти на страницу события</button></td>
+                <td><button class="btn waves-effect waves-light dark-blue-grey white-text" data-bind="click:goToDetails">Перейти на страницу события</button></td>
             </tr>
         </tbody>
     </table>

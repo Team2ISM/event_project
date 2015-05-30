@@ -16,7 +16,7 @@
 
 
 <div class="container">
-    <h1 class ="center blue-text">Мероприятия</h1>
+    <h1 class ="center blue-grey-text">Мероприятия</h1>
     
     <!-- Dropdown Trigger -->
     <div class="width80">
@@ -69,21 +69,21 @@
 
     if ((Regex.IsMatch(filters.LastOrDefault(), @"^\d+$") && filters.LastOrDefault() == nOfDaysToEvent) || (!Regex.IsMatch(filters.LastOrDefault(), @"^\d+$") && nOfDaysToEvent == null))
     {
-        <a href="#" class="blue-text active">@linkName</a>
+        <a href="#" class="blue-grey-text active">@linkName</a>
     }
     else
     {
         if (nOfDaysToEvent == null)
         {
-            @Html.ActionLink(linkName, "Filters", new { days = -1 }, htmlAttributes: new { Class = "blue-text" }) //DIRTY HACK, remove fast as possible
+            @Html.ActionLink(linkName, "Filters", new { days = -1 }, htmlAttributes: new { Class = "blue-grey-text" }) //DIRTY HACK, remove fast as possible
         }
         else if (filters.Length == 3 && !filters[2].IsInt())
         {
-           @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "blue-text" })
+           @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "blue-grey-text" })
         }
         else
         {
-           @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent}, htmlAttributes: new { Class = "blue-text" })
+           @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent}, htmlAttributes: new { Class = "blue-grey-text" })
         }
     }
 

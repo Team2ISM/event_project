@@ -13,7 +13,7 @@
 }
 
 <div class="container">
-<h2 class ="center blue-text">Текущие/будущие события</h2>
+    <h2 class="center blue-grey-text">Текущие/будущие события</h2>
     <div class="width80">
         @Html.RouteLink("Мои события", "MyEvents", FormMethod.Post, new { @class = "blue-text" })
         @Html.RouteLink("Прошедшие события", "PastEvents")
@@ -39,7 +39,7 @@
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })                        
                     </td>
                     <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
-                    <td id="TdUpdate"><button class="btn waves-effect waves-light blue white-text" type="submit">@Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id })</button></td>
+                    <td id="TdUpdate"><button class="btn waves-effect waves-light dark-blue-grey white-text" type="submit">@Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id })</button></td>
                     <td id="TdDell">@Html.RouteLink("Удалить", "DeleteUserEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light white-text red" })</td>
                 </tr>
             }

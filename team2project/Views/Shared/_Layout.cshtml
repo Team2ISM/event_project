@@ -28,10 +28,10 @@
             if (!User.Identity.IsAuthenticated)
             {
                 <li>
-                    @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "blue-text" })
+                    @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "dark-text" })
                 </li>
                 <li>
-                    @Html.RouteLink("Вход", "Login", FormMethod.Post, new { @class = "blue-text" })
+                    @Html.RouteLink("Вход", "Login", FormMethod.Post, new { @class = "dark-text" })
                 </li>
             }
         }
@@ -40,17 +40,17 @@
             if (User.Identity.IsAuthenticated)
             {
                 <li>
-                    @Html.RouteLink("Сменить пароль", "Update", FormMethod.Post, new { @class = "blue-text" })
+                    @Html.RouteLink("Сменить пароль", "Update", FormMethod.Post, new { @class = "dark-text" })
                 </li>
                 <li>
-                    @Html.RouteLink("Выйти", "Logout", FormMethod.Post, new { @class = "blue-text" })
+                    @Html.RouteLink("Выйти", "Logout", FormMethod.Post, new { @class = "dark-text" })
                 </li>
                 <li class="divider"></li>
             }
         }
     </ul>
     <nav>
-        <div class="nav-wrapper blue">
+        <div class="nav-wrapper blue-grey">
 
             @Html.RouteLink("Субботник", "Index", htmlAttributes: new { Class = "white-text", Id = "logo" })
             <ul class="hide-on-med-and-down right">
