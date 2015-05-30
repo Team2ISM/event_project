@@ -11,6 +11,36 @@
     @Styles.Render("~/Content/jquery.datetimepicker.css")
     @Styles.Render("~/Content/Events/CreatePage.css")
     @Styles.Render("~/Content/Site.css")
+    <style type="text/css">
+    .fm-modal {
+        z-index: 10011; /** Because CKEditor image dialog was at 10010 */
+        width:80%;
+        height:98%;
+        top: 3%;
+        left:10%;
+        border:0;
+        position:fixed;
+        -moz-box-shadow: 0px 1px 5px 0px #656565;
+        -webkit-box-shadow: 0px 1px 5px 0px #656565;
+        -o-box-shadow: 0px 1px 5px 0px #656565;
+        box-shadow: 0px 1px 5px 0px #656565;
+        filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=5);
+    }
+    </style>
+    <style type="text/css">
+        label[for="Description"] {
+            position:relative;
+        }
+        .cke_textarea_inline {
+            overflow: hidden;
+            border-color: -moz-use-text-color -moz-use-text-color #9e9e9e;
+            border-style: none none solid;
+            border-width: medium medium 1px;
+        }
+        .cke_focus {
+            overflow: scroll;
+        }
+    </style>
 }
 
 
@@ -65,10 +95,11 @@
 </script>
 
 @section scripts{
-    @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/script.js")
     @Scripts.Render("~/Scripts/jquery.datetimepicker.js")
+    @Scripts.Render("~/Scripts/ckeditor/ckeditor.js")
+    @Scripts.Render("~/Scripts/ckeditor/adapters/jquery.js")
     @Scripts.Render("~/Scripts/createScript.js")
     @Scripts.Render("~/bundles/jqueryval")
 }

@@ -131,23 +131,70 @@
         }
     });
 })(jQuery);
-var locat = $("#location");
-window.onload = function(){
-    var combobox = $("#combobox");
-    var value;
-    if (city) {
-        var arr = combobox.children();
-        arr.each(function (i, val) {
-            if (val.innerHTML === city) {
-                val.setAttribute('selected', 'selected');
-                value = city;
-                return false;
-            }
+var locat = $("#location"), editor;
+window.onload = function () {
+    window.setTimeout(function () {
+        var combobox = $("#combobox");
+        var value;
+        if (city) {
+            var arr = combobox.children();
+            arr.each(function (i, val) {
+                if (val.innerHTML === city) {
+                    val.setAttribute('selected', 'selected');
+                    value = city;
+                    return false;
+                }
+            });
+        }
+        combobox.combobox();
+        locat.val(combobox.children()[0].innerHTML);
+        if (value) locat.val(value);
+    }, 10);
+    
+    editor = CKEDITOR.inline('Description', { magicline_everywhere:true, elementMode: 3 });
+    var label = $('label[for="Description"]');
+    editor.on('blur', function (e) {
+        if (editor.getData().length > 0) return;
+        label.removeClass('active');
+    });
+    editor.on('focus', function () {
+        label.addClass('active');
+    });
+
+    CKEDITOR.on('dialogDefinition', function (event) {
+        var editor = event.editor;
+        var dialogDefinition = event.data.definition;
+        var dialogName = event.data.name;
+
+        var cleanUpFuncRef = CKEDITOR.tools.addFunction(function () {
+            // Do the clean-up of filemanager here (called when an image was selected or cancel was clicked)
+            $('#fm-iframe').remove();
+            $("body").css("overflow-y", "scroll");
         });
-    }
-    combobox.combobox();
-    locat.val(combobox.children()[0].innerHTML);
-    if(value)locat.val(value);
+
+        var tabCount = dialogDefinition.contents.length;
+        for (var i = 0; i < tabCount; i++) {
+            var browseButton = dialogDefinition.contents[i].get('browse');
+
+            if (browseButton !== null) {
+                browseButton.hidden = false;
+                browseButton.onClick = function (dialog, i) {
+                    editor._.filebrowserSe = this;
+                    var iframe = $("<iframe id='fm-iframe' class='fm-modal'/>").attr({
+                        src: '/Scripts/filemanager/index.html' + // Change it to wherever  Filemanager is stored.
+                            '?CKEditorFuncNum=' + CKEDITOR.instances[event.editor.name]._.filebrowserFn +
+                            '&CKEditorCleanUpFuncNum=' + cleanUpFuncRef +
+                            '&langCode=en' +
+                            '&CKEditor=' + event.editor.name
+                    });
+
+                    $("body").append(iframe);
+                    $("body").css("overflow-y", "hidden");  // Get rid of possible scrollbars in containing document
+                }
+            }
+        }
+    }); // dialogDefinition
+
     var pick1 = $('#datetimepicker1'), pick2 = $('#datetimepicker2');
     if (fDate) pick1.val(fDate);
     if (tDate) pick2.val(tDate);

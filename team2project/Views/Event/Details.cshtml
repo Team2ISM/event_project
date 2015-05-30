@@ -28,7 +28,11 @@
             <div class="row medium-font" id="desc">
                 
                 <div>
-                    <p>@Model.Description</p>
+                    <p>@{
+                        var description = new HtmlString(Model.Description);
+                    }
+                        @description
+                    </p>
                 </div>
             </div>
             <div class="row medium-font">
