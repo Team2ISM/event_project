@@ -3,7 +3,7 @@
     "options": {
         "culture": "ru",
         "lang": "mvc",
-        "theme": "flat-dark",
+        "theme": "default",
         "defaultViewMode": "grid",
         "autoload": true,
         "showFullPath": false,
