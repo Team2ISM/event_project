@@ -83,15 +83,6 @@ namespace Events.Business.Classes
             return evntModel;
         }
 
-        public IList<Event> GetByAuthorMail(string email)
-        {
-            return cacheManager.FromCache<IList<Event>>("userEvents" + email,
-                () => 
-                {
-                    return dataProvider.GetByAuthorMail(email);
-                });
-        }
-
         public IList<Event> GetAuthorPastEvents(string email)
         {
             return cacheManager.FromCache<IList<Event>>("userEvents" + email + "past",

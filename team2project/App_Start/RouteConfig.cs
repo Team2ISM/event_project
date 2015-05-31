@@ -75,20 +75,14 @@ namespace team2project
 
             routes.MapRoute(
                 name: "PastEvents",
-                url: "user/myevents/past",
+                url: "user/past",
                 defaults: new { controller = "User", action = "MyPastEvents" }
             );
 
             routes.MapRoute(
                 name: "FutureEvents",
-                url: "user/myevents/future",
+                url: "user/future",
                 defaults: new { controller = "User", action = "MyFutureEvents" }
-            );
-
-            routes.MapRoute(
-                name: "MyEvents",
-                url: "user/myevents",
-                defaults: new { controller = "User", action = "MyEvents"}
             );
 
             routes.MapRoute(
