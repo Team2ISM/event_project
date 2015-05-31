@@ -16,6 +16,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 .nuGet/
+.nuget/
 
 # Roslyn cache directories
 *.ide/
@@ -189,3 +190,4 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 Events.Business/bin/*
+team2project/Properties/PublishProfiles/*
