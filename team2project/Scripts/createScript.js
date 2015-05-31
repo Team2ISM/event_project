@@ -133,9 +133,9 @@
 })(jQuery);
 var locat = $("#location"), editor;
 window.onload = function () {
-    window.setTimeout(function () {
-        var combobox = $("#combobox");
-        var value;
+    editor = CKEDITOR.replace('Description', { /*magicline_everywhere : true*/ });
+
+        var combobox = $("#combobox"), value;
         if (city) {
             var arr = combobox.children();
             arr.each(function (i, val) {
@@ -149,9 +149,7 @@ window.onload = function () {
         combobox.combobox();
         locat.val(combobox.children()[0].innerHTML);
         if (value) locat.val(value);
-    }, 10);
     
-    editor = CKEDITOR.replace('Description', { /*magicline_everywhere : true*/});
     var content, label = $('label[for="Description"]'),
         textDescr = $('#TextDescription'),
         description = $('#Description');
@@ -172,9 +170,9 @@ window.onload = function () {
     });
 
     CKEDITOR.on('dialogDefinition', function (event) {
-        var editor = event.editor;
-        var dialogDefinition = event.data.definition;
-        var dialogName = event.data.name;
+        var editor = event.editor,
+            dialogDefinition = event.data.definition,
+            dialogName = event.data.name;
 
         var cleanUpFuncRef = CKEDITOR.tools.addFunction(function () {
             // Do the clean-up of filemanager here (called when an image was selected or cancel was clicked)
@@ -198,8 +196,7 @@ window.onload = function () {
                             '&CKEditor=' + event.editor.name
                     });
 
-                    $("body").append(iframe);
-                    $("body").css("overflow-y", "hidden");  // Get rid of possible scrollbars in containing document
+                    $("body").append(iframe).css("overflow-y", "hidden");  // Get rid of possible scrollbars in containing document
                 }
             }
         }
