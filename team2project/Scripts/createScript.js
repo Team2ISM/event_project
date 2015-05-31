@@ -153,18 +153,22 @@ window.onload = function () {
     
     editor = CKEDITOR.replace('Description', { colordialog:true });
     var content, label = $('label[for="Description"]'),
-        textDescr = $('#TextDescription');
+        textDescr = $('#TextDescription'),
+        description = $('#Description');
         
     editor.on('blur', function () {
         if (editor.getData().length > 0) return;
         label.removeClass('active');
     });
+
     editor.on('focus', function () {
         if (!content) content = $(editor._.editable.$);
         label.addClass('active');
     });
+
     editor.on('change', function () {
         textDescr.val(content.children().text());
+        description.html(editor.getData());
     });
 
     CKEDITOR.on('dialogDefinition', function (event) {
