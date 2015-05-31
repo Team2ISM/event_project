@@ -30,7 +30,7 @@ else
     </div>
     <div class="row">
         @Html.ValidationSummary(true)
-        @if (ViewBag.RegistrationSuccess != null)
+        @*@if (ViewBag.RegistrationSuccess != null)
             {
             <div id="registrationSuccess" class="col s12 m12 12 reg-mess center large-font">
                 @ViewBag.RegistrationSuccess
@@ -38,7 +38,7 @@ else
             }
             else
             {
-            <div class="input-field col s12 m6">
+            *@<div class="input-field col s12 m6">
                 @Html.LabelFor(m => m.Name, "Имя")
                 @Html.EditorFor(m => m.Name)
                 @Html.ValidationMessageFor(m => m.Name)
@@ -72,7 +72,7 @@ else
                 @Html.ValidationMessageFor(m => m.RepeatPassword)
             </div>
             <button class="btn waves-effect waves-light blue" type="submit">Зарегистрировать меня</button>
-            }
+            @*}*@
     </div>
     }
 </div>

@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "UnconfirmedUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("UnconfirmedUser", "User", FormMethod.Post))
+{
+    <h3>Адрес электронной почты не подтвержден</h3>
+    <p>
+        Письмо с подтверждением было отправлено раньше на адрес @ViewBag.Mail
+        Пожалуйста, перейдите по ссылке из письма
+    </p>
+    <div style="display:none;">
+        <input name="email" type="email" value="@ViewBag.Mail" /> 
+    </div>
+    <button type="submit">Отправить письмо с подтверждением</button>
+}

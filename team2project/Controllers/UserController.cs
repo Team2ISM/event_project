@@ -44,7 +44,7 @@ namespace team2project.Controllers
 
         IUserDataProvider data;
         EventManager eventManager;
-        
+        string unconfirmedUserMail;
 
 
 
@@ -52,6 +52,7 @@ namespace team2project.Controllers
         {
             this.data = data;
             this.eventManager = eventManager;
+            unconfirmedUserMail = "";
         }
 
         public ActionResult Index()
@@ -90,7 +91,8 @@ namespace team2project.Controllers
 
                         FormsAuthentication.SetAuthCookie(email, false);
 
-                        if (string.IsNullOrEmpty(decodedUrl) == false && decodedUrl.ToLower() != "/user/thankyoupage")
+                        if (string.IsNullOrEmpty(decodedUrl) == false && decodedUrl.ToLower() != "/user/thankyoupage"
+                             && decodedUrl.ToLower() != "/user/confirm")
                         {
                             return Redirect(decodedUrl);
                         }
@@ -101,7 +103,8 @@ namespace team2project.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Завершите регистрацию перейдя по ссылке на вашей почте");
+                        ViewBag.Mail = email;
+                        return View("UnconfirmedUser");
                     }
                 }
                 else
@@ -109,6 +112,23 @@ namespace team2project.Controllers
                     ModelState.AddModelError("", "Неправильный e-mail или пароль");
                 }
             }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UnconfirmedUser(string email)
+        {
+            var user = data.GetByMail(email);
+            if (user != null && user.IsActive == false)
+            {
+                SendActivationLink(AutoMapper.Mapper.Map<UserViewModel>(user));
+                return RedirectToAction("ConfirmRegistration", "User");
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult ConfirmRegistration()
+        {
             return View();
         }
 
@@ -184,17 +204,10 @@ namespace team2project.Controllers
 
                     data.CreateUser(newUser);
 
-                    string authority = Request.Url.Authority;
-                    string scheme = Request.Url.Scheme;
-                    string activationLink = scheme + "://" + authority + Url.Action("Activate", new { controller = "User", action = "Activate", id = user.Id });
+                    SendActivationLink(user);
 
-                    string body = user.Name + ", спасибо за регистрацию\n";
-                    body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
-                    string subject = "Подтверждение регистрации";
-                    string newBody = RenderPartialViewToString("email", activationLink);
-                    EmailSender(user.Email, newBody, subject);
-                    
-                    ViewBag.RegistrationSuccess = "Пожалуйста, подтвердите регистрацию перейдя по ссылке на вашей почте";
+                    return RedirectToAction("ConfirmRegistration", "User");
+                    //ViewBag.RegistrationSuccess = "Пожалуйста, подтвердите регистрацию перейдя по ссылке на вашей почте";
                 }
                 else
                 {
@@ -318,6 +331,19 @@ namespace team2project.Controllers
             }
 
             return new String(stringChars);
+        }
+
+        private void SendActivationLink(UserViewModel user)
+        {
+            string authority = Request.Url.Authority;
+            string scheme = Request.Url.Scheme;
+            string activationLink = scheme + "://" + authority + Url.Action("Activate", new { controller = "User", action = "Activate", id = user.Id });
+
+            string body = user.Name + ", спасибо за регистрацию\n";
+            body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
+            string subject = "Подтверждение регистрации";
+            string newBody = RenderPartialViewToString("email", activationLink);
+            EmailSender(user.Email, newBody, subject);
         }
 
         private void EmailSender(string userEmail, string body, string subject)
