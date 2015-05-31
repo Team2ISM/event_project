@@ -76,7 +76,13 @@ namespace Events.Business.Classes
                      return dataProvider.GetById(id);
                  });
 
-            if (evntModel == null || evntModel.Active == false)
+            if (evntModel == null)
+            {
+                Event evnt = new Event();
+                evnt.AuthorId = "undefinded";
+                return evnt;
+            }
+            if (evntModel.Active == false)
             {
                 return null;
             }
