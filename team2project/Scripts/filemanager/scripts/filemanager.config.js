@@ -21,7 +21,7 @@
         "fileRoot": false,
         "baseUrl": false,
         "logger": false,
-        "capabilities": ["select", "download", "rename", "delete", "replace"],
+        "capabilities": ["select", "rename", "delete"],
         "plugins": [],
         "fileConnector": "/Scripts/filemanager/connectors/mvc/filemanager"
     },

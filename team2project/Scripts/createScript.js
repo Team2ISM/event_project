@@ -151,14 +151,20 @@ window.onload = function () {
         if (value) locat.val(value);
     }, 10);
     
-    editor = CKEDITOR.inline('Description', { magicline_everywhere:true, elementMode: 3 });
-    var label = $('label[for="Description"]');
-    editor.on('blur', function (e) {
+    editor = CKEDITOR.replace('Description', { colordialog:true });
+    var content, label = $('label[for="Description"]'),
+        textDescr = $('#TextDescription');
+        
+    editor.on('blur', function () {
         if (editor.getData().length > 0) return;
         label.removeClass('active');
     });
     editor.on('focus', function () {
+        if (!content) content = $(editor._.editable.$);
         label.addClass('active');
+    });
+    editor.on('change', function () {
+        textDescr.val(content.children().text());
     });
 
     CKEDITOR.on('dialogDefinition', function (event) {
