@@ -44,15 +44,12 @@ namespace team2project.Controllers
 
         IUserDataProvider data;
         EventManager eventManager;
-        string unconfirmedUserMail;
-
 
 
         public UserController(IUserDataProvider data, EventManager eventManager)
         {
             this.data = data;
             this.eventManager = eventManager;
-            unconfirmedUserMail = "";
         }
 
         public ActionResult Index()
@@ -207,7 +204,6 @@ namespace team2project.Controllers
                     SendActivationLink(user);
 
                     return RedirectToAction("ConfirmRegistration", "User");
-                    //ViewBag.RegistrationSuccess = "Пожалуйста, подтвердите регистрацию перейдя по ссылке на вашей почте";
                 }
                 else
                 {
@@ -270,16 +266,6 @@ namespace team2project.Controllers
                 }
             }
             return View();
-        }
-
-        [Authorize]
-        [HttpGet]
-        public ActionResult MyEvents()
-        {
-            IList<Event> events = eventManager.GetByAuthorMail(User.Identity.Name);
-            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-
-            return View(eventsModels);
         }
 
         [Authorize]
