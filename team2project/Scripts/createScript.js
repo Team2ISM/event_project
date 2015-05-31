@@ -151,7 +151,7 @@ window.onload = function () {
         if (value) locat.val(value);
     }, 10);
     
-    editor = CKEDITOR.replace('Description', { colordialog:true });
+    editor = CKEDITOR.replace('Description', { /*magicline_everywhere : true*/});
     var content, label = $('label[for="Description"]'),
         textDescr = $('#TextDescription'),
         description = $('#Description');
