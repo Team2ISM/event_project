@@ -29,7 +29,9 @@
     </style>
     <style type="text/css">
         label[for="Description"] {
-            position:relative;
+            left: 0;
+            position: relative;
+            top: -5px;
         }
         .cke_textarea_inline {
             overflow: hidden;
@@ -38,7 +40,7 @@
             border-width: medium medium 1px;
         }
         .cke_focus {
-            overflow: scroll;
+            /*overflow: scroll;*/
         }
     </style>
 }
@@ -50,6 +52,7 @@
     <br />
     @using (Html.BeginForm("Create", "EventController", FormMethod.Post)) {
         @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.TextDescription)
         @Html.ValidationSummary(true)
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.Title, "Название")
