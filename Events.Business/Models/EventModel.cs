@@ -10,6 +10,8 @@ namespace Events.Business.Models
 
         public virtual string Description { get; set; }
 
+        public virtual string TextDescription { get; set; }
+
         public virtual DateTime? FromDate { get; set; }
 
         public virtual DateTime? ToDate { get; set; }

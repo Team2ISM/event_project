@@ -5,7 +5,7 @@
    
 
     <fieldset>    
-    <h5 class="blue-text">
+    <h5 class="blue-grey-text">
         <p>Оставьте свой комментарий</p>
     </h5>
         @Html.AntiForgeryToken()
@@ -39,7 +39,7 @@
             @Html.Captcha(Request.Url.Authority, "cptchid")
         </div>
         <p>
-            <button class="btn waves-effect waves-light blue right" type="submit">Отправить</button>
+            <button class="btn waves-effect waves-light dark-blue-grey left" type="submit">Опубликовать</button>
         </p>
     </fieldset>
 }

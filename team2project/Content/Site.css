@@ -153,3 +153,15 @@ nav li a
 	font-size: 24px;
 	font-weight: bold;
 }
+.dark-blue-grey {
+    background-color: #607D8B !important;
+}
+.dark-blue-grey.lighten {
+    background-color: #808080 !important;
+}
+.dark-blue-grey.accent {
+    background-color: #455A64 !important;
+}
+.dark-text {
+    color: #727272 !important;
+}

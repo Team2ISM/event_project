@@ -126,7 +126,7 @@
         }, self);
 
         self.updateAccent = ko.computed(function () {
-            return this.active() ? "lighten-2" : "accent-3";
+            return this.active() ? "lighten" : "accent";
         }, self);
 
         self.changeToogleText = ko.computed(function () {

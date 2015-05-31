@@ -182,7 +182,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
-    <Compile Include="Scripts\filemanager\connectors\mvc\FilemanagerController.cs" />
+    <Compile Include="Controllers\FilemanagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SubscribersController.cs" />
     <Compile Include="Controllers\UserController.cs" />

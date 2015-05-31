@@ -4,9 +4,12 @@
 
 
 @model team2project.Models.EventViewModel
+@using System
 @using System.Globalization
 @using team2project.Models
 @using System.Collections.Generic
+@using System.Web
+@using team2project.Helpers
 
 @section css{
     @Styles.Render("~/Content/Home/Details.css")
@@ -16,16 +19,16 @@
         <fieldset>
             
             <div class="row first-row">
-                <div class=" month-date-block left border-blue center no-padding">
-                    <div class="white-text bg-blue month">
+                <div class="month-date-block left border-blue-grey center no-padding">
+                    <div class="white-text bg-blue-grey month">
                         @CheckDateIfNull(Model.FromDate, "MMMM")
                     </div>
-                    <div class="day color-blue">
+                    <div class="day color-blue-grey">
                         @CheckDateIfNull(Model.FromDate, "dd")
                     </div>
                 </div>
                 <div class="title-date-block inline-block left">
-                    <div class="blue-text event-title inline-block"><h3 class="inline-block no-margin">@Model.Title</h3></div>
+                    <div class="event-title inline-block"><h3 class="inline-block no-margin">@Model.Title</h3></div>
                     <div></div>
                     <div class="inline-block">
                         <span class="text-bold large-font">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy года, H:mm ")</span>
@@ -37,25 +40,31 @@
                         <span class="text-bold large-font">@Model.Location</span>
                     </div>
                 </div>
-                <div class="button-block right">
-                    @if (Model.ToDate > DateTime.Now)
-                    {
-                        <button id="submit" class="btn waves-effect waves-light blue right margin-right large-font">Подождите</button>
-                    }
-                    <div class="medium-font center subscribers">
+                
+                
+            </div>
+            <div class="row medium-font" id="desc">
+                <div>
+                    <p class="text-align-justify">@Model.Description.ToHtmlString()</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="button-block">
+                    <div class="medium-font right subscribers">
                         Уже подписалось:
                         @{
 
                             Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });
                         }
                     </div>
+                    <div class="join-button">
+                        @if (Model.ToDate > DateTime.Now)
+                        {
+                            <button id="submit" class="btn waves-effect waves-light dark-blue-grey left margin-right large-font">Подождите</button>
+                        }
+                    </div>
                 </div>
                 
-            </div>
-            <div class="row medium-font" id="desc">
-                <div>
-                    <p class="text-align-justify">@Model.Description</p>
-                </div>
             </div>
         </fieldset>
     </form>
