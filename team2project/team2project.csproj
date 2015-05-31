@@ -888,7 +888,6 @@
     <Content Include="Scripts\filemanager\scripts\jquery.splitter\vgrabber.gif" />
     <Content Include="Scripts\filemanager\scripts\jquery.tablesorter-2.7.2.min.js" />
     <Content Include="Scripts\filemanager\scripts\languages\1en-gb.js" />
-    <Content Include="Scripts\filemanager\scripts\languages\1en.js" />
     <Content Include="Scripts\filemanager\scripts\languages\ru.js" />
     <Content Include="Scripts\filemanager\scripts\zeroclipboard\.gitignore" />
     <Content Include="Scripts\filemanager\scripts\zeroclipboard\copy.js" />
@@ -1076,6 +1075,8 @@
     <Content Include="Scripts\filemanager\scripts\dropzone\src\dropzone.coffee" />
     <Content Include="Scripts\filemanager\scripts\dropzone\test.sh" />
     <Content Include="Scripts\filemanager\scripts\dropzone\test\test.coffee" />
+    <None Include="Properties\PublishProfiles\subbotnik - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\subbotnik - Web Deploy.pubxml" />
     <None Include="Scripts\filemanager\scripts\filemanager.config.js.1" />
     <Content Include="Scripts\filemanager\scripts\zeroclipboard\.jshintrc" />
     <Content Include="Scripts\filemanager\scripts\zeroclipboard\.npmignore" />
@@ -1128,7 +1129,6 @@
     <Content Include="Scripts\register.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\listScript.js" />
-    <Content Include="Views\Mails\email.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1153,6 +1153,7 @@
     <Content Include="Views\User\MyEvents.cshtml" />
     <Content Include="Views\User\MyPastEvents.cshtml" />
     <Content Include="Views\User\MyFutureEvents.cshtml" />
+    <Content Include="Views\Mails\email.cshtml" />
     <None Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Welcome.cshtml" />
     <Content Include="Views\User\ThankYouPage.cshtml" />
@@ -1188,9 +1189,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\EventNotFound.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fonts\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Events.Business\Events.Business.csproj">
