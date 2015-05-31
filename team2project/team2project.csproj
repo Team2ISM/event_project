@@ -257,6 +257,8 @@
     <Content Include="Scripts\ckeditor\plugins\about\dialogs\about.js" />
     <Content Include="Scripts\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
     <Content Include="Scripts\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\samples\autogrow.html" />
     <Content Include="Scripts\ckeditor\plugins\clipboard\dialogs\paste.js" />
     <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
     <Content Include="Scripts\ckeditor\plugins\dialog\dialogDefinition.js" />

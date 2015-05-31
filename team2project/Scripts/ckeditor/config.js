@@ -37,7 +37,10 @@ CKEDITOR.editorConfig = function( config ) {
 	// Simplify the dialog windows.
 	config.removeDialogTabs = 'image:advanced;link:advanced';
 
-	config.extraPlugins = 'magicline';
+	config.extraPlugins = 'autogrow';
+	config.autoGrow_minHeight = 100;
+	config.autoGrow_maxHeight = 600;
+
 	config.language = 'ru';
 	config.filebrowserBrowseUrl = '/Scripts/filemanager/index.html';
 };
