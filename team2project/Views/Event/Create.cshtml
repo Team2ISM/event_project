@@ -46,7 +46,7 @@
 }
 
 
-<div class="container z-depth-1 m6">
+<div class="container container-wider z-depth-3 m6">
 
     <h5>@ViewBag.Title</h5>
     <br />
@@ -78,7 +78,7 @@
                 @Html.ValidationMessageFor(m => m.ToDate)
             </div>
         </div>
-        <div class="input-field col s12 m12 l12">
+        <div class="input-field col s12 m12 l12 center">
             <div class="m-left" id ="city">@Html.LabelFor(m => m.Location, "Город")</div>
             <div class="ui-widget m-left">
                 @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
