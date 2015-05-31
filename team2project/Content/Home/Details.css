@@ -132,9 +132,10 @@ textarea
 }
 .month-date-block
 {
-    min-width: 120px;
+    min-width: 75px;
+    width: 10%;
     height: 100%;
-    margin: 0 20px;
+    margin-left:20px;
 }
 .color-blue-grey
 {
@@ -153,7 +154,7 @@ textarea
     font-size: 50px;
 }
 .month {
-    font-size: x-large;
+    font-size: large;
 }
 .no-margin{
     margin: 0;
@@ -173,11 +174,18 @@ textarea
     margin-bottom: 10px;
 }
 .title-date-block{
+    width: 50%;
     color: #212121;
 }
 .button-block{
+    width: 25%;
     padding: 0;
 }
 .inline-block{
     display: inline-block
+}
+.join-button button{
+    width: 100%;
+    padding: 0 5px;
+    font-size: 80%;
 }
