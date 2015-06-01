@@ -17,7 +17,7 @@ using Events.Business.Models;
 using Events.Business.Interfaces;
 using Events.NHibernateDataProvider;
 using team2project.Models;
-
+using Newtonsoft.Json;
 using System.IO;
 
 namespace team2project.Controllers
@@ -88,20 +88,15 @@ namespace team2project.Controllers
                         string decodedUrl = "";
                         if (string.IsNullOrEmpty(returnUrl) == false)
                             decodedUrl = Server.UrlDecode(returnUrl);
+                        FormsAuthentication.SetAuthCookie(user.Email, false);
 
-                        //((ClaimsIdentity)User.Identity).AddClaim(new Claim("Fullname", user.Name + " " + user.Surname));
-                        //((ClaimsIdentity)User.Identity).AddClaim(new Claim("Email", user.Email));
-                        var claims = new List<Claim>();
-                        claims.Add(new Claim(ClaimTypes.Name, "MyUser"));
-                        claims.Add(new Claim(ClaimTypes.NameIdentifier, "MyUserID"));
-                        claims.Add(new Claim(ClaimTypes.Role, "MyRole"));
-                        var claimsIdentity = new ClaimsIdentity(claims, "CustomApiKeyAuth");
-                        //FormsAuthentication.SetAuthCookie(user.Email, false);
+                        string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + user.Location;
+                        var json = JsonConvert.SerializeObject(userData);
 
-                        var principal = new ClaimsPrincipal(new[] { claimsIdentity });
-                        Thread.CurrentPrincipal = principal;
-                        System.Web.HttpContext.Current.User = principal;
-
+                        var userCookie = new HttpCookie("user", json);
+                        userCookie.Expires.AddDays(365);
+                        HttpContext.Response.SetCookie(userCookie);
+                        
                         if (string.IsNullOrEmpty(decodedUrl) == false && decodedUrl.ToLower() != "/user/thankyoupage"
                              && decodedUrl.ToLower() != "/user/confirm")
                         {
@@ -146,7 +141,16 @@ namespace team2project.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
-            userManager.Clear();
+
+            if (Request.Cookies["user"] != null)
+            {
+                var user = new HttpCookie("user")
+                {
+                    Expires = DateTime.Now.AddDays(-1),
+                    Value = null
+                };
+                Response.Cookies.Add(user);
+            }
             return RedirectToAction("Index", "Event");
         }
 
@@ -212,6 +216,14 @@ namespace team2project.Controllers
                 user.IsActive = true;
                 userManager.UpdateUser(user);
                 FormsAuthentication.SetAuthCookie(user.Email, false);
+
+                string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + user.Location;
+                var json = JsonConvert.SerializeObject(userData);
+
+                var userCookie = new HttpCookie("user", json);
+                userCookie.Expires.AddDays(365);
+                HttpContext.Response.SetCookie(userCookie);
+
                 return RedirectToRoute("Welcome", "User");
             }
             return RedirectToAction("Index", "Event");
@@ -288,7 +300,7 @@ namespace team2project.Controllers
             return isValid;
         }
 
-        
+
 
         private void SendActivationLink(UserViewModel user)
         {
