@@ -101,7 +101,7 @@ namespace team2project.Controllers
         {
             commentManager.DeleteByEventId(id);
             eventManager.Delete(id);
-            return RedirectToRoute("MyEvents");
+            return RedirectToRoute("FutureEvents");
         }
 
         [HttpPost]

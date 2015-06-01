@@ -9,8 +9,6 @@ namespace Events.Business.Interfaces
 
         Event GetById(string id);
 
-        IList<Event> GetByAuthorMail(string email);
-
         IList<Event> GetAuthorPastEvents(string email);
 
         IList<Event> GetAuthorFutureEvents(string email);

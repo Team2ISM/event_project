@@ -390,6 +390,7 @@
     <Content Include="Scripts\ckeditor\skins\moonocolor\images\lock.png" />
     <Content Include="Scripts\ckeditor\skins\moonocolor\images\refresh.png" />
     <Content Include="Scripts\ckeditor\styles.js" />
+    <Content Include="Scripts\deleteButton.js" />
     <Content Include="Scripts\details.js" />
     <Content Include="Scripts\filemanager\.gitignore" />
     <Content Include="Scripts\filemanager\images\fileicons\aac.png" />
@@ -1150,7 +1151,6 @@
     <Content Include="Views\Subscribers\GetSubscribers.cshtml" />
     <Content Include="Views\Subscribers\Index.cshtml" />
     <Content Include="Views\User\email.cshtml" />
-    <Content Include="Views\User\MyEvents.cshtml" />
     <Content Include="Views\User\MyPastEvents.cshtml" />
     <Content Include="Views\User\MyFutureEvents.cshtml" />
     <Content Include="Views\User\ConfirmRegistration.cshtml" />
