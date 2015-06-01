@@ -15,6 +15,7 @@ function subscribe() {
             location.assign('/User/Login');
         }
         reloadCount();
+        ReloadSubscr($('#subscribers_onhover'));
     });
 }
 function unsubscribe() {
@@ -29,6 +30,7 @@ function unsubscribe() {
             location.assign('/user/login');
         }
         reloadCount();
+        ReloadSubscr($('#subscribers_onhover'));
     });
 }
 var button, id, link;
