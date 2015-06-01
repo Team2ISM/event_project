@@ -133,9 +133,9 @@
 })(jQuery);
 var locat = $("#location"), editor;
 window.onload = function () {
-    window.setTimeout(function () {
-        var combobox = $("#combobox");
-        var value;
+    editor = CKEDITOR.replace('Description', { /*magicline_everywhere : true*/ });
+
+        var combobox = $("#combobox"), value;
         if (city) {
             var arr = combobox.children();
             arr.each(function (i, val) {
@@ -149,47 +149,55 @@ window.onload = function () {
         combobox.combobox();
         locat.val(combobox.children()[0].innerHTML);
         if (value) locat.val(value);
-    }, 10);
     
-    editor = CKEDITOR.inline('Description', { magicline_everywhere:true, elementMode: 3 });
-    var label = $('label[for="Description"]');
-    editor.on('blur', function (e) {
+    var content, label = $('label[for="Description"]'),
+        textDescr = $('#TextDescription'),
+        description = $('#Description');
+        
+    editor.on('blur', function () {
         if (editor.getData().length > 0) return;
         label.removeClass('active');
     });
+
     editor.on('focus', function () {
+        if (!content) content = $(editor._.editable.$);
         label.addClass('active');
     });
 
+    editor.on('change', function () {
+        textDescr.val(content.children().text());
+        description.html(editor.getData());
+    });
+
     CKEDITOR.on('dialogDefinition', function (event) {
-        var editor = event.editor;
-        var dialogDefinition = event.data.definition;
-        var dialogName = event.data.name;
+        var editor = event.editor,
+            dialogDefinition = event.data.definition,
+            dialogName = event.data.name;
+        if (dialogName === 'image') {
+            var cleanUpFuncRef = CKEDITOR.tools.addFunction(function () {
+                // Do the clean-up of filemanager here (called when an image was selected or cancel was clicked)
+                $('#fm-iframe').remove();
+                $("body").css("overflow-y", "scroll");
+            });
 
-        var cleanUpFuncRef = CKEDITOR.tools.addFunction(function () {
-            // Do the clean-up of filemanager here (called when an image was selected or cancel was clicked)
-            $('#fm-iframe').remove();
-            $("body").css("overflow-y", "scroll");
-        });
+            var tabCount = dialogDefinition.contents.length;
+            for (var i = 0; i < tabCount; i++) {
+                var browseButton = dialogDefinition.contents[i].get('browse');
 
-        var tabCount = dialogDefinition.contents.length;
-        for (var i = 0; i < tabCount; i++) {
-            var browseButton = dialogDefinition.contents[i].get('browse');
+                if (browseButton !== null) {
+                    browseButton.hidden = false;
+                    browseButton.onClick = function (dialog, i) {
+                        editor._.filebrowserSe = this;
+                        var iframe = $("<iframe id='fm-iframe' class='fm-modal'/>").attr({
+                            src: '/Scripts/filemanager/index.html' + // Change it to wherever  Filemanager is stored.
+                                '?CKEditorFuncNum=' + CKEDITOR.instances[event.editor.name]._.filebrowserFn +
+                                '&CKEditorCleanUpFuncNum=' + cleanUpFuncRef +
+                                '&langCode=en' +
+                                '&CKEditor=' + event.editor.name
+                        });
 
-            if (browseButton !== null) {
-                browseButton.hidden = false;
-                browseButton.onClick = function (dialog, i) {
-                    editor._.filebrowserSe = this;
-                    var iframe = $("<iframe id='fm-iframe' class='fm-modal'/>").attr({
-                        src: '/Scripts/filemanager/index.html' + // Change it to wherever  Filemanager is stored.
-                            '?CKEditorFuncNum=' + CKEDITOR.instances[event.editor.name]._.filebrowserFn +
-                            '&CKEditorCleanUpFuncNum=' + cleanUpFuncRef +
-                            '&langCode=en' +
-                            '&CKEditor=' + event.editor.name
-                    });
-
-                    $("body").append(iframe);
-                    $("body").css("overflow-y", "hidden");  // Get rid of possible scrollbars in containing document
+                        $("body").append(iframe).css("overflow-y", "hidden");  // Get rid of possible scrollbars in containing document
+                    }
                 }
             }
         }

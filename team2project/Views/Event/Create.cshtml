@@ -29,7 +29,9 @@
     </style>
     <style type="text/css">
         label[for="Description"] {
-            position:relative;
+            left: 0;
+            position: relative;
+            top: -5px;
         }
         .cke_textarea_inline {
             overflow: hidden;
@@ -37,19 +39,23 @@
             border-style: none none solid;
             border-width: medium medium 1px;
         }
+        .cke_dialog_ui_input_select {
+            display: inline-block;
+        }
         .cke_focus {
-            overflow: scroll;
+            /*overflow: scroll;*/
         }
     </style>
 }
 
 
-<div class="container z-depth-1 m6">
+<div class="container container-wider z-depth-3 m6">
 
     <h5>@ViewBag.Title</h5>
     <br />
     @using (Html.BeginForm("Create", "EventController", FormMethod.Post)) {
         @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.TextDescription)
         @Html.ValidationSummary(true)
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.Title, "Название")
@@ -75,7 +81,7 @@
                 @Html.ValidationMessageFor(m => m.ToDate)
             </div>
         </div>
-        <div class="input-field col s12 m12 l12">
+        <div class="input-field col s12 m12 l12 center">
             <div class="m-left" id ="city">@Html.LabelFor(m => m.Location, "Город")</div>
             <div class="ui-widget m-left">
                 @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
@@ -84,7 +90,7 @@
             @Html.ValidationMessageFor(m => m.Location)
 
         </div>
-        <button class="btn waves-effect waves-light blue" type="submit">@ViewBag.Button</button>
+        <button class="btn waves-effect waves-light dark-blue-grey" type="submit">@ViewBag.Button</button>
     }
 </div>
 <!--не работает-->
@@ -99,7 +105,6 @@
     @Scripts.Render("~/Scripts/script.js")
     @Scripts.Render("~/Scripts/jquery.datetimepicker.js")
     @Scripts.Render("~/Scripts/ckeditor/ckeditor.js")
-    @Scripts.Render("~/Scripts/ckeditor/adapters/jquery.js")
     @Scripts.Render("~/Scripts/createScript.js")
     @Scripts.Render("~/bundles/jqueryval")
 }

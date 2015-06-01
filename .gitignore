@@ -17,6 +17,7 @@ bld/
 [Oo]bj/
 .nuGet/
 .nuget/
+packages/
 
 # Roslyn cache directories
 *.ide/

@@ -49,21 +49,35 @@
         }
 
         this.deleteEvent = function (data, self) {
-            $.ajax({
-                url: url + "/admin/events/delete",
-                type: "POST",
-                data: {
-                    id: data.id()
-                },
-                success: function (response) {
-                    successHelper(response, function () {
-                        var events = self.events();
-                        ko.utils.arrayRemoveItem(events, data);
-                        self.events(events);
-                    });
-                },
-                error: function (er) {
-                    console.dir(er);
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                width: 400,
+                height: 200,
+                modal: true,
+                buttons: {
+                    "Удалить событие": function () {
+                        $(this).dialog("close");
+                        $.ajax({
+                            url: url + "/admin/events/delete",
+                            type: "POST",
+                            data: {
+                                id: data.id()
+                            },
+                            success: function (response) {
+                                successHelper(response, function () {
+                                    var events = self.events();
+                                    ko.utils.arrayRemoveItem(events, data);
+                                    self.events(events);
+                                });
+                            },
+                            error: function (er) {
+                                console.dir(er);
+                            }
+                        });
+                    },
+                    "Отмена": function () {
+                        $(this).dialog("close");
+                    }
                 }
             });
         }
@@ -97,10 +111,10 @@
 
     function EventModel(evnt, model) {
         var self = this;
-
+        debugger;
         this.id = ko.observable(evnt.Id);
         this.title = ko.observable(evnt.Title);
-        this.description = ko.observable(evnt.Description);
+        this.description = ko.observable(evnt.Description != null ? evnt.TextDescription : evnt.Description);
         this.location = ko.observable(evnt.Location);
         this.dateFrom = new Date(turnDate(evnt.FromDate));
         this.dateTo = new Date(turnDate(evnt.ToDate));
@@ -109,16 +123,20 @@
         this.toogleText = ko.observable("");
 
         self.shortDescription = ko.computed(function () {
-            var words = self.description().split(' ');
-            if (words.length <= 10) return self.description();
-            else 
+            if (self.description())
             {
-                var result = "";
-                for (var i = 0; i != 10; i++)
-                    result += " " + words[i];
-                return result + "...";
+                var words = self.description().split(' ');
+                if (words.length <= 10) return self.description();
+                else {
+                    var result = "";
+                    for (var i = 0; i != 10; i++)
+                        result += " " + words[i];
+                    return result + "...";
+                }
             }
-        }, self);
+
+            return "";
+        });
 
         self.isSeen = ko.computed(function () {
             var status = this.checked();
@@ -126,7 +144,7 @@
         }, self);
 
         self.updateAccent = ko.computed(function () {
-            return this.active() ? "lighten-2" : "accent-3";
+            return this.active() ? "lighten" : "accent";
         }, self);
 
         self.changeToogleText = ko.computed(function () {
@@ -170,7 +188,7 @@
         initFunc(self);
 
         self.deleteEvent = function (data) {
-            if (confirm("Вы действительно хотите удалить событие?")) adminAjaxHelper.deleteEvent(data, self);
+            adminAjaxHelper.deleteEvent(data, self);
         } 
     }
 

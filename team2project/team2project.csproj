@@ -185,7 +185,7 @@
     <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
-    <Compile Include="Scripts\filemanager\connectors\mvc\FilemanagerController.cs" />
+    <Compile Include="Controllers\FilemanagerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SubscribersController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -260,6 +260,8 @@
     <Content Include="Scripts\ckeditor\plugins\about\dialogs\about.js" />
     <Content Include="Scripts\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
     <Content Include="Scripts\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\autogrow\samples\autogrow.html" />
     <Content Include="Scripts\ckeditor\plugins\clipboard\dialogs\paste.js" />
     <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
     <Content Include="Scripts\ckeditor\plugins\dialog\dialogDefinition.js" />
@@ -329,6 +331,9 @@
     <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
     <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
     <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Scripts\ckeditor\plugins\tableresize\dev\tableresize.html" />
+    <Content Include="Scripts\ckeditor\plugins\tableresize\plugin.js" />
+    <Content Include="Scripts\ckeditor\plugins\tableresize\samples\tableresize.html" />
     <Content Include="Scripts\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
     <Content Include="Scripts\ckeditor\plugins\table\dialogs\table.js" />
     <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\ciframe.html" />
@@ -892,7 +897,6 @@
     <Content Include="Scripts\filemanager\scripts\jquery.splitter\vgrabber.gif" />
     <Content Include="Scripts\filemanager\scripts\jquery.tablesorter-2.7.2.min.js" />
     <Content Include="Scripts\filemanager\scripts\languages\1en-gb.js" />
-    <Content Include="Scripts\filemanager\scripts\languages\1en.js" />
     <Content Include="Scripts\filemanager\scripts\languages\ru.js" />
     <Content Include="Scripts\filemanager\scripts\zeroclipboard\.gitignore" />
     <Content Include="Scripts\filemanager\scripts\zeroclipboard\copy.js" />
@@ -1080,6 +1084,8 @@
     <Content Include="Scripts\filemanager\scripts\dropzone\src\dropzone.coffee" />
     <Content Include="Scripts\filemanager\scripts\dropzone\test.sh" />
     <Content Include="Scripts\filemanager\scripts\dropzone\test\test.coffee" />
+    <None Include="Properties\PublishProfiles\subbotnik - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\subbotnik - Web Deploy.pubxml" />
     <None Include="Scripts\filemanager\scripts\filemanager.config.js.1" />
     <Content Include="Scripts\filemanager\scripts\zeroclipboard\.jshintrc" />
     <Content Include="Scripts\filemanager\scripts\zeroclipboard\.npmignore" />
@@ -1132,7 +1138,6 @@
     <Content Include="Scripts\register.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\listScript.js" />
-    <Content Include="Views\Mails\email.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1156,6 +1161,7 @@
     <Content Include="Views\User\email.cshtml" />
     <Content Include="Views\User\MyPastEvents.cshtml" />
     <Content Include="Views\User\MyFutureEvents.cshtml" />
+    <Content Include="Views\Mails\email.cshtml" />
     <Content Include="Views\User\ConfirmRegistration.cshtml" />
     <None Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Welcome.cshtml" />
@@ -1193,9 +1199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Event\EventNotFound.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Fonts\packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Events.Business\Events.Business.csproj">

@@ -26,6 +26,8 @@
     <property name="DateOfCreation" access="property" type="datetime"></property>
     
     <property name="AuthorId" access="property" type="string"></property>
+
+    <property name="TextDescription" access="property" type="string"></property>
     
     <filter name ="effectiveDate" condition ="ToDate >= :asOfDate"/>
     
