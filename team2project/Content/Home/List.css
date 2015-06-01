@@ -19,7 +19,7 @@
     padding-left: 8px;
 }
 tbody tr {
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .container
@@ -62,7 +62,9 @@ table a
 
 overflow: hidden;
 }
-.seen {}
+.seen {
+    border: none;
+}
 .not-seen{
     border: 1px solid gray;
 }
