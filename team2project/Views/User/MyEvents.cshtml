@@ -15,8 +15,8 @@
 <div class="container">
 <h2 class ="center blue-grey-text">Мои события</h2>
     <div class="width80">
-        @Html.RouteLink("Прошедшие события", "PastEvents")
-        @Html.RouteLink("Текущие/будущие события", "FutureEvents")
+        @Html.RouteLink("Прошедшие события", "PastEvents", htmlAttributes: new { Class = "blue-grey-text" })
+        @Html.RouteLink("Текущие/будущие события", "FutureEvents", htmlAttributes: new { Class = "blue-grey-text" })
     </div>
 <table class="striped width80 centered" >
         <thead>
