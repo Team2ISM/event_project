@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Security.Claims;
+using System.Threading;
 
 using System.Net;
 using System.Net.Mime;
@@ -42,13 +45,13 @@ namespace team2project.Controllers
         //
         // GET: /User/
 
-        IUserDataProvider data;
+        UserManager userManager;
         EventManager eventManager;
 
 
-        public UserController(IUserDataProvider data, EventManager eventManager)
+        public UserController(UserManager userManager, EventManager eventManager)
         {
-            this.data = data;
+            this.userManager = userManager;
             this.eventManager = eventManager;
         }
 
@@ -77,7 +80,7 @@ namespace team2project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = data.GetByMail(email);
+                var user = userManager.GetByMail(email);
                 if (user != null && isValid(email, password))
                 {
                     if (user.IsActive == true)
@@ -86,7 +89,18 @@ namespace team2project.Controllers
                         if (string.IsNullOrEmpty(returnUrl) == false)
                             decodedUrl = Server.UrlDecode(returnUrl);
 
-                        FormsAuthentication.SetAuthCookie(email, false);
+                        //((ClaimsIdentity)User.Identity).AddClaim(new Claim("Fullname", user.Name + " " + user.Surname));
+                        //((ClaimsIdentity)User.Identity).AddClaim(new Claim("Email", user.Email));
+                        var claims = new List<Claim>();
+                        claims.Add(new Claim(ClaimTypes.Name, "MyUser"));
+                        claims.Add(new Claim(ClaimTypes.NameIdentifier, "MyUserID"));
+                        claims.Add(new Claim(ClaimTypes.Role, "MyRole"));
+                        var claimsIdentity = new ClaimsIdentity(claims, "CustomApiKeyAuth");
+                        //FormsAuthentication.SetAuthCookie(user.Email, false);
+
+                        var principal = new ClaimsPrincipal(new[] { claimsIdentity });
+                        Thread.CurrentPrincipal = principal;
+                        System.Web.HttpContext.Current.User = principal;
 
                         if (string.IsNullOrEmpty(decodedUrl) == false && decodedUrl.ToLower() != "/user/thankyoupage"
                              && decodedUrl.ToLower() != "/user/confirm")
@@ -115,7 +129,7 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult UnconfirmedUser(string email)
         {
-            var user = data.GetByMail(email);
+            var user = userManager.GetByMail(email);
             if (user != null && user.IsActive == false)
             {
                 SendActivationLink(AutoMapper.Mapper.Map<UserViewModel>(user));
@@ -132,6 +146,7 @@ namespace team2project.Controllers
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();
+            userManager.Clear();
             return RedirectToAction("Index", "Event");
         }
 
@@ -146,26 +161,10 @@ namespace team2project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = data.GetByMail(email);
+                var user = userManager.GetByMail(email);
                 if (user != null)
                 {
-                    var crypto = new SimpleCrypto.PBKDF2();
-
-                    string newPassword = GeneratePassword();
-
-                    var encrPass = crypto.Compute(newPassword);
-
-                    user.Password = encrPass;
-                    user.PasswordSalt = crypto.Salt;
-
-                    data.UpdateUser(user);
-
-                    MailMessage msg = new MailMessage();
-
-                    string body = user.Name + ", ваш пароль: \n" + newPassword;
-                    string subject = "Новый пароль";
-
-                    EmailSender(user.Email, body, subject);
+                    userManager.ForgotPassword(user);
                 }
             }
             return RedirectToAction("ThankYouPage", "User");
@@ -187,20 +186,10 @@ namespace team2project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userExist = data.GetByMail(user.Email);
+                var userExist = userManager.GetByMail(user.Email);
                 if (userExist == null)
                 {
-                    var crypto = new SimpleCrypto.PBKDF2();
-
-                    var encrPass = crypto.Compute(user.Password);
-
-                    User newUser = AutoMapper.Mapper.Map<User>(user);
-                    newUser.Password = encrPass;
-                    newUser.PasswordSalt = crypto.Salt;
-                    newUser.IsActive = false;
-
-                    data.CreateUser(newUser);
-
+                    userManager.RegisterUser(AutoMapper.Mapper.Map<User>(user));
                     SendActivationLink(user);
 
                     return RedirectToAction("ConfirmRegistration", "User");
@@ -217,13 +206,12 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Activate(string id)
         {
-            var user = data.GetById(id);
+            var user = userManager.GetById(id);
             if (user != null && user.IsActive == false)
             {
                 user.IsActive = true;
-                data.UpdateUser(user);
+                userManager.UpdateUser(user);
                 FormsAuthentication.SetAuthCookie(user.Email, false);
-                UserViewModel model = AutoMapper.Mapper.Map<UserViewModel>(user);
                 return RedirectToRoute("Welcome", "User");
             }
             return RedirectToAction("Index", "Event");
@@ -248,16 +236,11 @@ namespace team2project.Controllers
                 var crypto = new SimpleCrypto.PBKDF2();
 
                 var mail = User.Identity.Name;
-                User user = data.GetByMail(mail);
+                User user = userManager.GetByMail(mail);
 
                 if (user.Password == crypto.Compute(oldPassword, user.PasswordSalt))
                 {
-                    var encrPass = crypto.Compute(password);
-
-                    user.Password = encrPass;
-                    user.PasswordSalt = crypto.Salt;
-
-                    data.UpdateUser(user);
+                    userManager.ChangePassword(user, password);
                     ViewBag.PasswordSuccess = "Пароль изменен";
                 }
                 else
@@ -293,7 +276,7 @@ namespace team2project.Controllers
             var crypto = new SimpleCrypto.PBKDF2();
             bool isValid = false;
 
-            User user = data.GetByMail(email);
+            User user = userManager.GetByMail(email);
             if (user != null)
             {
                 if (user.Password == crypto.Compute(password, user.PasswordSalt))
@@ -305,19 +288,7 @@ namespace team2project.Controllers
             return isValid;
         }
 
-        private string GeneratePassword()
-        {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[8];
-            var random = new Random();
-
-            for (int i = 0; i < stringChars.Length; i++)
-            {
-                stringChars[i] = chars[random.Next(chars.Length)];
-            }
-
-            return new String(stringChars);
-        }
+        
 
         private void SendActivationLink(UserViewModel user)
         {
@@ -329,29 +300,8 @@ namespace team2project.Controllers
             body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
             string subject = "Подтверждение регистрации";
             string newBody = RenderPartialViewToString("email", activationLink);
-            EmailSender(user.Email, newBody, subject);
-        }
-
-        private void EmailSender(string userEmail, string body, string subject)
-        {
-            MailMessage msg = new MailMessage();
-
-            msg.From = new MailAddress("team2project222@gmail.com");
-            msg.To.Add(userEmail);
-            msg.Subject = subject;
-            msg.IsBodyHtml = true;
-            msg.Body = body;
-
-            ContentType mimeType = new System.Net.Mime.ContentType("text/html");
-            AlternateView alternate = AlternateView.CreateAlternateViewFromString(body, mimeType);
-            msg.AlternateViews.Add(alternate);
-
-            msg.Priority = MailPriority.High;
-
-            SmtpClient client = new SmtpClient();
-
-            client.Send(msg);
-        }
+            userManager.EmailSender(user.Email, newBody, subject);
+        }  
 
     }
 }
