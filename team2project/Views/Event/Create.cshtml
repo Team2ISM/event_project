@@ -1,6 +1,4 @@
-﻿
-
-@model team2project.Models.EventViewModel
+﻿@model team2project.Models.EventViewModel
 @using System.Globalization
 @section css{
     @Styles.Render("~/Content/Home/List.css")
@@ -12,20 +10,20 @@
     @Styles.Render("~/Content/Events/CreatePage.css")
     @Styles.Render("~/Content/Site.css")
     <style type="text/css">
-    .fm-modal {
-        z-index: 10011; /** Because CKEditor image dialog was at 10010 */
-        width:80%;
-        height:98%;
-        top: 3%;
-        left:10%;
-        border:0;
-        position:fixed;
-        -moz-box-shadow: 0px 1px 5px 0px #656565;
-        -webkit-box-shadow: 0px 1px 5px 0px #656565;
-        -o-box-shadow: 0px 1px 5px 0px #656565;
-        box-shadow: 0px 1px 5px 0px #656565;
-        filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=5);
-    }
+        .fm-modal {
+            z-index: 10011; /** Because CKEditor image dialog was at 10010 */
+            width: 80%;
+            height: 98%;
+            top: 3%;
+            left: 10%;
+            border: 0;
+            position: fixed;
+            -moz-box-shadow: 0px 1px 5px 0px #656565;
+            -webkit-box-shadow: 0px 1px 5px 0px #656565;
+            -o-box-shadow: 0px 1px 5px 0px #656565;
+            box-shadow: 0px 1px 5px 0px #656565;
+            filter: progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=180, Strength=5);
+        }
     </style>
     <style type="text/css">
         label[for="Description"] {
@@ -33,15 +31,18 @@
             position: relative;
             top: -5px;
         }
+
         .cke_textarea_inline {
             overflow: hidden;
             border-color: -moz-use-text-color -moz-use-text-color #9e9e9e;
             border-style: none none solid;
             border-width: medium medium 1px;
         }
+
         .cke_dialog_ui_input_select {
             display: inline-block;
         }
+
         .cke_focus {
             /*overflow: scroll;*/
         }
@@ -53,7 +54,8 @@
 
     <h5>@ViewBag.Title</h5>
     <br />
-    @using (Html.BeginForm("Create", "EventController", FormMethod.Post)) {
+    @using (Html.BeginForm("Create", "EventController", FormMethod.Post))
+    {
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.TextDescription)
         @Html.ValidationSummary(true)
@@ -62,13 +64,13 @@
             @Html.EditorFor(m => m.Title)
             @Html.ValidationMessageFor(m => m.Title)
         </div>
-        
+
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.Description, "Описание")
             @Html.EditorFor(m => m.Description)
             @Html.ValidationMessageFor(m => m.Description)
         </div>
-        
+
         <div class="row">
             <div class="input-field col s12 m6">
                 @Html.LabelFor(m => m.FromDate, "От")
@@ -82,7 +84,7 @@
             </div>
         </div>
         <div class="input-field col s12 m12 l12 center">
-            <div class="m-left" id ="city">@Html.LabelFor(m => m.Location, "Город")</div>
+            <div class="m-left" id="city">@Html.LabelFor(m => m.Location, "Город")</div>
             <div class="ui-widget m-left">
                 @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
             </div>

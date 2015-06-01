@@ -25,19 +25,19 @@ else
 <div class="@classes">
     @using (Html.BeginForm("Registration", "User", FormMethod.Post))
     {
-    <div class="row center">
-        <h3>Регистрация участников</h3>
-    </div>
-    <div class="row">
-        @Html.ValidationSummary(true)
-        @*@if (ViewBag.RegistrationSuccess != null)
-            {
-            <div id="registrationSuccess" class="col s12 m12 12 reg-mess center large-font">
-                @ViewBag.RegistrationSuccess
-            </div>
-            }
-            else
-            {
+        <div class="row center">
+            <h3>Регистрация участников</h3>
+        </div>
+        <div class="row">
+            @Html.ValidationSummary(true)
+            @*@if (ViewBag.RegistrationSuccess != null)
+                {
+                <div id="registrationSuccess" class="col s12 m12 12 reg-mess center large-font">
+                    @ViewBag.RegistrationSuccess
+                </div>
+                }
+                else
+                {
             *@<div class="input-field col s12 m6">
                 @Html.LabelFor(m => m.Name, "Имя")
                 @Html.EditorFor(m => m.Name)
@@ -73,7 +73,7 @@ else
             </div>
             <button class="btn waves-effect waves-light dark-blue-grey" type="submit">Зарегистрировать меня</button>
             @*}*@
-    </div>
+        </div>
     }
 </div>
 @section scripts{
