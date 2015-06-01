@@ -17,8 +17,17 @@
 @using (Html.BeginForm("Update", "User", FormMethod.Post, new { @class = "container z-depth-3" }))
 {
     <h5>Смена пароля</h5>
-    @Html.ValidationSummary(true)
-    @ViewBag.PasswordSuccess
+    if (@ViewBag.PasswordSuccess != null)
+    {
+        <div class="row">
+            <p class="center-align">
+                @ViewBag.PasswordSuccess
+            </p>      
+        </div> 
+    }
+    else
+    {
+        @Html.ValidationSummary(true)
     <div class="input-field col s12 m12 12">
         @Html.LabelFor(m => m.Password, "Старый пароль")
         <input type="password" id="oldPassword" name="oldPassword" />
@@ -35,4 +44,5 @@
         @Html.ValidationMessageFor(m => m.RepeatPassword)
     </div>
     <button class="btn waves-effect waves-light dark-blue-grey" type="submit">Сменить пароль</button>
+    } 
 }
