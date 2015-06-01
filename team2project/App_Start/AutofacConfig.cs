@@ -18,6 +18,7 @@ namespace team2project
             builder.RegisterType<EventManager>();
             builder.RegisterType<CitiesManager>();
             builder.RegisterType<CommentManager>();
+            builder.RegisterType<UserManager>();
             builder.RegisterType<NHibernateEventDataProvider>()
                 .As<IEventDataProvider>();
             builder.RegisterType<NHibernateCitiesDataProvider>()

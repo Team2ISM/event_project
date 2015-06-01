@@ -11,6 +11,7 @@
     @Scripts.Render("~/bundles/knockout");
     @Scripts.Render("~/Scripts/adminScript.js")
     @Styles.Render("~/Content/jquery-ui.min.css")
+    @Scripts.Render("~/Scripts/jquery-ui.min.js")
 }
 <div class="container">
     <h2 class ="center dark-text">@ViewBag.Title</h2>
@@ -25,14 +26,19 @@
         </thead>
         <tbody data-bind="foreach: events">
             <tr data-bind="descriminateActive, css: isSeen" id="td-button-color">
-                <td data-bind="text: title"></td>
-                <td data-bind="text: shortDescription"></td>
-                <td data-bind="text: dateAndTime"></td>
-                <td data-bind="text: location"></td>
+                <td data-bind="text: title, click:goToDetails"></td>
+                <td data-bind="text: shortDescription, click:goToDetails"></td>
+                <td data-bind="text: dateAndTime, click:goToDetails"></td>
+                <td data-bind="text: location, click:goToDetails"></td>
                 <td><button id="visibleButton" class="btn waves-effect waves-light dark-blue-grey white-text" data-bind="text: toogleText, click: $data.toogleActive, css: updateAccent"></button></td>
                 <td><button class="btn waves-effect waves-light red white-text" data-bind="click: function(){$root.deleteEvent($data)}">Удалить</button></td>
-                <td><button class="btn waves-effect waves-light dark-blue-grey white-text" data-bind="click:goToDetails">Перейти на страницу события</button></td>
             </tr>
         </tbody>
     </table>
+    <div id="dialog-confirm" title="Удалить это событие?" style="display:none;">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0"></span>
+            Это событие будет удалено окончательно и не может быть восстановлено. Вы уверены?
+        </p>
+    </div>
 </div>
