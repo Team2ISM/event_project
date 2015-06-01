@@ -104,6 +104,18 @@ namespace team2project
             );
 
             routes.MapRoute(
+                name: "UnconfirmedUser",
+                url: "user/unconfirmed",
+                defaults: new { controller = "User", action = "UnconfirmedUser"}
+            );
+
+            routes.MapRoute(
+                name: "ConfirmRegistration",
+                url: "user/confirm",
+                defaults: new { controller = "User", action = "ConfirmRegistration"}
+            );
+
+            routes.MapRoute(
                 name: "Welcome",
                 url: "user/welcome",
                 defaults: new { controller = "User", action = "Welcome" }
