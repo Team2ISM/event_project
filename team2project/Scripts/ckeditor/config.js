@@ -41,6 +41,8 @@ CKEDITOR.editorConfig = function( config ) {
 	config.autoGrow_minHeight = 100;
 	config.autoGrow_maxHeight = 600;
 
+	config.extraPlugins += ',tableresize';
+
 	config.language = 'ru';
 	config.filebrowserBrowseUrl = '/Scripts/filemanager/index.html';
 };
