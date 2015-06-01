@@ -95,12 +95,6 @@
         <button class="btn waves-effect waves-light dark-blue-grey" type="submit">@ViewBag.Button</button>
     }
 </div>
-<!--не работает-->
-<script>
-    window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/d HH:mm") : " ") + "'");
-    window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm") : " ") + "'");
-    window.city = @Html.Raw("'" + (Model.Location != null ? Model.Location : " ") + "'");
-</script>
 
 @section scripts{
     @Scripts.Render("~/Scripts/jquery-ui.js")

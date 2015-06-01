@@ -1136,6 +1136,7 @@
     <Content Include="Scripts\MvcFoolproofJQueryValidation.min.js" />
     <Content Include="Scripts\MvcFoolproofValidation.min.js" />
     <Content Include="Scripts\register.js" />
+    <Content Include="Scripts\registrationScript.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\listScript.js" />
     <Content Include="Web.config" />
