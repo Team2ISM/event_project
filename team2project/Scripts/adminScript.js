@@ -49,21 +49,35 @@
         }
 
         this.deleteEvent = function (data, self) {
-            $.ajax({
-                url: url + "/admin/events/delete",
-                type: "POST",
-                data: {
-                    id: data.id()
-                },
-                success: function (response) {
-                    successHelper(response, function () {
-                        var events = self.events();
-                        ko.utils.arrayRemoveItem(events, data);
-                        self.events(events);
-                    });
-                },
-                error: function (er) {
-                    console.dir(er);
+            $("#dialog-confirm").dialog({
+                resizable: false,
+                width: 400,
+                height: 200,
+                modal: true,
+                buttons: {
+                    "Удалить событие": function () {
+                        $(this).dialog("close");
+                        $.ajax({
+                            url: url + "/admin/events/delete",
+                            type: "POST",
+                            data: {
+                                id: data.id()
+                            },
+                            success: function (response) {
+                                successHelper(response, function () {
+                                    var events = self.events();
+                                    ko.utils.arrayRemoveItem(events, data);
+                                    self.events(events);
+                                });
+                            },
+                            error: function (er) {
+                                console.dir(er);
+                            }
+                        });
+                    },
+                    "Отмена": function () {
+                        $(this).dialog("close");
+                    }
                 }
             });
         }
@@ -170,7 +184,7 @@
         initFunc(self);
 
         self.deleteEvent = function (data) {
-            if (confirm("Вы действительно хотите удалить событие?")) adminAjaxHelper.deleteEvent(data, self);
+            adminAjaxHelper.deleteEvent(data, self);
         } 
     }
 

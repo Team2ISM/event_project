@@ -48,7 +48,10 @@ namespace team2project.Controllers
             {
                 return View("EventNotFound");
             }
-
+            if(evntModel.AuthorId=="undefinded")
+            {
+                return View("~/Views/Error/Page404.cshtml");
+            }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             ViewData["Comments"] = commentManager.GetByEventId(id);
             return View(evntViewModel);
