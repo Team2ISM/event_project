@@ -100,7 +100,7 @@
 
         this.id = ko.observable(evnt.Id);
         this.title = ko.observable(evnt.Title);
-        this.description = ko.observable(evnt.Description);
+        this.description = ko.observable(evnt.Description != null ? evnt.TextDescription : evnt.Description);
         this.location = ko.observable(evnt.Location);
         this.dateFrom = new Date(turnDate(evnt.FromDate));
         this.dateTo = new Date(turnDate(evnt.ToDate));
