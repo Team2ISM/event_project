@@ -5,13 +5,23 @@
 
 @using (Html.BeginForm("UnconfirmedUser", "User", FormMethod.Post))
 {
-    <h3>Адрес электронной почты не подтвержден</h3>
-    <p>
-        Письмо с подтверждением было отправлено раньше на адрес @ViewBag.Mail
-        Пожалуйста, перейдите по ссылке из письма
-    </p>
-    <div style="display:none;">
-        <input name="email" type="email" value="@ViewBag.Mail" /> 
+    <div class="container container-wide z-depth-3">
+        <div class="row center-align">
+            <h5 class="dark-text">Адрес электронной почты не подтвержден</h5>
+        </div>
+        <div class="row">
+            <p class="center-align">
+                Письмо с подтверждением было отправлено раньше на адрес @ViewBag.Mail
+            </p>
+            <p class="center-align">
+                Пожалуйста, перейдите по ссылке из письма.
+            </p>
+            <div style="display:none;">
+                <input name="email" type="email" value="@ViewBag.Mail" />
+            </div>
+        </div>
+        <div class="row center-align">
+            <button class="btn waves-effect waves-light dark-blue-grey autosize" type="submit">Отправить письмо с подтверждением</button>
+        </div>        
     </div>
-    <button type="submit">Отправить письмо с подтверждением</button>
 }

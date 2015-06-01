@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@using Newtonsoft.Json
+@{
+    var userName = "";
+    var userInCookie = Request.Cookies["user"];
+    if (User.Identity.IsAuthenticated && userInCookie.Values != null)
+    {
+        var data = userInCookie.Value.ToString().Split('\"')[1].Split(':');
+        userName = data[1] + " " + data[3];
+    }    
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -70,10 +80,9 @@
                 <li class="menu-content">
                     <a class="dropdown-button" href="#!" data-activates="dropdown1">
                         @if (User.Identity.IsAuthenticated)
-                        {
-
+                        {                            
                             <i class="white-text" style="font-size: 1rem;">
-                                Здравствуйте, @User.Identity.Name
+                                Здравствуйте, @userName
                                 <i class="mdi-action-toc right white-text"></i>
                             </i>
 

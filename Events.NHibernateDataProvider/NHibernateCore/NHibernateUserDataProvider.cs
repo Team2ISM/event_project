@@ -32,16 +32,29 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return Model;
         }
 
-        public User GetByMail(string mail)
+        public User GetByMail(string email)
         {
             User Model;
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria(typeof(User));
-                criteria.Add(Restrictions.Eq("Email", mail));
+                criteria.Add(Restrictions.Eq("Email", email));
                 Model = criteria.UniqueResult<User>();
             }
             return Model;
+        }
+
+        public string GetFullName(string email)
+        {
+            string name;
+            using (ISession session = Helper.OpenSession())
+            {
+                var criteria = session.CreateCriteria(typeof(User));
+                criteria.Add(Restrictions.Eq("Email", email));
+                User Model = criteria.UniqueResult<User>();
+                name = Model.Name + " " + Model.Surname;
+            }
+            return name;
         }
 
         public void CreateUser(User user)
