@@ -36,6 +36,7 @@ window.onload = function () {
     button = $('#submit');
     link = $('#subscribers a');
     id = location.pathname.split('/').pop();
+    ReloadSubscr($('#subscribers_onhover'));
     $.post("/issubscribed", {id:id}, function (data) {
         if (data) {
             button.html('Покинуть');

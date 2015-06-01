@@ -32,7 +32,6 @@ namespace team2project.Controllers
 
         public JsonResult GetSubscribers(string id) {
             return Json(Provider.GetAllSubscribers(id), JsonRequestBehavior.AllowGet);
-
         }
 
         public JsonResult Subscribe(string id) {

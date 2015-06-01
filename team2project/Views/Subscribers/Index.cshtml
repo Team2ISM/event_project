@@ -5,15 +5,24 @@
 @Scripts.Render("~/Scripts/jquery.js")
 @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
 <script type="text/javascript">
-    function OnSuccess(data) {
-        var results = $('#subscribers_list'); // получаем нужный элемент
-        results.empty(); //очищаем элемент
-        if (data) for (var i = 0; i < data.length; i++) {
-            if (data[i]) results.append('<li>' + data[i].Surname + ' ' + data[i].Name + '</li>'); // добавляем данные в список
-        }
+    function ReloadSubscr(elem) {
+        $.post("/subscribers", { id: id }, function (data, err) {
+            if (data) {
+                elem.empty(); //очищаем элемент
+                if (data) for (var i = 0; i < data.length; i++) {
+                    if (data[i]) elem.append('<li>' + data[i].Surname + ' ' + data[i].Name + '</li>'); // добавляем данные в список
+                }
+            }
+            else {
+                console.log(err);
+            }
+        });
     }
 </script>
 <span id="subscribers">
-    @Ajax.ActionLink(@Model.ToString(), "GetSubscribers", "Subscribers", new AjaxOptions {OnSuccess = "OnSuccess"})
-    <div id="subscribers_list"></div>
+    <a href="#" onclick="ReloadSubscr($('#subscribers_list')); return false;">
+        @Model.ToString()
+    </a>
 </span>
+<ul id="subscribers_list"></ul>
+<ul id="subscribers_onhover"></ul>
