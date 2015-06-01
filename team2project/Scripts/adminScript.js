@@ -111,7 +111,7 @@
 
     function EventModel(evnt, model) {
         var self = this;
-
+        debugger;
         this.id = ko.observable(evnt.Id);
         this.title = ko.observable(evnt.Title);
         this.description = ko.observable(evnt.Description != null ? evnt.TextDescription : evnt.Description);
@@ -123,16 +123,20 @@
         this.toogleText = ko.observable("");
 
         self.shortDescription = ko.computed(function () {
-            var words = self.description().split(' ');
-            if (words.length <= 10) return self.description();
-            else 
+            if (self.description())
             {
-                var result = "";
-                for (var i = 0; i != 10; i++)
-                    result += " " + words[i];
-                return result + "...";
+                var words = self.description().split(' ');
+                if (words.length <= 10) return self.description();
+                else {
+                    var result = "";
+                    for (var i = 0; i != 10; i++)
+                        result += " " + words[i];
+                    return result + "...";
+                }
             }
-        }, self);
+
+            return "";
+        });
 
         self.isSeen = ko.computed(function () {
             var status = this.checked();
