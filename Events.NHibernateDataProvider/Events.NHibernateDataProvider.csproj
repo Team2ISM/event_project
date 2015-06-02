@@ -91,8 +91,11 @@
     </Content>
     <EmbeddedResource Include="NHibernateCore\Mappings\Role.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="NHibernateCore\Mappings\Subscribing.hbm.xml" />
+    <EmbeddedResource Include="NHibernateCore\Mappings\Subscribing.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="Scripts\dbo.Role.sql" />
     <Content Include="Scripts\dbo.UserRole.sql" />
     <EmbeddedResource Include="NHibernateCore\Mappings\Event.hbm.xml">

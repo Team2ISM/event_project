@@ -9,7 +9,7 @@
         $.post("/subscribers", { id: id }, function (data, err) {
             if (data) {
                 elem.empty(); //очищаем элемент
-                if (data) for (var i = 0; i < data.length; i++) {
+                if (data) for (var i = 0; i < data.length && i<10; i++) {
                     if (data[i]) elem.append('<li>' + data[i].Surname + ' ' + data[i].Name + '</li>'); // добавляем данные в список
                 }
             }
@@ -24,5 +24,11 @@
         @Model.ToString()
     </a>
 </span>
-<ul id="subscribers_list"></ul>
+<div id="sub_wrapper" style="display:none">
+    <header>Подписавшиеся
+        <span>X</span>
+    </header>
+    <ul id="subscribers_list"></ul>
+</div>
+<div></div>
 <ul id="subscribers_onhover"></ul>
