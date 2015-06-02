@@ -1,5 +1,5 @@
 ﻿function reloadCount() {
-    $.post("subscribers/getcount", { id: id }, function (data) {
+    $.post("/subscribers/getcount", { id: id }, function (data) {
         link.html(data);
     });
 }
