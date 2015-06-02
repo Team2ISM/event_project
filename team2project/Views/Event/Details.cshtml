@@ -40,19 +40,20 @@
                         <span class="text-bold large-font">@Model.Location</span>
                     </div>
                 </div>
-                <div class="button-block medium-font center right">
+                <div id="onme"  class="button-block medium-font center right">
                     <div class="join-button">
                         @if (Model.ToDate > DateTime.Now)
                         {
                             <button id="submit" class="btn waves-effect waves-light dark-blue-grey margin-right large-font">Подождите</button>
                         }
                     </div>
-                        Уже подписалось:
+                    <div class="wrap">
+                        <span id="subscribed">Уже подписалось:</span>
                         @{
 
-                            Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });
+                            Html.RenderAction("Index", "Subscribers",new { EventId = @Model.Id });
                         }
-                    
+                    </div>
                 </div>
             </div>
             <div class="row medium-font" id="desc">

@@ -165,3 +165,8 @@ nav li a
 .dark-text {
     color: #727272 !important;
 }
+
+.hover
+{
+	display: none;
+}
