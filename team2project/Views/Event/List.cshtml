@@ -67,6 +67,11 @@
 {
     var filters = Request.Url.AbsolutePath.Split('/');
 
+    filters[1] = HttpUtility.UrlDecode(filters[1]);
+    if(filters.Length > 2) {
+        filters[2] = HttpUtility.UrlDecode(filters[2]);
+    }
+    
     if ((Regex.IsMatch(filters.LastOrDefault(), @"^\d+$") && filters.LastOrDefault() == nOfDaysToEvent) || (!Regex.IsMatch(filters.LastOrDefault(), @"^\d+$") && nOfDaysToEvent == null))
     {
         <a href="#" class="blue-grey-text active">@linkName</a>
@@ -79,7 +84,8 @@
         }
         else if (filters.Length == 3 && !filters[2].IsInt())
         {
-           @Html.ActionLink(linkName, "Filters", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "blue-grey-text" })
+           
+           @Html.RouteLink(linkName, "by-Location-Days", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "blue-grey-text" })
         }
         else
         {
