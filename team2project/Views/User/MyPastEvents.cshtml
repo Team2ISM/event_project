@@ -31,7 +31,7 @@
             {
                 <tr>
                     <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
-                    <td>@Html.RouteLink(evnt.Description.Cut(), "EventDetails", new { evnt.Id })</td>
+                    <td>@Html.RouteLink(evnt.TextDescription.Cut(), "EventDetails", new { evnt.Id })</td>
                     <td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(",", "EventDetails", new { evnt.Id })
