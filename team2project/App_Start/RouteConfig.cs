@@ -193,7 +193,7 @@ namespace team2project
             #region Subscribers map routes
             routes.MapRoute(
                 name: "Subscribers",
-                url: "subscribers/{id}",
+                url: "subscribers",
                 defaults: new { controller = "Subscribers", action = "GetSubscribers" }
             );
             routes.MapRoute(

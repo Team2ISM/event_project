@@ -13,6 +13,9 @@ namespace Events.Business.Models
             this.EventId = EventId;
             this.UserId = UserId;
         }
+
+        public virtual string Id { get; set; }
+
         public virtual string EventId { get; set; }
 
         public virtual string UserId { get; set; }

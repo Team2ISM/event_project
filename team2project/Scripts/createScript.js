@@ -135,25 +135,25 @@ var locat = $("#location"), editor;
 window.onload = function () {
     editor = CKEDITOR.replace('Description', { /*magicline_everywhere : true*/ });
 
-        var combobox = $("#combobox"), value;
-        if (city) {
-            var arr = combobox.children();
-            arr.each(function (i, val) {
-                if (val.innerHTML === city) {
-                    val.setAttribute('selected', 'selected');
-                    value = city;
-                    return false;
-                }
-            });
-        }
-        combobox.combobox();
-        locat.val(combobox.children()[0].innerHTML);
-        if (value) locat.val(value);
-    
+    var combobox = $("#combobox"), value;
+    if (city) {
+        var arr = combobox.children();
+        arr.each(function (i, val) {
+            if (val.innerHTML === city) {
+                val.setAttribute('selected', 'selected');
+                value = city;
+                return false;
+            }
+        });
+    }
+    combobox.combobox();
+    locat.val(combobox.children()[0].innerHTML);
+    if (value) locat.val(value);
+
     var content, label = $('label[for="Description"]'),
         textDescr = $('#TextDescription'),
         description = $('#Description');
-        
+
     editor.on('blur', function () {
         if (editor.getData().length > 0) return;
         label.removeClass('active');
@@ -204,17 +204,17 @@ window.onload = function () {
     }); // dialogDefinition
 
     var pick1 = $('#datetimepicker1'), pick2 = $('#datetimepicker2');
-    if (fDate) pick1.val(fDate);
-    if (tDate) pick2.val(tDate);
+    //if (fDate != "undefined" && fDate) pick1.val(fDate);
+    //if (tDate != "undefined" && tDate) pick2.val(tDate);
     pick1.datetimepicker({
         minDate: '-1970/01/01',
-        startDate: fDate ? fDate.split(' ')[0] : '',
-        lang:'ru',
+        startDate:  '',
+        lang: 'ru',
         mask: true
     });
     pick2.datetimepicker({
         minDate: '-1970/01/01',//
-        startDate: tDate ? tDate.split(' ')[0] : '',
+        startDate:  '',
         lang: 'ru',
         mask: true
     });

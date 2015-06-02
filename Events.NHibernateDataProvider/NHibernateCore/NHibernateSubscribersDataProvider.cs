@@ -41,7 +41,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         public void SubscribeUser(Subscribing row) {
             if (IsSubscribed(row)) return;
             using (ISession session = Helper.OpenSession()) {
-                using (ITransaction tran = session.BeginTransaction()) {
+                using (ITransaction tran = session.BeginTransaction()) {                 
                     session.Save(row);
                     tran.Commit();
                 }
@@ -52,7 +52,12 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             if (!IsSubscribed(row)) return;
             using (ISession session = Helper.OpenSession()) {
                 using (ITransaction tran = session.BeginTransaction()) {
-                    session.Delete(row);
+                    var criteria = session.CreateCriteria(typeof(Subscribing));
+                    criteria.Add(Restrictions.Eq("EventId", row.EventId));
+                    criteria.Add(Restrictions.Eq("UserId", row.UserId));
+                    var elem = criteria.List<Subscribing>()[0];
+
+                    session.Delete(elem);
                     tran.Commit();
                 }
             }

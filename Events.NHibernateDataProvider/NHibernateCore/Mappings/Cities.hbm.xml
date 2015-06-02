@@ -6,7 +6,7 @@
  auto-import="true">
   <class name="City, Events.Business" table="Cities">
     <id name="Id" access="property" type="int">
-      <generator class="assigned"></generator>
+      <generator class="identity"></generator>
     </id>
     <property name="Name" access="property" type="string"></property>
   </class>

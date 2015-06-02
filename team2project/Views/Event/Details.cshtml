@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="title-date-block inline-block left">
-                    <div class="event-title inline-block"><h3 class="inline-block no-margin">@Model.Title</h3></div>
+                    <div class="event-title inline-block"><h4 class="inline-block no-margin">@Model.Title</h4></div>
                     <div></div>
                     <div class="inline-block">
                         <span class="text-bold large-font">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy года, H:mm ")</span>
@@ -40,31 +40,26 @@
                         <span class="text-bold large-font">@Model.Location</span>
                     </div>
                 </div>
-                
-                
+                <div id="onme"  class="button-block medium-font center right">
+                    <div class="join-button">
+                        @if (Model.ToDate > DateTime.Now)
+                        {
+                            <button id="submit" class="btn waves-effect waves-light dark-blue-grey margin-right large-font">Подождите</button>
+                        }
+                    </div>
+                    <div class="wrap">
+                        <span id="subscribed">Уже подписалось:</span>
+                        @{
+
+                            Html.RenderAction("Index", "Subscribers",new { EventId = @Model.Id });
+                        }
+                    </div>
+                </div>
             </div>
             <div class="row medium-font" id="desc">
                 <div>
                     <p class="text-align-justify">@Model.Description.ToHtmlString()</p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="button-block">
-                    <div class="medium-font right subscribers">
-                        Уже подписалось:
-                        @{
-
-                            Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });
-                        }
-                    </div>
-                    <div class="join-button">
-                        @if (Model.ToDate > DateTime.Now)
-                        {
-                            <button id="submit" class="btn waves-effect waves-light dark-blue-grey left margin-right large-font">Подождите</button>
-                        }
-                    </div>
-                </div>
-                
             </div>
         </fieldset>
     </form>
