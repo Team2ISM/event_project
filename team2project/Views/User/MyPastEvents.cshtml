@@ -35,7 +35,7 @@
                     <td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(",", "EventDetails", new { evnt.Id })
-                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })                        
+                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a", "EventDetails", new { evnt.Id })                        
                     </td>
                     <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
                     <td id="TdUpdate"><button class="btn waves-effect waves-light dark-blue-grey white-text" type="submit">@Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id })</button></td>
