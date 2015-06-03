@@ -15,7 +15,7 @@ namespace Events.Business.Interfaces
 
         void Delete(Event model);
 
-        void ToggleButtonStatusActive(string id);
+        void ToggleStatus(string id);
 
         int Create(Event evnt);
 

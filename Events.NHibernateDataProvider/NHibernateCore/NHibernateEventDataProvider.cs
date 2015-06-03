@@ -95,7 +95,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         }
 
 
-        public void ToggleButtonStatusActive(string id)
+        public void ToggleStatus(string id)
         {
             Event evnt = GetById(id);
             evnt.Active=!evnt.Active;

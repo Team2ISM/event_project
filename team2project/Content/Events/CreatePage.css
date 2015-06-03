@@ -11,3 +11,16 @@
 {
 	margin-left: -10px;
 }
+.cke_dialog_ui_hbox_last
+{
+    display: none;
+}
+#cke_98_uiElement
+{
+    display: none;
+}
+
+.cke_dialog_title
+{
+    background-color: #607d8b;
+}

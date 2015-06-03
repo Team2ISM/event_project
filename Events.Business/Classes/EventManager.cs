@@ -75,17 +75,6 @@ namespace Events.Business.Classes
                  {
                      return dataProvider.GetById(id);
                  });
-
-            if (evntModel == null)
-            {
-                Event evnt = new Event();
-                evnt.AuthorId = "undefinded";
-                return evnt;
-            }
-            if (evntModel.Active == false)
-            {
-                return null;
-            }
             return evntModel;
         }
 
@@ -107,9 +96,9 @@ namespace Events.Business.Classes
                 });
         }
 
-        public void ToggleButtonStatusActive(string id)
+        public void ToggleStatus(string id)
         {
-            dataProvider.ToggleButtonStatusActive(id);
+            dataProvider.ToggleStatus(id);
             cacheManager.RemoveFromCache(id);
             cacheManager.ClearCacheByRegion("Events");
             cacheManager.ClearCacheByRegion("eventsList");
