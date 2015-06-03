@@ -29,7 +29,7 @@ namespace team2project.Controllers
             ViewBag.city = null;
 
             if (!string.IsNullOrEmpty(location))
-            {
+        {
                 ViewBag.city = location;
             }
 
@@ -58,10 +58,7 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            // ViewBag.cities = cityManager.GetList();
-            ViewBag.Title = "Создайте собственное событие";
-            ViewBag.Button = "Создать";
-            var evnt = new EventViewModel();
+                var evnt = new EventViewModel();
             return View(evnt);
         }
         [HttpGet]
@@ -69,13 +66,15 @@ namespace team2project.Controllers
         public ActionResult Update(string id)
         {
             var evntModel = eventManager.GetById(id);
+           
+            if (evntModel.AuthorId != User.Identity.Name)
+                return RedirectToAction("Index");
+
             if (evntModel == null)
             {
                 return View("EventNotFound");
             }
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
-            ViewBag.Title = "Редактируйте это событие";
-            ViewBag.Button = "Сохранить";
             return View("Create", evnt);
         }
 
@@ -83,10 +82,12 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Update(EventViewModel evnt)
         {
+       
+            if (evnt.AuthorId != User.Identity.Name)
+                return RedirectToAction("Index");
+
             if (!ModelState.IsValid)
             {
-                ViewBag.Title = "Редактируйте это событие";
-                ViewBag.Button = "Сохранить";
                 return View("Create", evnt);
             }
             evnt.AuthorId = User.Identity.Name;
@@ -99,7 +100,12 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult DeleteEvent(string id)
         {
-            commentManager.DeleteByEventId(id);
+            //  commentManager.DeleteByEventId(id);
+            var evntModel = eventManager.GetById(id);
+
+            if (evntModel.AuthorId != User.Identity.Name)
+                return RedirectToAction("Index");
+
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");
         }
@@ -110,11 +116,8 @@ namespace team2project.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Title = "Создайте собственное событие";
-                ViewBag.Button = "Создать";
                 return View(evnt);
             }
-            evnt.TextDescription = evnt.TextDescription.Substring(0, evnt.TextDescription.Length < 51 ? evnt.TextDescription.Length - 1 : 50);
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             evntModel.AuthorId = User.Identity.Name;
             evntModel.Description = evntModel.Description.Replace("<pre>", "");

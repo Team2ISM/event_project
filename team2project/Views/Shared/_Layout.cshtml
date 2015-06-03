@@ -20,14 +20,17 @@
     <script src="@Url.Content("~/Scripts/materialize/materialize.min.js")" type="text/javascript"> </script>
     <script>
         $(document).ready(function () {
-            var butt = $(".dropdown-button"), drop = $("#dropdown1");
+            var butt = $('.dropdown-button'), drop = $('#dropdown1');
             butt.on('click', function () {
                 drop.stop();
                 drop.show(150);
             });
-            drop.mouseleave(function () {
+            $(document).click(function (event) {
+                if ($(event.target).closest(butt).length) return;
+                if ($(event.target).closest(drop).length) return;
                 drop.stop();
-                drop.hide(150);
+                drop.hide(100);
+                event.stopPropagation();
             });
         });
     </script>

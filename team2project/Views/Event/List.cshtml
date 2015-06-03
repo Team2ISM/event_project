@@ -17,7 +17,7 @@
 
 <div class="container">
     <h1 class="center blue-grey-text">Мероприятия</h1>
-
+    
     <!-- Dropdown Trigger -->
     <div class="width80">
         <div class="ui-widget left">
@@ -52,11 +52,11 @@
                     <td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(",", "EventDetails", new { evnt.Id })
-                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
-
-                    </td>
-                    <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
-                </tr>
+                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a", "EventDetails", new { evnt.Id })
+                        
+                </td>
+                <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
+            </tr>
             }
         </tbody>
     </table>
@@ -76,18 +76,18 @@
     {
         filters[2] = HttpUtility.UrlDecode(filters[2]);
     }
-
+    
     if (period == filters[2])
-    {
+        {
         @Html.RouteLink(linkName, "EventsList", new { period = period }, new { Class = "blue-grey-text active routelink" })
-    }
-    else
-    {
+        }
+        else
+        {
         @Html.RouteLink(linkName, "EventsList", new { period = period }, new { Class = "blue-grey-text routelink" })
+        }
     }
-}
 
-
+    
 }
 
 @section scripts{
