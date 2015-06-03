@@ -69,6 +69,10 @@ namespace team2project.Controllers
         public ActionResult Update(string id)
         {
             var evntModel = eventManager.GetById(id);
+           
+            if (evntModel.AuthorId != User.Identity.Name)
+                return RedirectToAction("Index");
+
             if (evntModel == null)
             {
                 return View("EventNotFound");
@@ -81,6 +85,10 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Update(EventViewModel evnt)
         {
+       
+            if (evnt.AuthorId != User.Identity.Name)
+                return RedirectToAction("Index");
+
             if (!ModelState.IsValid)
             {
                 return View("Create", evnt);
@@ -96,6 +104,11 @@ namespace team2project.Controllers
         public ActionResult DeleteEvent(string id)
         {
             //  commentManager.DeleteByEventId(id);
+            var evntModel = eventManager.GetById(id);
+
+            if (evntModel.AuthorId != User.Identity.Name)
+                return RedirectToAction("Index");
+
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");
         }
