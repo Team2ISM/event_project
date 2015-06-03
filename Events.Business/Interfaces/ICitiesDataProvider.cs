@@ -12,6 +12,6 @@ namespace Events.Business.Interfaces
 
         int Create(City city);
 
-        City GetByValue(string value);
+        City GetByName(string name);
     }
 }

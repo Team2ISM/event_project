@@ -36,12 +36,12 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return EmpNo;
         }
 
-        public City GetByValue(string value)
+        public City GetByName(string name)
         {
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria(typeof(City));
-                    criteria.Add(Restrictions.Eq("Value", value));
+                    criteria.Add(Restrictions.Eq("Name", name));
                     var city = new City[1];
                     criteria.List<City>().CopyTo(city, 0);
                     return city[0];

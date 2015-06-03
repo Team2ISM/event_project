@@ -16,6 +16,8 @@ namespace team2project
             AutoMapper.Mapper.CreateMap<Comment, CommentViewModel>();
             AutoMapper.Mapper.CreateMap<User, Subscriber>();
             AutoMapper.Mapper.CreateMap<Subscriber, User>();
+            AutoMapper.Mapper.CreateMap<CitiesViewModel, City>();
+            AutoMapper.Mapper.CreateMap<City, CitiesViewModel>();
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web.UI;
+using team2project.Helpers;
 
 namespace team2project.Models
 {
@@ -11,9 +12,7 @@ namespace team2project.Models
         public virtual int Id { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        public virtual string City { get; set; }
+        public virtual string Name { get; set; }
 
-        [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        public virtual string Value { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using team2project.Models;
+using team2project.Helpers;
 
 namespace team2project.Controllers
 {
@@ -43,7 +44,7 @@ namespace team2project.Controllers
             {
                 return View("EventNotFound");
             }
-            if(evntModel.AuthorId=="undefinded")
+            if (evntModel.AuthorId == "undefinded")
             {
                 return View("~/Views/Error/Page404.cshtml");
             }
@@ -56,10 +57,10 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Create()
         {
-           // ViewBag.cities = cityManager.GetList();
+            // ViewBag.cities = cityManager.GetList();
             ViewBag.Title = "Создайте собственное событие";
             ViewBag.Button = "Создать";
-                var evnt = new EventViewModel();
+            var evnt = new EventViewModel();
             return View(evnt);
         }
         [HttpGet]
@@ -112,7 +113,7 @@ namespace team2project.Controllers
                 ViewBag.Button = "Создать";
                 return View(evnt);
             }
-            evnt.TextDescription = evnt.TextDescription.Substring(0, evnt.TextDescription.Length<51 ? evnt.TextDescription.Length-1 : 50);
+            evnt.TextDescription = evnt.TextDescription.Substring(0, evnt.TextDescription.Length < 51 ? evnt.TextDescription.Length - 1 : 50);
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             evntModel.AuthorId = User.Identity.Name;
             evntModel.Description = evntModel.Description.Replace("<pre>", "");

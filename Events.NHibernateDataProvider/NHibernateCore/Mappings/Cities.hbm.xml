@@ -9,6 +9,5 @@
       <generator class="identity"></generator>
     </id>
     <property name="Name" access="property" type="string"></property>
-    <property name="Value" access="property" type="string"></property>
   </class>
 </hibernate-mapping>

@@ -63,7 +63,7 @@ namespace Events.Business.Classes
 
             if (!String.IsNullOrEmpty(location))
             {
-                City city = citiesProvider.GetByValue(location);
+                City city = citiesProvider.GetByName(location);
                 if (city != null)
                 {
                     loc = city.Name;

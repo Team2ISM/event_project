@@ -7,6 +7,7 @@ using Events.Business.Classes;
 using Events.Business.Models;
 using Events.NHibernateDataProvider;
 using Events.NHibernateDataProvider.NHibernateCore;
+using team2project.Models;
 
 namespace team2project.App_Start
 {
@@ -38,11 +39,11 @@ namespace team2project.App_Start
         }
         public List<SelectListItem> AvailableLocations {
             get {
-                var cities = cityManager.GetList();
+                var cities = AutoMapper.Mapper.Map<List<CitiesViewModel>>(cityManager.GetList());
                 var list = new List<SelectListItem>(cities.Count+1);
                 //list.Add(new SelectListItem() { Text = "Все", Value = "" });
                 foreach (var city in cities) {
-                    list.Add(new SelectListItem() { Text = city.Name, Value = city.Value.ToString() });
+                    list.Add(new SelectListItem() { Text = city.Name, Value = city.Name });
                 }
                 return list;
             }
