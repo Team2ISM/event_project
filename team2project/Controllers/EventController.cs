@@ -27,6 +27,7 @@ namespace team2project.Controllers
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(period, location));
             ViewBag.city = null;
+
             if (!string.IsNullOrEmpty(location))
             {
                 ViewBag.city = location;
