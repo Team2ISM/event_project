@@ -16,8 +16,8 @@
 
 
 <div class="container">
-    <h1 class ="center blue-grey-text">Мероприятия</h1>
-    
+    <h1 class="center blue-grey-text">Мероприятия</h1>
+
     <!-- Dropdown Trigger -->
     <div class="width80">
         <div class="ui-widget left">
@@ -28,13 +28,13 @@
         </div>
 
         <div class="date-filters">
-            @ConstructLink("Все мероприятия", null)
-            @ConstructLink("На сегодня", "0")
-            @ConstructLink("На 3 дня", "3")
-            @ConstructLink("На неделю", "7")
+            @ConstructLink("Все мероприятия", "all")
+            @ConstructLink("На сегодня", "today")
+            @ConstructLink("На 3 дня", "threedays")
+            @ConstructLink("На неделю", "week")
         </div>
     </div>
-    <table class="striped width80 centered" >
+    <table class="striped width80 centered">
         <thead>
             <tr>
                 <th>Заголовок</th>
@@ -53,47 +53,41 @@
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(",", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
-                        
-                </td>
-                <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
-            </tr>
+
+                    </td>
+                    <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
+                </tr>
             }
         </tbody>
     </table>
 
 </div>
 
-@helper ConstructLink(string linkName, string nOfDaysToEvent)
+<script>
+    var cityValue = "@ViewBag.city";
+</script>
+
+@helper ConstructLink(string linkName, string period)
 {
     var filters = Request.Url.AbsolutePath.Split('/');
 
     filters[1] = HttpUtility.UrlDecode(filters[1]);
-    if(filters.Length > 2) {
+    if (filters.Length > 2)
+    {
         filters[2] = HttpUtility.UrlDecode(filters[2]);
     }
-    
-    if ((Regex.IsMatch(filters.LastOrDefault(), @"^\d+$") && filters.LastOrDefault() == nOfDaysToEvent) || (!Regex.IsMatch(filters.LastOrDefault(), @"^\d+$") && nOfDaysToEvent == null))
+
+    if (period == filters[2])
     {
-        <a href="#" class="blue-grey-text active">@linkName</a>
+        @Html.RouteLink(linkName, "EventsList", new { period = period }, new { Class = "blue-grey-text active routelink" })
     }
     else
     {
-        if (nOfDaysToEvent == null)
-        {
-            @Html.ActionLink(linkName, "Filters", new { days = -1 }, htmlAttributes: new { Class = "blue-grey-text" }) //DIRTY HACK, remove fast as possible
-        }
-        else if (filters.Length == 3 && !filters[2].IsInt())
-        {
-           
-           @Html.RouteLink(linkName, "by-Location-Days", new { loc = filters[2], days = nOfDaysToEvent }, htmlAttributes: new { Class = "blue-grey-text" })
-        }
-        else
-        {
-           @Html.ActionLink(linkName, "Filters", new {days = nOfDaysToEvent}, htmlAttributes: new { Class = "blue-grey-text" })
-        }
+        @Html.RouteLink(linkName, "EventsList", new { period = period }, new { Class = "blue-grey-text routelink" })
     }
+}
 
-    
+
 }
 
 @section scripts{

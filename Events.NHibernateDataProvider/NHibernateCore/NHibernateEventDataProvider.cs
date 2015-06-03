@@ -11,7 +11,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateEventDataProvider : IEventDataProvider
     {
-        public IList<Event> GetList(string location, string nDaysToEvent, string onlyAvailableData, bool isForAdmin = false)
+        public IList<Event> GetList(int daysToEvent, string location, string onlyAvailableData, bool isForAdmin = false)
         {
             using (ISession session = Helper.OpenSession())
             {
@@ -21,30 +21,24 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                     var result = session.CreateCriteria<Event>();
                     if (isForAdmin) result.AddOrder(Order.Asc("Checked"));
                     return result
-                        .AddOrder(Order.Desc("DateOfCreation"))                        
+                        .AddOrder(Order.Desc("DateOfCreation"))
                         .List<Event>();
                 }
-                if (nDaysToEvent != null && location != null)
-                {
-                    session.EnableFilter("equalDate")
-                    .SetParameter("chosenDate", now.AddDays(Convert.ToDouble(nDaysToEvent)))
-                    .SetParameter("nowaday", now);
-                    session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
-                }
-                else if (nDaysToEvent != null)
-                {
-                    session.EnableFilter("equalDate")
-                    .SetParameter("chosenDate", now.AddDays(Convert.ToDouble(nDaysToEvent)))
-                    .SetParameter("nowaday", now);
-                }
-                else if (location != null)
+
+                if (!String.IsNullOrEmpty(location))
                 {
                     session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
+                }
+
+                if (daysToEvent > 0)
+                {
+                    session.EnableFilter("equalDate").SetParameter("nowaday", now).SetParameter("chosenDate", now.AddDays(daysToEvent - 1));
                 }
                 else
                 {
                     session.EnableFilter("effectiveDate").SetParameter("asOfDate", now);
                 }
+
                 var criteria = session.CreateCriteria<Event>();
                 criteria.Add(Restrictions.Eq("Active", true));
                 criteria.AddOrder(Order.Asc("FromDate"));
@@ -67,7 +61,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria(typeof(Event));
-                criteria.Add(Restrictions.And(Restrictions.Eq("AuthorId", email), 
+                criteria.Add(Restrictions.And(Restrictions.Eq("AuthorId", email),
                     Restrictions.Lt("ToDate", DateTime.Now.Date)));
                 return criteria.List<Event>();
             }
@@ -98,7 +92,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         public void ToggleButtonStatusActive(string id)
         {
             Event evnt = GetById(id);
-            evnt.Active=!evnt.Active;
+            evnt.Active = !evnt.Active;
             this.Update(evnt, "Admin");
         }
 
@@ -127,7 +121,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public void Update(Event model, string admin = "NoAdmin")
         {
-            if(admin == "NoAdmin") model.DateOfCreation = DateTime.Now;
+            if (admin == "NoAdmin") model.DateOfCreation = DateTime.Now;
             model.Checked = true;
             using (ISession session = Helper.OpenSession())
             {

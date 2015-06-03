@@ -12,16 +12,16 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                return session.CreateCriteria< City>().List<City>();
+                return session.CreateCriteria<City>().List<City>();
             }
         }
 
         public City GetById(int id)
         {
-            
+
             using (ISession session = Helper.OpenSession())
             {
-               return session.Get<City>(id);
+                return session.Get<City>(id);
             }
         }
 
@@ -34,6 +34,18 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 session.Save(model);
             }
             return EmpNo;
+        }
+
+        public City GetByValue(string value)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                var criteria = session.CreateCriteria(typeof(City));
+                    criteria.Add(Restrictions.Eq("Value", value));
+                    var city = new City[1];
+                    criteria.List<City>().CopyTo(city, 0);
+                    return city[0];
+            }
         }
     }
 }

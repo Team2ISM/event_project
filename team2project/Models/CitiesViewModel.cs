@@ -12,5 +12,8 @@ namespace team2project.Models
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
         public virtual string City { get; set; }
+
+        [Required(ErrorMessage = "Это поле должно быть заполненым")]
+        public virtual string Value { get; set; }
     }
 }

@@ -36,7 +36,7 @@
                         item: ui.item.option
                     });
                     //My 
-                    locat.val(ui.item.value);
+                    locat.val(ui.item.option.value);
                     locat.html(ui.item.value);
                 },
 

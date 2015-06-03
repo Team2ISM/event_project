@@ -19,11 +19,6 @@ namespace team2project
             );
 
             #region Events map routes
-            routes.MapRoute(
-                name: "EventList",
-                url: "events",
-                defaults: new { controller = "Event", action = "Index" }
-            );
 
             routes.MapRoute(
                name: "CreateEvent",
@@ -50,23 +45,9 @@ namespace team2project
             );
 
             routes.MapRoute(
-                 name: "by-Days",
-                 url: "events/{days}",
-                 defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
-                 constraints: new { days = @"\d+" }
-             );
-
-            routes.MapRoute(
-                 name: "by-Location",
-                 url: "events/{loc}",
-                 defaults: new { controller = "Event", action = "Filters", loc = UrlParameter.Optional }
-             );
-
-            routes.MapRoute(
-              name: "by-Location-Days",
-              url: "events/{loc}/{days}",
-              defaults: new { controller = "Event", action = "Filters", days = UrlParameter.Optional },
-              constraints: new { days = @"\d+" }
+              name: "EventsList",
+              url: "events/{period}/{location}",
+              defaults: new { controller = "Event", action = "Index", location = UrlParameter.Optional }
           );
 
             #endregion
@@ -100,13 +81,13 @@ namespace team2project
             routes.MapRoute(
                 name: "UnconfirmedUser",
                 url: "user/unconfirmed",
-                defaults: new { controller = "User", action = "UnconfirmedUser"}
+                defaults: new { controller = "User", action = "UnconfirmedUser" }
             );
 
             routes.MapRoute(
                 name: "ConfirmRegistration",
                 url: "user/confirm",
-                defaults: new { controller = "User", action = "ConfirmRegistration"}
+                defaults: new { controller = "User", action = "ConfirmRegistration" }
             );
 
             routes.MapRoute(
@@ -228,7 +209,7 @@ namespace team2project
                 name: "Filemanager",
                 url: "Scripts/filemanager/connectors/mvc/filemanager/{id}",
                 defaults: new { controller = "Filemanager", action = "Index", id = UrlParameter.Optional },
-                namespaces : new [] { "team2project.Areas.Filemanager"}
+                namespaces: new[] { "team2project.Areas.Filemanager" }
             );
 
             routes.MapRoute(

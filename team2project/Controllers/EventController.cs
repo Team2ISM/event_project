@@ -22,20 +22,15 @@ namespace team2project.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string period, string location)
         {
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList());
-            return View("List", list);
-        }
-
-        [HttpGet]
-        public ActionResult Filters(string loc, string days)
-        {
-            if (days == "-1")
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(period, location));
+            ViewBag.city = null;
+            if (!string.IsNullOrEmpty(location))
             {
-                return View("List", AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(loc, null)));
+                ViewBag.city = location;
             }
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(loc, days));
+
             return View("List", list);
         }
 
@@ -95,7 +90,7 @@ namespace team2project.Controllers
             evnt.AuthorId = User.Identity.Name;
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             eventManager.Update(evntModel);
-            return RedirectToAction("Index");
+            return RedirectToRoute("Home");
         }
 
         [HttpGet]
@@ -123,7 +118,7 @@ namespace team2project.Controllers
             evntModel.Description = evntModel.Description.Replace("<pre>", "");
             evntModel.Description = evntModel.Description.Replace("</pre>", "");
             eventManager.Create(evntModel.Id, evntModel);
-            return RedirectToAction("Index");
+            return RedirectToRoute("Home");
         }
 
     }

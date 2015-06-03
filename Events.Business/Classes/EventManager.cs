@@ -11,11 +11,14 @@ namespace Events.Business.Classes
 
         ICacheManager cacheManager;
 
+        ICitiesDataProvider citiesProvider;
 
-        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager)
+
+        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, ICitiesDataProvider citiesProvider)
         {
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
+            this.citiesProvider = citiesProvider;
         }
 
         public IList<Event> GetAllEvents(bool isForAdmin)
@@ -23,24 +26,54 @@ namespace Events.Business.Classes
             return cacheManager.FromCache<IList<Event>>("Events::allEvents",
                     () =>
                     {
-                        return dataProvider.GetList(null, null, "Admin", isForAdmin);
+                        return dataProvider.GetList(0, null, "Admin", isForAdmin);
                     });
         }
-        public IList<Event> GetList()
-        {
-            return cacheManager.FromCache<IList<Event>>("eventsList",
-                () =>
-                {
-                    return dataProvider.GetList();
-                });
-        }
 
-        public IList<Event> GetList(string location, string nDaysToEvent)
+        //public IList<Event> GetList()
+        //{
+        //    return cacheManager.FromCache<IList<Event>>("eventsList",
+        //        () =>
+        //        {
+        //            return dataProvider.GetList();
+        //        });
+        //}
+
+        public IList<Event> GetList(string period, string location)
         {
-            return cacheManager.FromCache<IList<Event>>("Filter." + nDaysToEvent + " - " + location,
+            int days;
+            var loc = "";
+            switch (period)
+            {
+                case "today":
+                    days = 1;
+                    break;
+                case "threedays":
+                    days = 3;
+                    break;
+                case "week":
+                    days = 7;
+                    break;
+                case "all":
+                    days = 0;
+                    break;
+                default:
+                    return new List<Event>();
+            }
+
+            if (!String.IsNullOrEmpty(location))
+            {
+                City city = citiesProvider.GetByValue(location);
+                if (city != null)
+                {
+                    loc = city.Name;
+                }
+            }
+
+            return cacheManager.FromCache<IList<Event>>("Filter." + period + " - " + loc,
                 () =>
                 {
-                    return dataProvider.GetList(location, nDaysToEvent);
+                    return dataProvider.GetList(days, loc, null, false);
                 });
         }
 
@@ -57,11 +90,13 @@ namespace Events.Business.Classes
             cacheManager.ClearCacheByRegion("eventsList");
         }
 
-        public void Update(Event model) {
+        public void Update(Event model)
+        {
             dataProvider.Update(model);
             cacheManager.RemoveFromCache(model.Id);
             cacheManager.ToCache<Event>(model.Id,
-                ( ) => {
+                () =>
+                {
                     return model;
                 });
             cacheManager.ClearCacheByRegion("Events");

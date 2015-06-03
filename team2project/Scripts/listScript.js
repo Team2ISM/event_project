@@ -38,10 +38,14 @@
                     var url = location.protocol + '//' + location.host + '/', path = location.pathname.split('/');
                     url += path[1];
 
-                    if (ui.item.value && ui.item.option.value !== '-1' && ui.item.value !== "Все") {
-                        url += '/' + ui.item.value;
+                    if (period && period !== '-1') {
+                        url += '/' + period;
                     }
-                    if (days && days !== '-1') url += '/' + days;
+
+                    if (ui.item.value && ui.item.option.value !== '-1' && ui.item.value !== "Все") {
+                        debugger;
+                        url += '/' + ui.item.option.value;
+                    }
                     document.location.href = url;
                     setTimeout(function () {
                         document.location.href = url;
@@ -139,22 +143,24 @@
         }
     });
 })(jQuery);
+
+debugger;
 var combobox = $("#combobox");
-var days, city = { value: '-1' };
+var period, city;
 $(function () {
     var path = decodeURI(location.pathname).split('/');
-    if (path[2]) {
-        var arr = combobox.children();
-        arr.each(function (i, val) {
-            if ($(val).html() === path[2]) {val.setAttribute('selected', 'selected'); city = val; return false}
-        });
-    }
+
+    period = path[2];
     if (path[3]) {
-        days = path[3];
+        var arr = combobox.children();
+        if (cityValue) {
+            arr.each(function (i, val) {
+                if ($(val).val() === cityValue) { val.setAttribute('selected', 'selected'); city = val; return false }
+            });
+        }
     }
-    else days = '';
-    if (!days) days = '-1';
-    combobox.html('<option value="0">Все</option>' + combobox.html());
+
+    combobox.html('<option value="-1">Все</option>' + combobox.html());
     combobox.combobox();
     $("#toggle").click(function () {
         combobox.toggle();
@@ -169,4 +175,10 @@ $(function () {
             $(this).addClass('active');
         }
     });
+
+    $(".routelink").on("click", function () {
+        if (cityValue && cityValue !== "undefined") {
+            $(this).attr("href", $(this).attr("href") + "/" + cityValue);
+        }
+    })
 });

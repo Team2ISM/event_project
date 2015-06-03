@@ -13,7 +13,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return RedirectToAction("Index", "Event");
+            return RedirectToRoute("EventsList", new { period = "all" });
         }
     }
 }
