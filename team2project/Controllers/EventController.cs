@@ -25,11 +25,17 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index(string period, string location)
         {
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(period, location));
+            var listModel = eventManager.GetList(period, location);
+            if (listModel == null)
+            {
+                return RedirectToRoute("Error404");
+            }
+
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
             ViewBag.city = null;
 
             if (!string.IsNullOrEmpty(location))
-        {
+            {
                 ViewBag.city = location;
             }
 
@@ -58,7 +64,7 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Create()
         {
-                var evnt = new EventViewModel();
+            var evnt = new EventViewModel();
             return View(evnt);
         }
         [HttpGet]
@@ -66,7 +72,7 @@ namespace team2project.Controllers
         public ActionResult Update(string id)
         {
             var evntModel = eventManager.GetById(id);
-           
+
             if (evntModel.AuthorId != User.Identity.Name)
                 return RedirectToAction("Index");
 
@@ -82,7 +88,7 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Update(EventViewModel evnt)
         {
-       
+
             if (evnt.AuthorId != User.Identity.Name)
                 return RedirectToAction("Index");
 

@@ -213,6 +213,11 @@ namespace team2project
             );
 
             routes.MapRoute(
+                "Error404",
+                "error404",
+             new { controller = "Error", action = "Index" });
+
+            routes.MapRoute(
                 "NotFound",
                 "{*url}",
              new { controller = "Error", action = "Index" }

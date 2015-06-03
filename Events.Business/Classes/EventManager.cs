@@ -41,26 +41,14 @@ namespace Events.Business.Classes
 
         public IList<Event> GetList(string period, string location)
         {
-            int days;
-            var loc = "";
-            switch (period)
+            int? days = getDaysCount(period);
+            if (days == null)
             {
-                case "today":
-                    days = 1;
-                    break;
-                case "threedays":
-                    days = 3;
-                    break;
-                case "week":
-                    days = 7;
-                    break;
-                case "all":
-                    days = 0;
-                    break;
-                default:
-                    return new List<Event>();
+                return null;
             }
 
+            string loc = "";
+            
             if (!String.IsNullOrEmpty(location))
             {
                 City city = citiesProvider.GetByName(location);
@@ -68,12 +56,20 @@ namespace Events.Business.Classes
                 {
                     loc = city.Name;
                 }
+                else 
+                {
+                    return null;
+                }
             }
+
+           
+
+            int daysToEvent = (int)days;
 
             return cacheManager.FromCache<IList<Event>>("Filter." + period + " - " + loc,
                 () =>
                 {
-                    return dataProvider.GetList(days, loc, null, false);
+                    return dataProvider.GetList(daysToEvent, loc, null, false);
                 });
         }
 
@@ -163,6 +159,30 @@ namespace Events.Business.Classes
             cacheManager.RemoveFromCache(id);
             cacheManager.ClearCacheByRegion("Events");
             cacheManager.ClearCacheByRegion("eventsList");
+        }
+
+        private int? getDaysCount(string period)
+        {
+            int? days;
+        switch (period)
+            {
+                case "today":
+                    days = 1;
+                    break;
+                case "threedays":
+                    days = 3;
+                    break;
+                case "week":
+                    days = 7;
+                    break;
+                case "all":
+                    days = 0;
+                    break;
+                default :
+                    days = null;
+                    break;
+            }
+        return days;
         }
     }
 }
