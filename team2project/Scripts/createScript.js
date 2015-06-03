@@ -209,12 +209,13 @@ window.onload = function () {
     //if (tDate != "undefined" && tDate) pick2.val(tDate);
     pick1.datetimepicker({
         minDate: '-1970/01/01',
-        startDate:  '',
+        startDate: '',
+        minTime: 0,
         lang: 'ru',
         mask: true
     });
     pick2.datetimepicker({
-        minDate: '-1970/01/01',//
+        minDate: 0,
         startDate:  '',
         lang: 'ru',
         mask: true

@@ -458,7 +458,7 @@
 
 		minDate: false,
 		maxDate: false,
-		minTime: 0,
+		minTime: false,
 		maxTime: false,
 
 		allowTimes: [],
