@@ -188,3 +188,7 @@ nav li a
     max-width: 900px !important;
     width: auto;
 }
+
+.side-nav * {
+    color: black !important;
+}

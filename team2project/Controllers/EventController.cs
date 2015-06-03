@@ -146,7 +146,7 @@ namespace team2project.Controllers
             //
 
             eventManager.Create(evntModel.Id, evntModel);
-            return RedirectToRoute("Home");
+            return RedirectToRoute("EventDetails", new { id = evntModel.Id});
         }
 
     }
