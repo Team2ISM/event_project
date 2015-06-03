@@ -79,7 +79,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 var criteria = session.CreateCriteria(typeof(Event));
                 criteria.Add(Restrictions.And(Restrictions.Eq("AuthorId", email),
-                    Restrictions.Gt("ToDate", DateTime.Now.Date)));
+                    Restrictions.Ge("ToDate", DateTime.Now.Date)));
                 return criteria.List<Event>();
             }
         }
