@@ -121,7 +121,6 @@ namespace team2project.Controllers
             {
                 return View(evnt);
             }
-            evnt.TextDescription = evnt.TextDescription.Substring(0, evnt.TextDescription.Length < 51 ? evnt.TextDescription.Length - 1 : 50);
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             evntModel.AuthorId = User.Identity.Name;
             evntModel.Description = evntModel.Description.Replace("<pre>", "");
