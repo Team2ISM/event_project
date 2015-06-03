@@ -61,16 +61,15 @@ namespace team2project.Controllers
         }
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
-            string returnUrl = "";
-            if (Request.UrlReferrer != null)
+            if (!string.IsNullOrEmpty(returnUrl))
             {
-                returnUrl = Server.UrlEncode(Request.UrlReferrer.PathAndQuery);
-            }            
-            if (string.IsNullOrEmpty(returnUrl) == false)
+                ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
+            }
+            else if (Request.UrlReferrer != null)
             {
-                ViewBag.ReturnUrl = returnUrl;
+                ViewBag.ReturnUrl = Server.UrlEncode(Request.UrlReferrer.PathAndQuery);
             }
             return View();
         }

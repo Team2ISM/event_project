@@ -31,11 +31,11 @@
             {
                 <tr>
                     <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
-                    <td>@Html.RouteLink(evnt.Description.Cut(), "EventDetails", new { evnt.Id })</td>
+                    <td>@Html.RouteLink(evnt.TextDescription.Cut(), "EventDetails", new { evnt.Id })</td>
                     <td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(",", "EventDetails", new { evnt.Id })
-                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })                        
+                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a", "EventDetails", new { evnt.Id })                        
                     </td>
                     <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
                     <td id="TdDell">@Html.RouteLink("Удалить", "DeleteUserEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light white-text red" })</td>
