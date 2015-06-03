@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web.UI;
 using Microsoft.Ajax.Utilities;
 using Foolproof;
+using Events.Business.Models;
 namespace team2project.Models
 {
     public class EventViewModel
@@ -53,5 +55,7 @@ namespace team2project.Models
 
         [DataType(DataType.Date)]
         public DateTime? DateOfCreation { get; set; }
+
+        public IList<Comment> Comments { get; set; }
     }
 }

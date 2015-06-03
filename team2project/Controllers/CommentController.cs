@@ -14,47 +14,35 @@ namespace team2project.Controllers
 
         CommentManager commentManager;
         EventManager eventManager;
-    
-        public CommentController(EventManager eventManager, CommentManager commentManager)
+        UserManager userManager;
+
+        public CommentController(EventManager eventManager, CommentManager commentManager, UserManager userManager)
         {
             this.eventManager = eventManager;
             this.commentManager = commentManager;
+            this.userManager = userManager;
         }
         
         [HttpPost]
-        public string GetCommentsByEventId(string id)
-        {
-            var evnt = AutoMapper.Mapper.Map<EventViewModel>(eventManager.GetById(id));
-
-            if (evnt == null)
-            {
-                return "[]";
-            }
-
-            var comments = commentManager.GetByEventId(id);
-
-            return new JavaScriptSerializer().Serialize(comments);
-        }
-        [HttpPost]
         public ActionResult AddComment(CommentViewModel commentModel)
         {
-            if (!String.IsNullOrEmpty(User.Identity.Name)) {
-                var user = new NHibernateUserDataProvider().GetByMail(User.Identity.Name);
+            if (!HttpContext.User.Identity.IsAuthenticated) //Set values for authorized commentator
+            {
+                var user = userManager.GetByMail(User.Identity.Name);
                 commentModel.AuthorId = user.Id;
                 commentModel.AuthorName = user.Name + " " + user.Surname;
             }
-            else if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                if (commentModel.EventId == null)
-                {
-                    return RedirectToRoute("eventDetails");
-                }
-                return RedirectToRoute("eventDetails", new { @id = commentModel.EventId });
+                if (commentModel.EventId == null) return RedirectToRoute("eventDetails");
             }
-            var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
-            comment.PostingTime = DateTime.Now;
-            commentManager.Create(comment);
-            return RedirectToRoute("eventDetails", new { @id=comment.EventId });
+            else
+            {
+                var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
+                comment.PostingTime = DateTime.Now;
+                commentManager.Create(comment);
+            }
+            return RedirectToRoute("eventDetails", new { @id=commentModel.EventId });
         }
 
     }

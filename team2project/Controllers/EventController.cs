@@ -53,7 +53,7 @@ namespace team2project.Controllers
                 return View("~/Views/Error/Page404.cshtml");
             }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
-            ViewData["Comments"] = commentManager.GetByEventId(id);
+            evntViewModel.Comments = commentManager.GetByEventId(id);
             return View(evntViewModel);
         }
 
@@ -102,7 +102,6 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult DeleteEvent(string id)
         {
-            commentManager.DeleteByEventId(id);
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");
         }

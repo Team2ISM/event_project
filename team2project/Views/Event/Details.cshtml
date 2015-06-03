@@ -69,7 +69,7 @@
     @Html.Partial("~/Views/Comment/Create.cshtml", new CommentViewModel(Model.Id))
 </div>
 @{
-    var list = AutoMapper.Mapper.Map<IList<CommentViewModel>>(ViewData["Comments"]);
+    var list = AutoMapper.Mapper.Map<IList<CommentViewModel>>(Model.Comments);
     foreach (CommentViewModel item in list)
     {
     <div class="padding20 container z-depth-1 comment-body">
