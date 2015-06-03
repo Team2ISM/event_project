@@ -53,7 +53,7 @@ namespace team2project.Controllers
                 return View("EventNotFound");
             }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
-            ViewData["Comments"] = commentManager.GetByEventId(id);
+            evntViewModel.Comments = commentManager.GetByEventId(id);
             return View(evntViewModel);
         }
 
@@ -103,12 +103,15 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult DeleteEvent(string id)
         {
+<<<<<<< HEAD
             //  commentManager.DeleteByEventId(id);
             var evntModel = eventManager.GetById(id);
 
             if (evntModel.AuthorId != User.Identity.Name)
                 return RedirectToAction("Index");
 
+=======
+>>>>>>> origin/SolariBranch
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");
         }
@@ -123,8 +126,12 @@ namespace team2project.Controllers
             }
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             evntModel.AuthorId = User.Identity.Name;
+
+            // Replace <pre> tags with nothing, 'cause they break markup
             evntModel.Description = evntModel.Description.Replace("<pre>", "");
             evntModel.Description = evntModel.Description.Replace("</pre>", "");
+            //
+
             eventManager.Create(evntModel.Id, evntModel);
             return RedirectToAction("Index");
         }

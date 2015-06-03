@@ -11,11 +11,13 @@ namespace Events.Business.Classes
 
         ICacheManager cacheManager;
 
+        CommentManager commentManager;
 
-        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager)
+        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, CommentManager commentManager)
         {
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
+            this.commentManager = commentManager;
         }
 
         public IList<Event> GetAllEvents(bool isForAdmin)
@@ -113,6 +115,7 @@ namespace Events.Business.Classes
         }
         public void Delete(string id)
         {
+            commentManager.DeleteByEventId(id);
             dataProvider.Delete(dataProvider.GetById(id));
             cacheManager.RemoveFromCache(id);
             cacheManager.ClearCacheByRegion("Events");
