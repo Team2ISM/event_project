@@ -22,13 +22,15 @@ else
 {
     classes = "container z-depth-3";
 }
-<div class="@classes">
+<div class="@classes" style="position: relative">
     @using (Html.BeginForm("Registration", "User", FormMethod.Post))
-    {
+    {          
         <div class="row center">
             <h3>Регистрация участников</h3>
+            <img id="loading-img" class="center" alt="loading" src="~/Content/loading32.GIF"/>
         </div>
         <div class="row">
+
             @Html.ValidationSummary(true)
             @*@if (ViewBag.RegistrationSuccess != null)
                 {
@@ -76,7 +78,7 @@ else
             <button class="btn waves-effect waves-light dark-blue-grey" type="submit">Зарегистрировать меня</button>
             @*}*@
         </div>
-    }
+    }      
 </div>
 @section scripts{
     @Scripts.Render("~/Scripts/jquery-ui.js")

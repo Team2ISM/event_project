@@ -53,3 +53,12 @@
 .reg-mess {
     margin-bottom:15px;
 }
+
+#message {
+    display:none;
+}
+#loading-img {
+    display:none;
+    float:right;
+    position: relative;
+}
