@@ -1,5 +1,6 @@
 ﻿@using Newtonsoft.Json
 @{
+    var currentURL = Request.Url;
     var userName = "";
     var userInCookie = Request.Cookies["user"];
     if (User.Identity.IsAuthenticated && userInCookie != null)
@@ -28,7 +29,7 @@
                     @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "dark-text" })
                 </li>
                 <li>
-                    @Html.RouteLink("Вход", "Login", FormMethod.Post, new { @class = "dark-text" })
+                    @Html.RouteLink("Вход", "Login", new { returnURL = currentURL }, new { @class = "dark-text" })
                 </li>
             }
         }
@@ -89,7 +90,7 @@
                 else
                 {
                     <li>
-                        @Html.RouteLink("Войти", "Login", FormMethod.Post, new { @class = "dark-text" })
+                        @Html.RouteLink("Войти", "Login", new { returnURL = currentURL }, new { @class = "dark-text" })
                     </li>  
                 }
                 <li class="divider"></li>
