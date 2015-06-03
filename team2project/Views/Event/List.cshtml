@@ -55,7 +55,7 @@
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a", "EventDetails", new { evnt.Id })
                         
                 </td>
-                <td>@Html.RouteLink(evnt.Location==null?"Null":evnt.Location, "EventDetails", new { evnt.Id })</td>
+                <td>@Html.RouteLink((String.IsNullOrEmpty(evnt.Location) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })</td>
             </tr>
             }
         </tbody>
