@@ -79,7 +79,8 @@ td a:hover, td a:active {
 
 #TdDell
 {
-      width: 166px;
+    padding: 0 1rem;
+    width: 145px;
 }
 
 .text-white a
@@ -89,12 +90,14 @@ td a:hover, td a:active {
 
 #TdUpdate
 {
-    width: 240px;
+    width: 200px;
 }
 
-#TdUpdate button a
+#TdUpdate a
 {
     color: white;
+    padding: 0 1rem;
+    width: 145px;
 }
 .text-white a
 {
