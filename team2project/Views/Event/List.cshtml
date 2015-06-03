@@ -76,15 +76,16 @@
     {
         filters[2] = HttpUtility.UrlDecode(filters[2]);
     }
-    
+
+
     if (period == filters[2])
-        {
-        @Html.RouteLink(linkName, "EventsList", new { period = period }, new { Class = "blue-grey-text active routelink" })
-        }
-        else
-        {
+    {
+        <a href="javascript: return false" class="blue-grey-text active routelink">@linkName</a>
+    }
+    else
+    {
         @Html.RouteLink(linkName, "EventsList", new { period = period }, new { Class = "blue-grey-text routelink" })
-        }
+    }
   }
 
 
