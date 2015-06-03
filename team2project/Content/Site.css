@@ -170,3 +170,17 @@ nav li a
 {
 	display: none;
 }
+
+.custom-combobox a {
+    margin-top: -2px;
+}
+.custom-combobox input {
+    padding-left: 8px;
+}
+
+#ui-id-1 {
+    max-height: 8em;
+    outline: medium none;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
