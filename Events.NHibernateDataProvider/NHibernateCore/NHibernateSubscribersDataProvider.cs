@@ -14,9 +14,11 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateSubscribersDataProvider : ISubscribersDataProvider
     {
-        
-        public int GetCount(string EventId) {
-            using (ISession session = Helper.OpenSession()) {
+
+        public int GetCount(string EventId)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
                 var criteria = session.CreateCriteria(typeof(Subscribing));
                 criteria.Add(Restrictions.Eq("EventId", EventId));
                 var list = criteria.List<Subscribing>();
@@ -24,47 +26,58 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
 
         }
-        public List<Subscriber> GetAllSubscribers(string EventId) {
+        public IList<Subscriber> GetAllSubscribers(string EventId)
+        {
             var result = new List<Subscriber>();
             var userProvider = new NHibernateUserDataProvider();
-            using (ISession session = Helper.OpenSession()) {
+            using (ISession session = Helper.OpenSession())
+            {
                 var criteria = session.CreateCriteria(typeof(Subscribing));
                 criteria.Add(Restrictions.Eq("EventId", EventId));
                 var list = criteria.List<Subscribing>();
-                foreach (var item in list) {
+                foreach (var item in list)
+                {
                     result.Add(AutoMapper.Mapper.Map<Subscriber>(userProvider.GetById(item.UserId)));
                 }
             }
             return result;
         }
 
-        public void SubscribeUser(Subscribing row) {
+       
+        public void SubscribeUser(Subscribing row)
+        {
             if (IsSubscribed(row)) return;
-            using (ISession session = Helper.OpenSession()) {
-                using (ITransaction tran = session.BeginTransaction()) {                 
+            using (ISession session = Helper.OpenSession())
+            {
+                using (ITransaction tran = session.BeginTransaction())
+                {
                     session.Save(row);
                     tran.Commit();
                 }
             }
         }
 
-        public void UnsubscribeUser(Subscribing row) {
+        public void UnsubscribeUser(Subscribing row)
+        {
             if (!IsSubscribed(row)) return;
-            using (ISession session = Helper.OpenSession()) {
-                using (ITransaction tran = session.BeginTransaction()) {
-                    var criteria = session.CreateCriteria(typeof(Subscribing));
-                    criteria.Add(Restrictions.Eq("EventId", row.EventId));
-                    criteria.Add(Restrictions.Eq("UserId", row.UserId));
-                    var elem = criteria.List<Subscribing>()[0];
-
-                    session.Delete(elem);
+            using (ISession session = Helper.OpenSession())
+            {
+                var criteria = session.CreateCriteria<Subscribing>();
+                criteria.Add(Restrictions.Eq("EventId", row.EventId));
+                criteria.Add(Restrictions.Eq("UserId", row.UserId));
+                var rowForDeleting = criteria.List<Subscribing>()[0];
+                using (ITransaction tran = session.BeginTransaction())
+                {
+                    session.Delete(rowForDeleting);
                     tran.Commit();
                 }
             }
         }
 
-        public bool IsSubscribed(Subscribing row) {
-            using (ISession session = Helper.OpenSession()) {
+        public bool IsSubscribed(Subscribing row)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
                 var criteria = session.CreateCriteria(typeof(Subscribing));
                 criteria.Add(Restrictions.Eq("EventId", row.EventId));
                 criteria.Add(Restrictions.Eq("UserId", row.UserId));

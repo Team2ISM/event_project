@@ -42,10 +42,6 @@ namespace team2project.Controllers
             {
                 ViewBag.city = location;
             }
-
-            int? locId = null;
-            //if (!string.IsNullOrEmpty(location))
-            //    locId = cityManager.GetByName(location).Id;
             foreach (var ev in list)
             {
                 ev.Location = cityManager.GetById(ev.LocationId).Name;
@@ -67,6 +63,7 @@ namespace team2project.Controllers
                 return View("EventNotFound");
             }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
+            evntViewModel.Location = cityManager.GetById(evntViewModel.LocationId).Name;
             evntViewModel.Comments = commentManager.GetByEventId(id);
             return View(evntViewModel);
         }
