@@ -86,7 +86,8 @@ namespace team2project.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(user.Email, false);
 
-                    string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (cityManager.GetById(user.LocationId)).Name;
+                    var city = cityManager.GetById(user.LocationId);
+                    string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (city != null ? city.Name : "Default");
                     var json = JsonConvert.SerializeObject(userData);
 
                     var userCookie = new HttpCookie("user", json);
