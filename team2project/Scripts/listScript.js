@@ -43,7 +43,6 @@
                     }
 
                     if (ui.item.value && ui.item.option.value !== '-1' && ui.item.value !== "Все") {
-                        debugger;
                         url += '/' + ui.item.option.value;
                     }
                     document.location.href = url;
@@ -144,7 +143,6 @@
     });
 })(jQuery);
 
-debugger;
 var combobox = $("#combobox");
 var period, city;
 $(function () {
