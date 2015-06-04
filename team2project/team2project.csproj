@@ -273,6 +273,7 @@
     <Compile Include="Scripts\filemanager\connectors\mvc\FilemanagerAreaRegistration.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\closegray.png" />
     <Content Include="Content\loading32.GIF" />
     <Content Include="Content\loading.GIF" />
     <Content Include="Content\Captcha\-772591457.png" />
