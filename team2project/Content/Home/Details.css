@@ -211,10 +211,13 @@ textarea
 
 #subscribers_list li
 {
-	padding-bottom: 10px;
-	padding-top: 10px;
-	text-align: center;
 	color: black;
+    display: block;
+    float: left;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    text-align: center;
+    width: 48%;
 }
 
 #subscribers_onhover li
@@ -224,42 +227,46 @@ textarea
 
 #sub_wrapper
 {
-	position:absolute;
-	top:40%;
-	left:50%;
-	width:400px;  /* adjust as per your needs */
-	height:400px;   /* adjust as per your needs */
-	margin-left:-200px;   /* negative half of width above */
-	margin-top:-200px;   /* negative half of height above */
 	background-color: white;
+    box-shadow: 4px 4px 20px 0 rgba(50, 50, 50, 0.75);
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -200px;
+    max-height: 600px;
+    min-height: 100px;
+    position: absolute;
+    top: 40%;
+    width: 400px;
 	-webkit-box-shadow: 4px 4px 20px 0px rgba(50, 50, 50, 0.75);
--moz-box-shadow:    4px 4px 20px 0px rgba(50, 50, 50, 0.75);
-box-shadow:         4px 4px 20px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    4px 4px 20px 0px rgba(50, 50, 50, 0.75);
 }
 
 #sub_wrapper header
 {
-	height: 15%;
 	background-color: #607d8b;
-	text-align: center;
-	line-height: 50px;
-	color: white;
-	font-family: 'Times New Roman';
-	font-weight: bold;
-	font-size: 20px;
-	z-index: 1000;
-	margin-left: -10px;
+    color: white;
+    font-family: "Times New Roman";
+    font-size: 20px;
+    font-weight: bold;
+    height: 3em;
+    line-height: 50px;
+    margin-left: -10px;
+    text-align: center;
+    z-index: 1000;
 }
 
 #sub_wrapper header span
 {
-	float: right;
-	position: absolute;
-	right: 15px;
-	font-size: 15px;
-	color: white;
-	cursor:pointer;
-	font-family: "Adobe Caslon Pro";
+	background: rgba(0, 0, 0, 0) url("../images/closegray.png") repeat scroll 0 0;
+    background-size: cover;
+    cursor: pointer;
+    display: inline-block;
+    float: right;
+    height: 30px;
+    position: absolute;
+    right: 20px;
+    top: 12px;
+    width: 30px;
 }
 
 .overscreen
