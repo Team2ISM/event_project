@@ -216,7 +216,7 @@ namespace team2project.Controllers
                 userManager.UpdateUser(user);
                 FormsAuthentication.SetAuthCookie(user.Email, false);
 
-                string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (cityManager.GetById(user.LocationId)).Name;
+                string userData = HttpUtility.UrlEncode("Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (cityManager.GetById(user.LocationId)).Name);
                 var json = JsonConvert.SerializeObject(userData);
 
                 var userCookie = new HttpCookie("user", json);
