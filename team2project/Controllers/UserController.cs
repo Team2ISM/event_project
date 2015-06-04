@@ -189,7 +189,9 @@ namespace team2project.Controllers
                 var userExist = userManager.GetByMail(user.Email);
                 if (userExist == null)
                 {
-                    userManager.RegisterUser(AutoMapper.Mapper.Map<User>(user));
+                    var mappedUser = AutoMapper.Mapper.Map<User>(user);
+                    mappedUser.LocationId = cityManager.GetByName(user.Location).Id;
+                    userManager.RegisterUser(mappedUser);
                     SendActivationLink(user);
 
                     return RedirectToAction("ConfirmRegistration", "User");
