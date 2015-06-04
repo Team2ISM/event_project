@@ -28,23 +28,8 @@ namespace Events.Business.Classes
         public void Create(Comment model)
         {
             dataProvider.Create(model);
-            cacheManager.ToCache<Comment>("comment/" + model.Id,
-                () =>
-                {
-                    return model;
-                });
-            cacheManager.RemoveFromCache("comment/" + model.Id);
             cacheManager.RemoveFromCache("commentsList");
             cacheManager.RemoveFromCache("commentsToEvent/" + model.EventId);
-        }
-
-        public Comment GetById(string id)
-        {
-            return cacheManager.FromCache<Comment>("comment/"+id,
-                () =>
-                {
-                    return dataProvider.GetById(id);
-                });
         }
 
         public IList<Comment> GetByEventId(string eventId)
@@ -72,13 +57,6 @@ namespace Events.Business.Classes
                 {
                     return dataProvider.GetByEventId(eventId);
                 });
-   
-            foreach(var element in comments)
-            {
-                dataProvider.Delete(element);
-                cacheManager.RemoveFromCache("comment/" + element.Id);
-            }
-
             cacheManager.RemoveFromCache("commentsList");
             cacheManager.RemoveFromCache("commentsToEvent/" + eventId);
         }
