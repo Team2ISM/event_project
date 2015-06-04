@@ -84,7 +84,7 @@ namespace team2project.Controllers
             if (evntModel.AuthorId != User.Identity.Name)
                 return RedirectToAction("Index");
 
-            if (evntModel == null || DateTime.Now > evntModel.DateOfCreation)
+            if (evntModel == null || DateTime.Now > evntModel.ToDate)
             {
                 return View("EventNotFound");
             }
@@ -120,8 +120,9 @@ namespace team2project.Controllers
         public ActionResult DeleteEvent(string id)
         {
             var mail = User.Identity.Name;
-            User user = userManager.GetByMail(mail);
-            if (user.Id == eventManager.GetById(id).AuthorId)
+            var target = eventManager.GetById(id);
+            var all = eventManager.GetAllEvents(true);
+            if (target != null && mail == target.AuthorId)
             {
                 eventManager.Delete(id);
                 return RedirectToRoute("FutureEvents");
