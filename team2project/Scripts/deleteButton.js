@@ -11,7 +11,7 @@
             "Удалить событие": function () {
                 $(this).dialog("close");
                 $.ajax({
-                    url: url + "/admin/events/delete",
+                    url: host + "/events/delete",
                     type: "POST",
                     data: {
                         id: e

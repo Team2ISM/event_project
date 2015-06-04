@@ -40,7 +40,7 @@ namespace team2project
 
             routes.MapRoute(
                 name: "DeleteUserEvent",
-                url: "events/delete/{id}",
+                url: "events/delete/",
                 defaults: new { controller = "Event", action = "DeleteEvent" }
             );
 

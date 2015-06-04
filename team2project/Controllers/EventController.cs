@@ -115,7 +115,7 @@ namespace team2project.Controllers
             return RedirectToRoute("Home");
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         public ActionResult DeleteEvent(string id)
         {
