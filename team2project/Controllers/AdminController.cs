@@ -70,16 +70,29 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult DeleteEvent(string id)
         {
-            commentManager.DeleteByEventId(id);
-            manager.Delete(id);
-            return Json(
-                new JsonResultHelper()
+            JsonResultHelper result = null;
+            if (manager.GetById(id) == null)
+            {
+                result = new JsonResultHelper()
+                {
+                    Data = null,
+                    Message = "Failure: Event already deleted",
+                    Status = JsonResultHelper.StatusEnum.Error
+                };
+            }
+            else
+            {
+                commentManager.DeleteByEventId(id);
+                manager.Delete(id);
+                result = new JsonResultHelper()
                 {
                     Data = null,
                     Message = "Success: Delete Event",
                     Status = JsonResultHelper.StatusEnum.Success
-                }
-                );
+                };
+            }
+            
+            return Json(result);
         }
 
         bool MarkAsSeen()
