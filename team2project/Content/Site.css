@@ -19,10 +19,9 @@ p, div{
 -----------------------------------------------------------*/
 fieldset {
     border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
+    margin: 0 0 4px;
+    padding: 0 1.2em 1em;
 	resize: none;
-	margin-bottom: 10px;
 }
 .large-font
 {
