@@ -100,7 +100,8 @@ namespace team2project.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("Index", "Event");
+                        //return RedirectToAction("Index", "Event");
+                        return RedirectToRoute("EventsList", new {period="all"});
                     }
                 }
                 else
