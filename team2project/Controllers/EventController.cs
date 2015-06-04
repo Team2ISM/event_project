@@ -1,4 +1,5 @@
 ﻿using Events.Business.Classes;
+using Events.Business;
 using Events.Business.Models;
 using Events.NHibernateDataProvider.NHibernateCore;
 using System;
@@ -16,12 +17,14 @@ namespace team2project.Controllers
         EventManager eventManager;
         CommentManager commentManager;
         CitiesManager cityManager;
+        UserManager userManager;
 
-        public EventController(EventManager eventManager, CommentManager commentManager, CitiesManager cityManager)
+        public EventController(EventManager eventManager, CommentManager commentManager, CitiesManager cityManager, UserManager userManager)
         {
             this.eventManager = eventManager;
             this.commentManager = commentManager;
             this.cityManager = cityManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -119,8 +122,14 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult DeleteEvent(string id)
         {
-            eventManager.Delete(id);
-            return RedirectToRoute("FutureEvents");
+            var mail = User.Identity.Name;
+            User user = userManager.GetByMail(mail);
+            if (user.Id == eventManager.GetById(id).AuthorId)
+            {
+                eventManager.Delete(id);
+                return RedirectToRoute("FutureEvents");
+            }
+            else return RedirectToRoute("Home");
         }
 
         [HttpPost]
