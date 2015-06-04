@@ -54,9 +54,9 @@ namespace team2project.Controllers
         }
 
         [HttpPost]
-        public ActionResult ToggleButtonStatusActive(string id)
+        public ActionResult ToggleStatus(string id)
         {
-            manager.ToggleButtonStatusActive(id);
+            manager.ToggleStatus(id);
             return Json(
                 new JsonResultHelper()
                 {

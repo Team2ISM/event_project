@@ -108,6 +108,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NHibernateCore\Mappings\Cities.hbm.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <Content Include="Scripts\dbo.Cities.sql" />
     <Content Include="Scripts\dbo.Comment.sql" />

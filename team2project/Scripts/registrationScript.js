@@ -116,7 +116,7 @@
             // Remove invalid value
             this.input
               .val("")
-              .attr("title", value + " didn't match any item")
+              .attr("title", value + " Сорян братуха, но такого города у нас нету...")
               .tooltip("open");
             this.element.val("");
             this._delay(function () {
@@ -133,7 +133,6 @@
 })(jQuery);
 var locat = $("#location");
 window.onload = function () {
-
     var combobox = $("#combobox"), value;
     if (city) {
         var arr = combobox.children();
@@ -148,4 +147,8 @@ window.onload = function () {
     combobox.combobox();
     locat.val(combobox.children()[0].innerHTML);
     if (value) locat.val(value);
+
+    document.forms[0].onsubmit = function () {
+        if ($(this).valid()) $('#loading-img').show();
+    }
 };

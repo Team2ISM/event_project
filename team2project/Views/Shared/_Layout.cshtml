@@ -5,7 +5,7 @@
     if (User.Identity.IsAuthenticated && userInCookie != null)
     {
         var data = userInCookie.Value.ToString().Split('\"')[1].Split(':');
-        userName = data[1] + " " + data[3];
+        userName = Server.UrlDecode(data[1] + " " + data[3]);
     }    
 }
 <!DOCTYPE html>
@@ -66,7 +66,7 @@
         <div class="nav-wrapper blue-grey">
 
             @Html.RouteLink("Субботник", "Index", htmlAttributes: new { Class = "white-text", Id = "logo" })
-            <ul class="hide-on-med-and-down right">
+            <ul class="right">
 
                 <li class="menu-content">
                     @Html.RouteLink("Список событий", "EventsList", FormMethod.Post, new { @class = "white-text" })
@@ -115,9 +115,9 @@
     @RenderSection("scripts", required: false)
     <script>
         var size = [document.documentElement.clientWidth, document.documentElement.clientHeight];
-        window.onresize = function () {
+        /*window.onresize = function () {
             document.body.style.zoom = document.documentElement.clientWidth / size[0];
-        }
+        }*/
     </script>
 </body>
 </html>

@@ -25,6 +25,25 @@ namespace Events.Business.Classes
                     return dataProvider.GetAll();
                 });
         }
+
+        public City GetById(int citytId)
+        {
+            return cacheManager.FromCache<City>("City :: " + citytId,
+                () =>
+                {
+                    return dataProvider.GetById(citytId);
+                });
+        }
+
+        public City GetByName(string name)
+        {
+            return cacheManager.FromCache<City>("City :: " + name,
+                () =>
+                {
+                    return dataProvider.GetByName(name);
+                });
+        }
+
         public void Create(string key, City model)
         {
             dataProvider.Create(model);

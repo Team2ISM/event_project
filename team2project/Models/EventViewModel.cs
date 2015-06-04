@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web.UI;
 using Microsoft.Ajax.Utilities;
 using Foolproof;
+using Events.Business.Models;
 namespace team2project.Models
 {
     public class EventViewModel
@@ -42,8 +44,10 @@ namespace team2project.Models
         [GreaterThan("FromDate",ErrorMessage="Даты введены неправильно")]
         public DateTime? ToDate { get; set; }
 
+        public string Location { get; set; }
+
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        public string Location { get; set; }   
+        public string LocationId { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
         public bool Active { get; set; }
@@ -53,5 +57,7 @@ namespace team2project.Models
 
         [DataType(DataType.Date)]
         public DateTime? DateOfCreation { get; set; }
+
+        public IList<Comment> Comments { get; set; }
     }
 }

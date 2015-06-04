@@ -10,8 +10,8 @@ namespace Events.Business.Interfaces
 
         City GetById(int citytId);
 
-        int Create(City city);
-
         City GetByName(string name);
+
+        int Create(City city);
     }
 }

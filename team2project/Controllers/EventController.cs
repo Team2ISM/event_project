@@ -1,11 +1,13 @@
 ﻿using Events.Business.Classes;
 using Events.Business.Models;
 using Events.NHibernateDataProvider.NHibernateCore;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using team2project.Models;
 using team2project.Helpers;
+
 
 namespace team2project.Controllers
 {
@@ -30,7 +32,6 @@ namespace team2project.Controllers
             {
                 return RedirectToRoute("Error404");
             }
-
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
             ViewBag.city = null;
 
@@ -39,6 +40,13 @@ namespace team2project.Controllers
                 ViewBag.city = location;
             }
 
+            int? locId = null;
+            if (!string.IsNullOrEmpty(location))
+                locId = cityManager.GetByName(location).Id;
+            foreach (var ev in list)
+            {
+                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+            }
             return View("List", list);
         }
 
@@ -49,14 +57,14 @@ namespace team2project.Controllers
 
             if (evntModel == null)
             {
-                return View("EventNotFound");
-            }
-            if (evntModel.AuthorId == "undefinded")
-            {
                 return View("~/Views/Error/Page404.cshtml");
             }
+            if (evntModel.Active == false)
+            {
+                return View("EventNotFound");
+            }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
-            ViewData["Comments"] = commentManager.GetByEventId(id);
+            evntViewModel.Comments = commentManager.GetByEventId(id);
             return View(evntViewModel);
         }
 
@@ -106,12 +114,6 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult DeleteEvent(string id)
         {
-            //  commentManager.DeleteByEventId(id);
-            var evntModel = eventManager.GetById(id);
-
-            if (evntModel.AuthorId != User.Identity.Name)
-                return RedirectToAction("Index");
-
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");
         }
@@ -126,8 +128,12 @@ namespace team2project.Controllers
             }
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             evntModel.AuthorId = User.Identity.Name;
+
+            // Replace <pre> tags with nothing, 'cause they break markup
             evntModel.Description = evntModel.Description.Replace("<pre>", "");
             evntModel.Description = evntModel.Description.Replace("</pre>", "");
+            //
+
             eventManager.Create(evntModel.Id, evntModel);
             return RedirectToRoute("Home");
         }

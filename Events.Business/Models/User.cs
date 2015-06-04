@@ -21,11 +21,11 @@ namespace Events.Business
 
         public virtual string PasswordSalt { get; set; }
 
-        public virtual string Location { get; set; }
-
         public virtual bool IsActive { get; set; }
 
         public virtual IList<Role> Roles { get; set; }
+
+        public virtual string LocationId { get; set; }
 
         public virtual void AddRole(Role role)
         {

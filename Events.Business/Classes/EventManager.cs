@@ -11,14 +11,17 @@ namespace Events.Business.Classes
 
         ICacheManager cacheManager;
 
+        CommentManager commentManager;
+
         ICitiesDataProvider citiesProvider;
 
 
-        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, ICitiesDataProvider citiesProvider)
+        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, ICitiesDataProvider citiesProvider, CommentManager commentManager)
         {
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
             this.citiesProvider = citiesProvider;
+            this.commentManager = commentManager;
         }
 
         public IList<Event> GetAllEvents(bool isForAdmin)
@@ -48,7 +51,7 @@ namespace Events.Business.Classes
             }
 
             string loc = "";
-            
+
             if (!String.IsNullOrEmpty(location))
             {
                 City city = citiesProvider.GetByName(location);
@@ -56,13 +59,13 @@ namespace Events.Business.Classes
                 {
                     loc = city.Name;
                 }
-                else 
+                else
                 {
                     return null;
                 }
             }
 
-           
+
 
             int daysToEvent = (int)days;
 
@@ -106,17 +109,6 @@ namespace Events.Business.Classes
                  {
                      return dataProvider.GetById(id);
                  });
-
-            if (evntModel == null)
-            {
-                Event evnt = new Event();
-                evnt.AuthorId = "undefinded";
-                return evnt;
-            }
-            if (evntModel.Active == false)
-            {
-                return null;
-            }
             return evntModel;
         }
 
@@ -138,9 +130,9 @@ namespace Events.Business.Classes
                 });
         }
 
-        public void ToggleButtonStatusActive(string id)
+        public void ToggleStatus(string id)
         {
-            dataProvider.ToggleButtonStatusActive(id);
+            dataProvider.ToggleStatus(id);
             cacheManager.RemoveFromCache(id);
             cacheManager.ClearCacheByRegion("Events");
             cacheManager.ClearCacheByRegion("eventsList");
@@ -155,6 +147,7 @@ namespace Events.Business.Classes
         }
         public void Delete(string id)
         {
+            commentManager.DeleteByEventId(id);
             dataProvider.Delete(dataProvider.GetById(id));
             cacheManager.RemoveFromCache(id);
             cacheManager.ClearCacheByRegion("Events");
@@ -164,7 +157,7 @@ namespace Events.Business.Classes
         private int? getDaysCount(string period)
         {
             int? days;
-        switch (period)
+            switch (period)
             {
                 case "today":
                     days = 1;
@@ -178,11 +171,11 @@ namespace Events.Business.Classes
                 case "all":
                     days = 0;
                     break;
-                default :
+                default:
                     days = null;
                     break;
             }
-        return days;
+            return days;
         }
     }
 }

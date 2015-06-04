@@ -16,8 +16,8 @@
     <property name="FromDate" access="property" type="datetime"></property>
     
     <property name="ToDate" access="property" type="datetime"></property>
-    
-    <property name="Location" access="property" type="string"></property>
+
+    <property name="LocationId" access="property" type="string"></property>
     
     <property name="Active" access="property" type="bool"></property>
     
@@ -31,11 +31,13 @@
     
     <filter name ="effectiveDate" condition ="ToDate >= :asOfDate"/>
     
-    <filter name ="equalLocation" condition ="Location = :chosenLocation"/>
+    <filter name ="equalLocation" condition ="LocationId = :chosenLocation"/>
     
     <filter name ="equalDate" condition ="ToDate >= :nowaday AND :chosenDate >= FromDate"/>
   </class>
-
+  
+  
+  <!--business logic-->
   <filter-def name = "effectiveDate">
     <filter-param name ="asOfDate" type ="System.DateTime"/>
   </filter-def>

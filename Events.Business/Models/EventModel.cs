@@ -16,7 +16,7 @@ namespace Events.Business.Models
 
         public virtual DateTime? ToDate { get; set; }
 
-        public virtual string Location { get; set; }
+        public virtual string LocationId { get; set; }
 
         public virtual bool Active { get; set; }
 

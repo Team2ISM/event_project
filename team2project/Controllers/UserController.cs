@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Security.Claims;
@@ -47,12 +46,14 @@ namespace team2project.Controllers
 
         UserManager userManager;
         EventManager eventManager;
+        CitiesManager cityManager;
 
 
-        public UserController(UserManager userManager, EventManager eventManager)
+        public UserController(UserManager userManager, EventManager eventManager, CitiesManager citiesManager)
         {
             this.userManager = userManager;
             this.eventManager = eventManager;
+            this.cityManager = citiesManager;
         }
 
         public ActionResult Index()
@@ -67,55 +68,49 @@ namespace team2project.Controllers
             {
                 ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
             }
-            else if (Request.UrlReferrer != null)
-            {
-                ViewBag.ReturnUrl = Server.UrlEncode(Request.UrlReferrer.PathAndQuery);
-            }
             return View();
         }
 
         [HttpPost]
         public ActionResult Login(string email, string password, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = userManager.GetByMail(email);
-                if (user != null && isValid(email, password))
+                return View();
+            }
+
+            var user = userManager.GetByMail(email);
+            if (user != null && isValid(email, password))
+            {
+                if (user.IsActive == true)
                 {
-                    if (user.IsActive == true)
+                    FormsAuthentication.SetAuthCookie(user.Email, false);
+
+                    string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + user.Location;
+                    var json = JsonConvert.SerializeObject(userData);
+
+                    var userCookie = new HttpCookie("user", json);
+                    userCookie.Expires.AddDays(365);
+                    HttpContext.Response.SetCookie(userCookie);
+
+                    if (!string.IsNullOrEmpty(returnUrl))
                     {
-                        string decodedUrl = "";
-                        if (string.IsNullOrEmpty(returnUrl) == false)
-                            decodedUrl = Server.UrlDecode(returnUrl);
-                        FormsAuthentication.SetAuthCookie(user.Email, false);
-
-                        string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + user.Location;
-                        var json = JsonConvert.SerializeObject(userData);
-
-                        var userCookie = new HttpCookie("user", json);
-                        userCookie.Expires.AddDays(365);
-                        HttpContext.Response.SetCookie(userCookie);
-                        
-                        if (string.IsNullOrEmpty(decodedUrl) == false && decodedUrl.ToLower() != "/user/thankyoupage"
-                             && decodedUrl.ToLower() != "/user/confirm")
-                        {
-                            return Redirect(decodedUrl);
-                        }
-                        else
-                        {
-                            return RedirectToAction("Index", "Event");
-                        }
+                        return Redirect(Server.UrlDecode(returnUrl));
                     }
                     else
                     {
-                        ViewBag.Mail = email;
-                        return View("UnconfirmedUser");
+                        return RedirectToAction("Index", "Event");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильный e-mail или пароль");
+                    ViewBag.Mail = email;
+                    return View("UnconfirmedUser");
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Неправильный e-mail или пароль");
             }
             return View();
         }
@@ -268,7 +263,10 @@ namespace team2project.Controllers
         {
             IList<Event> events = eventManager.GetAuthorPastEvents(User.Identity.Name);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-
+            foreach (var ev in eventsModels)
+            {
+                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+            }
             return View(eventsModels);
         }
 
@@ -278,7 +276,10 @@ namespace team2project.Controllers
         {
             IList<Event> events = eventManager.GetAuthorFutureEvents(User.Identity.Name);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-
+            foreach (var ev in eventsModels)
+            {
+                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+            }
             return View(eventsModels);
         }
 

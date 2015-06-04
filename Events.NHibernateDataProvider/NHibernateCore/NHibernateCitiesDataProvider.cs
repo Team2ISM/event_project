@@ -8,8 +8,14 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateCitiesDataProvider : ICitiesDataProvider
     {
+        private IList<City> Cities { get; set; }
+
         public IList<City> GetAll()
         {
+            if (Cities != null)
+            {
+                return Cities;
+            }
             using (ISession session = Helper.OpenSession())
             {
                 return session.CreateCriteria<City>().List<City>();
@@ -18,10 +24,31 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public City GetById(int id)
         {
+            if (Cities != null)
+            {
+                foreach (var city in Cities)
+                    if (city.Id == id) return city;
+            }
 
             using (ISession session = Helper.OpenSession())
             {
                 return session.Get<City>(id);
+            }
+        }
+
+        public City GetByName(string name)
+        {
+            if (Cities != null)
+            {
+                foreach (var city in Cities)
+                    if (city.Name == name) return city;
+            }
+
+            using (ISession session = Helper.OpenSession())
+            {
+                var creteria = session.CreateCriteria<City>();
+                creteria.Add(Restrictions.Eq("Name", name));
+                return creteria.List<City>()[0];
             }
         }
 
@@ -34,18 +61,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 session.Save(model);
             }
             return EmpNo;
-        }
-
-        public City GetByName(string name)
-        {
-            using (ISession session = Helper.OpenSession())
-            {
-                var criteria = session.CreateCriteria(typeof(City));
-                    criteria.Add(Restrictions.Eq("Name", name));
-                    var city = new City[1];
-                    criteria.List<City>().CopyTo(city, 0);
-                    return city[0];
-            }
         }
     }
 }
