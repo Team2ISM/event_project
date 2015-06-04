@@ -37,7 +37,7 @@
                     });
                     debugger;
                     //My 
-                    locat.val(ui.item.option.value);
+                    locat.val(ui.item.value);
                     //locat.html(ui.item.value);
                 },
 
