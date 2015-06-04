@@ -88,6 +88,7 @@ namespace team2project.Controllers
 
                     var city = cityManager.GetById(user.LocationId);
                     string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (city != null ? city.Name : "Default");
+                    userData = HttpUtility.UrlEncode(userData);
                     var json = JsonConvert.SerializeObject(userData);
 
                     var userCookie = new HttpCookie("user", json);
