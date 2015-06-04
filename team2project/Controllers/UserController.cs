@@ -147,7 +147,7 @@ namespace team2project.Controllers
                 };
                 Response.Cookies.Add(user);
             }
-            return RedirectToAction("Index", "Event");
+            return RedirectToRoute("EventsList", new { period = "all" });
         }
 
         [HttpGet]
@@ -222,7 +222,7 @@ namespace team2project.Controllers
 
                 return RedirectToRoute("Welcome", "User");
             }
-            return RedirectToAction("Index", "Event");
+            return RedirectToRoute("EventsList", new { period = "all" });
         }
 
         public ActionResult Welcome()
