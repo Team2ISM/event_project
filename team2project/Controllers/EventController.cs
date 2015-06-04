@@ -129,7 +129,7 @@ namespace team2project.Controllers
                 eventManager.Delete(id);
                 return RedirectToRoute("FutureEvents");
             }
-            else return RedirectToRoute("Home");
+            else return RedirectToRoute("Index");
         }
 
         [HttpPost]
