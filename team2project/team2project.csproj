@@ -264,6 +264,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\JsonResultHelper.cs" />
+    <Compile Include="Helpers\ResponseMessages.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\CitiesViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
@@ -1248,6 +1249,7 @@
     <Content Include="Views\User\Welcome.cshtml" />
     <Content Include="Views\User\ThankYouPage.cshtml" />
     <Content Include="Views\User\UnconfirmedUser.cshtml" />
+    <Content Include="Views\Event\EventError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

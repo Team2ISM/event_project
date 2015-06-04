@@ -54,13 +54,9 @@ namespace team2project.Controllers
         {
             var evntModel = eventManager.GetById(id);
 
-            if (evntModel == null)
+            if (evntModel == null || evntModel.Active == false)
             {
-                return View("~/Views/Error/Page404.cshtml");
-            }
-            if (evntModel.Active == false)
-            {
-                return View("EventNotFound");
+                return View("EventError", ResponseMessages.NotFound);
             }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             evntViewModel.Location = cityManager.GetById(evntViewModel.LocationId).Name;
@@ -84,9 +80,13 @@ namespace team2project.Controllers
             if (evntModel.AuthorId != User.Identity.Name)
                 return RedirectToAction("Index");
 
-            if (evntModel == null || DateTime.Now > evntModel.ToDate)
+            if (evntModel == null)
             {
-                return View("EventNotFound");
+                return View("EventError", ResponseMessages.NotFound);
+            }
+            if (DateTime.Now > evntModel.ToDate)
+            {
+                return View("EventError", ResponseMessages.EditingNotAllowedDueToEventEndingTime);
             }
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             return View("Create", evnt);
