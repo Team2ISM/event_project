@@ -72,6 +72,9 @@
                             },
                             error: function (er) {
                                 console.dir(er);
+                                var events = self.events();
+                                ko.utils.arrayRemoveItem(events, data);
+                                self.events(events);
                             }
                         });
                     },
