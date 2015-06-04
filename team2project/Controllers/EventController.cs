@@ -77,9 +77,6 @@ namespace team2project.Controllers
         {
             var evntModel = eventManager.GetById(id);
 
-            if (evntModel.AuthorId != User.Identity.Name)
-                return RedirectToAction("Index");
-
             if (evntModel == null)
             {
                 return View("EventError", ResponseMessages.NotFound);
@@ -88,6 +85,10 @@ namespace team2project.Controllers
             {
                 return View("EventError", ResponseMessages.EditingNotAllowedDueToEventEndingTime);
             }
+
+            if (evntModel.AuthorId != User.Identity.Name)
+                return View("EventError", ResponseMessages.EditingNotAllowedDueToWrongUser);
+
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             return View("Create", evnt);
         }
