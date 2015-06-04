@@ -256,7 +256,7 @@ namespace team2project.Controllers
                 }
                 else
                 {
-                    ViewBag.OldPasswordError = "Неправильный старый пароль";
+                    ModelState.AddModelError("", "Неправильный старый пароль");
                 }
             }
             return View();
