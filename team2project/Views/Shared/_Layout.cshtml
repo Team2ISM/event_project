@@ -68,8 +68,8 @@
             @Html.RouteLink("Субботник", "Index", htmlAttributes: new { Class = "white-text", Id = "logo" })
             <ul class="right">
 
-                <li class="menu-content">
-                    @Html.RouteLink("Список событий", "EventsList", FormMethod.Post, new { @class = "white-text" })
+                <li class="menu-content">                    
+                    @Html.RouteLink("Список событий", "EventsList",  new { period = "all" }, new { @class = "white-text" })
                 </li>
                 @if (User.Identity.IsAuthenticated)
                 {
