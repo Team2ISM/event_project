@@ -26,7 +26,7 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult AddComment(CommentViewModel commentModel)
         {
-            if (!HttpContext.User.Identity.IsAuthenticated) //Set values for authorized commentator
+            if (HttpContext.User.Identity.IsAuthenticated) //Set values for authorized commentator
             {
                 var user = userManager.GetByMail(User.Identity.Name);
                 commentModel.AuthorId = user.Id;
