@@ -281,3 +281,16 @@ fieldset h5 {
 fieldset h5 p {
     margin-top: 0;
 }
+
+#desc div p img
+{
+    width: 100%;
+}
+.cke_editable img
+{
+    width: 94%;
+}
+#cke_108_uiElement
+{
+    display: none;
+}
