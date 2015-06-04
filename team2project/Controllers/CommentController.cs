@@ -32,10 +32,7 @@ namespace team2project.Controllers
                 commentModel.AuthorId = user.Id;
                 commentModel.AuthorName = user.Name + " " + user.Surname;
             }
-            if (!ModelState.IsValid)
-            {
-                if (commentModel.EventId == null) return RedirectToRoute("eventDetails");
-            }
+            if (commentModel.EventId == null) return RedirectToRoute("eventDetails");
             else
             {
                 var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
