@@ -9,5 +9,6 @@ namespace team2project.Helpers
     {
         public static object NotFound = "Событие не найдено :(";
         public static object EditingNotAllowedDueToEventEndingTime = "Невозможно редактировать прошедшее событие";
+        public static object DeletingNotAllowedDueToWrongUser = "Удалить событие может только его создатель";
     }
 }

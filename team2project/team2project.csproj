@@ -1281,9 +1281,6 @@
     <Content Include="Views\Event\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Event\EventNotFound.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Events.Business\Events.Business.csproj">
       <Project>{c68a6f0d-aae7-4639-8867-6fd26f0bfb2b}</Project>
       <Name>Events.Business</Name>

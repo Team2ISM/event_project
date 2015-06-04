@@ -122,12 +122,10 @@ namespace team2project.Controllers
             var mail = User.Identity.Name;
             var target = eventManager.GetById(id);
             var all = eventManager.GetAllEvents(true);
-            if (target != null && mail == target.AuthorId)
-            {
-                eventManager.Delete(id);
-                return RedirectToRoute("FutureEvents");
-            }
-            else return RedirectToRoute("Home");
+            if (target == null) return View("EventError", ResponseMessages.NotFound);
+            if (mail != target.AuthorId) return View("EventError", ResponseMessages.DeletingNotAllowedDueToWrongUser);
+            eventManager.Delete(id);
+            return RedirectToRoute("FutureEvents");
         }
 
         [HttpPost]
