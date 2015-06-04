@@ -4,7 +4,7 @@
     var userInCookie = Request.Cookies["user"];
     if (User.Identity.IsAuthenticated && userInCookie != null)
     {
-        var data = userInCookie.Value.ToString().Split('\"')[1].Split(':');
+        var data = Server.UrlDecode(userInCookie.Value.ToString()).Split('\"')[1].Split(':');
         userName = Server.UrlDecode(data[1] + " " + data[3]);
     }    
 }
