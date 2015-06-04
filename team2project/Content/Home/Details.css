@@ -229,14 +229,12 @@ textarea
 {
 	background-color: white;
     box-shadow: 4px 4px 20px 0 rgba(50, 50, 50, 0.75);
-    left: 50%;
-    margin-left: -200px;
-    margin-top: -200px;
+    left: 35%;
     max-height: 600px;
     min-height: 100px;
-    position: absolute;
-    top: 40%;
-    width: 400px;
+    position: fixed;
+    top: 35%;
+    width: 30%;
 	-webkit-box-shadow: 4px 4px 20px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow:    4px 4px 20px 0px rgba(50, 50, 50, 0.75);
 }
