@@ -1,5 +1,5 @@
 ﻿@model team2project.Models.EventViewModel
-@using System.Globalization
+@using System.Globalization;
 @section css{
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/jquery-ui.min.css")
@@ -49,10 +49,23 @@
     </style>
 }
 
+@{
+    var button = "";
+    var header = "";
+    if (String.IsNullOrEmpty(Model.Title))
+    {
 
+        button = "Создать";
+        header = "Создайте собственное событие";
+    }
+    else
+    {
+        button = "Сохранить";
+        header = "Редактируйте событие";
+    }
+}
 <div class="container container-wider z-depth-3 m6">
-
-    <h5>@ViewBag.Title</h5>
+    <h5>@header</h5>
     <br />
     @using (Html.BeginForm("Create", "EventController", FormMethod.Post))
     {
@@ -92,7 +105,8 @@
             @Html.ValidationMessageFor(m => m.LocationId)
 
         </div>
-        <button class="btn waves-effect waves-light dark-blue-grey" type="submit">@ViewBag.Button</button>
+
+        <button class="btn waves-effect waves-light dark-blue-grey" type="submit">@button</button>
     }
 </div>
 
@@ -104,4 +118,3 @@
     @Scripts.Render("~/Scripts/createScript.js")
     @Scripts.Render("~/bundles/jqueryval")
 }
-

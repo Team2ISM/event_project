@@ -3,6 +3,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section css{
+    @Styles.Render("~/Content/User/user.css")
+}
 <div class="container-wide container z-depth-1 m6">
     <div class="row">
         <div class="col s12 m12 12 center-align">
@@ -11,7 +14,7 @@
     </div>
     <div class="row">
         <div class="col s12 m12 12 center-align">
-            Пожалуйста, подтвердите регистрацию перейдя по ссылке на вашей почте
+            Пожалуйста, подтвердите регистрацию, перейдя по ссылке на вашей почте.
         </div>
     </div>
 </div>

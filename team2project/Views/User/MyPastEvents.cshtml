@@ -8,7 +8,7 @@
 @section css{
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/jquery-ui.min.css")
-    @Styles.Render("~/Content/jquery-ui.theme.min.css")
+    @*Styles.Render("~/Content/jquery-ui.theme.min.css")*@
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
 }
 
@@ -31,7 +31,7 @@
             {
                 <tr>
                     <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
-                    <td>@Html.RouteLink(evnt.Description.Cut(), "EventDetails", new { evnt.Id })</td>
+                    <td>@Html.RouteLink(evnt.TextDescription.Cut(), "EventDetails", new { evnt.Id })</td>
                     <td>
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
                         @Html.RouteLink(",", "EventDetails", new { evnt.Id })
@@ -43,9 +43,16 @@
             }
         </tbody>
     </table>
+    <div id="dialog-confirm" title="Удалить это событие?" style="display:none;">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0"></span>
+            Это событие будет удалено окончательно и не может быть восстановлено. Вы уверены?
+        </p>
+    </div>
 </div>
 
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.js")
-    @Scripts.Render("~/Scripts/jquery-ui.js")
+    @Scripts.Render("~/Scripts/jquery-ui.min.js")
+    @Scripts.Render("~/Scripts/deleteButton.js")
 }

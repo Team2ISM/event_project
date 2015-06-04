@@ -62,16 +62,11 @@ namespace team2project.Controllers
         }
 
         [HttpGet]
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
-            string returnUrl = "";
-            if (Request.UrlReferrer != null)
+            if (!string.IsNullOrEmpty(returnUrl))
             {
-                returnUrl = Server.UrlEncode(Request.UrlReferrer.PathAndQuery);
-            }            
-            if (string.IsNullOrEmpty(returnUrl) == false)
-            {
-                ViewBag.ReturnUrl = returnUrl;
+                ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
             }
             return View();
         }
@@ -79,45 +74,43 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password, string returnUrl)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var user = userManager.GetByMail(email);
-                if (user != null && isValid(email, password))
+                return View();
+            }
+
+            var user = userManager.GetByMail(email);
+            if (user != null && isValid(email, password))
+            {
+                if (user.IsActive == true)
                 {
-                    if (user.IsActive == true)
+                    FormsAuthentication.SetAuthCookie(user.Email, false);
+
+                    string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + user.Location;
+                    var json = JsonConvert.SerializeObject(userData);
+
+                    var userCookie = new HttpCookie("user", json);
+                    userCookie.Expires.AddDays(365);
+                    HttpContext.Response.SetCookie(userCookie);
+
+                    if (!string.IsNullOrEmpty(returnUrl))
                     {
-                        string decodedUrl = "";
-                        if (string.IsNullOrEmpty(returnUrl) == false)
-                            decodedUrl = Server.UrlDecode(returnUrl);
-                        FormsAuthentication.SetAuthCookie(user.Email, false);
-
-                        string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + user.Location;
-                        var json = JsonConvert.SerializeObject(userData);
-
-                        var userCookie = new HttpCookie("user", json);
-                        userCookie.Expires.AddDays(365);
-                        HttpContext.Response.SetCookie(userCookie);
-                        
-                        if (string.IsNullOrEmpty(decodedUrl) == false && decodedUrl.ToLower() != "/user/thankyoupage"
-                             && decodedUrl.ToLower() != "/user/confirm")
-                        {
-                            return Redirect(decodedUrl);
-                        }
-                        else
-                        {
-                            return RedirectToAction("Index", "Event");
-                        }
+                        return Redirect(Server.UrlDecode(returnUrl));
                     }
                     else
                     {
-                        ViewBag.Mail = email;
-                        return View("UnconfirmedUser");
+                        return RedirectToAction("Index", "Event");
                     }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильный e-mail или пароль");
+                    ViewBag.Mail = email;
+                    return View("UnconfirmedUser");
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Неправильный e-mail или пароль");
             }
             return View();
         }

@@ -7,29 +7,19 @@ namespace team2project.Helpers
 {
     public static class StringHelper
     {
-        public static string Cut(this string data)
+        public static string Cut(this string data, int maxChars = 75, int maxWords = 10)
         {
             var result = "";
-            var words = data.Split(' ');
-            if (words.Length <= 10 && data.Length <= 50)
-            {
-                return data;
-            }
+            if (data.Length <= maxChars) return data;
             else
             {
-                if (data.Length > 50)
-                {
-                    result = data.Substring(0, 50);
-                }
-                else 
-                    for (var i = 0; i != 10; i++)
-                    {
-                        result += " " + words[i];
-                    }
-                result += "...";
-                return result;
+                data = data.Substring(0, maxChars);
+                var words = data.Split(' ');
+                foreach (var word in words)
+                    result += " " + word;
+                result += "...";   
             }
-
+            return result;
         }
 
         public static IHtmlString ToHtmlString(this string data)

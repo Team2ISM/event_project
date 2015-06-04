@@ -58,15 +58,19 @@ namespace team2project.Controllers
 
             if (evntModel == null)
             {
-                return View("EventNotFound");
-            }
-            if(evntModel.AuthorId=="undefinded")
-            {
                 return View("~/Views/Error/Page404.cshtml");
             }
+            if (evntModel.Active == false)
+            {
+                return View("EventNotFound");
+            }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
+<<<<<<< HEAD
             evntViewModel.Location = cityManager.GetById(Convert.ToInt32(evntViewModel.LocationId)).Name;
             ViewData["Comments"] = commentManager.GetByEventId(id);
+=======
+            evntViewModel.Comments = commentManager.GetByEventId(id);
+>>>>>>> origin/master
             return View(evntViewModel);
         }
 
@@ -74,10 +78,7 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Create()
         {
-           // ViewBag.cities = cityManager.GetList();
-            ViewBag.Title = "Создайте собственное событие";
-            ViewBag.Button = "Создать";
-                var evnt = new EventViewModel();
+            var evnt = new EventViewModel();
             return View(evnt);
         }
         [HttpGet]
@@ -85,14 +86,21 @@ namespace team2project.Controllers
         public ActionResult Update(string id)
         {
             var evntModel = eventManager.GetById(id);
+           
+            if (evntModel.AuthorId != User.Identity.Name)
+                return RedirectToAction("Index");
+
             if (evntModel == null)
             {
                 return View("EventNotFound");
             }
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
+<<<<<<< HEAD
             evnt.Location = cityManager.GetById(Convert.ToInt32(evnt.LocationId)).Name;
             ViewBag.Title = "Редактируйте это событие";
             ViewBag.Button = "Сохранить";
+=======
+>>>>>>> origin/master
             return View("Create", evnt);
         }
 
@@ -100,10 +108,12 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Update(EventViewModel evnt)
         {
+       
+            if (evnt.AuthorId != User.Identity.Name)
+                return RedirectToAction("Index");
+
             if (!ModelState.IsValid)
             {
-                ViewBag.Title = "Редактируйте это событие";
-                ViewBag.Button = "Сохранить";
                 return View("Create", evnt);
             }
             evnt.AuthorId = User.Identity.Name;
@@ -116,7 +126,15 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult DeleteEvent(string id)
         {
-            commentManager.DeleteByEventId(id);
+<<<<<<< HEAD
+            //  commentManager.DeleteByEventId(id);
+            var evntModel = eventManager.GetById(id);
+
+            if (evntModel.AuthorId != User.Identity.Name)
+                return RedirectToAction("Index");
+
+=======
+>>>>>>> origin/SolariBranch
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");
         }
@@ -127,15 +145,16 @@ namespace team2project.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.Title = "Создайте собственное событие";
-                ViewBag.Button = "Создать";
                 return View(evnt);
             }
-            evnt.TextDescription = evnt.TextDescription.Substring(0, evnt.TextDescription.Length<51 ? evnt.TextDescription.Length-1 : 50);
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             evntModel.AuthorId = User.Identity.Name;
+
+            // Replace <pre> tags with nothing, 'cause they break markup
             evntModel.Description = evntModel.Description.Replace("<pre>", "");
             evntModel.Description = evntModel.Description.Replace("</pre>", "");
+            //
+
             eventManager.Create(evntModel.Id, evntModel);
             return RedirectToAction("Index");
         }
