@@ -84,7 +84,7 @@ namespace team2project.Controllers
         {
             var evntModel = eventManager.GetById(id);
 
-            if (evntModel.AuthorId != User.Identity.Name)
+            if (evntModel.AuthorId != User.Identity.Name || DateTime.Now > evntModel.DateOfCreation)
                 return RedirectToAction("Index");
 
             if (evntModel == null)
