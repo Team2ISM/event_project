@@ -44,8 +44,8 @@ namespace team2project.Controllers
             }
 
             int? locId = null;
-            if (!string.IsNullOrEmpty(location))
-                locId = cityManager.GetByName(location).Id;
+            //if (!string.IsNullOrEmpty(location))
+            //    locId = cityManager.GetByName(location).Id;
             foreach (var ev in list)
             {
                 ev.Location = cityManager.GetById(ev.LocationId).Name;

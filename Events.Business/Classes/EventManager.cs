@@ -33,15 +33,6 @@ namespace Events.Business.Classes
                     });
         }
 
-        //public IList<Event> GetList()
-        //{
-        //    return cacheManager.FromCache<IList<Event>>("eventsList",
-        //        () =>
-        //        {
-        //            return dataProvider.GetList();
-        //        });
-        //}
-
         public IList<Event> GetList(string period, string location)
         {
             int? days = getDaysCount(period);
@@ -50,29 +41,12 @@ namespace Events.Business.Classes
                 return null;
             }
 
-            string loc = "";
-
-            if (!String.IsNullOrEmpty(location))
-            {
-                City city = citiesProvider.GetByName(location);
-                if (city != null)
-                {
-                    loc = city.Name;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-
-
-
             int daysToEvent = (int)days;
 
-            return cacheManager.FromCache<IList<Event>>("Filter." + period + " - " + loc,
+            return cacheManager.FromCache<IList<Event>>("Filter." + period + " - " + location,
                 () =>
                 {
-                    return dataProvider.GetList(daysToEvent, loc, null, false);
+                    return dataProvider.GetList(daysToEvent, location, null, false);
                 });
         }
 
