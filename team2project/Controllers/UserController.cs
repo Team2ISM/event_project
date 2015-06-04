@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Security.Claims;
@@ -47,12 +46,14 @@ namespace team2project.Controllers
 
         UserManager userManager;
         EventManager eventManager;
+        CitiesManager cityManager;
 
 
-        public UserController(UserManager userManager, EventManager eventManager)
+        public UserController(UserManager userManager, EventManager eventManager, CitiesManager citiesManager)
         {
             this.userManager = userManager;
             this.eventManager = eventManager;
+            this.cityManager = citiesManager;
         }
 
         public ActionResult Index()
@@ -269,7 +270,10 @@ namespace team2project.Controllers
         {
             IList<Event> events = eventManager.GetAuthorPastEvents(User.Identity.Name);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-
+            foreach (var ev in eventsModels)
+            {
+                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+            }
             return View(eventsModels);
         }
 
@@ -279,7 +283,10 @@ namespace team2project.Controllers
         {
             IList<Event> events = eventManager.GetAuthorFutureEvents(User.Identity.Name);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-
+            foreach (var ev in eventsModels)
+            {
+                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+            }
             return View(eventsModels);
         }
 

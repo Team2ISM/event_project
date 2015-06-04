@@ -36,8 +36,8 @@
                         item: ui.item.option
                     });
                     //My 
-                    locat.val(ui.item.value);
-                    locat.html(ui.item.value);
+                    locat.val(ui.item.option.value);
+                    locat.html(ui.item.option.value);
                 },
 
                 autocompletechange: "_removeIfInvalid"
@@ -116,7 +116,7 @@
             // Remove invalid value
             this.input
               .val("")
-              .attr("title", value + " didn't match any item")
+              .attr("title", value + " Сорян братуха, но такого города у нас нету...")
               .tooltip("open");
             this.element.val("");
             this._delay(function () {

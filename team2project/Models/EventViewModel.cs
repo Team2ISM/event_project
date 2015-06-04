@@ -42,8 +42,10 @@ namespace team2project.Models
         [GreaterThan("FromDate",ErrorMessage="Даты введены неправильно")]
         public DateTime? ToDate { get; set; }
 
+        public string Location { get; set; }
+
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        public string Location { get; set; }   
+        public string LocationId { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
         public bool Active { get; set; }

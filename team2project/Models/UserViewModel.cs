@@ -33,8 +33,10 @@ namespace team2project.Models
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string RepeatPassword { get; set; }
 
-        [Required(ErrorMessage = "Введите город")]
         public string Location { get; set; }
+
+        [Required(ErrorMessage = "Введите город")]
+        public string LocationId { get; set; }
 
         public IList<Role> Roles { get; set; }
 

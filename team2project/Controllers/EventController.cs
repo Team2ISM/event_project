@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using team2project.Models;
+using System;
 
 namespace team2project.Controllers
 {
@@ -25,6 +26,10 @@ namespace team2project.Controllers
         public ActionResult Index()
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList());
+            foreach (var ev in list)
+            {
+                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+            }
             return View("List", list);
         }
 
@@ -35,7 +40,14 @@ namespace team2project.Controllers
             {
                 return View("List", AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(loc, null)));
             }
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(loc, days));
+            int? locId = null;
+            if(!String.IsNullOrEmpty(loc))
+                locId = cityManager.GetByName(loc).Id;
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(eventManager.GetList(locId.ToString(), days));
+            foreach (var ev in list)
+            {
+                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+            }
             return View("List", list);
         }
 
@@ -53,6 +65,7 @@ namespace team2project.Controllers
                 return View("~/Views/Error/Page404.cshtml");
             }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
+            evntViewModel.Location = cityManager.GetById(Convert.ToInt32(evntViewModel.LocationId)).Name;
             ViewData["Comments"] = commentManager.GetByEventId(id);
             return View(evntViewModel);
         }
@@ -77,6 +90,7 @@ namespace team2project.Controllers
                 return View("EventNotFound");
             }
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
+            evnt.Location = cityManager.GetById(Convert.ToInt32(evnt.LocationId)).Name;
             ViewBag.Title = "Редактируйте это событие";
             ViewBag.Button = "Сохранить";
             return View("Create", evnt);
