@@ -48,7 +48,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 var creteria = session.CreateCriteria<City>();
                 creteria.Add(Restrictions.Eq("Name", name));
-                return creteria.List<City>()[0];
+                return new List<City>(creteria.List<City>()).ToArray()[0];
             }
         }
 

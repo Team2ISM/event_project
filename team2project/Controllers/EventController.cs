@@ -45,7 +45,7 @@ namespace team2project.Controllers
                 locId = cityManager.GetByName(location).Id;
             foreach (var ev in list)
             {
-                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+                ev.Location = cityManager.GetById(ev.LocationId).Name;
             }
             return View("List", list);
         }

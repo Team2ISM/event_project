@@ -86,7 +86,7 @@ namespace team2project.Controllers
                 {
                     FormsAuthentication.SetAuthCookie(user.Email, false);
 
-                    string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + user.Location;
+                    string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (cityManager.GetById(user.LocationId)).Name;
                     var json = JsonConvert.SerializeObject(userData);
 
                     var userCookie = new HttpCookie("user", json);
@@ -211,7 +211,7 @@ namespace team2project.Controllers
                 userManager.UpdateUser(user);
                 FormsAuthentication.SetAuthCookie(user.Email, false);
 
-                string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + user.Location;
+                string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (cityManager.GetById(user.LocationId)).Name;
                 var json = JsonConvert.SerializeObject(userData);
 
                 var userCookie = new HttpCookie("user", json);

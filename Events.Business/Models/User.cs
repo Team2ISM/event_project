@@ -25,7 +25,7 @@ namespace Events.Business
 
         public virtual IList<Role> Roles { get; set; }
 
-        public virtual string LocationId { get; set; }
+        public virtual int LocationId { get; set; }
 
         public virtual void AddRole(Role role)
         {

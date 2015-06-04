@@ -47,7 +47,7 @@ namespace team2project.Models
         public string Location { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        public string LocationId { get; set; }
+        public int LocationId { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
         public bool Active { get; set; }
