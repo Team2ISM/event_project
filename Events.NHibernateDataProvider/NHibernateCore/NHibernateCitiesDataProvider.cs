@@ -8,7 +8,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateCitiesDataProvider : ICitiesDataProvider
     {
-        private IList<City> Cities { get; set; }
+        private static IList<City> Cities { get; set; }
 
         public IList<City> GetAll()
         {
@@ -18,7 +18,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
             using (ISession session = Helper.OpenSession())
             {
-                return session.CreateCriteria<City>().List<City>();
+
+                return Cities = session.CreateCriteria<City>().List<City>();
             }
         }
 
