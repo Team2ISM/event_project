@@ -263,6 +263,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EventModelHelper.cs" />
     <Compile Include="Helpers\JsonResultHelper.cs" />
     <Compile Include="Helpers\ResponseMessages.cs" />
     <Compile Include="Helpers\StringHelper.cs" />

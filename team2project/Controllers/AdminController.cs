@@ -104,18 +104,5 @@ namespace team2project.Controllers
             }
             return true;
         }
-        //[HttpPost]
-        //public ActionResult MarkEvent(string id)
-        //{
-        //    manager.MarkAsSeen(id);
-        //    return Json(
-        //        new JsonResultHelper()
-        //        {
-        //            Data = null,
-        //            Message = "Success: Marking Event",
-        //            Status = JsonResultHelper.StatusEnum.Success
-        //        }
-        //        );
-        //}
     }
 }

@@ -97,9 +97,9 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Update(EventViewModel evnt)
         {
-
+            evnt = evnt.Merge(eventManager.GetById(evnt.Id));
             if (evnt.AuthorId != User.Identity.Name)
-                return RedirectToAction("Index");
+                return View("EventError", ResponseMessages.EditingNotAllowedDueToWrongUser);
 
             if (!ModelState.IsValid)
             {

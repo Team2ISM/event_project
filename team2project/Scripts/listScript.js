@@ -174,8 +174,11 @@ $(function () {
         }
     });
 
+    var isClicked = false;
+    
     $(".routelink").on("click", function () {
-        if (cityValue && cityValue !== "undefined") {
+        if (!isClicked && cityValue && cityValue !== "undefined") {
+            isClicked = true;
             $(this).attr("href", $(this).attr("href") + "/" + cityValue);
         }
     })

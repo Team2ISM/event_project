@@ -33,7 +33,8 @@
             $.ajax({
                 url: url + "/admin/events/getall",
                 success: function (response) {
-                    successHelper(response, function (response) {
+                    successHelper(response,
+                        function (response) {
                         var events = response.Data;
                         for (var i in events) {
                             self.events.push(new EventModel(events[i], self));
@@ -64,7 +65,19 @@
                                 id: data.id()
                             },
                             success: function (response) {
-                                successHelper(response, function () {
+                                successHelper(response,
+                                    function () {
+                                    var events = self.events();
+                                    ko.utils.arrayRemoveItem(events, data);
+                                    self.events(events);
+                                },
+                                function () {
+                                    $("#dialog-was-deleted").dialog({
+                                        resizable: false,
+                                        width: 400,
+                                        height: 200,
+                                        modal: true
+                                    });
                                     var events = self.events();
                                     ko.utils.arrayRemoveItem(events, data);
                                     self.events(events);
@@ -72,9 +85,6 @@
                             },
                             error: function (er) {
                                 console.dir(er);
-                                var events = self.events();
-                                ko.utils.arrayRemoveItem(events, data);
-                                self.events(events);
                             }
                         });
                     },
@@ -103,12 +113,18 @@
         return "Status: " + response.Status + "\n" + "Message: " + response.Message;
     }
 
-    function successHelper(response, func) {
+    function successHelper(response, funcSuccess, funcError) {
         if (response.Status) {
-            func(response);
+            if (funcSuccess)
+            {
+                funcSuccess(response);
+            }
         }
         else {
-            console.dir(responseMessageHelper(response))
+            if (funcError)
+            {
+                funcError(response);
+            }
         }
     }
 
