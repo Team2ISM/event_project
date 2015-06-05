@@ -97,9 +97,9 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Update(EventViewModel evnt)
         {
-
+            evnt = evnt.Merge(eventManager.GetById(evnt.Id));
             if (evnt.AuthorId != User.Identity.Name)
-                return RedirectToAction("Index");
+                return View("EventError", ResponseMessages.EditingNotAllowedDueToWrongUser);
 
             if (!ModelState.IsValid)
             {
@@ -113,7 +113,7 @@ namespace team2project.Controllers
             evntModel.Description = evntModel.Description.Replace("</pre>", "");
             //
             eventManager.Update(evntModel);
-            return RedirectToRoute("Home");
+            return RedirectToRoute("EventDetails", new { id = evntModel.Id });
         }
 
         [HttpPost]
