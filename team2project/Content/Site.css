@@ -180,8 +180,7 @@ nav li a
 #ui-id-1 {
     max-height: 8em;
     outline: medium none;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden;
 }
 
 .container-auto-width {
