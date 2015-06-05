@@ -133,3 +133,7 @@ td a:hover, td a:active {
 {
     font-weight: normal;
 }
+.ui-widget .ui-widget 
+{
+    padding-top:2px;
+}
