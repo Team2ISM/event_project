@@ -113,7 +113,7 @@ namespace team2project.Controllers
             evntModel.Description = evntModel.Description.Replace("</pre>", "");
             //
             eventManager.Update(evntModel);
-            return RedirectToRoute("Home");
+            return RedirectToRoute("EventDetails", new { id = evntModel.Id });
         }
 
         [HttpPost]

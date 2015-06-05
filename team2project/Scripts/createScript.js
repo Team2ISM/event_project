@@ -205,18 +205,18 @@ window.onload = function () {
     }); // dialogDefinition
 
     var pick1 = $('#datetimepicker1'), pick2 = $('#datetimepicker2');
-    //if (fDate != "undefined" && fDate) pick1.val(fDate);
-    //if (tDate != "undefined" && tDate) pick2.val(tDate);
-    pick1.datetimepicker({
+        if (fDate) pick1.val(fDate);
+        if (tDate) pick2.val(tDate);
+        pick1.datetimepicker({
         minDate: '-1970/01/01',
-        startDate: '',
+        startDate: fDate ? fDate.split(' ')[0] : '',
         minTime: 0,
         lang: 'ru',
         mask: true
     });
     pick2.datetimepicker({
         minDate: 0,
-        startDate:  '',
+        sstartDate: tDate ? tDate.split(' ')[0] : '',
         lang: 'ru',
         mask: true
     });
