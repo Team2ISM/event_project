@@ -149,6 +149,7 @@
     @RenderSection("scripts", required: false)
     <script>
         var size = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+        var returnURL = "@Server.HtmlEncode(currentURL.AbsoluteUri)";
     </script>
 </body>
 </html>
