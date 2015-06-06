@@ -11,5 +11,6 @@ namespace team2project.Helpers
         public static object EditingNotAllowedDueToEventEndingTime = "Невозможно редактировать прошедшее событие";
         public static object EditingNotAllowedDueToWrongUser = "Редактировать событие может только его создатель";
         public static object DeletingNotAllowedDueToWrongUser = "Удалить событие может только его создатель";
+        public static object AccesDenied = "Недостаточный уровень доступа. Доступ закрыт";
     }
 }

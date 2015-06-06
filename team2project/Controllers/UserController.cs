@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Security.Claims;
 using System.Threading;
-
+using team2project.Helpers;
 using System.Net;
 using System.Net.Mime;
 using System.Net.Mail;
@@ -67,12 +67,17 @@ namespace team2project.Controllers
             ActionResult result = View();
             if (!string.IsNullOrEmpty(returnUrl))
             {
-                if (User.Identity.IsAuthenticated)
+                if (!User.IsInRole("Admin") && User.Identity.IsAuthenticated && returnUrl.Contains("admin"))
+                {
+                    result = View("GenericError", ResponseMessages.AccesDenied);
+                }
+                else if (User.Identity.IsAuthenticated)
                 {
                     result = Redirect(returnUrl);
                 }
                 ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
             }
+            
             else if (User.Identity.IsAuthenticated)
             {
                 result = RedirectToRoute("EventsList", new { period = "all" });

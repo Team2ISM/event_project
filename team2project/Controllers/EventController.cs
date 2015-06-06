@@ -56,7 +56,7 @@ namespace team2project.Controllers
 
             if (evntModel == null || evntModel.Active == false)
             {
-                return View("EventError", ResponseMessages.NotFound);
+                return View("GenericError", ResponseMessages.NotFound);
             }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             evntViewModel.Location = cityManager.GetById(evntViewModel.LocationId).Name;
@@ -79,15 +79,15 @@ namespace team2project.Controllers
 
             if (evntModel == null)
             {
-                return View("EventError", ResponseMessages.NotFound);
+                return View("GenericError", ResponseMessages.NotFound);
             }
             if (DateTime.Now > evntModel.ToDate)
             {
-                return View("EventError", ResponseMessages.EditingNotAllowedDueToEventEndingTime);
+                return View("GenericError", ResponseMessages.EditingNotAllowedDueToEventEndingTime);
             }
 
             if (evntModel.AuthorId != User.Identity.Name)
-                return View("EventError", ResponseMessages.EditingNotAllowedDueToWrongUser);
+                return View("GenericError", ResponseMessages.EditingNotAllowedDueToWrongUser);
 
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             return View("Create", evnt);
@@ -99,7 +99,7 @@ namespace team2project.Controllers
         {
             evnt = evnt.Merge(eventManager.GetById(evnt.Id));
             if (evnt.AuthorId != User.Identity.Name)
-                return View("EventError", ResponseMessages.EditingNotAllowedDueToWrongUser);
+                return View("GenericError", ResponseMessages.EditingNotAllowedDueToWrongUser);
 
             if (!ModelState.IsValid)
             {
@@ -123,8 +123,8 @@ namespace team2project.Controllers
             var mail = User.Identity.Name;
             var target = eventManager.GetById(id);
             var all = eventManager.GetAllEvents(true);
-            if (target == null) return View("EventError", ResponseMessages.NotFound);
-            if (mail != target.AuthorId) return View("EventError", ResponseMessages.DeletingNotAllowedDueToWrongUser);
+            if (target == null) return View("GenericError", ResponseMessages.NotFound);
+            if (mail != target.AuthorId) return View("GenericError", ResponseMessages.DeletingNotAllowedDueToWrongUser);
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");
         }
