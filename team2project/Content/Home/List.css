@@ -18,7 +18,7 @@
 {
     padding-left: 8px;
 }
-tbody tr {
+tbody tr {    
     /*cursor: pointer;*/
 }
 
@@ -143,8 +143,9 @@ td a:hover, td a:active {
 
 
 .list-events-date {
+    vertical-align: middle;
     color: #727272 !important;
-    width:10%;
+    width:5%;
     font-size:1.2em;
 }
 
@@ -184,4 +185,9 @@ td a:hover, td a:active {
 .list-events-location {
     font-size: 1em;
     font-weight: 600;
+}
+
+.list-events-links {
+    margin-top: -4.5%;
+    float:right;
 }

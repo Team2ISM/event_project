@@ -65,7 +65,7 @@
                                 @(evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a")
                             </span>
                             <p>
-                                @(evnt.TextDescription != null ? evnt.TextDescription.Cut(400) : evnt.Description.Cut())
+                                @(evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300))
                             </p>
                         </div>
                     </td>

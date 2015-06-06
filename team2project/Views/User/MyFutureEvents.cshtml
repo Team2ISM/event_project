@@ -18,28 +18,38 @@
         @Html.RouteLink("Прошедшие события", "PastEvents", null, new { Class = "blue-grey-text" })
     </div>
     <table class="striped width80 centered">
-        <thead>
-            <tr>
-                <th>Заголовок</th>
-                <th>Описание</th>
-                <th>Дата, время</th>
-                <th>Город</th>
-            </tr>
-        </thead>
+        
         <tbody>
             @foreach (var evnt in Model)
             {
                 <tr>
-                    <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
-                    <td>@Html.RouteLink(evnt.TextDescription.Cut(), "EventDetails", new { evnt.Id })</td>
-                    <td>
-                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("dd MMMM yyyy") : "n/a", "EventDetails", new { evnt.Id })
-                        @Html.RouteLink(",", "EventDetails", new { evnt.Id })
-                        @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("hh:mm") : "n/a", "EventDetails", new { evnt.Id })
+                    <td class="list-events-date">
+                        <div class="bg-blue-grey month">
+                            @CheckDateIfNull(evnt.FromDate, "MMMM")
+                        </div>
+                        <div class="day color-blue-grey">
+                            @CheckDateIfNull(evnt.FromDate, "dd")
+                        </div>
                     </td>
-                    <td>@Html.RouteLink(evnt.Location, "EventDetails", new { evnt.Id })</td>
-                    <td id="TdUpdate">@Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light dark-blue-grey white-text" })</td>
-                    <td><button id="TdDell" class="btn waves-effect waves-light white-text red" onclick="deleteEvent('@evnt.Id')">Удалить</button></td>
+                    <td>                        
+                        <div class="list-events-content">
+                            <h5 class="blue-grey-text">
+                                @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
+                            </h5>
+                            <div class="list-events-links">
+                        @Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light dark-blue-grey white-text", @id = "TdUpdate"})
+                        <button id="TdDell" class="btn waves-effect waves-light white-text red" onclick="deleteEvent('@evnt.Id')">Удалить</button>
+                    </div>                         
+                            <span class="list-events-location">
+                                @((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location) 
+                                @(evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a")
+                            </span>
+                            <p>
+                                @(evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300))
+                            </p>
+                        </div>
+                    </td>
+                    
                 </tr>
             }
         </tbody>
@@ -51,6 +61,17 @@
         </p>
     </div>
 </div>
+@helper CheckDateIfNull(DateTime? date, string format)
+{
+    if (date != null)
+    {
+    @date.Value.ToString(format)
+    }
+    else
+    {
+    <span>n/a</span>
+    }
+}
 
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.js")
