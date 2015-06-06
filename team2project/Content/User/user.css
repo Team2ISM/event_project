@@ -62,3 +62,6 @@
     float:right;
     position: relative;
 }
+#ui-id-1 {
+  overflow-y: scroll;
+}
