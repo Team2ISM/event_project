@@ -3,13 +3,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("~/Content/Home/Page404.css")
-<div class="wrap">
-    <div class="logo center">   
-        
-        <img id ="notfound" src= @Url.Content("~/Content/images/karl.jpg") alt="Image"/>
-        <div class="sub">
+@Styles.Render("~/Content/Home/Details.css")
+<div class="container-auto-width container z-depth-1 m6">
+    <div class="row">
+        <div class="col s12 m12 12 center-align">
+            <img id="notfound" class="responsive-img circle" src=@Url.Content("~/Content/images/doge-regular.png") alt="Image" />
+            <div id="error-msg" class="large-font">
+                <h1>404</h1>
+                Страница не найдена
+            </div>
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $("#notfound").click(function () {
+            $("#error-msg").html("<h5>wow</h5><h5>so error</h5><h5>very 404</h5><h5>such not found</h5><h5>wow</h5>");
+            $("#error-msg").css("bottom", "20px");
+        });
+    });
+</script>
 
 

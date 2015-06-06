@@ -135,7 +135,13 @@ nav li a
 {
 	text-align: center;
 	padding-top: 50px;
-
+    width: 200px;
+    display: inline-block;
+}
+#error-msg{
+    position: relative;
+    display: inline-block;
+    bottom: 55px;
 }
 
 .input-field label
