@@ -64,11 +64,20 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
+            ActionResult result = View();
             if (!string.IsNullOrEmpty(returnUrl))
             {
+                if (User.Identity.IsAuthenticated)
+                {
+                    result = Redirect(returnUrl);
+                }
                 ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
             }
-            return View();
+            else if (User.Identity.IsAuthenticated)
+            {
+                result = RedirectToRoute("EventsList", new { period = "all" });
+            }
+            return result;
         }
 
         [HttpPost]
@@ -179,7 +188,12 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
-            return View();
+            ActionResult result = View();
+            if (User.Identity.IsAuthenticated)
+            {
+                result = RedirectToRoute("EventsList", new { period = "all" });
+            }
+            return result;
         }
 
         [HttpPost]
