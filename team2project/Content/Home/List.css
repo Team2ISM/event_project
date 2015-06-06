@@ -54,6 +54,8 @@ table td
 	text-overflow: ellipsis;
 	overflow: hidden;
 	font-family: Roboto;
+    vertical-align: top;
+    padding: 10px;
 }
 
 table a
@@ -113,6 +115,7 @@ td a:hover, td a:active {
 {
     max-width: 85%;
     margin: 0 auto;
+    margin-bottom: 1%;
 }
 
 #visibleButton
@@ -136,4 +139,49 @@ td a:hover, td a:active {
 .ui-widget .ui-widget 
 {
     padding-top:2px;
+}
+
+
+.list-events-date {
+    color: #727272 !important;
+    width:10%;
+    font-size:1.2em;
+}
+
+.month {
+    margin-bottom: -10%;
+}
+
+.day {
+    font-family: Roboto;
+    font-size:2em;
+}
+
+.list-events-content {
+    text-align:left;
+    font-family: Roboto;
+    text-align: left;
+    vertical-align: top;
+    color: #78909c !important;
+}
+    .list-events-content h5 {
+        margin-top: 0%;
+    }
+    
+    .list-events-content h5 a {
+        color: #455a64 !important;
+    }
+
+    .list-events-content h5 a:hover{
+        text-decoration:underline;
+    }
+
+    .list-events-content p {
+        margin-left: -1%;
+        margin-top: -1px;
+    }
+
+.list-events-location {
+    font-size: 1em;
+    font-weight: 600;
 }

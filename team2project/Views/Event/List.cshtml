@@ -35,18 +35,42 @@
         </div>
     </div>
     <table class="striped width80 centered">
-        <thead>
+        @*<thead>
             <tr>
                 <th>Заголовок</th>
                 <th>Описание</th>
                 <th>Дата, время</th>
                 <th>Город</th>
             </tr>
-        </thead>
+        </thead>*@
         <tbody>
             @foreach (var evnt in Model)
             {
                 <tr>
+                    <td class="list-events-date">
+                        <div class="bg-blue-grey month">
+                            @CheckDateIfNull(evnt.FromDate, "MMMM")
+                        </div>
+                        <div class="day color-blue-grey">
+                            @CheckDateIfNull(evnt.FromDate, "dd")
+                        </div>
+                    </td>
+                    <td>                        
+                        <div class="list-events-content">
+                            <h5 class="blue-grey-text">
+                                @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
+                            </h5>                         
+                            <span class="list-events-location">
+                                @((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location) 
+                                @(evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a")
+                            </span>
+                            <p>
+                                @(evnt.TextDescription != null ? evnt.TextDescription.Cut(400) : evnt.Description.Cut())
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                @*<tr>
                     <td>@Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })</td>
                     <td>@Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut() : evnt.Description.Cut()), "EventDetails", new { evnt.Id })</td>
                     <td>
@@ -55,8 +79,7 @@
                         @Html.RouteLink(evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a", "EventDetails", new { evnt.Id })
                         
                 </td>
-                <td>@Html.RouteLink((String.IsNullOrEmpty(evnt.Location) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })</td>
-            </tr>
+                <td>@Html.RouteLink((String.IsNullOrEmpty(evnt.Location) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })</td>*@
             }
         </tbody>
     </table>
@@ -88,6 +111,17 @@
     }
   }
 
+@helper CheckDateIfNull(DateTime? date, string format)
+{
+    if (date != null)
+    {
+    @date.Value.ToString(format)
+    }
+    else
+    {
+    <span>n/a</span>
+    }
+}
 
 @section scripts{
     @Scripts.Render("~/Scripts/jquery.js")
