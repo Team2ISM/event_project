@@ -191,3 +191,8 @@ td a:hover, td a:active {
     margin-top: -4.5%;
     float:right;
 }
+
+#ui-id-1
+{
+    overflow-y: scroll;
+}
