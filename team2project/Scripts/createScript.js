@@ -117,7 +117,7 @@
             // Remove invalid value
             this.input
               .val("")
-              .attr("title", value + " didn't match any item")
+              .attr("title", value + " отсутствует в списке")
               .tooltip("open");
             this.element.val("");
             this._delay(function () {
