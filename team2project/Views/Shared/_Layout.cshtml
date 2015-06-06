@@ -57,10 +57,10 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li class="menu-content">
-                        @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "white-text" })
+                        @Html.RouteLink("Создать событие", "CreateEvent", FormMethod.Post, new { @class = "white-text" })
                     </li>
-                    <li>
-                        @Html.RouteLink("Вход", "Login", new { returnURL = currentURL }, new { @class = "white-text" })
+                    <li class="menu-content">
+                        @Html.RouteLink("Мои события", "FutureEvents", FormMethod.Post, new { @class = "white-text" })
                     </li>
                 }
                 <li class="menu-content">
