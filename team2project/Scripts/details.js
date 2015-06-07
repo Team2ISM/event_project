@@ -63,7 +63,6 @@ window.onload = function () {
         button.removeAttr("disabled");
     });
 }
-
 $("#subscribed").hover(
   function () {
       $("#subscribers_onhover").removeClass("hover");

@@ -288,7 +288,8 @@ fieldset h5 p {
 
 #desc div p img
 {
-    width: 100%;
+    width: 100% !important;
+    background-size: cover;
 }
 .cke_editable img
 {
