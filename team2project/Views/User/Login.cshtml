@@ -34,5 +34,14 @@
     <div class="input-field col s12 m12">
         @Html.RouteLink("Забыли пароль?", "ForgotPassword")           
     </div>
-    <button class="btn waves-effect waves-light dark-blue-grey" type="submit">Вход</button>
+    <button class="btn waves-effect waves-light dark-blue-grey" id="send" type="submit">Вход</button>
 }
+<script>
+    $(document).ready(function () {
+        var target = $("#send");
+        $("form").on("submit", function () {
+            target.addClass("disabled");
+            target.attr("disabled", "disabled");
+        });
+    });
+</script>
