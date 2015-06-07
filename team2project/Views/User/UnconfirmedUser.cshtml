@@ -3,16 +3,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@Styles.Render("~/Content/User/user.css")
+
 @using (Html.BeginForm("UnconfirmedUser", "User", FormMethod.Post))
 {
     <div class="container container-wide z-depth-3">
-        <div class="row center-align">
+        <div class="row center">
             <h5 class="dark-text">Адрес электронной почты не подтвержден</h5>
         </div>
         <div class="row">
-            <p class="center-align">
+            <div class=" col s12 m12 12 center">
                 Письмо с подтверждением было отправлено раньше на адрес @ViewBag.Mail
-            </p>
+            </div>
             <p class="center-align">
                 Пожалуйста, перейдите по ссылке из письма.
             </p>
@@ -20,8 +22,8 @@
                 <input name="email" type="email" value="@ViewBag.Mail" />
             </div>
         </div>
-        <div class="row center-align">
+        <div class="row center">
             <button class="btn waves-effect waves-light dark-blue-grey autosize" type="submit">Отправить письмо с подтверждением</button>
-        </div>        
+        </div>      
     </div>
 }
