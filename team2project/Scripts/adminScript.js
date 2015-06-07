@@ -22,15 +22,20 @@
                     successHelper(response, function () {
                         self.active(!self.active());
                     },
-                    function () {
-                        $("#text-toggleStatus").html("Это событие уже было " + errorActivateText + "!");
+                    function (response) {
+                        $("#text-toggleStatus").html(response.Message);
                         $("#dialog-toggleStatus-error").dialog({
                             resizable: false,
                             width: 400,
                             height: 200,
                             modal: true
                         });
-                        self.active(!self.active());
+                        if (response.Message === "Событие было удалено") {
+                            viewModel.deleteEventLocal(self);
+                        }
+                        else {
+                            self.active(!self.active());
+                        }
                     }
                     )
                 },
@@ -89,9 +94,7 @@
                                         height: 200,
                                         modal: true
                                     });
-                                    var events = self.events();
-                                    ko.utils.arrayRemoveItem(events, data);
-                                    self.events(events);
+                                    self.deleteEventLocal(data);
                                 });
                             },
                             error: function (er) {
@@ -223,6 +226,12 @@
         self.deleteEvent = function (data) {
             adminAjaxHelper.deleteEvent(data, self);
         }
+
+        self.deleteEventLocal = function (data) {
+            var events = self.events();
+            ko.utils.arrayRemoveItem(events, data);
+            self.events(events);
+        }
     }
 
     ko.bindingHandlers.descriminateActive = {
@@ -236,6 +245,6 @@
             }
         }
     };
-
-    ko.applyBindings(new AdminViewModel(adminAjaxHelper.loadEvents));
+    var viewModel = new AdminViewModel(adminAjaxHelper.loadEvents);
+    ko.applyBindings(viewModel);
 })();

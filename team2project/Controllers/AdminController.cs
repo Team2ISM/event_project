@@ -61,7 +61,8 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Activate(string id)
         {
-            if (manager.Activate(id))
+            bool? result = manager.Activate(id);
+            if (result == true)
             {
                 return Json(
                     new JsonResultHelper()
@@ -74,38 +75,66 @@ namespace team2project.Controllers
             }
             else
             {
-                return Json(
-                     new JsonResultHelper()
-                     {
-                         Message = "Failure: Event already activated",
-                         Status = JsonResultHelper.StatusEnum.Error
-                     }
-                     );
+                if (result == false)
+                {
+                    return Json(
+                         new JsonResultHelper()
+                         {
+                             Message = "Событие уже было активировано",
+                             Status = JsonResultHelper.StatusEnum.Error
+                         }
+                         );
+                }
+                else
+                {
+                    return Json(
+                         new JsonResultHelper()
+                         {
+                             Message = "Событие было удалено",
+                             Status = JsonResultHelper.StatusEnum.Error
+                         }
+                         );
+                }
             }
         }
 
         [HttpPost]
         public ActionResult Deactivate(string id)
         {
-            if (manager.Deactivate(id))
+            bool? result = manager.Deactivate(id);
+            if (result == true)
             {
                 return Json(
-                 new JsonResultHelper()
-                 {
-                     Message = "Success: Deactivate Event",
-                     Status = JsonResultHelper.StatusEnum.Success
-                 }
-                 );
+                    new JsonResultHelper()
+                    {
+                        Data = null,
+                        Message = "Success: Activate Event",
+                        Status = JsonResultHelper.StatusEnum.Success
+                    }
+                    );
             }
             else
             {
-                return Json(
-                     new JsonResultHelper()
-                     {
-                         Message = "Failure: Event already deactivated",
-                         Status = JsonResultHelper.StatusEnum.Error
-                     }
-                     );
+                if (result == false)
+                {
+                    return Json(
+                         new JsonResultHelper()
+                         {
+                             Message = "Событие уже было деактивировано",
+                             Status = JsonResultHelper.StatusEnum.Error
+                         }
+                         );
+                }
+                else
+                {
+                    return Json(
+                         new JsonResultHelper()
+                         {
+                             Message = "Событие было удалено",
+                             Status = JsonResultHelper.StatusEnum.Error
+                         }
+                         );
+                }
             }
         }
 

@@ -104,10 +104,10 @@ namespace Events.Business.Classes
                 });
         }
 
-        public bool Deactivate(string id)
+        public bool? Deactivate(string id)
         {
-            bool result = false;
-            if (dataProvider.ToggleStatus(id, false))
+            bool? result;
+            if ((result = dataProvider.ToggleStatus(id, false)) == true)
             {
                 cacheManager.RemoveFromCache(id);
                 cacheManager.ClearCacheByRegion("Events");
@@ -117,10 +117,10 @@ namespace Events.Business.Classes
             return result;
         }
 
-        public bool Activate(string id)
+        public bool? Activate(string id)
         {
-            bool result = false;
-            if (dataProvider.ToggleStatus(id, true))
+            bool? result;
+            if ((result = dataProvider.ToggleStatus(id, true)) == true)
             {
                 cacheManager.RemoveFromCache(id);
                 cacheManager.ClearCacheByRegion("Events");
