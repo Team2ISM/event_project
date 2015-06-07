@@ -89,18 +89,27 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         }
 
 
-        public void ToggleStatus(string id)
+        public bool ToggleStatus(string id, bool status)
         {
             Event evnt = GetById(id);
-            evnt.Active = !evnt.Active;
-            this.Update(evnt, "Admin");
+            bool result = false;
+            if ((bool)evnt.Active != status)
+            {
+                evnt.Active = status;
+                this.Update(evnt, "Admin");
+                result = true;
+            }
+            return result;
         }
 
         public void MarkAsSeen(string id)
         {
             Event evnt = GetById(id);
-            evnt.Checked = true;
-            this.Update(evnt, "Admin");
+            if (evnt != null)
+            {
+                evnt.Checked = true;
+                this.Update(evnt, "Admin");
+            }
         }
 
         public int Create(Event model)

@@ -59,17 +59,54 @@ namespace team2project.Controllers
         }
 
         [HttpPost]
-        public ActionResult ToggleStatus(string id)
+        public ActionResult Activate(string id)
         {
-            manager.ToggleStatus(id);
-            return Json(
-                new JsonResultHelper()
-                {
-                    Data = null,
-                    Message = "Success: Toogle Active Event",
-                    Status = JsonResultHelper.StatusEnum.Success
-                }
-                );
+            if (manager.Activate(id))
+            {
+                return Json(
+                    new JsonResultHelper()
+                    {
+                        Data = null,
+                        Message = "Success: Activate Event",
+                        Status = JsonResultHelper.StatusEnum.Success
+                    }
+                    );
+            }
+            else
+            {
+                return Json(
+                     new JsonResultHelper()
+                     {
+                         Message = "Failure: Event already activated",
+                         Status = JsonResultHelper.StatusEnum.Error
+                     }
+                     );
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Deactivate(string id)
+        {
+            if (manager.Deactivate(id))
+            {
+                return Json(
+                 new JsonResultHelper()
+                 {
+                     Message = "Success: Deactivate Event",
+                     Status = JsonResultHelper.StatusEnum.Success
+                 }
+                 );
+            }
+            else
+            {
+                return Json(
+                     new JsonResultHelper()
+                     {
+                         Message = "Failure: Event already deactivated",
+                         Status = JsonResultHelper.StatusEnum.Error
+                     }
+                     );
+            }
         }
 
         [HttpPost]
@@ -96,7 +133,7 @@ namespace team2project.Controllers
                     Status = JsonResultHelper.StatusEnum.Success
                 };
             }
-            
+
             return Json(result);
         }
 

@@ -11,9 +11,9 @@
     })
 
     function AdminAjaxHelper() {
-        this.toogleActive = function (self) {
+        this.toogleActive = function (self, urlPart, errorActivateText) {
             $.ajax({
-                url: url + "/admin/events/toggleactive",
+                url: url + "/admin/events/" + urlPart,
                 type: "POST",
                 data: {
                     id: self.id()
@@ -21,7 +21,18 @@
                 success: function (response) {
                     successHelper(response, function () {
                         self.active(!self.active());
-                    })
+                    },
+                    function () {
+                        $("#text-toggleStatus").html("Это событие уже было " + errorActivateText + "!");
+                        $("#dialog-toggleStatus-error").dialog({
+                            resizable: false,
+                            width: 400,
+                            height: 200,
+                            modal: true
+                        });
+                        self.active(!self.active());
+                    }
+                    )
                 },
                 error: function (er) {
                     console.dir(er);
@@ -29,19 +40,19 @@
             });
         }
 
-        this.loadEvents = function(self) {
+        this.loadEvents = function (self) {
             $.ajax({
                 url: url + "/admin/events/getall",
                 success: function (response) {
                     successHelper(response,
                         function (response) {
-                        var events = response.Data;
-                        for (var i in events) {
-                            self.events.push(new EventModel(events[i], self));
-                        }
-                    })
-                        
-                  
+                            var events = response.Data;
+                            for (var i in events) {
+                                self.events.push(new EventModel(events[i], self));
+                            }
+                        })
+
+
                 },
                 error: function (er) {
                     console.dir(er);
@@ -67,10 +78,10 @@
                             success: function (response) {
                                 successHelper(response,
                                     function () {
-                                    var events = self.events();
-                                    ko.utils.arrayRemoveItem(events, data);
-                                    self.events(events);
-                                },
+                                        var events = self.events();
+                                        ko.utils.arrayRemoveItem(events, data);
+                                        self.events(events);
+                                    },
                                 function () {
                                     $("#dialog-was-deleted").dialog({
                                         resizable: false,
@@ -115,14 +126,12 @@
 
     function successHelper(response, funcSuccess, funcError) {
         if (response.Status) {
-            if (funcSuccess)
-            {
+            if (funcSuccess) {
                 funcSuccess(response);
             }
         }
         else {
-            if (funcError)
-            {
+            if (funcError) {
                 funcError(response);
             }
         }
@@ -130,20 +139,23 @@
 
     function EventModel(evnt, model) {
         var self = this;
-        
-        this.id = ko.observable(evnt.Id);
-        this.title = ko.observable(evnt.Title);
-        this.description = ko.observable(evnt.Description != null ? evnt.TextDescription : evnt.Description);
-        this.location = ko.observable(evnt.Location);
-        this.dateFrom = new Date(turnDate(evnt.FromDate));
-        this.dateTo = new Date(turnDate(evnt.ToDate));
-        this.active = ko.observable(evnt.Active);
-        this.checked = ko.observable(evnt.Checked);
-        this.toogleText = ko.observable("");
+
+        self.id = ko.observable(evnt.Id);
+        self.title = ko.observable(evnt.Title);
+        self.description = ko.observable(evnt.Description != null ? evnt.TextDescription : evnt.Description);
+        self.location = ko.observable(evnt.Location);
+        self.dateFrom = new Date(turnDate(evnt.FromDate));
+        self.dateTo = new Date(turnDate(evnt.ToDate));
+        self.active = ko.observable(evnt.Active);
+        self.checked = ko.observable(evnt.Checked);
+        self.toogleText = ko.observable("");
+        self.urlPart = ko.observable("");
+        self.errorActivateText = ko.observable("");
+
+
 
         self.shortDescription = ko.computed(function () {
-            if (self.description())
-            {
+            if (self.description()) {
                 var words = self.description().split(' ');
                 if (words.length <= 10) return self.description();
                 else {
@@ -169,11 +181,13 @@
         self.changeToogleText = ko.computed(function () {
             if (self.active()) {
                 self.toogleText("Деактивировать");
-                self.updateAccent();
+                self.urlPart("deactivate");
+                self.errorActivateText("активировано");
             }
             else {
                 self.toogleText("Активировать");
-                self.updateAccent();
+                self.urlPart("activate");
+                self.errorActivateText("деактивировано");
             }
         });
 
@@ -191,14 +205,14 @@
         });
 
         self.toogleActive = function () {
-            adminAjaxHelper.toogleActive(self);
+            adminAjaxHelper.toogleActive(self, self.urlPart(), self.errorActivateText());
         }
 
         self.goToDetails = function () {
             window.location = url + "/events/details/" + self.id();
         }
 
-        
+
     }
 
     function AdminViewModel(initFunc) {
@@ -208,7 +222,7 @@
 
         self.deleteEvent = function (data) {
             adminAjaxHelper.deleteEvent(data, self);
-        } 
+        }
     }
 
     ko.bindingHandlers.descriminateActive = {

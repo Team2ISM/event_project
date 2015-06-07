@@ -149,9 +149,14 @@ namespace team2project
                 defaults: new { controller = "Admin", action = "ToggleButtonStatusChecked" }
             );
             routes.MapRoute(
-                name: "ToogleIsActiveEvent",
-                url: "admin/events/toggleactive",
-                defaults: new { controller = "Admin", action = "ToggleStatus" }
+                name: "ActivateEvent",
+                url: "admin/events/activate",
+                defaults: new { controller = "Admin", action = "Activate" }
+            );
+            routes.MapRoute(
+                name: "DeactivateEvent",
+                url: "admin/events/deactivate",
+                defaults: new { controller = "Admin", action = "Deactivate" }
             );
             routes.MapRoute(
                name: "getEventsToAdminPage",

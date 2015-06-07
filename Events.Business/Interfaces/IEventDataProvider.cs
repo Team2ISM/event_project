@@ -15,7 +15,7 @@ namespace Events.Business.Interfaces
 
         void Delete(Event model);
 
-        void ToggleStatus(string id);
+        bool ToggleStatus(string id, bool status);
 
         int Create(Event evnt);
 

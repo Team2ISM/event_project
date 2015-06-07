@@ -104,12 +104,30 @@ namespace Events.Business.Classes
                 });
         }
 
-        public void ToggleStatus(string id)
+        public bool Deactivate(string id)
         {
-            dataProvider.ToggleStatus(id);
-            cacheManager.RemoveFromCache(id);
-            cacheManager.ClearCacheByRegion("Events");
-            cacheManager.ClearCacheByRegion("eventsList");
+            bool result = false;
+            if (dataProvider.ToggleStatus(id, false))
+            {
+                cacheManager.RemoveFromCache(id);
+                cacheManager.ClearCacheByRegion("Events");
+                cacheManager.ClearCacheByRegion("eventsList");
+                result = true;
+            }
+            return result;
+        }
+
+        public bool Activate(string id)
+        {
+            bool result = false;
+            if (dataProvider.ToggleStatus(id, true))
+            {
+                cacheManager.RemoveFromCache(id);
+                cacheManager.ClearCacheByRegion("Events");
+                cacheManager.ClearCacheByRegion("eventsList");
+                result = true;
+            }
+            return result;
         }
 
         public void MarkAsSeen(string id)
