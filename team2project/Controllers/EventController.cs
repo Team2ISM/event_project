@@ -107,7 +107,7 @@ namespace team2project.Controllers
             }
             evnt.AuthorId = User.Identity.Name;
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
-            evntModel.LocationId = cityManager.GetByName(evnt.Location).Id;
+            if (!String.IsNullOrEmpty(evnt.Location)) evntModel.LocationId = cityManager.GetByName(evnt.Location).Id;
             // Replace <pre> tags with nothing, 'cause they break markup
             evntModel.Description = evntModel.Description.Replace("<pre>", "");
             evntModel.Description = evntModel.Description.Replace("</pre>", "");

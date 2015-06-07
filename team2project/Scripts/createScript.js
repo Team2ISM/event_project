@@ -140,7 +140,7 @@ window.onload = function () {
     if (city) {
         var arr = combobox.children();
         arr.each(function (i, val) {
-            if (val.innerHTML === city) {
+            if (val.value === city) {
                 val.setAttribute('selected', 'selected');
                 value = city;
                 return false;
@@ -149,7 +149,7 @@ window.onload = function () {
     }
     combobox.combobox();
     locat.val(combobox.children()[0].innerHTML);
-    if (value) locat.val(value);
+    if (value) $('#LocationId').val(value);
 
     var content, label = $('label[for="Description"]'),
         textDescr = $('#TextDescription'),
@@ -170,7 +170,7 @@ window.onload = function () {
         description.html(editor.getData());
     });
 
-    CKEDITOR.on('dialogDefinition', function (event) {
+    /*CKEDITOR.on('dialogDefinition', function (event) {
         var editor = event.editor,
             dialogDefinition = event.data.definition,
             dialogName = event.data.name;
@@ -202,21 +202,22 @@ window.onload = function () {
                 }
             }
         }
-    }); // dialogDefinition
-
+    }); // dialogDefinition*/
+    if (fDate) $('label[for="FromDate"]').addClass('active');
+    if (tDate) $('label[for="ToDate"]').addClass('active');
     var pick1 = $('#datetimepicker1'), pick2 = $('#datetimepicker2');
         if (fDate) pick1.val(fDate);
         if (tDate) pick2.val(tDate);
         pick1.datetimepicker({
         minDate: '-1970/01/01',
-        startDate: fDate ? fDate.split(' ')[0] : '',
+        startDate: fDate ? fDate : '',
         minTime: 0,
         lang: 'ru',
         mask: true
     });
     pick2.datetimepicker({
         minDate: 0,
-        sstartDate: tDate ? tDate.split(' ')[0] : '',
+        sstartDate: tDate ? tDate : '',
         lang: 'ru',
         mask: true
     });
