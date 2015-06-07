@@ -182,6 +182,13 @@ td a:hover, td a:active {
         margin-top: -1px;
     }
 
+    .list-events-content p a {
+        color: #78909c !important;
+    }
+    .list-events-content span a {
+        color: #78909c !important;
+    }
+
 .list-events-location {
     font-size: 1em;
     font-weight: 600;
