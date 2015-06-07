@@ -11,7 +11,7 @@
     })
 
     function AdminAjaxHelper() {
-        this.toogleActive = function (self, urlPart, errorActivateText) {
+        this.toggleActive = function (self, urlPart) {
             $.ajax({
                 url: url + "/admin/events/" + urlPart,
                 type: "POST",
@@ -153,7 +153,6 @@
         self.checked = ko.observable(evnt.Checked);
         self.toogleText = ko.observable("");
         self.urlPart = ko.observable("");
-        self.errorActivateText = ko.observable("");
 
 
 
@@ -185,12 +184,10 @@
             if (self.active()) {
                 self.toogleText("Деактивировать");
                 self.urlPart("deactivate");
-                self.errorActivateText("активировано");
             }
             else {
                 self.toogleText("Активировать");
                 self.urlPart("activate");
-                self.errorActivateText("деактивировано");
             }
         });
 
@@ -208,7 +205,7 @@
         });
 
         self.toogleActive = function () {
-            adminAjaxHelper.toogleActive(self, self.urlPart(), self.errorActivateText());
+            adminAjaxHelper.toggleActive(self, self.urlPart());
         }
 
         self.goToDetails = function () {
