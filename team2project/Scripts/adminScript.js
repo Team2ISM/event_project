@@ -130,7 +130,7 @@
 
     function EventModel(evnt, model) {
         var self = this;
-        debugger;
+        
         this.id = ko.observable(evnt.Id);
         this.title = ko.observable(evnt.Title);
         this.description = ko.observable(evnt.Description != null ? evnt.TextDescription : evnt.Description);

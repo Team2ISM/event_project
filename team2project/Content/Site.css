@@ -197,3 +197,7 @@ nav li a
 .side-nav * {
     color: black !important;
 }
+
+.clickable{
+    cursor: pointer;
+}

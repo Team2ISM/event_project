@@ -14,26 +14,31 @@ namespace team2project.Controllers
     {
         EventManager manager;
         CommentManager commentManager;
+        CitiesManager cityManager;
         delegate bool mark();
 
-        public AdminController(EventManager manager, CommentManager commentManager)
+        public AdminController(EventManager manager, CommentManager commentManager, CitiesManager cityManager)
         {
             this.manager = manager;
             this.commentManager = commentManager;
+            this.cityManager = cityManager;
         }
 
         [HttpGet]
         public ActionResult ManagerPage()
         {
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents(true));
-            return View("ManagerPage", list);
+
+            return View();
         }
 
         [HttpGet]
         public ActionResult GetEvents()
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents(true));
-
+            foreach (var Event in list)
+            {
+                Event.Location = cityManager.GetById(Event.LocationId).Name;
+            }
             //temporary bydlokod
             mark func = MarkAsSeen;
             func.BeginInvoke((ir) =>
