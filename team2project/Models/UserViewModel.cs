@@ -34,8 +34,6 @@ namespace team2project.Models
         public string RepeatPassword { get; set; }
 
         [Required(ErrorMessage = "Введите город")]
-        public string Location { get; set; }
-        
         public int LocationId { get; set; }
 
         public IList<Role> Roles { get; set; }

@@ -210,7 +210,7 @@ namespace team2project.Controllers
                 if (userExist == null)
                 {
                     var mappedUser = AutoMapper.Mapper.Map<User>(user);
-                    mappedUser.LocationId = cityManager.GetByName(user.Location).Id;
+                    mappedUser.LocationId = user.LocationId;
                     userManager.RegisterUser(mappedUser);
                     SendActivationLink(user);
 
