@@ -188,6 +188,9 @@ nav li a
     outline: medium none;
     overflow: hidden;
 }
+.ui-autocomplete {
+    overflow-y: scroll !important;
+}
 
 .container-auto-width {
     max-width: 900px !important;
