@@ -76,13 +76,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NHibernateCore\NHibernateCitiesDataProvider.cs" />
-    <Compile Include="NHibernateCore\NHibernateCommentDataProvider.cs" />
-    <Compile Include="NHibernateCore\NHibernateEventDataProvider.cs" />
+    <Compile Include="DataProviders\NHibernateCitiesDataProvider.cs" />
+    <Compile Include="DataProviders\NHibernateCommentDataProvider.cs" />
+    <Compile Include="DataProviders\NHibernateEventDataProvider.cs" />
     <Compile Include="NHibernateCore\Helper.cs" />
-    <Compile Include="NHibernateCore\NHibernateRoleDataProvider.cs" />
-    <Compile Include="NHibernateCore\NHibernateSubscribersDataProvider.cs" />
-    <Compile Include="NHibernateCore\NHibernateUserDataProvider.cs" />
+    <Compile Include="DataProviders\NHibernateRoleDataProvider.cs" />
+    <Compile Include="DataProviders\NHibernateSubscribersDataProvider.cs" />
+    <Compile Include="DataProviders\NHibernateUserDataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
