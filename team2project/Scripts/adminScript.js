@@ -28,6 +28,11 @@
                             resizable: false,
                             width: 400,
                             height: 200,
+                            buttons: {
+                                "Ok": function () {
+                                    $(this).dialog("close");
+                                }
+                            },
                             modal: true
                         });
                         if (response.Message === "Событие было удалено") {
@@ -92,7 +97,12 @@
                                         resizable: false,
                                         width: 400,
                                         height: 200,
-                                        modal: true
+                                        modal: true,
+                                        buttons: {
+                                        "Ok": function () {
+                                            $(this).dialog("close");
+                                        }
+                                    },
                                     });
                                     self.deleteEventLocal(data);
                                 });
