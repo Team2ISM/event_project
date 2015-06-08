@@ -40,8 +40,7 @@ namespace team2project.App_Start
         public List<SelectListItem> AvailableLocations {
             get {
                 var cities = AutoMapper.Mapper.Map<List<CitiesViewModel>>(cityManager.GetList());
-                var list = new List<SelectListItem>(cities.Count+2);
-                list.Add(new SelectListItem() { Text = "Выберите город", Value = "0" });
+                var list = new List<SelectListItem>(cities.Count+1);
                 //list.Add(new SelectListItem() { Text = "Все", Value = "" });
                 foreach (var city in cities) {
                     list.Add(new SelectListItem() { Text = city.Name, Value = city.Id.ToString() });
