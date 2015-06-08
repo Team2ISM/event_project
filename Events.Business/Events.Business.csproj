@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\BaseManager.cs" />
     <Compile Include="Classes\CitiesManager.cs" />
     <Compile Include="Classes\CommentManager.cs" />
     <Compile Include="Classes\EventManager.cs" />

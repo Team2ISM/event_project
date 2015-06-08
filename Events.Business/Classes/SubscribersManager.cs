@@ -9,21 +9,22 @@ using Events.Business.Models;
 
 namespace Events.Business.Classes
 {
-    public class SubscribersManager
+    public class SubscribersManager : BaseManager
     {
         private ISubscribersDataProvider dataProvider;
 
-        private ICacheManager cacheManager;
+        protected override string Name { get; set; }
 
         public SubscribersManager(ISubscribersDataProvider dataProvider, ICacheManager cacheManager)
         {
+            Name = "Subsribers";
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
         }
 
         public IList<Subscriber> GetAllSubscribers(string eventId)
         {
-            return cacheManager.FromCache<IList<Subscriber>>("Subsribers." + eventId,
+            return FromCache<IList<Subscriber>>(eventId,
                 () =>
                 {
                     return dataProvider.GetAllSubscribers(eventId);
@@ -32,11 +33,11 @@ namespace Events.Business.Classes
 
         public int GetCount(string eventId)
         {
-            return cacheManager.FromCache<int>("Subscribers.Count." + eventId,
+            return FromCache<int>("Count:" + eventId,
                 () =>
                 {
                     return dataProvider.GetCount(eventId);
-                });         
+                });
         }
 
         [Authorize]
@@ -53,7 +54,7 @@ namespace Events.Business.Classes
 
         public bool IsSubscribed(Subscribing row)
         {
-            return cacheManager.FromCache<bool>("Subscribers." + row.EventId + "." + row.UserId,
+            return FromCache<bool>(row.EventId + "." + row.UserId,
                 () =>
                 {
                     return dataProvider.IsSubscribed(row);

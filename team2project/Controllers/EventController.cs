@@ -42,6 +42,7 @@ namespace team2project.Controllers
             {
                 ViewBag.city = location;
             }
+            
             foreach (var ev in list)
             {
                 ev.Location = cityManager.GetById(ev.LocationId).Name;

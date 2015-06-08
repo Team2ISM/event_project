@@ -5,19 +5,19 @@ using System;
 
 namespace Events.Business.Classes
 {
-    public class EventManager
+    public class EventManager : BaseManager
     {
         IEventDataProvider dataProvider;
-
-        ICacheManager cacheManager;
 
         CommentManager commentManager;
 
         ICitiesDataProvider citiesProvider;
 
+        protected override string Name { get; set; }
 
         public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, ICitiesDataProvider citiesProvider, CommentManager commentManager)
         {
+            Name = "Events";
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
             this.citiesProvider = citiesProvider;
@@ -26,7 +26,7 @@ namespace Events.Business.Classes
 
         public IList<Event> GetAllEvents(bool isForAdmin)
         {
-            return cacheManager.FromCache<IList<Event>>("Events::allEvents",
+            return FromCache<IList<Event>>("list",
                     () =>
                     {
                         return dataProvider.GetList(0, null, "Admin", isForAdmin);
@@ -36,6 +36,7 @@ namespace Events.Business.Classes
         public IList<Event> GetList(string period, string location)
         {
             int? days = getDaysCount(period);
+                     
             if (days == null)
             {
                 return null;
@@ -43,7 +44,7 @@ namespace Events.Business.Classes
 
             int daysToEvent = (int)days;
 
-            return cacheManager.FromCache<IList<Event>>("Filter." + period + " - " + location,
+            return FromCache<IList<Event>>("list" + period + "-" + location,
                 () =>
                 {
                     return dataProvider.GetList(daysToEvent, location, null, false);
@@ -54,26 +55,24 @@ namespace Events.Business.Classes
         {
             model.DateOfCreation = DateTime.Now;
             dataProvider.Create(model);
-            cacheManager.ToCache<Event>(key,
+            ToCache<Event>(key,
                 () =>
                 {
                     return model;
                 });
-            cacheManager.ClearCacheByRegion("Events");
-            cacheManager.ClearCacheByRegion("eventsList");
+            ClearCacheByRegion();
         }
 
         public void Update(Event model)
         {
             dataProvider.Update(model);
-            cacheManager.RemoveFromCache(model.Id);
-            cacheManager.ToCache<Event>(model.Id,
+            RemoveFromCache(model.Id);
+            ToCache<Event>(model.Id,
                 () =>
                 {
                     return model;
                 });
-            cacheManager.ClearCacheByRegion("Events");
-            cacheManager.ClearCacheByRegion("eventsList");
+            ClearCacheByRegion();
         }
 
         public Event GetById(string id)
@@ -88,7 +87,7 @@ namespace Events.Business.Classes
 
         public IList<Event> GetAuthorPastEvents(string email)
         {
-            return cacheManager.FromCache<IList<Event>>("userEvents" + email + "past",
+            return FromCache<IList<Event>>("userEvents" + email + "past",
                 () =>
                 {
                     return dataProvider.GetAuthorPastEvents(email);
@@ -97,7 +96,7 @@ namespace Events.Business.Classes
 
         public IList<Event> GetAuthorFutureEvents(string email)
         {
-            return cacheManager.FromCache<IList<Event>>("userEvents" + email + "future",
+            return FromCache<IList<Event>>("userEvents" + email + "future",
                 () =>
                 {
                     return dataProvider.GetAuthorFutureEvents(email);
@@ -109,9 +108,8 @@ namespace Events.Business.Classes
             bool? result;
             if ((result = dataProvider.ToggleStatus(id, false)) == true)
             {
-                cacheManager.RemoveFromCache(id);
-                cacheManager.ClearCacheByRegion("Events");
-                cacheManager.ClearCacheByRegion("eventsList");
+                RemoveFromCache(id);
+                ClearCacheByRegion(); ;
                 result = true;
             }
             return result;
@@ -122,9 +120,8 @@ namespace Events.Business.Classes
             bool? result;
             if ((result = dataProvider.ToggleStatus(id, true)) == true)
             {
-                cacheManager.RemoveFromCache(id);
-                cacheManager.ClearCacheByRegion("Events");
-                cacheManager.ClearCacheByRegion("eventsList");
+                RemoveFromCache(id);
+                ClearCacheByRegion();
                 result = true;
             }
             return result;
@@ -133,17 +130,16 @@ namespace Events.Business.Classes
         public void MarkAsSeen(string id)
         {
             dataProvider.MarkAsSeen(id);
-            cacheManager.RemoveFromCache(id);
-            cacheManager.ClearCacheByRegion("Events");
-            cacheManager.ClearCacheByRegion("eventsList");
+            RemoveFromCache(id);
+            ClearCacheByRegion();
         }
+
         public void Delete(string id)
         {
             commentManager.DeleteByEventId(id);
             dataProvider.Delete(dataProvider.GetById(id));
-            cacheManager.RemoveFromCache(id);
-            cacheManager.ClearCacheByRegion("Events");
-            cacheManager.ClearCacheByRegion("eventsList");
+            RemoveFromCache(id);
+            ClearCacheByRegion();
         }
 
         private int? getDaysCount(string period)

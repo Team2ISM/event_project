@@ -19,14 +19,17 @@ using Events.Business.Models;
 
 namespace Events.Business.Classes
 {
-    public class UserManager
+    public class UserManager : BaseManager
     {
         IUserDataProvider userDataProvider;
-        ICacheManager cacheManager;
+
         public string userName;
+
+        protected override string Name { get; set; }
 
         public UserManager(IUserDataProvider userDataProvider, ICacheManager cacheManager)
         {
+            Name = "Users";
             this.userDataProvider = userDataProvider;
             this.cacheManager = cacheManager;
         }
@@ -63,16 +66,11 @@ namespace Events.Business.Classes
 
         public string GetFullName(string email)
         {
-            return cacheManager.FromCache<string>("UserName",
+            return FromCache<string>("UserName:" + email,
                 () =>
                 {
                     return userDataProvider.GetFullName(email);
                 });
-        }
-
-        public void Clear()
-        {
-            cacheManager.ClearCacheByRegion("UserName");
         }
 
         public void ChangePassword(User user, string password)
@@ -118,7 +116,7 @@ namespace Events.Business.Classes
             string subject = "Новый пароль";
 
             EmailSender(user.Email, body, subject);
-        }        
+        }
 
         public void EmailSender(string userEmail, string body, string subject)
         {

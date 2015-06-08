@@ -4,21 +4,22 @@ using Events.Business.Interfaces;
 
 namespace Events.Business.Classes
 {
-    public class CommentManager
+    public class CommentManager : BaseManager
     {
         ICommentDataProvider dataProvider;
 
-        ICacheManager cacheManager;
+        protected override string Name { get; set; }
 
         public CommentManager(ICommentDataProvider dataProvider, ICacheManager cacheManager)
         {
+            Name = "Comments";
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
         }
 
         public IList<Comment> GetList()
         {
-            return cacheManager.FromCache<IList<Comment>>("commentsList",
+            return FromCache<IList<Comment>>("commentsList",
                 () =>
                 {
                     return dataProvider.GetAll();
@@ -28,13 +29,13 @@ namespace Events.Business.Classes
         public void Create(Comment model)
         {
             dataProvider.Create(model);
-            cacheManager.RemoveFromCache("commentsList");
-            cacheManager.RemoveFromCache("commentsToEvent/" + model.EventId);
+            RemoveFromCache("commentsList");
+            RemoveFromCache("commentsToEvent/" + model.EventId);
         }
 
         public IList<Comment> GetByEventId(string eventId)
         {
-            return cacheManager.FromCache<IList<Comment>>("commentsToEvent/"+eventId,
+            return FromCache<IList<Comment>>("commentsToEvent/" + eventId,
                 () =>
                 {
                     return dataProvider.GetByEventId(eventId);
@@ -43,7 +44,7 @@ namespace Events.Business.Classes
 
         public IList<Comment> GetByAuthorId(string authorId)
         {
-            return cacheManager.FromCache<IList<Comment>>("commentsByUser/" + authorId,
+            return FromCache<IList<Comment>>("commentsByUser/" + authorId,
                 () =>
                 {
                     return dataProvider.GetByAuthorId(authorId);
@@ -52,13 +53,13 @@ namespace Events.Business.Classes
 
         public void DeleteByEventId(string eventId)
         {
-            var comments = cacheManager.FromCache<IList<Comment>>("commentsToEvent/" + eventId,
+            var comments = FromCache<IList<Comment>>("commentsToEvent/" + eventId,
                 () =>
                 {
                     return dataProvider.GetByEventId(eventId);
                 });
-            cacheManager.RemoveFromCache("commentsList");
-            cacheManager.RemoveFromCache("commentsToEvent/" + eventId);
+            RemoveFromCache("commentsList");
+            RemoveFromCache("commentsToEvent/" + eventId);
         }
     }
 }

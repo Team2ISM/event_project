@@ -4,22 +4,23 @@ using Events.Business.Models;
 
 namespace Events.Business.Classes
 {
-    public class CitiesManager
+    public class CitiesManager : BaseManager
 
     {
         ICitiesDataProvider dataProvider;
 
-        ICacheManager cacheManager;
+        protected override string Name { get; set; }
 
         public CitiesManager(ICitiesDataProvider dataProvider, ICacheManager cacheManager)
         {
+            Name = "Cities";
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
         }
 
         public IList<City> GetList()
         {
-            return cacheManager.FromCache<IList<City>>("citiesList",
+            return FromCache<IList<City>>("list",
                 () =>
                 {
                     return dataProvider.GetAll();
@@ -28,7 +29,7 @@ namespace Events.Business.Classes
 
         public City GetById(int citytId)
         {
-            return cacheManager.FromCache<City>("City :: " + citytId,
+            return FromCache<City>(citytId.ToString(),
                 () =>
                 {
                     return dataProvider.GetById(citytId);
@@ -37,22 +38,21 @@ namespace Events.Business.Classes
 
         public City GetByName(string name)
         {
-            return cacheManager.FromCache<City>("City :: " + name,
+            return cacheManager.FromCache<City>(name,
                 () =>
                 {
                     return dataProvider.GetByName(name);
                 });
         }
 
-        public void Create(string key, City model)
+        public void Create(City model)
         {
             dataProvider.Create(model);
-            cacheManager.ToCache<City>(key,
+            ToCache<City>(model.Id.ToString(),
                 () =>
                 {
                     return model;
                 });
-            cacheManager.RemoveFromCache("commentsList");
         }
     }
 }
