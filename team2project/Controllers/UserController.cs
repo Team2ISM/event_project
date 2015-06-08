@@ -168,6 +168,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult ForgotPassword()
         {
+            if (User.Identity.IsAuthenticated) return RedirectToRoute("EventsList", new { period = "all" });
             return View();
         }
 
