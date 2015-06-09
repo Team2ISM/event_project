@@ -25,13 +25,10 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             Role role = null;
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
-                    role = session.CreateCriteria(typeof(Role))
-                        .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
-                        .UniqueResult<Role>();
-                    ICollection<User> us = role.Users;
-                }
+                role = session.CreateCriteria(typeof(Role))
+                    .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
+                    .UniqueResult<Role>();
+                ICollection<User> us = role.Users;
             }
             return role;
         }
@@ -73,13 +70,9 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
-                    Role role = new Role();
-                    role.Name = rolename;
-                    session.Save(role);
-                    transaction.Commit();
-                }
+                Role role = new Role();
+                role.Name = rolename;
+                session.Save(role);
             }
         }
 
@@ -87,12 +80,9 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
-                    Role role = GetRole(rolename);
-                    session.Delete(role);
-                    transaction.Commit();
-                }
+                Role role = GetRole(rolename);
+                session.Delete(role);
+                session.Flush();
             }
         }
 
@@ -101,11 +91,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             ICollection<Role> allRole = null;
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
-                    allRole = session.CreateCriteria(typeof(Role))
-                                    .List<Role>();
-                }
+                allRole = session.CreateCriteria(typeof(Role))
+                                .List<Role>();
             }
 
             return allRole;
@@ -118,18 +105,15 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
 
-                    usr = session.CreateCriteria(typeof(User))
-                                    .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
-                                    .UniqueResult<User>();
+                usr = session.CreateCriteria(typeof(User))
+                                .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
+                                .UniqueResult<User>();
+            }
 
-                    if (usr != null)
-                    {
-                        usrRoles = usr.Roles;
-                    }
-                }
+            if (usr != null)
+            {
+                usrRoles = usr.Roles;
             }
 
             return usrRoles;
@@ -140,14 +124,11 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             ICollection<User> usrs = null;
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
-                    Role role = session.CreateCriteria(typeof(Role))
-                                    .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
-                                    .UniqueResult<Role>();
+                Role role = session.CreateCriteria(typeof(Role))
+                                .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
+                                .UniqueResult<Role>();
 
-                    usrs = role.Users;
-                }
+                usrs = role.Users;
             }
 
             return usrs;
@@ -160,27 +141,24 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             ICollection<Role> usrRoles = null;
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction transaction = session.BeginTransaction())
+                usr = session.CreateCriteria(typeof(User))
+                                .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
+                                .UniqueResult<User>();
+            }
+
+            if (usr != null)
+            {
+                usrRoles = usr.Roles;
+                foreach (Role r in usrRoles)
                 {
-                    usr = session.CreateCriteria(typeof(User))
-                                    .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
-                                    .UniqueResult<User>();
-
-                    if (usr != null)
+                    if (r.Name.Equals(rolename))
                     {
-                        usrRoles = usr.Roles;
-                        foreach (Role r in usrRoles)
-                        {
-                            if (r.Name.Equals(rolename))
-                            {
-                                userIsInRole = true;
-                                break;
-                            }
-                        }
+                        userIsInRole = true;
+                        break;
                     }
-
                 }
             }
+
             return userIsInRole;
         }
 
@@ -207,7 +185,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                             {
                                 if (r.Name.Equals(rolename))
                                     Roletodelete.Add(r);
-
                             }
                         }
                         foreach (Role rd in Roletodelete)
@@ -228,37 +205,31 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             bool exists = false;
 
             StringBuilder sb = new StringBuilder();
+            Role role = null;
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
-
-                    Role role = session.CreateCriteria(typeof(Role))
-                                        .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
-                                        .UniqueResult<Role>();
-                    if (role != null)
-                        exists = true;
-                }
+                role = session.CreateCriteria(typeof(Role))
+                                                    .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
+                                                    .UniqueResult<Role>();
             }
+
+            if (role != null)
+                exists = true;
+
             return exists;
         }
 
         public ICollection<User> FindUsersInRole(string rolename)
         {
-            ICollection<User> User = null;
+            ICollection<User> Users = null;
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
-
-                    Role role = session.CreateCriteria(typeof(Role))
-                                    .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
-                                    .UniqueResult<Role>();
-
-                    User = role.Users;
-                }
-                return User;
+                Role role = session.CreateCriteria(typeof(Role))
+                                .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
+                                .UniqueResult<Role>();
             }
+            Users = role.Users;
+            return Users;
         }
 
     }
