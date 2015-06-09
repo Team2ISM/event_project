@@ -55,13 +55,11 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public int Create(City model)
         {
-            int EmpNo = 0;
-
             using (ISession session = Helper.OpenSession())
             {
                 session.Save(model);
             }
-            return EmpNo;
+            return 0;
         }
     }
 }
