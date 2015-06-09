@@ -57,7 +57,7 @@ namespace team2project.Controllers
 
             if (evntModel == null || !evntModel.Active)
             {
-                return View("GenericError", ResponseMessages.NotFound);
+                return View("GenericError", ResponseMessages.EventNotFound);
             }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             evntViewModel.Location = cityManager.GetById(evntViewModel.LocationId).Name;
@@ -80,7 +80,7 @@ namespace team2project.Controllers
 
             if (evntModel == null)
             {
-                return View("GenericError", ResponseMessages.NotFound);
+                return View("GenericError", ResponseMessages.EventNotFound);
             }
             if (DateTime.Now > evntModel.ToDate)
             {
@@ -124,7 +124,7 @@ namespace team2project.Controllers
             var mail = User.Identity.Name;
             var target = eventManager.GetById(id);
             var all = eventManager.GetAllEvents(true);
-            if (target == null) return View("GenericError", ResponseMessages.NotFound);
+            if (target == null) return View("GenericError", ResponseMessages.EventNotFound);
             if (mail != target.AuthorId) return View("GenericError", ResponseMessages.DeletingNotAllowedDueToWrongUser);
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");

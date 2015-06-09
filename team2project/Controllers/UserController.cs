@@ -69,7 +69,7 @@ namespace team2project.Controllers
             {
                 if (!User.IsInRole("Admin") && User.Identity.IsAuthenticated && returnUrl.Contains("admin"))
                 {
-                    result = View("GenericError", ResponseMessages.AccesDenied);
+                    result = View("GenericError", ResponseMessages.AccessDenied);
                 }
                 else if (User.Identity.IsAuthenticated)
                 {
