@@ -222,9 +222,11 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         public ICollection<User> FindUsersInRole(string rolename)
         {
             ICollection<User> Users = null;
+            Role role = null;
+
             using (ISession session = Helper.OpenSession())
             {
-                Role role = session.CreateCriteria(typeof(Role))
+                role = session.CreateCriteria(typeof(Role))
                                 .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
                                 .UniqueResult<Role>();
             }
