@@ -61,12 +61,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                //Perform transaction
-                using (ITransaction tran = session.BeginTransaction())
-                {
-                    session.Save(user);
-                    tran.Commit();
-                }
+                session.Save(user);
+                session.Flush();
             }
         }
 
@@ -74,11 +70,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction tran = session.BeginTransaction())
-                {
-                    session.Delete(user);
-                    tran.Commit();
-                }
+                session.Delete(user);
+                session.Flush();
             }
         }
 
@@ -86,11 +79,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction tran = session.BeginTransaction())
-                {
-                    session.Update(user);
-                    tran.Commit();
-                }
+                session.Update(user);
+                session.Flush();
             }
         }
     }

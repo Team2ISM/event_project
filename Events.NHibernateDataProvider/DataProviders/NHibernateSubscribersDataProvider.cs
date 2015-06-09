@@ -43,17 +43,13 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return result;
         }
 
-       
+
         public void SubscribeUser(Subscribing row)
         {
             if (IsSubscribed(row)) return;
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction tran = session.BeginTransaction())
-                {
-                    session.Save(row);
-                    tran.Commit();
-                }
+                session.Save(row);
             }
         }
 
@@ -66,11 +62,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 criteria.Add(Restrictions.Eq("EventId", row.EventId));
                 criteria.Add(Restrictions.Eq("UserId", row.UserId));
                 var rowForDeleting = criteria.List<Subscribing>()[0];
-                using (ITransaction tran = session.BeginTransaction())
-                {
-                    session.Delete(rowForDeleting);
-                    tran.Commit();
-                }
+                session.Delete(rowForDeleting);
+                session.Flush();
             }
         }
 
