@@ -53,11 +53,7 @@ namespace Events.Business.Classes
 
         public void DeleteByEventId(string eventId)
         {
-            var comments = FromCache<IList<Comment>>("commentsToEvent/" + eventId,
-                () =>
-                {
-                    return dataProvider.GetByEventId(eventId);
-                });
+            dataProvider.DeleteByEventId(eventId);
             RemoveFromCache("commentsList");
             RemoveFromCache("commentsToEvent/" + eventId);
         }

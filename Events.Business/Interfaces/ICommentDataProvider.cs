@@ -18,5 +18,7 @@ namespace Events.Business.Interfaces
         void Update(Comment model);
 
         void Delete(Comment model);
+
+        void DeleteByEventId(string id);
     }
 }

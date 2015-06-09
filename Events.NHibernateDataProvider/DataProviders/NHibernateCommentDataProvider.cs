@@ -88,5 +88,23 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 }
             }
         }
+
+        public void DeleteByEventId(string id)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                using (ITransaction tran = session.BeginTransaction())
+                {
+                    var criteria = session.CreateCriteria<Comment>();
+                    criteria.Add(Expression.Eq("EventId", id));
+                    var list = criteria.List<Comment>();
+                    foreach(var comment in list)
+                    {
+                        session.Delete(comment);
+                    }
+                    tran.Commit();
+                }
+            }
+        }
     }
 }
