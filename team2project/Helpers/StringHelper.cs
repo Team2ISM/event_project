@@ -23,12 +23,6 @@ namespace team2project.Helpers
             return result;
         }
 
-        public static string StripTags(this string htmlString)
-        {
-            string pattern = @"(?:<|>)";
-            return Regex.Replace(htmlString, pattern, string.Empty);
-        }
-
         public static IHtmlString ToHtmlString(this string data)
         {
             return new HtmlString(data);

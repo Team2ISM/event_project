@@ -33,6 +33,7 @@ namespace team2project.Models
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
+        [AllowHtml]
         [ScaffoldColumn(false)]
         public string TextDescription { get; set; }
 
