@@ -5,6 +5,7 @@ using team2project.Models;
 using System.Web.Script.Serialization;
 using team2project.Helpers;
 using System.Runtime.Remoting.Messaging;
+using System.Threading;
 
 namespace team2project.Controllers
 {
@@ -15,7 +16,6 @@ namespace team2project.Controllers
         EventManager manager;
         CommentManager commentManager;
         CitiesManager cityManager;
-        delegate bool mark();
 
         public AdminController(EventManager manager, CommentManager commentManager, CitiesManager cityManager)
         {
@@ -38,13 +38,8 @@ namespace team2project.Controllers
             {
                 Event.Location = cityManager.GetById(Event.LocationId).Name;
             }
-            //temporary bydlokod
-            mark func = MarkAsSeen;
-            func.BeginInvoke((ir) =>
-            {
-                var a = ((mark)(((AsyncResult)ir).AsyncDelegate)).EndInvoke(ir);
-            }, null);
-            //
+
+            new Thread(() => MarkAsSeen()).Start();
 
             return Json(
                 new JsonResultHelper()
@@ -165,14 +160,13 @@ namespace team2project.Controllers
             return Json(result);
         }
 
-        bool MarkAsSeen()
+        void MarkAsSeen()
         {
             var list = manager.GetAllEvents(true);
             foreach (var elem in list)
             {
-                manager.MarkAsSeen(elem.Id);
+               manager.MarkAsSeen(elem.Id);
             }
-            return true;
         }
     }
 }

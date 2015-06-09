@@ -2,6 +2,7 @@
 
 namespace Events.Business.Models
 {
+
     public class Event
     {
         public virtual string Id { get; set; }
