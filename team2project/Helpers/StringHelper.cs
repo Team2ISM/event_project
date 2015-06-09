@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,12 @@ namespace team2project.Helpers
                 result += "...";   
             }
             return result;
+        }
+
+        public static string StripTags(this string htmlString)
+        {
+            string pattern = @"(?:<|>)";
+            return Regex.Replace(htmlString, pattern, string.Empty);
         }
 
         public static IHtmlString ToHtmlString(this string data)

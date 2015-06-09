@@ -22,6 +22,7 @@ namespace team2project.Models
         [ScaffoldColumn(false)]
         public string AuthorId { get; set; }
 
+        [AllowHtml]
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
         [StringLength(50, MinimumLength = 5, ErrorMessage = "Длина должна быть от 5 до 50 символов")]
         public string Title { get; set; }
