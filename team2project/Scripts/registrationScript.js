@@ -133,7 +133,7 @@
 })(jQuery);
 var locat = $("#location");
 window.onload = function () {
-    var combobox = $("#combobox"), value;
+    var combobox = $("#combobox"), value = 1;
     if (city) {
         var arr = combobox.children();
         arr.each(function (i, val) {
