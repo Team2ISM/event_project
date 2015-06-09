@@ -22,7 +22,7 @@ namespace team2project.Controllers
             this.commentManager = commentManager;
             this.userManager = userManager;
         }
-        
+
         [HttpPost]
         public ActionResult AddComment(CommentViewModel commentModel)
         {
@@ -33,13 +33,10 @@ namespace team2project.Controllers
                 commentModel.AuthorName = user.Name + " " + user.Surname;
             }
             if (commentModel.EventId == null) return RedirectToRoute("eventDetails");
-            else
-            {
-                var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
-                comment.PostingTime = DateTime.Now;
-                commentManager.Create(comment);
-            }
-            return RedirectToRoute("eventDetails", new { @id=commentModel.EventId });
+            var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
+            comment.PostingTime = DateTime.Now;
+            commentManager.Create(comment);
+            return RedirectToRoute("eventDetails", new { id = commentModel.EventId });
         }
 
     }

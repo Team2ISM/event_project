@@ -27,7 +27,6 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult ManagerPage()
         {
-
             return View();
         }
 

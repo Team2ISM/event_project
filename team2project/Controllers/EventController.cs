@@ -55,7 +55,7 @@ namespace team2project.Controllers
         {
             var evntModel = eventManager.GetById(id);
 
-            if (evntModel == null || evntModel.Active == false)
+            if (evntModel == null || !evntModel.Active)
             {
                 return View("GenericError", ResponseMessages.NotFound);
             }

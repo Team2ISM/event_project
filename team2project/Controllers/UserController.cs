@@ -332,7 +332,6 @@ namespace team2project.Controllers
             string authority = Request.Url.Authority;
             string scheme = Request.Url.Scheme;
             string activationLink = scheme + "://" + authority + Url.Action("Activate", new { controller = "User", action = "Activate", id = user.Id });
-
             string body = user.Name + ", спасибо за регистрацию\n";
             body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
             string subject = "Подтверждение регистрации";
