@@ -28,3 +28,24 @@
 form {
     margin-top: -4%;
 }
+
+label[for="Description"] {
+    left: 0;
+    position: relative;
+    top: -5px;
+}
+
+.cke_textarea_inline {
+    overflow: hidden;
+    border-color: -moz-use-text-color -moz-use-text-color #9e9e9e;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+}
+
+.cke_dialog_ui_input_select {
+    display: inline-block;
+}
+
+.cke_dialog_ui_hbox_first input{
+    margin-bottom: 4px;
+}

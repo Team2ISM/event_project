@@ -170,39 +170,10 @@ window.onload = function () {
         description.html(editor.getData());
     });
 
-    /*CKEDITOR.on('dialogDefinition', function (event) {
-        var editor = event.editor,
-            dialogDefinition = event.data.definition,
-            dialogName = event.data.name;
-        if (dialogName === 'image') {
-            var cleanUpFuncRef = CKEDITOR.tools.addFunction(function () {
-                // Do the clean-up of filemanager here (called when an image was selected or cancel was clicked)
-                $('#fm-iframe').remove();
-                $("body").css("overflow-y", "scroll");
-            });
+    $('#form input').on('keypress', function(e) {
+        if (e.key == '<' || e.key == '>') return false;
+    });
 
-            var tabCount = dialogDefinition.contents.length;
-            for (var i = 0; i < tabCount; i++) {
-                var browseButton = dialogDefinition.contents[i].get('browse');
-
-                if (browseButton !== null) {
-                    browseButton.hidden = false;
-                    browseButton.onClick = function (dialog, i) {
-                        editor._.filebrowserSe = this;
-                        var iframe = $("<iframe id='fm-iframe' class='fm-modal'/>").attr({
-                            src: '/Scripts/filemanager/index.html' + // Change it to wherever  Filemanager is stored.
-                                '?CKEditorFuncNum=' + CKEDITOR.instances[event.editor.name]._.filebrowserFn +
-                                '&CKEditorCleanUpFuncNum=' + cleanUpFuncRef +
-                                '&langCode=en' +
-                                '&CKEditor=' + event.editor.name
-                        });
-
-                        $("body").append(iframe).css("overflow-y", "hidden");  // Get rid of possible scrollbars in containing document
-                    }
-                }
-            }
-        }
-    }); // dialogDefinition*/
     if (fDate) $('label[for="FromDate"]').addClass('active');
     if (tDate) $('label[for="ToDate"]').addClass('active');
     var pick1 = $('#datetimepicker1'), pick2 = $('#datetimepicker2');
