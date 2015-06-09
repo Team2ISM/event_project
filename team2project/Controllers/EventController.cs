@@ -123,7 +123,6 @@ namespace team2project.Controllers
         {
             var mail = User.Identity.Name;
             var target = eventManager.GetById(id);
-            var all = eventManager.GetAllEvents(true);
             if (target == null) return View("GenericError", ResponseMessages.EventNotFound);
             if (mail != target.AuthorId) return View("GenericError", ResponseMessages.DeletingNotAllowedDueToWrongUser);
             eventManager.Delete(id);

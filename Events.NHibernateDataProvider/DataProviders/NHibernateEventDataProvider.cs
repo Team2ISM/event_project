@@ -98,7 +98,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 if ((bool)evnt.Active != status)
                 {
                     evnt.Active = status;
-                    this.Update(evnt, "Admin");
+                    this.Update(evnt);
                     result = true;
                 }
                 return result;
@@ -112,7 +112,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             if (evnt != null)
             {
                 evnt.Checked = true;
-                this.Update(evnt, "Admin");
+                this.Update(evnt);
             }
         }
 
@@ -132,10 +132,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return EmpNo;
         }
 
-        public void Update(Event model, string admin = "NoAdmin")
+        public void Update(Event model)
         {
-            if (admin == "NoAdmin") model.DateOfCreation = DateTime.Now;
-            model.Checked = true;
             using (ISession session = Helper.OpenSession())
             {
                 using (ITransaction tran = session.BeginTransaction())

@@ -65,6 +65,7 @@ namespace Events.Business.Classes
 
         public void Update(Event model)
         {
+            model.Checked = false;
             dataProvider.Update(model);
             RemoveFromCache(model.Id);
             ToCache<Event>(model.Id,

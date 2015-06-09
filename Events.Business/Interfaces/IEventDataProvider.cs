@@ -19,7 +19,7 @@ namespace Events.Business.Interfaces
 
         int Create(Event evnt);
 
-        void Update(Event model, string admin = "NoAdmin");
+        void Update(Event model);
 
         void MarkAsSeen(string id);
     }
