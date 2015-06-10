@@ -26,13 +26,16 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult AddComment(CommentViewModel commentModel)
         {
-            if (HttpContext.User.Identity.IsAuthenticated) //Set values for authorized commentator
+            if (commentModel.EventId == null)
+            {
+                return RedirectToRoute("eventDetails");
+            }
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
                 var user = userManager.GetByMail(User.Identity.Name);
                 commentModel.AuthorId = user.Id;
                 commentModel.AuthorName = user.Name + " " + user.Surname;
             }
-            if (commentModel.EventId == null) return RedirectToRoute("eventDetails");
             var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
             comment.PostingTime = DateTime.Now;
             commentManager.Create(comment);

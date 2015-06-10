@@ -120,18 +120,15 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public int Create(Event model)
         {
-            int EmpNo = 0;
-
             using (ISession session = Helper.OpenSession())
             {
-                //Perform transaction
                 using (ITransaction tran = session.BeginTransaction())
                 {
                     session.Save(model);
                     tran.Commit();
                 }
             }
-            return EmpNo;
+            return 0;
         }
 
         public void Update(Event model)
