@@ -47,8 +47,7 @@
                             <button id="submit" class="btn waves-effect waves-light dark-blue-grey margin-right large-font">Подождите</button>
                         }
                     </div>
-                    <div class="wrap">
-                        <span id="subscribed">Уже подписалось:</span>
+                    <div class="wrap">          
                         @{
 
                             Html.RenderAction("Index", "Subscribers",new { EventId = @Model.Id });

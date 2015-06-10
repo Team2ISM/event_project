@@ -52,6 +52,7 @@
 
         this.loadEvents = function (self) {
             $.ajax({
+                type: "POST",
                 url: url + "/admin/events/getall",
                 success: function (response) {
                     successHelper(response,

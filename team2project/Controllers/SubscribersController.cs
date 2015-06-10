@@ -22,7 +22,6 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index(string EventId)
         {
-            ViewBag.EventId = EventId;
             return View(Provider.GetCount(EventId));
         }
         [HttpPost]

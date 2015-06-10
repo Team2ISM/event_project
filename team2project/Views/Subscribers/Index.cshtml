@@ -20,9 +20,11 @@
     }
 </script>
 <span id="subscribers">
-    <a href="#" onclick="ReloadSubscr($('#subscribers_list')); return false;">
-        @Model.ToString()
-    </a>
+    <span id="subscribed">Уже подписалось:
+        <a href="#" onclick="ReloadSubscr($('#subscribers_list')); return false;">
+            @Model.ToString()
+        </a>
+    </span>
 </span>
 <div id="sub_wrapper" style="display:none">
     <header>Подписавшиеся
@@ -30,5 +32,4 @@
     </header>
     <ul id="subscribers_list"></ul>
 </div>
-<div></div>
 <ul id="subscribers_onhover"></ul>

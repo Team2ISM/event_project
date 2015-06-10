@@ -27,7 +27,12 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             if (Cities != null)
             {
                 foreach (var city in Cities)
-                    if (city.Id == id) return city;
+                {
+                    if (city.Id == id)
+                    {
+                        return city;
+                    }
+                }
             }
 
             using (ISession session = Helper.OpenSession())
@@ -41,7 +46,12 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             if (Cities != null)
             {
                 foreach (var city in Cities)
-                    if (city.Name == name) return city;
+                {
+                    if (city.Name == name)
+                    {
+                        return city;
+                    }
+                }
             }
 
             using (ISession session = Helper.OpenSession())
@@ -52,12 +62,13 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public void Create(City model)
+        public int Create(City model)
         {
             using (ISession session = Helper.OpenSession())
             {
                 session.Save(model);
             }
+            return 0;
         }
     }
 }
