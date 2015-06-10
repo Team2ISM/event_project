@@ -151,23 +151,6 @@ namespace Events.Business.Classes
 
         public override void RemoveUsersFromRoles(string[] usernames, string[] rolenames)
         {
-            foreach (string rolename in rolenames)
-            {
-                if (!RoleExists(rolename))
-                    throw new ProviderException(String.Format("Role name {0} not found.", rolename));
-            }
-
-            foreach (string username in usernames)
-            {
-                foreach (string rolename in rolenames)
-                {
-                    if (!IsUserInRole(username, rolename))
-                        throw new ProviderException(String.Format("User {0} is not in role {1}.", username, rolename));
-                }
-            }
-
-            dataProvider.RemoveUsersFromRoles(usernames, rolenames);
-
         }
 
         public override bool RoleExists(string rolename)
@@ -177,25 +160,7 @@ namespace Events.Business.Classes
 
         public override string[] FindUsersInRole(string rolename, string usernameToMatch)
         {
-            StringBuilder sb = new StringBuilder();
-            ICollection<User> User = null;
-
-            User = dataProvider.FindUsersInRole(rolename);
-
-            if (User != null)
-            {
-                foreach (User u in User)
-                {
-                    if (String.Compare(u.Name, usernameToMatch, true) == 0)
-                        sb.Append(u.Name + ",");
-                }
-            }
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-            return new string[0];
+            return null;//realization to fix conflict
         }
 
     }
