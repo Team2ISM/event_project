@@ -30,7 +30,7 @@ namespace team2project.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult GetEvents()
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents(true));
@@ -42,14 +42,13 @@ namespace team2project.Controllers
             new Thread(() => MarkAsSeen()).Start();
 
             return Json(
-                new JsonResultHelper()
-                {
-                    Data = list,
-                    Message = "Success: Get list of all events",
-                    Status = JsonResultHelper.StatusEnum.Success
-                },
-                JsonRequestBehavior.AllowGet
-                );
+                        new JsonResultHelper()
+                        {
+                            Data = list,
+                            Message = "Success: Get list of all events",
+                            Status = JsonResultHelper.StatusEnum.Success
+                        }
+                    );
         }
 
         [HttpPost]
