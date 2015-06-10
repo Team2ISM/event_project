@@ -25,12 +25,12 @@ namespace Events.Business.Classes
             this.commentManager = commentManager;
         }
 
-        public IList<Event> GetAllEvents(bool isForAdmin)
+        public IList<Event> GetAllEvents()
         {
             return FromCache<IList<Event>>("AdminList",
                     () =>
                     {
-                        return dataProvider.GetList(0, null, isForAdmin);
+                        return dataProvider.GetList(0, null, true);
                     });
         }
 
