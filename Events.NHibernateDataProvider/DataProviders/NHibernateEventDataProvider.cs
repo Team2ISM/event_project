@@ -14,18 +14,16 @@ namespace Events.NHibernateDataProvider.NHibernateCore
     public class NHibernateEventDataProvider : IEventDataProvider
     {
 
-        public IList<Event> GetList(int daysToEvent, string location, string onlyAvailableData, bool isForAdmin = false)
+        public IList<Event> GetList(int daysToEvent, string location, bool isForAdmin = false)
         {
             using (ISession session = Helper.OpenSession())
             {
                 var endOfDay = DateTime.Now.Date.AddDays(1).AddTicks(-1);
-                if (onlyAvailableData != null)
+                if (isForAdmin)
                 {
-                    var result = session.CreateCriteria<Event>();
-                    if (isForAdmin) result.AddOrder(Order.Asc("Checked"));
-                    return result
-                        .AddOrder(Order.Desc("DateOfCreation"))
-                        .List<Event>();
+                    return session.CreateCriteria<Event>()
+                    .AddOrder(Order.Asc("Checked"))
+                    .AddOrder(Order.Desc("DateOfCreation")).List<Event>();
                 }
 
                 if (!String.IsNullOrEmpty(location))

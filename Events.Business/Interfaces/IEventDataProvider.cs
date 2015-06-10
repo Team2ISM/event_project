@@ -6,7 +6,7 @@ namespace Events.Business.Interfaces
 {
     public interface IEventDataProvider
     {
-        IList<Event> GetList(int nDaysToEvent = 0, string location = null, string onlyAvailableData = null, bool isForAdmin = false);
+        IList<Event> GetList(int nDaysToEvent = 0, string location = null, bool isForAdmin = false);
 
         Event GetById(string id);
 
