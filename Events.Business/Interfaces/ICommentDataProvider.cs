@@ -13,7 +13,7 @@ namespace Events.Business.Interfaces
 
         IList<Comment> GetByAuthorId(string authorId);
 
-        int Create(Comment comment);
+        void Create(Comment comment);
 
         void Update(Comment model);
 

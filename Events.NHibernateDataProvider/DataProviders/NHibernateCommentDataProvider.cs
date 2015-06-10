@@ -27,6 +27,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
             return Model;
         }
+
         public IList<Comment> GetByEventId(string eventId)
         {
             using (ISession session = Helper.OpenSession())
@@ -51,15 +52,9 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public void Create(Comment model)
         {        
-
             using (ISession session = Helper.OpenSession())
             {
-                //Perform transaction
-                using (ITransaction tran = session.BeginTransaction())
-                {
-                    session.Save(model);
-                    tran.Commit();
-                }
+                    session.Save(model);            
             }
         }
 
@@ -67,11 +62,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction tran = session.BeginTransaction())
-                {
-                    session.Update(model);
-                    tran.Commit();
-                }
+                session.Update(model);             
             }
         }
 
@@ -79,11 +70,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction tran = session.BeginTransaction())
-                {
-                    session.Delete(model);
-                    tran.Commit();
-                }
+                session.Delete(model);             
             }
         }
 
