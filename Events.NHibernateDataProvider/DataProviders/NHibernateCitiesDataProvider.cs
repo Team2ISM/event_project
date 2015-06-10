@@ -62,12 +62,13 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public void Create(City model)
+        public int Create(City model)
         {
             using (ISession session = Helper.OpenSession())
             {
                 session.Save(model);
             }
+            return 0;
         }
     }
 }
