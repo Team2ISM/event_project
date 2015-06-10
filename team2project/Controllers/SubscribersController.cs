@@ -12,8 +12,9 @@ namespace team2project.Controllers
 {
     public class SubscribersController : Controller
     {
-        public SubscribersManager Manager;
+        SubscribersManager Manager;
         UserManager UserManager;
+
         public SubscribersController(SubscribersManager subscribersManager, UserManager userManager)
         {
             Manager = subscribersManager;
@@ -39,7 +40,10 @@ namespace team2project.Controllers
 
         public JsonResult Subscribe(string id)
         {
-            if (!User.Identity.IsAuthenticated) return Json(false);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(false);
+            }
             var user = UserManager.GetByMail(User.Identity.Name);      
             Manager.SubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
@@ -47,7 +51,10 @@ namespace team2project.Controllers
 
         public JsonResult Unsubscribe(string id)
         {
-            if (!User.Identity.IsAuthenticated) return Json(false);
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(false);
+            }
             var user = UserManager.GetByMail(User.Identity.Name);
             Manager.UnsubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
@@ -55,7 +62,10 @@ namespace team2project.Controllers
 
         public JsonResult IsSubscribed(string id)
         {
-            if (String.IsNullOrEmpty(User.Identity.Name)) return Json(false);
+            if (String.IsNullOrEmpty(User.Identity.Name))
+            {
+                return Json(false);
+            }
             var user = UserManager.GetByMail(User.Identity.Name);
             return Json(Manager.IsSubscribed(new Subscribing(id, user.Id)));      
         }
