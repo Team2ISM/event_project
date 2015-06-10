@@ -96,11 +96,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             Event evnt = GetById(id);
             if (evnt != null)
             {
-<<<<<<< HEAD
-                bool result = false;
-=======
                 result = EventStatus.EventStatuses.WasToggled;
->>>>>>> origin/master
                 if (evnt.Active != status)
                 {
                     evnt.Active = status;
