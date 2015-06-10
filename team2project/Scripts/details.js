@@ -63,15 +63,19 @@ window.onload = function () {
         button.removeAttr("disabled");
     });
 }
-$("#subscribed").hover(
+
+$("#subscribed").mouseover(
   function () {
-      $("#subscribers_onhover").removeClass("hover");
-  }, function () {
+      if ($("#sub_wrapper").css('display') == 'none') {
+          $("#subscribers_onhover").removeClass("hover");
+      }
+  }).mouseout(function () {
       $("#subscribers_onhover").addClass("hover");
   }
 );
 
 $("#subscribers").on("click", function () {
+    $("#subscribers_onhover").addClass("hover");
     $("#sub_wrapper").show().css({"z-index":"1000000"}).next().addClass("overscreen");
 })
 
