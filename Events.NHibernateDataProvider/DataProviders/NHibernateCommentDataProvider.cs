@@ -49,9 +49,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public int Create(Comment model)
-        {
-            int EmpNo = 0;
+        public void Create(Comment model)
+        {        
 
             using (ISession session = Helper.OpenSession())
             {
@@ -62,7 +61,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                     tran.Commit();
                 }
             }
-            return EmpNo;
         }
 
         public void Update(Comment model)
