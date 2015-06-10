@@ -29,10 +29,10 @@
         </div>
 
         <div class="date-filters">
-            @ConstructLink("Все мероприятия", "all")
-            @ConstructLink("На сегодня", "today")
-            @ConstructLink("На 3 дня", "threedays")
-            @ConstructLink("На неделю", "week")
+            @ConstructLink("Все мероприятия", PeriodStates.AllEvents)
+            @ConstructLink("На сегодня", PeriodStates.Today)
+            @ConstructLink("На 3 дня", PeriodStates.ThreeDays)
+            @ConstructLink("На неделю", PeriodStates.Week)
         </div>
     </div>
     <table class="striped width80 centered">

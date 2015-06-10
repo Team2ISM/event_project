@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using team2project.Models;
 using System.Globalization;
+using team2project.Helpers;
 
 namespace team2project.Controllers
 {
@@ -13,7 +14,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return RedirectToRoute("EventsList", new { period = "all" });
+            return RedirectToRoute("EventsList", routeValues: new { period = PeriodStates.AllEvents });
         }
     }
 }
