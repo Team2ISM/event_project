@@ -88,18 +88,18 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         }
 
 
-        public EventStatus.EventStatuses ToggleStatus(string id, bool status)
+        public EventStatuses ToggleStatus(string id, bool status)
         {
-            EventStatus.EventStatuses result = EventStatus.EventStatuses.NotExist;
+            EventStatuses result = EventStatuses.NotExist;
             Event evnt = GetById(id);
             if (evnt != null)
             {
-                result = EventStatus.EventStatuses.WasToggled;
+                result = EventStatuses.WasToggled;
                 if (evnt.Active != status)
                 {
                     evnt.Active = status;
                     this.Update(evnt);
-                    result = EventStatus.EventStatuses.ToggleOK;
+                    result = EventStatuses.ToggleOK;
                 }
             }
             return result;

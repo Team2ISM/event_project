@@ -35,6 +35,7 @@ namespace team2project.Controllers
         public ActionResult GetEvents()
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents(true));
+
             foreach (var Event in list)
             {
                 Event.Location = cityManager.GetById(Event.LocationId).Name;
@@ -55,11 +56,11 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Activate(string id)
         {
-            EventStatus.EventStatuses result = manager.Activate(id);
+            EventStatuses result = manager.Activate(id);
             JsonResultHelper dataResult = null;
             switch (result)
             {
-                case EventStatus.EventStatuses.ToggleOK:
+                case EventStatuses.ToggleOK:
 
                     dataResult = new JsonResultHelper()
                     {
@@ -69,14 +70,14 @@ namespace team2project.Controllers
                     };
 
                     break;
-                case EventStatus.EventStatuses.NotExist:
+                case EventStatuses.NotExist:
                     dataResult = new JsonResultHelper()
                          {
                              Message = "Событие было удалено",
                              Status = JsonResultHelper.StatusEnum.Error
                          };
                     break;
-                case EventStatus.EventStatuses.WasToggled:
+                case EventStatuses.WasToggled:
                     dataResult = new JsonResultHelper()
                     {
                         Message = "Событие уже было активировано",
@@ -90,11 +91,11 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Deactivate(string id)
         {
-            EventStatus.EventStatuses result = manager.Activate(id);
+            EventStatuses result = manager.Activate(id);
             JsonResultHelper dataResult = null;
             switch (result)
             {
-                case EventStatus.EventStatuses.ToggleOK:
+                case EventStatuses.ToggleOK:
 
                     dataResult = new JsonResultHelper()
                     {
@@ -104,14 +105,14 @@ namespace team2project.Controllers
                     };
 
                     break;
-                case EventStatus.EventStatuses.NotExist:
+                case EventStatuses.NotExist:
                     dataResult = new JsonResultHelper()
                     {
                         Message = "Событие было удалено",
                         Status = JsonResultHelper.StatusEnum.Error
                     };
                     break;
-                case EventStatus.EventStatuses.WasToggled:
+                case EventStatuses.WasToggled:
                     dataResult = new JsonResultHelper()
                     {
                         Message = "Событие уже было деактивировано",
