@@ -18,7 +18,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
             using (ISession session = Helper.OpenSession())
             {
-
                 return Cities = session.CreateCriteria<City>().List<City>();
             }
         }
@@ -53,13 +52,12 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public int Create(City model)
+        public void Create(City model)
         {
             using (ISession session = Helper.OpenSession())
             {
                 session.Save(model);
             }
-            return 0;
         }
     }
 }
