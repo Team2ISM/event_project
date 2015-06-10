@@ -2,6 +2,7 @@
 using Events.Business.Interfaces;
 using Events.Business.Models;
 using System;
+using Events.Business.Helpers;
 
 namespace Events.Business.Classes
 {
@@ -36,7 +37,7 @@ namespace Events.Business.Classes
         public IList<Event> GetList(string period, string location)
         {
             int? days = getDaysCount(period);
-                     
+
             if (days == null)
             {
                 return null;
@@ -104,26 +105,24 @@ namespace Events.Business.Classes
                 });
         }
 
-        public bool? Deactivate(string id)
+        public EventStatus.EventStatuses Deactivate(string id)
         {
-            bool? result;
-            if ((result = dataProvider.ToggleStatus(id, false)) == true)
+            EventStatus.EventStatuses result;
+            if ((result = dataProvider.ToggleStatus(id, false)) == EventStatus.EventStatuses.ToggleOK)
             {
                 RemoveFromCache(id);
-                ClearCacheByRegion(); ;
-                result = true;
+                ClearCacheByRegion();
             }
             return result;
         }
 
-        public bool? Activate(string id)
+        public EventStatus.EventStatuses Activate(string id)
         {
-            bool? result;
-            if ((result = dataProvider.ToggleStatus(id, true)) == true)
+            EventStatus.EventStatuses result;
+            if ((result = dataProvider.ToggleStatus(id, true)) == EventStatus.EventStatuses.ToggleOK)
             {
                 RemoveFromCache(id);
                 ClearCacheByRegion();
-                result = true;
             }
             return result;
         }

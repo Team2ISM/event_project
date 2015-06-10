@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Events.Business.Models;
+using Events.Business.Helpers;
 
 namespace Events.Business.Interfaces
 {
@@ -15,7 +16,7 @@ namespace Events.Business.Interfaces
 
         void Delete(Event model);
 
-        bool? ToggleStatus(string id, bool status);
+        EventStatus.EventStatuses ToggleStatus(string id, bool status);
 
         int Create(Event evnt);
 
