@@ -45,14 +45,5 @@ namespace Events.Business.Classes
                 });
         }
 
-        public void Create(City model)
-        {
-            dataProvider.Create(model);
-            ToCache<City>(model.Id.ToString(),
-                () =>
-                {
-                    return model;
-                });
-        }
     }
 }

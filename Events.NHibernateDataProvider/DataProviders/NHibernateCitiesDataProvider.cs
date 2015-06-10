@@ -61,14 +61,5 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                     return new List<City>(creteria.List<City>()).ToArray()[0];
             }
         }
-
-        public int Create(City model)
-        {
-            using (ISession session = Helper.OpenSession())
-            {
-                session.Save(model);
-            }
-            return 0;
-        }
     }
 }
