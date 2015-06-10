@@ -17,7 +17,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                var now = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+                var endOfDay = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
                 if (onlyAvailableData != null)
                 {
                     var result = session.CreateCriteria<Event>();
@@ -34,11 +34,11 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
                 if (daysToEvent > 0)
                 {
-                    session.EnableFilter("equalDate").SetParameter("nowaday", now).SetParameter("chosenDate", now.AddDays(daysToEvent - 1));
+                    session.EnableFilter("equalDate").SetParameter("nowaday", endOfDay).SetParameter("chosenDate", endOfDay.AddDays(daysToEvent - 1));
                 }
                 else
                 {
-                    session.EnableFilter("effectiveDate").SetParameter("asOfDate", now);
+                    session.EnableFilter("effectiveDate").SetParameter("asOfDate", endOfDay);
                 }
 
                 var criteria = session.CreateCriteria<Event>();
@@ -122,11 +122,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction tran = session.BeginTransaction())
-                {
                     session.Save(model);
-                    tran.Commit();
-                }
+                    session.Flush();
             }
             return 0;
         }
@@ -135,11 +132,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction tran = session.BeginTransaction())
-                {
                     session.Update(model);
-                    tran.Commit();
-                }
+                    session.Flush();
             }
         }
 
@@ -147,11 +141,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                using (ITransaction tran = session.BeginTransaction())
-                {
                     session.Delete(model);
-                    tran.Commit();
-                }
+                    session.Flush();
             }
         }
     }

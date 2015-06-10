@@ -14,7 +14,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return RedirectToRoute("EventsList", routeValues: new { period = PeriodStates.AllEvents });
+            return RedirectToRoute("EventsList", routeValues: new { period = PeriodStates.Anytime });
         }
     }
 }
