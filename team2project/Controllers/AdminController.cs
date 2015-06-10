@@ -6,6 +6,7 @@ using System.Web.Script.Serialization;
 using team2project.Helpers;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
+using Events.Business.Helpers;
 
 namespace team2project.Controllers
 {
@@ -30,7 +31,7 @@ namespace team2project.Controllers
             return View();
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult GetEvents()
         {
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents(true));
@@ -42,94 +43,83 @@ namespace team2project.Controllers
             new Thread(() => MarkAsSeen()).Start();
 
             return Json(
-                new JsonResultHelper()
-                {
-                    Data = list,
-                    Message = "Success: Get list of all events",
-                    Status = JsonResultHelper.StatusEnum.Success
-                },
-                JsonRequestBehavior.AllowGet
-                );
+                        new JsonResultHelper()
+                        {
+                            Data = list,
+                            Message = "Success: Get list of all events",
+                            Status = JsonResultHelper.StatusEnum.Success
+                        }
+                    );
         }
 
         [HttpPost]
         public ActionResult Activate(string id)
         {
-            bool? result = manager.Activate(id);
-            if (result == true)
+            EventStatus.EventStatuses result = manager.Activate(id);
+            JsonResultHelper dataResult = null;
+            switch (result)
             {
-                return Json(
-                    new JsonResultHelper()
+                case EventStatus.EventStatuses.ToggleOK:
+
+                    dataResult = new JsonResultHelper()
                     {
                         Data = null,
                         Message = "Success: Activate Event",
                         Status = JsonResultHelper.StatusEnum.Success
-                    }
-                    );
-            }
-            else
-            {
-                if (result == false)
-                {
-                    return Json(
-                         new JsonResultHelper()
-                         {
-                             Message = "Событие уже было активировано",
-                             Status = JsonResultHelper.StatusEnum.Error
-                         }
-                         );
-                }
-                else
-                {
-                    return Json(
-                         new JsonResultHelper()
+                    };
+
+                    break;
+                case EventStatus.EventStatuses.NotExist:
+                    dataResult = new JsonResultHelper()
                          {
                              Message = "Событие было удалено",
                              Status = JsonResultHelper.StatusEnum.Error
-                         }
-                         );
-                }
+                         };
+                    break;
+                case EventStatus.EventStatuses.WasToggled:
+                    dataResult = new JsonResultHelper()
+                    {
+                        Message = "Событие уже было активировано",
+                        Status = JsonResultHelper.StatusEnum.Error
+                    };
+                    break;
             }
+            return Json(dataResult);
         }
 
         [HttpPost]
         public ActionResult Deactivate(string id)
         {
-            bool? result = manager.Deactivate(id);
-            if (result == true)
+            EventStatus.EventStatuses result = manager.Activate(id);
+            JsonResultHelper dataResult = null;
+            switch (result)
             {
-                return Json(
-                    new JsonResultHelper()
+                case EventStatus.EventStatuses.ToggleOK:
+
+                    dataResult = new JsonResultHelper()
                     {
                         Data = null,
-                        Message = "Success: Activate Event",
+                        Message = "Success: Deactivate Event",
                         Status = JsonResultHelper.StatusEnum.Success
-                    }
-                    );
+                    };
+
+                    break;
+                case EventStatus.EventStatuses.NotExist:
+                    dataResult = new JsonResultHelper()
+                    {
+                        Message = "Событие было удалено",
+                        Status = JsonResultHelper.StatusEnum.Error
+                    };
+                    break;
+                case EventStatus.EventStatuses.WasToggled:
+                    dataResult = new JsonResultHelper()
+                    {
+                        Message = "Событие уже было деактивировано",
+                        Status = JsonResultHelper.StatusEnum.Error
+                    };
+                    break;
             }
-            else
-            {
-                if (result == false)
-                {
-                    return Json(
-                         new JsonResultHelper()
-                         {
-                             Message = "Событие уже было деактивировано",
-                             Status = JsonResultHelper.StatusEnum.Error
-                         }
-                         );
-                }
-                else
-                {
-                    return Json(
-                         new JsonResultHelper()
-                         {
-                             Message = "Событие было удалено",
-                             Status = JsonResultHelper.StatusEnum.Error
-                         }
-                         );
-                }
-            }
+            return Json(dataResult);
         }
 
         [HttpPost]
@@ -165,7 +155,7 @@ namespace team2project.Controllers
             var list = manager.GetAllEvents(true);
             foreach (var elem in list)
             {
-               manager.MarkAsSeen(elem.Id);
+                manager.MarkAsSeen(elem.Id);
             }
         }
     }

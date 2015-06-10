@@ -5,6 +5,7 @@ using Events.Business.Models;
 using Events.Business.Classes;
 using System;
 using NHibernate.Criterion;
+using Events.Business.Helpers;
 
 
 namespace Events.NHibernateDataProvider.NHibernateCore
@@ -89,21 +90,25 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         }
 
 
-        public bool? ToggleStatus(string id, bool status)
+        public EventStatus.EventStatuses ToggleStatus(string id, bool status)
         {
+            EventStatus.EventStatuses result = EventStatus.EventStatuses.NotExist;
             Event evnt = GetById(id);
             if (evnt != null)
             {
+<<<<<<< HEAD
                 bool result = false;
+=======
+                result = EventStatus.EventStatuses.WasToggled;
+>>>>>>> origin/master
                 if (evnt.Active != status)
                 {
                     evnt.Active = status;
                     this.Update(evnt);
-                    result = true;
+                    result = EventStatus.EventStatuses.ToggleOK;
                 }
-                return result;
             }
-            return null;
+            return result;
         }
 
         public void MarkAsSeen(string id)
