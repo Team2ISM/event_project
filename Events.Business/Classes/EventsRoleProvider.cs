@@ -14,21 +14,13 @@ namespace Events.Business.Classes
 {
     public class EventsRoleProvider : RoleProvider
     {
-        private string _applicationName;
-
         INHibernateRoleDataProvider dataProvider;
 
-        public override string ApplicationName
-        {
-            get { return _applicationName; }
-            set { _applicationName = value; }
-        }
+        public override string ApplicationName { get; set; }
 
         private Role GetRole(string rolename)
         {
-            Role role = null;
-            role = dataProvider.GetRole(rolename);
-            return role;
+            return dataProvider.GetRole(rolename);
         }
 
         public override void Initialize(string name, NameValueCollection config)
