@@ -17,7 +17,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                var endOfDay = DateTime.Now.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+                var endOfDay = DateTime.Now.Date.AddDays(1).AddTicks(-1);
                 if (onlyAvailableData != null)
                 {
                     var result = session.CreateCriteria<Event>();
@@ -82,12 +82,10 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public Event GetById(string id)
         {
-            Event Model;
             using (ISession session = Helper.OpenSession())
             {
-                Model = session.Get<Event>(id);
+                return session.Get<Event>(id);
             }
-            return Model;
         }
 
 
@@ -97,7 +95,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             if (evnt != null)
             {
                 bool result = false;
-                if ((bool)evnt.Active != status)
+                if (evnt.Active != status)
                 {
                     evnt.Active = status;
                     this.Update(evnt);
