@@ -7,9 +7,9 @@ namespace Events.Business.Helpers
 {
     static public class PeriodStates
     {
-        public static const string Anytime = "all";
-        public static const string Today = "today";
-        public static const string ThreeDays = "threedays";
-        public static const string Week = "week";
+        public const string Anytime = "all";
+        public const string Today = "today";
+        public const string ThreeDays = "threedays";
+        public const string Week = "week";
     }
 }
