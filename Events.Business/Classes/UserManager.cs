@@ -69,7 +69,7 @@ namespace Events.Business.Classes
                 ( ) => {
                     return user;
                 });
-            ClearCacheByRegion();
+            ClearCache();
         }
 
         public void DeleteUser(User user)
@@ -77,7 +77,7 @@ namespace Events.Business.Classes
             userDataProvider.DeleteUser(user);
             RemoveFromCache("id:" + user.Id);
             RemoveFromCache("email:" + user.Email);
-            ClearCacheByRegion();            
+            ClearCache();            
         }
 
         public void UpdateUser(User user)
@@ -92,7 +92,7 @@ namespace Events.Business.Classes
                 ( ) => {
                     return user;
                 });
-            ClearCacheByRegion();          
+            ClearCache();          
         }
 
         public string GetFullName(string email)

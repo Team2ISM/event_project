@@ -24,7 +24,7 @@ namespace Events.Business.Classes
             return cacheManager.ToCache<TValue>(Name + "::" + name, function);
         }
 
-        protected void ClearCacheByRegion()
+        protected void ClearCache()
         {
             cacheManager.ClearCacheByRegion(Name);
         }

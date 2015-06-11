@@ -61,7 +61,7 @@ namespace Events.Business.Classes
                 {
                     return model;
                 });
-            ClearCacheByRegion();
+            ClearCache();
         }
 
         public void Update(Event model)
@@ -74,7 +74,7 @@ namespace Events.Business.Classes
                 {
                     return model;
                 });
-            ClearCacheByRegion();
+            ClearCache();
         }
 
         public Event GetById(string id)
@@ -107,22 +107,22 @@ namespace Events.Business.Classes
 
         public EventStatuses Deactivate(string id)
         {
-            EventStatuses result;
-            if ((result = dataProvider.ToggleStatus(id, false)) == EventStatuses.ToggleOK)
+            EventStatuses result = dataProvider.ToggleStatus(id, false);
+            if (result == EventStatuses.ToggleOK)
             {
                 RemoveFromCache(id);
-                ClearCacheByRegion();
+                ClearCache();
             }
             return result;
         }
 
         public EventStatuses Activate(string id)
         {
-            EventStatuses result;
-            if ((result = dataProvider.ToggleStatus(id, true)) == EventStatuses.ToggleOK)
+            EventStatuses result = dataProvider.ToggleStatus(id, true);
+            if (result == EventStatuses.ToggleOK)
             {
                 RemoveFromCache(id);
-                ClearCacheByRegion();
+                ClearCache();
             }
             return result;
         }
@@ -131,7 +131,7 @@ namespace Events.Business.Classes
         {
             dataProvider.MarkAsSeen(id);
             RemoveFromCache(id);
-            ClearCacheByRegion();
+            ClearCache();
         }
 
         public void Delete(string id)
@@ -139,7 +139,7 @@ namespace Events.Business.Classes
             commentManager.DeleteByEventId(id);
             dataProvider.Delete(dataProvider.GetById(id));
             RemoveFromCache(id);
-            ClearCacheByRegion();
+            ClearCache();
         }
 
         private int? getDaysCount(string period)
