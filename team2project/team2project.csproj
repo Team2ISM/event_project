@@ -1243,8 +1243,8 @@
     <Content Include="Views\Subscribers\GetSubscribers.cshtml" />
     <Content Include="Views\Subscribers\Index.cshtml" />
     <Content Include="Views\User\email.cshtml" />
-    <Content Include="Views\User\MyPastEvents.cshtml" />
-    <Content Include="Views\User\MyFutureEvents.cshtml" />
+    <Content Include="Views\Event\MyPastEvents.cshtml" />
+    <Content Include="Views\Event\MyFutureEvents.cshtml" />
     <Content Include="Views\Mails\email.cshtml" />
     <Content Include="Views\User\ConfirmRegistration.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
