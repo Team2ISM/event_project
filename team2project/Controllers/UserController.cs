@@ -22,29 +22,8 @@ using System.IO;
 
 namespace team2project.Controllers
 {
-    public abstract class MyBaseController : Controller
+    public class UserController : Controller
     {
-        protected string RenderPartialViewToString(string viewName, object model) {
-            if (string.IsNullOrEmpty(viewName))
-                viewName = ControllerContext.RouteData.GetRequiredString("action");
-
-            ViewData.Model = model;
-
-            using (StringWriter sw = new StringWriter()) {
-                ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
-                ViewContext viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
-                viewResult.View.Render(viewContext, sw);
-
-                return sw.GetStringBuilder().ToString();
-            }
-        }
-    }
-
-    public class UserController : MyBaseController
-    {
-        //
-        // GET: /User/
-
         UserManager userManager;
         EventManager eventManager;
         CitiesManager cityManager;
@@ -298,8 +277,6 @@ namespace team2project.Controllers
             return isValid;
         }
 
-
-
         private void SendActivationLink(UserViewModel user)
         {
             string authority = Request.Url.Authority;
@@ -308,7 +285,7 @@ namespace team2project.Controllers
             string body = user.Name + ", спасибо за регистрацию\n";
             body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
             string subject = "Подтверждение регистрации";
-            string newBody = RenderPartialViewToString("email", activationLink);
+            string newBody = this.RenderPartialViewToString("email", activationLink);
             userManager.EmailSender(user.Email, newBody, subject);
         }  
 
