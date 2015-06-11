@@ -27,7 +27,6 @@ namespace Events.Business.Classes
         {
 
             dataProvider = (INHibernateRoleDataProvider)DependencyResolver.Current.GetService(typeof(INHibernateRoleDataProvider));
-
             base.Initialize(name, config);
         }
 
@@ -37,32 +36,38 @@ namespace Events.Business.Classes
             foreach (string rolename in rolenames)
             {
                 if (!RoleExists(rolename))
+                {
                     throw new ProviderException(String.Format("Role name {0} not found.", rolename));
+                }
             }
 
             foreach (string username in usernames)
             {
                 if (username.Contains(","))
+                {
                     throw new ArgumentException(String.Format("User names {0} cannot contain commas.", username));
-
+                }
                 foreach (string rolename in rolenames)
                 {
                     if (IsUserInRole(username, rolename))
+                    {
                         throw new ProviderException(String.Format("User {0} is already in role {1}.", username, rolename));
+                    }
                 }
             }
-
             dataProvider.AddUsersToRoles(usernames, rolenames);
         }
 
         public override void CreateRole(string rolename)
         {
             if (rolename.Contains(","))
+            {
                 throw new ArgumentException("Role names cannot contain commas.");
-
+            }
             if (RoleExists(rolename))
+            {
                 throw new ProviderException("Role name already exists.");
-
+            }
             dataProvider.CreateRole(rolename);
         }
 
@@ -70,11 +75,14 @@ namespace Events.Business.Classes
         {
             bool deleted = false;
             if (!RoleExists(rolename))
+            {
                 throw new ProviderException("Role does not exist.");
+            }
 
             if (throwOnPopulatedRole && GetUsersInRole(rolename).Length > 0)
+            {
                 throw new ProviderException("Cannot delete a populated role.");
-
+            }
             dataProvider.DeleteRole(rolename);
 
             return deleted;
