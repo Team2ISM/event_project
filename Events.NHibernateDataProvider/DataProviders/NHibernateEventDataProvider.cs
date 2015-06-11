@@ -19,12 +19,10 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             using (ISession session = Helper.OpenSession())
             {
                 var endOfDay = DateTime.Now.Date.AddDays(1).AddTicks(-1);
-
                 if (!String.IsNullOrEmpty(location))
                 {
                     session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
                 }
-
                 if (daysToEvent > 0)
                 {
                     session.EnableFilter("equalDate").SetParameter("nowaday", endOfDay).SetParameter("chosenDate", endOfDay.AddDays(daysToEvent - 1));
@@ -33,7 +31,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 {
                     session.EnableFilter("effectiveDate").SetParameter("asOfDate", endOfDay);
                 }
-
                 var criteria = session.CreateCriteria<Event>();
                 criteria.Add(Restrictions.Eq("Active", true));
                 criteria.AddOrder(Order.Asc("FromDate"));
