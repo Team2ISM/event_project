@@ -15,6 +15,7 @@ using Events.Business.Classes;
 using Events.Business.Models;
 using Events.Business.Interfaces;
 using Events.NHibernateDataProvider;
+using Events.Business.Helpers;
 using team2project.Models;
 using Newtonsoft.Json;
 using System.IO;
@@ -64,25 +65,24 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
-            ActionResult result = View();
             if (!string.IsNullOrEmpty(returnUrl))
             {
-                if (!User.IsInRole("Admin") && User.Identity.IsAuthenticated && returnUrl.Contains("admin"))
+                if (!User.IsInRole("Admin") && User.Identity.IsAuthenticated)
                 {
-                    result = View("GenericError", ResponseMessages.AccessDenied);
+                    return View("GenericError", ResponseMessages.AccessDenied);
                 }
                 else if (User.Identity.IsAuthenticated)
                 {
-                    result = Redirect(returnUrl);
+                    return Redirect(returnUrl);
                 }
                 ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
             }
             
             else if (User.Identity.IsAuthenticated)
             {
-                result = RedirectToRoute("EventsList", new { period = "all" });
+                return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
             }
-            return result;
+            return View();
         }
 
         [HttpPost]
@@ -115,8 +115,7 @@ namespace team2project.Controllers
                     }
                     else
                     {
-                        //return RedirectToAction("Index", "Event");
-                        return RedirectToRoute("EventsList", new {period="all"});
+                        return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
                     }
                 }
                 else
@@ -162,26 +161,26 @@ namespace team2project.Controllers
                 };
                 Response.Cookies.Add(user);
             }
-            return RedirectToRoute("EventsList", new { period = "all" });
+            return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
         }
 
         [HttpGet]
         public ActionResult ForgotPassword()
         {
-            if (User.Identity.IsAuthenticated) return RedirectToRoute("EventsList", new { period = "all" });
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
+            }
             return View();
         }
 
         [HttpPost]
         public ActionResult ForgotPassword(string email)
         {
-            if (ModelState.IsValid)
+            var user = userManager.GetByMail(email);
+            if (user != null)
             {
-                var user = userManager.GetByMail(email);
-                if (user != null)
-                {
-                    userManager.ForgotPassword(user);
-                }
+               userManager.ForgotPassword(user);
             }
             return RedirectToAction("ThankYouPage", "User");
         }
@@ -197,7 +196,7 @@ namespace team2project.Controllers
             ActionResult result = View();
             if (User.Identity.IsAuthenticated)
             {
-                result = RedirectToRoute("EventsList", new { period = "all" });
+                result = RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
             }
             return result;
         }
@@ -245,7 +244,7 @@ namespace team2project.Controllers
 
                 return RedirectToRoute("Welcome", "User");
             }
-            return RedirectToRoute("EventsList", new { period = "all" });
+            return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
         }
 
         public ActionResult Welcome()
