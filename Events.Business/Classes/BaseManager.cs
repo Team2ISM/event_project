@@ -26,7 +26,7 @@ namespace Events.Business.Classes
 
         protected void ClearCache()
         {
-            cacheManager.ClearCacheByRegion(Name);
+            cacheManager.ClearCacheByName(Name);
         }
 
         protected void RemoveFromCache(string name)
