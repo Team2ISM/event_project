@@ -34,7 +34,7 @@ namespace team2project.Controllers
             {
                 var user = userManager.GetByEmail(User.Identity.Name);
                 commentModel.AuthorId = user.Id;
-                commentModel.AuthorName = user.Name + " " + user.Surname;
+                commentModel.AuthorName = userManager.GetFullName(user.Email);
             }
             var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
             comment.PostingTime = DateTime.Now;
