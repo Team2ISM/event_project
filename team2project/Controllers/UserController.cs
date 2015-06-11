@@ -180,7 +180,7 @@ namespace team2project.Controllers
             var user = userManager.GetByEmail(email);
             if (user != null)
             {
-               userManager.ForgotPassword(user);
+               userManager.SendNewPassword(user);
             }
             return RedirectToAction("ThankYouPage", "User");
         }

@@ -128,7 +128,7 @@ namespace Events.Business.Classes
             CreateUser(user);
         }
 
-        public void ForgotPassword(User user)
+        public void SendNewPassword(User user)
         {
             var crypto = new SimpleCrypto.PBKDF2();
 
