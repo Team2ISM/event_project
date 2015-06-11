@@ -44,23 +44,19 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
-            if (!string.IsNullOrEmpty(returnUrl))
+            if (User.Identity.IsAuthenticated)
             {
-                if (!User.IsInRole("Admin") && User.Identity.IsAuthenticated)
+                if (!User.IsInRole("Admin"))
                 {
                     return View("GenericError", ResponseMessages.AccessDenied);
                 }
-                else if (User.Identity.IsAuthenticated)
-                {
+                if (!string.IsNullOrEmpty(returnUrl))
+                {                    
                     return Redirect(returnUrl);
                 }
-                ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
-            }
-            
-            else if (User.Identity.IsAuthenticated)
-            {
                 return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
             }
+            ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
             return View();
         }
 
@@ -78,26 +74,16 @@ namespace team2project.Controllers
                 if (user.IsActive == true)
                 {
                     SignIn(user);
-
                     if (!string.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(Server.UrlDecode(returnUrl));
                     }
-                    else
-                    {
-                        return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
-                    }
+                    return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
                 }
-                else
-                {
-                    ViewBag.Mail = email;
-                    return View("UnconfirmedUser");
-                }
+                return View("UnconfirmedUser", AutoMapper.Mapper.Map<UserViewModel>(user));
             }
-            else
-            {
-                ModelState.AddModelError("", "Неправильный e-mail или пароль");
-            }
+
+            ModelState.AddModelError("", "Неправильный e-mail или пароль");
             return View();
         }
 
