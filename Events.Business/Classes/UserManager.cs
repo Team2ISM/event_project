@@ -132,7 +132,7 @@ namespace Events.Business.Classes
         {
             var crypto = new SimpleCrypto.PBKDF2();
 
-            string newPassword = GeneratePassword();
+            string newPassword = Guid.NewGuid().ToString().Substring(0, 8); ;
 
             var encrPass = crypto.Compute(newPassword);
 
@@ -169,20 +169,5 @@ namespace Events.Business.Classes
 
             client.Send(msg);
         }
-
-        private string GeneratePassword()
-        {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[8];
-            var random = new Random();
-
-            for (int i = 0; i < stringChars.Length; i++)
-            {
-                stringChars[i] = chars[random.Next(chars.Length)];
-            }
-
-            return new String(stringChars);
-        }
-
     }
 }
