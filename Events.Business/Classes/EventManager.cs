@@ -30,7 +30,7 @@ namespace Events.Business.Classes
             return FromCache<IList<Event>>("AdminList",
                     () =>
                     {
-                        return dataProvider.GetList(0, null, true);
+                        return dataProvider.GetAllEvents();
                     });
         }
 
@@ -48,7 +48,7 @@ namespace Events.Business.Classes
             return FromCache<IList<Event>>("list" + period + "-" + locationId,
                 () =>
                 {
-                    return dataProvider.GetList(daysToEvent, locationId, false);
+                    return dataProvider.GetList(daysToEvent, locationId);
                 });
         }
 

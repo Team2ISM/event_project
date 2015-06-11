@@ -6,7 +6,9 @@ namespace Events.Business.Interfaces
 {
     public interface IEventDataProvider
     {
-        IList<Event> GetList(int nDaysToEvent = 0, string location = null, bool isForAdmin = false);
+        IList<Event> GetList(int nDaysToEvent = 0, string location = null);
+
+        IList<Event> GetAllEvents();
 
         Event GetById(string id);
 
@@ -18,7 +20,7 @@ namespace Events.Business.Interfaces
 
         EventStatuses ToggleStatus(string id, bool status);
 
-        int Create(Event evnt);
+        void Create(Event evnt);
 
         void Update(Event model);
 

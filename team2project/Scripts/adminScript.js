@@ -135,11 +135,11 @@
     }
 
     function responseMessageHelper(response) {
-        return "Status: " + response.Status + "\n" + "Message: " + response.Message;
+        return "Status: " + response.State + "\n" + "Message: " + response.Message;
     }
 
     function successHelper(response, funcSuccess, funcError) {
-        if (response.Status) {
+        if (response.State) {
             if (funcSuccess) {
                 funcSuccess(response);
             }
