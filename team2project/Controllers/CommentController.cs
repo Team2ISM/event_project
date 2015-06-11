@@ -32,7 +32,7 @@ namespace team2project.Controllers
             }
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                var user = userManager.GetByMail(User.Identity.Name);
+                var user = userManager.GetByEmail(User.Identity.Name);
                 commentModel.AuthorId = user.Id;
                 commentModel.AuthorName = user.Name + " " + user.Surname;
             }

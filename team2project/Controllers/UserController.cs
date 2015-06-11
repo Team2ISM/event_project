@@ -93,7 +93,7 @@ namespace team2project.Controllers
                 return View();
             }
 
-            var user = userManager.GetByMail(email);
+            var user = userManager.GetByEmail(email);
             if (user != null && isValid(email, password))
             {
                 if (user.IsActive == true)
@@ -134,7 +134,7 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult UnconfirmedUser(string email)
         {
-            var user = userManager.GetByMail(email);
+            var user = userManager.GetByEmail(email);
             if (user != null && user.IsActive == false)
             {
                 SendActivationLink(AutoMapper.Mapper.Map<UserViewModel>(user));
@@ -177,7 +177,7 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult ForgotPassword(string email)
         {
-            var user = userManager.GetByMail(email);
+            var user = userManager.GetByEmail(email);
             if (user != null)
             {
                userManager.ForgotPassword(user);
@@ -206,7 +206,7 @@ namespace team2project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userExist = userManager.GetByMail(user.Email);
+                var userExist = userManager.GetByEmail(user.Email);
                 if (userExist == null)
                 {
                     var mappedUser = AutoMapper.Mapper.Map<User>(user);
@@ -266,7 +266,7 @@ namespace team2project.Controllers
                 var crypto = new SimpleCrypto.PBKDF2();
 
                 var mail = User.Identity.Name;
-                User user = userManager.GetByMail(mail);
+                User user = userManager.GetByEmail(mail);
 
                 if (user.Password == crypto.Compute(oldPassword, user.PasswordSalt))
                 {
@@ -312,7 +312,7 @@ namespace team2project.Controllers
             var crypto = new SimpleCrypto.PBKDF2();
             bool isValid = false;
 
-            User user = userManager.GetByMail(email);
+            User user = userManager.GetByEmail(email);
             if (user != null)
             {
                 if (user.Password == crypto.Compute(password, user.PasswordSalt))

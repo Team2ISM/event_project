@@ -44,7 +44,7 @@ namespace team2project.Controllers
             {
                 return Json(false);
             }
-            var user = UserManager.GetByMail(User.Identity.Name);      
+            var user = UserManager.GetByEmail(User.Identity.Name);      
             Manager.SubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
         }
@@ -55,7 +55,7 @@ namespace team2project.Controllers
             {
                 return Json(false);
             }
-            var user = UserManager.GetByMail(User.Identity.Name);
+            var user = UserManager.GetByEmail(User.Identity.Name);
             Manager.UnsubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
         }
@@ -66,7 +66,7 @@ namespace team2project.Controllers
             {
                 return Json(false);
             }
-            var user = UserManager.GetByMail(User.Identity.Name);
+            var user = UserManager.GetByEmail(User.Identity.Name);
             return Json(Manager.IsSubscribed(new Subscribing(id, user.Id)));      
         }
     }
