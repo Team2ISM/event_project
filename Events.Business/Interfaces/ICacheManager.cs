@@ -9,6 +9,6 @@ namespace Events.Business.Interfaces
         CacheItem ToCache<TValue>(string key, Func<TValue> function);
         void RemoveFromCache(string key);
         void ClearCacheByRegion(string region);
-        void ClearCacheByManagerName(string name);
+        void ClearCacheByName(string name);
     }
 }

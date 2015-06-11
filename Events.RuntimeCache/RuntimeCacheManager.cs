@@ -38,7 +38,7 @@ namespace Events.RuntimeCache
                 });
         }
 
-        public void ClearCacheByManagerName(string name)
+        public void ClearCacheByName(string name)
         {
             ClearCacheHelper(
                 (string key) =>
