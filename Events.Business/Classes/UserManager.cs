@@ -22,7 +22,8 @@ namespace Events.Business.Classes
     {
         IUserDataProvider userDataProvider;
 
-        public string userName;
+        string userName;
+        SimpleCrypto.PBKDF2 crypto = new SimpleCrypto.PBKDF2();
 
         protected override string Name { get; set; }
 
@@ -104,8 +105,7 @@ namespace Events.Business.Classes
         }        
 
         public void ChangePassword(User user, string password)
-        {
-            var crypto = new SimpleCrypto.PBKDF2();
+        {            
             var encrPass = crypto.Compute(password);
 
             user.Password = encrPass;
@@ -116,8 +116,6 @@ namespace Events.Business.Classes
 
         public void RegisterUser(User user)
         {
-            var crypto = new SimpleCrypto.PBKDF2();
-
             var encrPass = crypto.Compute(user.Password);
 
             user.Password = encrPass;
@@ -129,9 +127,7 @@ namespace Events.Business.Classes
 
         public void SendNewPassword(User user)
         {
-            var crypto = new SimpleCrypto.PBKDF2();
-
-            string newPassword = Guid.NewGuid().ToString().Substring(0, 8); ;
+            string newPassword = Guid.NewGuid().ToString().Substring(0, 8);
 
             var encrPass = crypto.Compute(newPassword);
 
@@ -148,9 +144,7 @@ namespace Events.Business.Classes
 
         public bool isValid(string email, string password)
         {
-            var crypto = new SimpleCrypto.PBKDF2();
             bool isValid = false;
-
             User user = GetByEmail(email);
             if (user != null)
             {
@@ -159,7 +153,6 @@ namespace Events.Business.Classes
                     isValid = true;
                 }
             }
-
             return isValid;
         }
 
