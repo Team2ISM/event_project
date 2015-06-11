@@ -86,10 +86,10 @@ namespace team2project.Controllers
             {
                 return View("GenericError", ResponseMessages.EditingNotAllowedDueToEventEndingTime);
             }
-
             if (evntModel.AuthorId != User.Identity.Name)
+            {
                 return View("GenericError", ResponseMessages.EditingNotAllowedDueToWrongUser);
-
+            }
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             return View("Create", evnt);
         }
@@ -100,15 +100,19 @@ namespace team2project.Controllers
         {
             evnt = evnt.Merge(eventManager.GetById(evnt.Id));
             if (evnt.AuthorId != User.Identity.Name)
+            {
                 return View("GenericError", ResponseMessages.EditingNotAllowedDueToWrongUser);
-
+            }
             if (!ModelState.IsValid)
             {
                 return View("Create", evnt);
             }
             evnt.AuthorId = User.Identity.Name;
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
-            if (!String.IsNullOrEmpty(evnt.Location)) evntModel.LocationId = cityManager.GetByName(evnt.Location).Id;
+            if (!String.IsNullOrEmpty(evnt.Location))
+            {
+                evntModel.LocationId = cityManager.GetByName(evnt.Location).Id;
+            }
             // Replace <pre> tags with nothing, 'cause they break markup
             evntModel.Description = evntModel.Description.Replace("<pre>", "");
             evntModel.Description = evntModel.Description.Replace("</pre>", "");
@@ -123,8 +127,14 @@ namespace team2project.Controllers
         {
             var mail = User.Identity.Name;
             var target = eventManager.GetById(id);
-            if (target == null) return View("GenericError", ResponseMessages.EventNotFound);
-            if (mail != target.AuthorId) return View("GenericError", ResponseMessages.DeletingNotAllowedDueToWrongUser);
+            if (target == null)
+            {
+                return View("GenericError", ResponseMessages.EventNotFound);
+            }
+            if (mail != target.AuthorId)
+            {
+                return View("GenericError", ResponseMessages.DeletingNotAllowedDueToWrongUser);
+            }
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");
         }
