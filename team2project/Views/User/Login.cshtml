@@ -9,9 +9,6 @@
 @section css{
     @Styles.Render("~/Content/User/user.css")
 }
-@section scripts{
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
 @using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "container z-depth-3" }))
 {
@@ -45,3 +42,6 @@
         });
     });
 </script>
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

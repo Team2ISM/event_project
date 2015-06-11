@@ -21,6 +21,18 @@ namespace team2project
             #region Events map routes
 
             routes.MapRoute(
+                name: "PastEvents",
+                url: "events/past",
+                defaults: new { controller = "Event", action = "MyPastEvents" }
+            );
+
+            routes.MapRoute(
+                name: "FutureEvents",
+                url: "events/future",
+                defaults: new { controller = "Event", action = "MyFutureEvents" }
+            );
+
+            routes.MapRoute(
                name: "CreateEvent",
                url: "events/create",
                defaults: new { controller = "Event", action = "Create" }
@@ -52,19 +64,7 @@ namespace team2project
 
             #endregion
 
-            #region User map routes
-
-            routes.MapRoute(
-                name: "PastEvents",
-                url: "user/past",
-                defaults: new { controller = "User", action = "MyPastEvents" }
-            );
-
-            routes.MapRoute(
-                name: "FutureEvents",
-                url: "user/future",
-                defaults: new { controller = "User", action = "MyFutureEvents" }
-            );
+            #region User map routes            
 
             routes.MapRoute(
                 name: "Activate",
