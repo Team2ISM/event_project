@@ -16,7 +16,6 @@ using Events.Business;
 using Events.Business.Interfaces;
 using Events.Business.Models;
 
-
 namespace Events.Business.Classes
 {
     public class UserManager : BaseManager
@@ -102,7 +101,7 @@ namespace Events.Business.Classes
                 {
                     return userDataProvider.GetFullName(email);
                 });
-        }
+        }        
 
         public void ChangePassword(User user, string password)
         {
@@ -141,12 +140,27 @@ namespace Events.Business.Classes
 
             UpdateUser(user);
 
-            MailMessage msg = new MailMessage();
-
             string body = user.Name + ", ваш пароль: \n" + newPassword;
             string subject = "Новый пароль";
 
             EmailSender(user.Email, body, subject);
+        }
+
+        public bool isValid(string email, string password)
+        {
+            var crypto = new SimpleCrypto.PBKDF2();
+            bool isValid = false;
+
+            User user = GetByEmail(email);
+            if (user != null)
+            {
+                if (user.Password == crypto.Compute(password, user.PasswordSalt))
+                {
+                    isValid = true;
+                }
+            }
+
+            return isValid;
         }
 
         public void EmailSender(string userEmail, string body, string subject)

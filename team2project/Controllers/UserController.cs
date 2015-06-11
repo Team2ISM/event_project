@@ -73,20 +73,11 @@ namespace team2project.Controllers
             }
 
             var user = userManager.GetByEmail(email);
-            if (user != null && isValid(email, password))
+            if (user != null && userManager.isValid(email, password))
             {
                 if (user.IsActive == true)
                 {
-                    FormsAuthentication.SetAuthCookie(user.Email, false);
-
-                    var city = cityManager.GetById(user.LocationId);
-                    string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (city != null ? city.Name : "Default");
-                    userData = HttpUtility.UrlEncode(userData);
-                    var json = JsonConvert.SerializeObject(userData);
-
-                    var userCookie = new HttpCookie("user", json);
-                    userCookie.Expires.AddDays(365);
-                    HttpContext.Response.SetCookie(userCookie);
+                    SignIn(user);
 
                     if (!string.IsNullOrEmpty(returnUrl))
                     {
@@ -129,17 +120,7 @@ namespace team2project.Controllers
 
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
-
-            if (Request.Cookies["user"] != null)
-            {
-                var user = new HttpCookie("user")
-                {
-                    Expires = DateTime.Now.AddDays(-1),
-                    Value = null
-                };
-                Response.Cookies.Add(user);
-            }
+            SignOut();
             return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
         }
 
@@ -172,12 +153,11 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
-            ActionResult result = View();
             if (User.Identity.IsAuthenticated)
             {
-                result = RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
+                return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
             }
-            return result;
+            return View();
         }
 
         [HttpPost]
@@ -200,7 +180,7 @@ namespace team2project.Controllers
                     ModelState.AddModelError("", "Пользователь с такой почтой уже зарегистрирован");                   
                 }
             }
-            return View(new UserViewModel());
+            return View();
 
         }
 
@@ -211,16 +191,8 @@ namespace team2project.Controllers
             if (user != null && user.IsActive == false)
             {
                 user.IsActive = true;
-                userManager.UpdateUser(user);
-                FormsAuthentication.SetAuthCookie(user.Email, false);
-
-                string userData = HttpUtility.UrlEncode("Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (cityManager.GetById(user.LocationId)).Name);
-                var json = JsonConvert.SerializeObject(userData);
-
-                var userCookie = new HttpCookie("user", json);
-                userCookie.Expires.AddDays(365);
-                HttpContext.Response.SetCookie(userCookie);
-
+                userManager.UpdateUser(user);                
+                SignIn(user);
                 return RedirectToRoute("Welcome", "User");
             }
             return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
@@ -260,21 +232,35 @@ namespace team2project.Controllers
             return View();
         }
 
-        private bool isValid(string email, string password)
+
+
+        private void SignIn(User user)
         {
-            var crypto = new SimpleCrypto.PBKDF2();
-            bool isValid = false;
+            FormsAuthentication.SetAuthCookie(user.Email, false);
 
-            User user = userManager.GetByEmail(email);
-            if (user != null)
+            var city = cityManager.GetById(user.LocationId);
+            string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (city != null ? city.Name : "Default");
+            userData = HttpUtility.UrlEncode(userData);
+            var json = JsonConvert.SerializeObject(userData);
+
+            var userCookie = new HttpCookie("user", json);
+            userCookie.Expires.AddDays(365);
+            HttpContext.Response.SetCookie(userCookie);
+        }
+
+        private void SignOut()
+        {
+            FormsAuthentication.SignOut();
+
+            if (Request.Cookies["user"] != null)
             {
-                if (user.Password == crypto.Compute(password, user.PasswordSalt))
+                var user = new HttpCookie("user")
                 {
-                    isValid = true;
-                }
+                    Expires = DateTime.Now.AddDays(-1),
+                    Value = null
+                };
+                Response.Cookies.Add(user);
             }
-
-            return isValid;
         }
 
         private void SendActivationLink(UserViewModel user)
