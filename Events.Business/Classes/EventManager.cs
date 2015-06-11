@@ -34,7 +34,7 @@ namespace Events.Business.Classes
                     });
         }
 
-        public IList<Event> GetList(string period, string location)
+        public IList<Event> GetList(string period, string locationId)
         {
             int? days = getDaysCount(period);
 
@@ -45,10 +45,10 @@ namespace Events.Business.Classes
 
             int daysToEvent = (int)days;
 
-            return FromCache<IList<Event>>("list" + period + "-" + location,
+            return FromCache<IList<Event>>("list" + period + "-" + locationId,
                 () =>
                 {
-                    return dataProvider.GetList(daysToEvent, location, false);
+                    return dataProvider.GetList(daysToEvent, locationId, false);
                 });
         }
 
