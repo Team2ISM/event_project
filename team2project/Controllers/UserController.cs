@@ -28,7 +28,6 @@ namespace team2project.Controllers
         EventManager eventManager;
         CitiesManager cityManager;
 
-
         public UserController(UserManager userManager, EventManager eventManager, CitiesManager citiesManager)
         {
             this.userManager = userManager;
@@ -217,8 +216,6 @@ namespace team2project.Controllers
             }
             return View();
         }
-
-
 
         private void SignIn(User user)
         {

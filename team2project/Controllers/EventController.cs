@@ -36,7 +36,6 @@ namespace team2project.Controllers
                 return RedirectToRoute("Error404");
             }
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
-            
             foreach (var ev in list)
             {
                 ev.Location = cityManager.GetById(ev.LocationId).Name;
@@ -48,7 +47,6 @@ namespace team2project.Controllers
         public ActionResult Details(string id)
         {
             var evntModel = eventManager.GetById(id);
-
             if (evntModel == null || !evntModel.Active)
             {
                 return View("GenericError", ResponseMessages.EventNotFound);
