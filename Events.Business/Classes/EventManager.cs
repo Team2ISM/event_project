@@ -147,16 +147,16 @@ namespace Events.Business.Classes
             int? days;
             switch (period)
             {
-                case "today":
+                case PeriodStates.Today:
                     days = 1;
                     break;
-                case "threedays":
+                case PeriodStates.ThreeDays:
                     days = 3;
                     break;
-                case "week":
+                case PeriodStates.Week:
                     days = 7;
                     break;
-                case "all":
+                case PeriodStates.Anytime:
                     days = 0;
                     break;
                 default:

@@ -60,6 +60,7 @@
     <Compile Include="Classes\SubscribersManager.cs" />
     <Compile Include="Classes\UserManager.cs" />
     <Compile Include="Helpers\EventStatus.cs" />
+    <Compile Include="Helpers\PeriodStates.cs" />
     <Compile Include="Interfaces\ICacheManager.cs">
       <SubType>Code</SubType>
     </Compile>
