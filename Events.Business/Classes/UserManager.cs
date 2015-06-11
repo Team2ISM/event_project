@@ -36,32 +36,63 @@ namespace Events.Business.Classes
 
         public IList<User> GetAllUsers()
         {
-            return userDataProvider.GetAllUsers();
+            return FromCache<IList<User>>("AllUsersList",
+                    ( ) => {
+                        return userDataProvider.GetAllUsers();
+                    });            
         }
 
         public User GetById(string id)
         {
-            return userDataProvider.GetById(id);
+            return cacheManager.FromCache<User>("id:" + id,
+                 ( ) => {
+                     return userDataProvider.GetById(id);
+                 });
         }
 
-        public User GetByMail(string mail)
+        public User GetByEmail(string mail)
         {
-            return userDataProvider.GetByMail(mail);
+            return cacheManager.FromCache<User>("email:" + mail,
+                 ( ) => {
+                     return userDataProvider.GetByMail(mail);
+                 });            
         }
 
         public void CreateUser(User user)
         {
             userDataProvider.CreateUser(user);
+            ToCache<User>("id:" + user.Id,
+                ( ) => {
+                    return user;
+                });
+            ToCache<User>("email:" + user.Email,
+                ( ) => {
+                    return user;
+                });
+            ClearCacheByRegion();
         }
 
         public void DeleteUser(User user)
         {
             userDataProvider.DeleteUser(user);
+            RemoveFromCache("id:" + user.Id);
+            RemoveFromCache("email:" + user.Email);
+            ClearCacheByRegion();            
         }
 
         public void UpdateUser(User user)
         {
             userDataProvider.UpdateUser(user);
+            RemoveFromCache("id:" + user.Id);
+            ToCache<User>("id:" + user.Id,
+                ( ) => {
+                    return user;
+                });
+            ToCache<User>("email:" + user.Email,
+                ( ) => {
+                    return user;
+                });
+            ClearCacheByRegion();          
         }
 
         public string GetFullName(string email)
