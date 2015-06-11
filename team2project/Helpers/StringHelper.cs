@@ -23,6 +23,13 @@ namespace team2project.Helpers
             return result;
         }
 
+        public static string RemovePreTag(this string str)
+        {
+            str = str.Replace("<pre>", "");
+            str = str.Replace("<pre>", "");
+            return str;
+        }
+
         public static IHtmlString ToHtmlString(this string data)
         {
             return new HtmlString(data);

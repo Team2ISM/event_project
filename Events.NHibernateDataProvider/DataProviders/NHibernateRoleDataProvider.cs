@@ -162,43 +162,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             return userIsInRole;
         }
 
-        public void RemoveUsersFromRoles(string[] usernames, string[] rolenames)
-        {
-            User usr = null;
-
-            using (ISession session = Helper.OpenSession())
-            {
-                using (ITransaction transaction = session.BeginTransaction())
-                {
-
-                    foreach (string username in usernames)
-                    {
-                        usr = session.CreateCriteria(typeof(User))
-                            .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
-                            .UniqueResult<User>();
-
-                        var Roletodelete = new List<Role>();
-                        foreach (string rolename in rolenames)
-                        {
-                            ICollection<Role> Role = usr.Roles;
-                            foreach (Role r in Role)
-                            {
-                                if (r.Name.Equals(rolename))
-                                    Roletodelete.Add(r);
-                            }
-                        }
-                        foreach (Role rd in Roletodelete)
-                            usr.RemoveRole(rd);
-
-
-                        session.SaveOrUpdate(usr);
-                    }
-                    transaction.Commit();
-
-                }
-            }
-
-        }
 
         public bool RoleExists(string rolename)
         {
@@ -217,21 +180,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 exists = true;
 
             return exists;
-        }
-
-        public ICollection<User> FindUsersInRole(string rolename)
-        {
-            ICollection<User> Users = null;
-            Role role = null;
-
-            using (ISession session = Helper.OpenSession())
-            {
-                role = session.CreateCriteria(typeof(Role))
-                                .Add(NHibernate.Criterion.Restrictions.Eq("Name", rolename))
-                                .UniqueResult<Role>();
-            }
-            Users = role.Users;
-            return Users;
         }
 
     }

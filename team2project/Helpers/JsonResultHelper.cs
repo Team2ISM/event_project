@@ -12,8 +12,12 @@ namespace team2project.Helpers
 
         public string Message;
 
-        public StatusEnum Status { get; set; }
+        public ResponseStatus State { get; set; }
 
-        public enum StatusEnum { Error = 0, Success = 1}
+        public enum ResponseStatus
+        {
+            Error,
+            Success
+        }
     }
 }

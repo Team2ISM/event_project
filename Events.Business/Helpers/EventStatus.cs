@@ -5,8 +5,5 @@ using System.Web;
 
 namespace Events.Business.Helpers
 {
-    public static class EventStatus
-    {
-        public enum EventStatuses { ToggleOK = 0, WasToggled = 1, NotExist = 2 };
-    }
+    public enum EventStatuses { ToggleOK = 0, WasToggled = 1, NotExist = 2 };
 }

@@ -34,7 +34,8 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult GetEvents()
         {
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents(true));
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(manager.GetAllEvents());
+
             foreach (var Event in list)
             {
                 Event.Location = cityManager.GetById(Event.LocationId).Name;
@@ -47,7 +48,7 @@ namespace team2project.Controllers
                         {
                             Data = list,
                             Message = "Success: Get list of all events",
-                            Status = JsonResultHelper.StatusEnum.Success
+                            State = JsonResultHelper.ResponseStatus.Success
                         }
                     );
         }
@@ -55,32 +56,32 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Activate(string id)
         {
-            EventStatus.EventStatuses result = manager.Activate(id);
+            EventStatuses result = manager.Activate(id);
             JsonResultHelper dataResult = null;
             switch (result)
             {
-                case EventStatus.EventStatuses.ToggleOK:
+                case EventStatuses.ToggleOK:
 
                     dataResult = new JsonResultHelper()
                     {
                         Data = null,
                         Message = "Success: Activate Event",
-                        Status = JsonResultHelper.StatusEnum.Success
+                        State = JsonResultHelper.ResponseStatus.Success
                     };
 
                     break;
-                case EventStatus.EventStatuses.NotExist:
+                case EventStatuses.NotExist:
                     dataResult = new JsonResultHelper()
                          {
                              Message = "Событие было удалено",
-                             Status = JsonResultHelper.StatusEnum.Error
+                             State = JsonResultHelper.ResponseStatus.Error
                          };
                     break;
-                case EventStatus.EventStatuses.WasToggled:
+                case EventStatuses.WasToggled:
                     dataResult = new JsonResultHelper()
                     {
                         Message = "Событие уже было активировано",
-                        Status = JsonResultHelper.StatusEnum.Error
+                        State = JsonResultHelper.ResponseStatus.Error
                     };
                     break;
             }
@@ -90,32 +91,32 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Deactivate(string id)
         {
-            EventStatus.EventStatuses result = manager.Activate(id);
+            EventStatuses result = manager.Activate(id);
             JsonResultHelper dataResult = null;
             switch (result)
             {
-                case EventStatus.EventStatuses.ToggleOK:
+                case EventStatuses.ToggleOK:
 
                     dataResult = new JsonResultHelper()
                     {
                         Data = null,
                         Message = "Success: Deactivate Event",
-                        Status = JsonResultHelper.StatusEnum.Success
+                        State = JsonResultHelper.ResponseStatus.Success
                     };
 
                     break;
-                case EventStatus.EventStatuses.NotExist:
+                case EventStatuses.NotExist:
                     dataResult = new JsonResultHelper()
                     {
                         Message = "Событие было удалено",
-                        Status = JsonResultHelper.StatusEnum.Error
+                        State = JsonResultHelper.ResponseStatus.Error
                     };
                     break;
-                case EventStatus.EventStatuses.WasToggled:
+                case EventStatuses.WasToggled:
                     dataResult = new JsonResultHelper()
                     {
                         Message = "Событие уже было деактивировано",
-                        Status = JsonResultHelper.StatusEnum.Error
+                        State = JsonResultHelper.ResponseStatus.Error
                     };
                     break;
             }
@@ -125,34 +126,28 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult DeleteEvent(string id)
         {
-            JsonResultHelper result = null;
             if (manager.GetById(id) == null)
             {
-                result = new JsonResultHelper()
+                return Json(new JsonResultHelper()
                 {
                     Data = null,
                     Message = "Failure: Event already deleted",
-                    Status = JsonResultHelper.StatusEnum.Error
-                };
+                    State = JsonResultHelper.ResponseStatus.Error
+                });
             }
-            else
+            commentManager.DeleteByEventId(id);
+            manager.Delete(id);
+            return Json(new JsonResultHelper()
             {
-                commentManager.DeleteByEventId(id);
-                manager.Delete(id);
-                result = new JsonResultHelper()
-                {
-                    Data = null,
-                    Message = "Success: Delete Event",
-                    Status = JsonResultHelper.StatusEnum.Success
-                };
-            }
-
-            return Json(result);
+                Data = null,
+                Message = "Success: Delete Event",
+                State = JsonResultHelper.ResponseStatus.Success
+            });
         }
 
         void MarkAsSeen()
         {
-            var list = manager.GetAllEvents(true);
+            var list = manager.GetAllEvents();
             foreach (var elem in list)
             {
                 manager.MarkAsSeen(elem.Id);

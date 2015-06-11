@@ -25,10 +25,6 @@ namespace Events.Business.Interfaces
 
         bool IsUserInRole(string username, string rolename);
 
-        void RemoveUsersFromRoles(string[] usernames, string[] rolenames);
-
         bool RoleExists(string rolename);
-
-        ICollection<User> FindUsersInRole(string rolename);
     }
 }

@@ -25,12 +25,12 @@ namespace Events.Business.Classes
             this.commentManager = commentManager;
         }
 
-        public IList<Event> GetAllEvents(bool isForAdmin)
+        public IList<Event> GetAllEvents()
         {
-            return FromCache<IList<Event>>("list",
+            return FromCache<IList<Event>>("AdminList",
                     () =>
                     {
-                        return dataProvider.GetList(0, null, "Admin", isForAdmin);
+                        return dataProvider.GetList(0, null, true);
                     });
         }
 
@@ -48,7 +48,7 @@ namespace Events.Business.Classes
             return FromCache<IList<Event>>("list" + period + "-" + location,
                 () =>
                 {
-                    return dataProvider.GetList(daysToEvent, location, null, false);
+                    return dataProvider.GetList(daysToEvent, location, false);
                 });
         }
 
@@ -105,10 +105,10 @@ namespace Events.Business.Classes
                 });
         }
 
-        public EventStatus.EventStatuses Deactivate(string id)
+        public EventStatuses Deactivate(string id)
         {
-            EventStatus.EventStatuses result;
-            if ((result = dataProvider.ToggleStatus(id, false)) == EventStatus.EventStatuses.ToggleOK)
+            EventStatuses result;
+            if ((result = dataProvider.ToggleStatus(id, false)) == EventStatuses.ToggleOK)
             {
                 RemoveFromCache(id);
                 ClearCacheByRegion();
@@ -116,10 +116,10 @@ namespace Events.Business.Classes
             return result;
         }
 
-        public EventStatus.EventStatuses Activate(string id)
+        public EventStatuses Activate(string id)
         {
-            EventStatus.EventStatuses result;
-            if ((result = dataProvider.ToggleStatus(id, true)) == EventStatus.EventStatuses.ToggleOK)
+            EventStatuses result;
+            if ((result = dataProvider.ToggleStatus(id, true)) == EventStatuses.ToggleOK)
             {
                 RemoveFromCache(id);
                 ClearCacheByRegion();
