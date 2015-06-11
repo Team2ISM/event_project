@@ -88,7 +88,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-
         public EventStatuses ToggleStatus(string id, bool status)
         {
             EventStatuses result = EventStatuses.NotExist;
