@@ -204,20 +204,17 @@ nav li a
 .clickable{
     cursor: pointer;
 }
-noscript div{
-    position: absolute;
+#noscript{
+    position: fixed;
     height: 100%;
     width: 100%;
     z-index: 1000000;
     background-color: white;
     font-size: xx-large;
     text-align: center;
-    padding: 30%;
+    padding: 7%;
 }
 img {
-
     max-width:100%;
-
     height:auto;
-
 }
