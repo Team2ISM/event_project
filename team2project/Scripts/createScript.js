@@ -34,8 +34,7 @@
                     ui.item.option.selected = true;
                     this._trigger("select", event, {
                         item: ui.item.option
-                    });
-                    debugger;
+                    });                    
                     //My 
                     locat.val(ui.item.value);
                     //locat.html(ui.item.value);
@@ -95,6 +94,7 @@
 
             // Selected an item, nothing to do
             if (ui.item) {
+                locat.val(ui.item.value);
                 return;
             }
 
@@ -111,6 +111,7 @@
 
             // Found a match, nothing to do
             if (valid) {
+                locat.val(value);
                 return;
             }
 
@@ -143,6 +144,7 @@ window.onload = function () {
             if (val.value === city) {
                 val.setAttribute('selected', 'selected');
                 value = city;
+                locat.val(val.value);
                 return false;
             }
         });
