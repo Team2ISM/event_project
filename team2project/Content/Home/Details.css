@@ -173,6 +173,10 @@ textarea
     line-height: normal;
     margin-bottom: 10px;
 }
+    .event-title *
+{
+        word-break:break-all;
+}
 .title-date-block{
     width: 50%;
     color: #212121;
