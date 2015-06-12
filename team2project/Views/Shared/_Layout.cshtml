@@ -21,6 +21,20 @@
     <script src="@Url.Content("~/Scripts/materialize/materialize.js")" type="text/javascript"> </script>
 </head>
 <body>
+    <noscript>
+        <div id="noscript">
+            <div class="container-auto-width container z-depth-1 m6">
+                <div class="row">
+                    <div class="col s12 m12 12 center-align">
+                        <img id="notfound" class="responsive-img circle" src=@Url.Content("~/Content/images/doge-regular.png") alt="Image" />
+                            <div id="error-msg" class="large-font">
+                                <h1>Для работы с сервисом включите javascript</h1>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </noscript>
     <ul id="dropdown1" class="dropdown-content">
         @{
             if (!User.Identity.IsAuthenticated)

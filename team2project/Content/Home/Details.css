@@ -173,6 +173,10 @@ textarea
     line-height: normal;
     margin-bottom: 10px;
 }
+    .event-title *
+{
+        word-break:break-all;
+}
 .title-date-block{
     width: 50%;
     color: #212121;
@@ -193,6 +197,7 @@ textarea
 #subscribers_onhover
 {
 	background-color: black;
+    border-radius: 3px;
     color: white;
     margin-left: 3px;
     opacity: 0.7;
@@ -220,12 +225,15 @@ textarea
     width: 48%;
 }
 
-#subscribers_onhover li
-{
-	/*margin: 5px;*/
+#sub_wrapper {
+    background-color: rgba(128, 128, 128, 0.5);
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
-
-#sub_wrapper
+#sub_inner
 {
 	background-color: white;
     box-shadow: 4px 4px 20px 0 rgba(50, 50, 50, 0.75);
@@ -239,7 +247,7 @@ textarea
     -moz-box-shadow:    4px 4px 20px 0px rgba(50, 50, 50, 0.75);
 }
 
-#sub_wrapper header
+#sub_inner header
 {
 	background-color: #607d8b;
     color: white;
@@ -253,7 +261,7 @@ textarea
     z-index: 1000;
 }
 
-#sub_wrapper header span
+#sub_inner header span
 {
   font-size: xx-large;
   background-size: cover;

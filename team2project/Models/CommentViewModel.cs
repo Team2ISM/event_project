@@ -7,22 +7,13 @@ namespace team2project.Models
     {
         public CommentViewModel()
         {
-            if (this.Id == null)
-            {
-                this.Id = Guid.NewGuid().ToString();
-            }
-
-            if (AuthorId == null)
-            {
-                AuthorId = "anon";
-            }
+            this.Id = Guid.NewGuid().ToString();
         }
 
         public CommentViewModel(string eventId)
         {
             this.Id = Guid.NewGuid().ToString();
             EventId = eventId;
-            AuthorId = "anon";
         }
 
         [ScaffoldColumn(false)]
@@ -32,7 +23,7 @@ namespace team2project.Models
         public string EventId { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        [StringLength(50)]
+        [StringLength(100, ErrorMessage = "Длина должна быть не больше 100 символов")]
         [DataType(DataType.Text)]
         public string AuthorName { get; set; }
 
@@ -42,7 +33,7 @@ namespace team2project.Models
         public virtual DateTime PostingTime { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "Длина должна быть от 2 до 50 символов")]
+        [StringLength(1000, MinimumLength = 2, ErrorMessage = "Длина должна быть от 2 до 1000 символов")]
         [DataType(DataType.MultilineText)]
         public string Text { get; set; }
 

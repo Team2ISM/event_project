@@ -46,6 +46,6 @@ CKEDITOR.editorConfig = function( config ) {
 	config.extraPlugins += ',tableresize';
 
 	config.language = 'ru';
-	config.filebrowserBrowseUrl = '/Scripts/filemanager/index.html';
+	//config.filebrowserBrowseUrl = '/Scripts/filemanager/index.html';
 
 };
