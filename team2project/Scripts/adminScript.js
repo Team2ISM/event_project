@@ -100,10 +100,10 @@
                                         height: 200,
                                         modal: true,
                                         buttons: {
-                                        "Ok": function () {
-                                            $(this).dialog("close");
-                                        }
-                                    },
+                                            "Ok": function () {
+                                                $(this).dialog("close");
+                                            }
+                                        },
                                     });
                                     self.deleteEventLocal(data);
                                 });
