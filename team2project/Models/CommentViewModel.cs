@@ -23,7 +23,7 @@ namespace team2project.Models
         public string EventId { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        [StringLength(100)]
+        [StringLength(100, ErrorMessage = "Длина должна быть не больше 100 символов")]
         [DataType(DataType.Text)]
         public string AuthorName { get; set; }
 
