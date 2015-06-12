@@ -204,3 +204,12 @@ nav li a
 .clickable{
     cursor: pointer;
 }
+
+
+img {
+
+    max-width:100%;
+
+    height:auto;
+
+}

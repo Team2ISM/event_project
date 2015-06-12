@@ -29,16 +29,22 @@ namespace Events.RuntimeCache
             return itemToSave;
         }
 
-        public void ClearCacheByRegion(string region)
+        public void ClearCacheByRegion(string r)
         {
-            foreach (var item in MemoryCache.Default)
-            {
-                if (item.Key.Contains(region))
+            ClearCacheHelper(
+                (string key) =>
                 {
-                    MemoryCache.Default.Remove(item.Key);
+                    return key.Contains(r);
+                });
+        }
 
-                }
-            }
+        public void ClearCacheByName(string name)
+        {
+            ClearCacheHelper(
+                (string key) =>
+                {
+                    return key.StartsWith(name);
+                });
         }
 
         public CacheItem ToCache<TValue>(string key, Func<TValue> function)
@@ -67,6 +73,18 @@ namespace Events.RuntimeCache
             if (cacheItem != null)
             {
                 MemoryCache.Default.Remove(cacheItem.Key);
+            }
+        }
+
+        void ClearCacheHelper(Func<string, bool> func)
+        {
+            foreach (var item in MemoryCache.Default)
+            {
+                if (func(item.Key))
+                {
+                    MemoryCache.Default.Remove(item.Key);
+
+                }
             }
         }
     }

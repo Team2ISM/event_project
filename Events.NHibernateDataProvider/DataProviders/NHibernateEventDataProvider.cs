@@ -14,23 +14,15 @@ namespace Events.NHibernateDataProvider.NHibernateCore
     public class NHibernateEventDataProvider : IEventDataProvider
     {
 
-        public IList<Event> GetList(int daysToEvent, string location, bool isForAdmin = false)
+        public IList<Event> GetList(int daysToEvent, string location)
         {
             using (ISession session = Helper.OpenSession())
             {
                 var endOfDay = DateTime.Now.Date.AddDays(1).AddTicks(-1);
-                if (isForAdmin)
-                {
-                    return session.CreateCriteria<Event>()
-                    .AddOrder(Order.Asc("Checked"))
-                    .AddOrder(Order.Desc("DateOfCreation")).List<Event>();
-                }
-
                 if (!String.IsNullOrEmpty(location))
                 {
                     session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
                 }
-
                 if (daysToEvent > 0)
                 {
                     session.EnableFilter("equalDate").SetParameter("nowaday", endOfDay).SetParameter("chosenDate", endOfDay.AddDays(daysToEvent - 1));
@@ -39,11 +31,20 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 {
                     session.EnableFilter("effectiveDate").SetParameter("asOfDate", endOfDay);
                 }
-
                 var criteria = session.CreateCriteria<Event>();
                 criteria.Add(Restrictions.Eq("Active", true));
                 criteria.AddOrder(Order.Asc("FromDate"));
                 return criteria.List<Event>();
+            }
+        }
+
+        public IList<Event> GetAllEvents()
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                return session.CreateCriteria<Event>()
+                        .AddOrder(Order.Asc("Checked"))
+                        .AddOrder(Order.Desc("DateOfCreation")).List<Event>();
             }
         }
 
@@ -87,7 +88,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-
         public EventStatuses ToggleStatus(string id, bool status)
         {
             EventStatuses result = EventStatuses.NotExist;
@@ -115,14 +115,13 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public int Create(Event model)
+        public void Create(Event model)
         {
             using (ISession session = Helper.OpenSession())
             {
                     session.Save(model);
                     session.Flush();
             }
-            return 0;
         }
 
         public void Update(Event model)

@@ -16,14 +16,14 @@ using Events.Business;
 using Events.Business.Interfaces;
 using Events.Business.Models;
 
-
 namespace Events.Business.Classes
 {
     public class UserManager : BaseManager
     {
         IUserDataProvider userDataProvider;
 
-        public string userName;
+        string userName;
+        SimpleCrypto.PBKDF2 crypto = new SimpleCrypto.PBKDF2();
 
         protected override string Name { get; set; }
 
@@ -69,7 +69,7 @@ namespace Events.Business.Classes
                 ( ) => {
                     return user;
                 });
-            ClearCacheByRegion();
+            ClearCache();
         }
 
         public void DeleteUser(User user)
@@ -77,7 +77,7 @@ namespace Events.Business.Classes
             userDataProvider.DeleteUser(user);
             RemoveFromCache("id:" + user.Id);
             RemoveFromCache("email:" + user.Email);
-            ClearCacheByRegion();            
+            ClearCache();            
         }
 
         public void UpdateUser(User user)
@@ -92,7 +92,7 @@ namespace Events.Business.Classes
                 ( ) => {
                     return user;
                 });
-            ClearCacheByRegion();          
+            ClearCache();          
         }
 
         public string GetFullName(string email)
@@ -102,11 +102,10 @@ namespace Events.Business.Classes
                 {
                     return userDataProvider.GetFullName(email);
                 });
-        }
+        }        
 
         public void ChangePassword(User user, string password)
-        {
-            var crypto = new SimpleCrypto.PBKDF2();
+        {            
             var encrPass = crypto.Compute(password);
 
             user.Password = encrPass;
@@ -117,8 +116,6 @@ namespace Events.Business.Classes
 
         public void RegisterUser(User user)
         {
-            var crypto = new SimpleCrypto.PBKDF2();
-
             var encrPass = crypto.Compute(user.Password);
 
             user.Password = encrPass;
@@ -128,11 +125,9 @@ namespace Events.Business.Classes
             CreateUser(user);
         }
 
-        public void ForgotPassword(User user)
+        public void SendNewPassword(User user)
         {
-            var crypto = new SimpleCrypto.PBKDF2();
-
-            string newPassword = Guid.NewGuid().ToString().Substring(0, 8); ;
+            string newPassword = Guid.NewGuid().ToString().Substring(0, 8);
 
             var encrPass = crypto.Compute(newPassword);
 
@@ -141,12 +136,24 @@ namespace Events.Business.Classes
 
             UpdateUser(user);
 
-            MailMessage msg = new MailMessage();
-
             string body = user.Name + ", ваш пароль: \n" + newPassword;
             string subject = "Новый пароль";
 
             EmailSender(user.Email, body, subject);
+        }
+
+        public bool isValid(string email, string password)
+        {
+            bool isValid = false;
+            User user = GetByEmail(email);
+            if (user != null)
+            {
+                if (user.Password == crypto.Compute(password, user.PasswordSalt))
+                {
+                    isValid = true;
+                }
+            }
+            return isValid;
         }
 
         public void EmailSender(string userEmail, string body, string subject)

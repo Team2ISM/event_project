@@ -22,33 +22,11 @@ using System.IO;
 
 namespace team2project.Controllers
 {
-    public abstract class MyBaseController : Controller
+    public class UserController : Controller
     {
-        protected string RenderPartialViewToString(string viewName, object model) {
-            if (string.IsNullOrEmpty(viewName))
-                viewName = ControllerContext.RouteData.GetRequiredString("action");
-
-            ViewData.Model = model;
-
-            using (StringWriter sw = new StringWriter()) {
-                ViewEngineResult viewResult = ViewEngines.Engines.FindPartialView(ControllerContext, viewName);
-                ViewContext viewContext = new ViewContext(ControllerContext, viewResult.View, ViewData, TempData, sw);
-                viewResult.View.Render(viewContext, sw);
-
-                return sw.GetStringBuilder().ToString();
-            }
-        }
-    }
-
-    public class UserController : MyBaseController
-    {
-        //
-        // GET: /User/
-
         UserManager userManager;
         EventManager eventManager;
         CitiesManager cityManager;
-
 
         public UserController(UserManager userManager, EventManager eventManager, CitiesManager citiesManager)
         {
@@ -65,23 +43,19 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
-            if (!string.IsNullOrEmpty(returnUrl))
+            if (User.Identity.IsAuthenticated)
             {
-                if (!User.IsInRole("Admin") && User.Identity.IsAuthenticated)
+                if (!User.IsInRole("Admin"))
                 {
                     return View("GenericError", ResponseMessages.AccessDenied);
                 }
-                else if (User.Identity.IsAuthenticated)
-                {
+                if (!string.IsNullOrEmpty(returnUrl))
+                {                    
                     return Redirect(returnUrl);
                 }
-                ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
-            }
-            
-            else if (User.Identity.IsAuthenticated)
-            {
                 return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
             }
+            ViewBag.ReturnUrl = Server.UrlEncode(returnUrl);
             return View();
         }
 
@@ -94,40 +68,21 @@ namespace team2project.Controllers
             }
 
             var user = userManager.GetByEmail(email);
-            if (user != null && isValid(email, password))
+            if (user != null && userManager.isValid(email, password))
             {
                 if (user.IsActive == true)
                 {
-                    FormsAuthentication.SetAuthCookie(user.Email, false);
-
-                    var city = cityManager.GetById(user.LocationId);
-                    string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (city != null ? city.Name : "Default");
-                    userData = HttpUtility.UrlEncode(userData);
-                    var json = JsonConvert.SerializeObject(userData);
-
-                    var userCookie = new HttpCookie("user", json);
-                    userCookie.Expires.AddDays(365);
-                    HttpContext.Response.SetCookie(userCookie);
-
+                    SignIn(user);
                     if (!string.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(Server.UrlDecode(returnUrl));
                     }
-                    else
-                    {
-                        return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
-                    }
+                    return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
                 }
-                else
-                {
-                    ViewBag.Mail = email;
-                    return View("UnconfirmedUser");
-                }
+                return View("UnconfirmedUser", AutoMapper.Mapper.Map<UserViewModel>(user));
             }
-            else
-            {
-                ModelState.AddModelError("", "Неправильный e-mail или пароль");
-            }
+
+            ModelState.AddModelError("", "Неправильный e-mail или пароль");
             return View();
         }
 
@@ -150,17 +105,7 @@ namespace team2project.Controllers
 
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
-
-            if (Request.Cookies["user"] != null)
-            {
-                var user = new HttpCookie("user")
-                {
-                    Expires = DateTime.Now.AddDays(-1),
-                    Value = null
-                };
-                Response.Cookies.Add(user);
-            }
+            SignOut();
             return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
         }
 
@@ -180,7 +125,7 @@ namespace team2project.Controllers
             var user = userManager.GetByEmail(email);
             if (user != null)
             {
-               userManager.ForgotPassword(user);
+               userManager.SendNewPassword(user);
             }
             return RedirectToAction("ThankYouPage", "User");
         }
@@ -193,12 +138,11 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Registration()
         {
-            ActionResult result = View();
             if (User.Identity.IsAuthenticated)
             {
-                result = RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
+                return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
             }
-            return result;
+            return View();
         }
 
         [HttpPost]
@@ -221,7 +165,7 @@ namespace team2project.Controllers
                     ModelState.AddModelError("", "Пользователь с такой почтой уже зарегистрирован");                   
                 }
             }
-            return View(new UserViewModel());
+            return View();
 
         }
 
@@ -232,16 +176,8 @@ namespace team2project.Controllers
             if (user != null && user.IsActive == false)
             {
                 user.IsActive = true;
-                userManager.UpdateUser(user);
-                FormsAuthentication.SetAuthCookie(user.Email, false);
-
-                string userData = HttpUtility.UrlEncode("Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (cityManager.GetById(user.LocationId)).Name);
-                var json = JsonConvert.SerializeObject(userData);
-
-                var userCookie = new HttpCookie("user", json);
-                userCookie.Expires.AddDays(365);
-                HttpContext.Response.SetCookie(userCookie);
-
+                userManager.UpdateUser(user);                
+                SignIn(user);
                 return RedirectToRoute("Welcome", "User");
             }
             return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
@@ -281,50 +217,34 @@ namespace team2project.Controllers
             return View();
         }
 
-        [Authorize]
-        [HttpGet]
-        public ActionResult MyPastEvents()
+        private void SignIn(User user)
         {
-            IList<Event> events = eventManager.GetAuthorPastEvents(User.Identity.Name);
-            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            foreach (var ev in eventsModels)
-            {
-                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
-            }
-            return View(eventsModels);
+            FormsAuthentication.SetAuthCookie(user.Email, false);
+
+            var city = cityManager.GetById(user.LocationId);
+            string userData = "Name:" + user.Name + ":Surname:" + user.Surname + ":Location:" + (city != null ? city.Name : "Default");
+            userData = HttpUtility.UrlEncode(userData);
+            var json = JsonConvert.SerializeObject(userData);
+
+            var userCookie = new HttpCookie("user", json);
+            userCookie.Expires.AddDays(365);
+            HttpContext.Response.SetCookie(userCookie);
         }
 
-        [Authorize]
-        [HttpGet]
-        public ActionResult MyFutureEvents()
+        private void SignOut()
         {
-            IList<Event> events = eventManager.GetAuthorFutureEvents(User.Identity.Name);
-            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            foreach (var ev in eventsModels)
-            {
-                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
-            }
-            return View(eventsModels);
-        }
+            FormsAuthentication.SignOut();
 
-        private bool isValid(string email, string password)
-        {
-            var crypto = new SimpleCrypto.PBKDF2();
-            bool isValid = false;
-
-            User user = userManager.GetByEmail(email);
-            if (user != null)
+            if (Request.Cookies["user"] != null)
             {
-                if (user.Password == crypto.Compute(password, user.PasswordSalt))
+                var user = new HttpCookie("user")
                 {
-                    isValid = true;
-                }
+                    Expires = DateTime.Now.AddDays(-1),
+                    Value = null
+                };
+                Response.Cookies.Add(user);
             }
-
-            return isValid;
         }
-
-
 
         private void SendActivationLink(UserViewModel user)
         {
@@ -334,7 +254,7 @@ namespace team2project.Controllers
             string body = user.Name + ", спасибо за регистрацию\n";
             body += "Для активации аккаунта перейдите по ссылке\n" + activationLink;
             string subject = "Подтверждение регистрации";
-            string newBody = RenderPartialViewToString("email", activationLink);
+            string newBody = this.RenderPartialViewToString("email", activationLink);
             userManager.EmailSender(user.Email, newBody, subject);
         }  
 

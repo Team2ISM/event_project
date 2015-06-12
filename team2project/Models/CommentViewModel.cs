@@ -5,24 +5,10 @@ namespace team2project.Models
 {
     public class CommentViewModel
     {
-        public CommentViewModel()
-        {
-            if (this.Id == null)
-            {
-                this.Id = Guid.NewGuid().ToString();
-            }
-
-            if (AuthorId == null)
-            {
-                AuthorId = "anon";
-            }
-        }
-
-        public CommentViewModel(string eventId)
+        public CommentViewModel(string eventId =  null)
         {
             this.Id = Guid.NewGuid().ToString();
             EventId = eventId;
-            AuthorId = "anon";
         }
 
         [ScaffoldColumn(false)]

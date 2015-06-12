@@ -36,7 +36,6 @@ namespace team2project.Controllers
                 return RedirectToRoute("Error404");
             }
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
-            
             foreach (var ev in list)
             {
                 ev.Location = cityManager.GetById(ev.LocationId).Name;
@@ -48,7 +47,6 @@ namespace team2project.Controllers
         public ActionResult Details(string id)
         {
             var evntModel = eventManager.GetById(id);
-
             if (evntModel == null || !evntModel.Active)
             {
                 return View("GenericError", ResponseMessages.EventNotFound);
@@ -144,6 +142,32 @@ namespace team2project.Controllers
             evntModel.Description = evntModel.Description.RemovePreTag();
             eventManager.Create(evntModel.Id, evntModel);
             return RedirectToRoute("EventDetails", new { id = evntModel.Id});
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult MyPastEvents()
+        {
+            IList<Event> events = eventManager.GetAuthorPastEvents(User.Identity.Name);
+            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
+            foreach (var ev in eventsModels)
+            {
+                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+            }
+            return View(eventsModels);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult MyFutureEvents()
+        {
+            IList<Event> events = eventManager.GetAuthorFutureEvents(User.Identity.Name);
+            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
+            foreach (var ev in eventsModels)
+            {
+                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+            }
+            return View(eventsModels);
         }
 
     }
