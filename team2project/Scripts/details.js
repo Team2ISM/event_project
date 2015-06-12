@@ -76,10 +76,17 @@ $("#subscribed").mouseover(
 
 $("#subscribers").on("click", function () {
     $("#subscribers_onhover").addClass("hover");
-    $("#sub_wrapper").show().css({"z-index":"1000000"}).next().addClass("overscreen");
-})
+    $("#sub_wrapper").show().css({ "z-index": "1000000" }).next().addClass("overscreen");
+});
 
-$("#sub_wrapper header span").on("click", function () {
+$("#sub_wrapper").on('click', function (e) {
+    var div = $("#sub_inner");
+    if (!div.is(e.target) // если клик был не по нашему блоку
+        && div.has(e.target).length === 0) { // и не по его дочерним элементам
+        $("#sub_wrapper").hide().next().removeClass("overscreen");
+    }
+});
+$("#sub_inner header span").on("click", function () {
     $("#sub_wrapper").hide().next().removeClass("overscreen");
 });
 
