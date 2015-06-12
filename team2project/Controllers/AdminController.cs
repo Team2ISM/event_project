@@ -68,8 +68,8 @@ namespace team2project.Controllers
                         Message = "Success: Activate Event",
                         State = JsonResultHelper.ResponseStatus.Success
                     };
-
                     break;
+
                 case EventStatuses.NotExist:
                     dataResult = new JsonResultHelper()
                          {
@@ -77,6 +77,7 @@ namespace team2project.Controllers
                              State = JsonResultHelper.ResponseStatus.Error
                          };
                     break;
+
                 case EventStatuses.WasToggled:
                     dataResult = new JsonResultHelper()
                     {
@@ -84,6 +85,7 @@ namespace team2project.Controllers
                         State = JsonResultHelper.ResponseStatus.Error
                     };
                     break;
+
             }
             return Json(dataResult);
         }
@@ -103,8 +105,8 @@ namespace team2project.Controllers
                         Message = "Success: Deactivate Event",
                         State = JsonResultHelper.ResponseStatus.Success
                     };
-
                     break;
+
                 case EventStatuses.NotExist:
                     dataResult = new JsonResultHelper()
                     {
@@ -112,6 +114,7 @@ namespace team2project.Controllers
                         State = JsonResultHelper.ResponseStatus.Error
                     };
                     break;
+
                 case EventStatuses.WasToggled:
                     dataResult = new JsonResultHelper()
                     {
@@ -119,6 +122,7 @@ namespace team2project.Controllers
                         State = JsonResultHelper.ResponseStatus.Error
                     };
                     break;
+
             }
             return Json(dataResult);
         }
@@ -135,8 +139,11 @@ namespace team2project.Controllers
                     State = JsonResultHelper.ResponseStatus.Error
                 });
             }
+
             commentManager.DeleteByEventId(id);
+
             manager.Delete(id);
+
             return Json(new JsonResultHelper()
             {
                 Data = null,
@@ -149,6 +156,7 @@ namespace team2project.Controllers
         void MarkAsSeen()
         {
             var list = manager.GetAllEvents();
+
             foreach (var elem in list)
             {
                 manager.MarkAsSeen(elem.Id);
