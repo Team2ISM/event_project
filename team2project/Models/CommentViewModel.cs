@@ -5,7 +5,12 @@ namespace team2project.Models
 {
     public class CommentViewModel
     {
-        public CommentViewModel(string eventId =  null)
+        public CommentViewModel()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
+        public CommentViewModel(string eventId)
         {
             this.Id = Guid.NewGuid().ToString();
             EventId = eventId;
