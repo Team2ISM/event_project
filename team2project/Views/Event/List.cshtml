@@ -1,11 +1,7 @@
 ﻿@{
     ViewBag.Title = "List";
     var About = " ";
-    var locationId = "null";
-    if (Model.Count > 0)
-    {
-        locationId = Model[0].LocationId.ToString();
-    }
+    var locationId = ViewBag.location;
 }
 
 @model System.Collections.Generic.List<team2project.Models.EventViewModel>

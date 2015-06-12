@@ -40,6 +40,7 @@ namespace team2project.Controllers
             {
                 ev.Location = cityManager.GetById(ev.LocationId).Name;
             }
+            ViewBag.location = location;
             return View("List", list);
         }
 
