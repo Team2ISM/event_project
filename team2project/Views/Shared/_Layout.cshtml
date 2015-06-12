@@ -21,6 +21,9 @@
     <script src="@Url.Content("~/Scripts/materialize/materialize.js")" type="text/javascript"> </script>
 </head>
 <body>
+    <noscript>
+        <div>Включи жс бля</div>
+    </noscript>
     <ul id="dropdown1" class="dropdown-content">
         @{
             if (!User.Identity.IsAuthenticated)
