@@ -7,6 +7,7 @@ using team2project.Helpers;
 using System.Runtime.Remoting.Messaging;
 using System.Threading;
 using Events.Business.Helpers;
+using System.Threading.Tasks;
 
 namespace team2project.Controllers
 {
@@ -41,7 +42,7 @@ namespace team2project.Controllers
                 Event.Location = cityManager.GetById(Event.LocationId).Name;
             }
 
-            new Thread(() => MarkAsSeen()).Start();
+            Task.Factory.StartNew(() => MarkAsSeen());
 
             return Json(
                         new JsonResultHelper()
@@ -64,7 +65,6 @@ namespace team2project.Controllers
 
                     dataResult = new JsonResultHelper()
                     {
-                        Data = null,
                         Message = "Success: Activate Event",
                         State = JsonResultHelper.ResponseStatus.Success
                     };
@@ -144,6 +144,7 @@ namespace team2project.Controllers
                 State = JsonResultHelper.ResponseStatus.Success
             });
         }
+
 
         void MarkAsSeen()
         {
