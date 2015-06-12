@@ -5,7 +5,12 @@ namespace team2project.Models
 {
     public class CommentViewModel
     {
-        public CommentViewModel(string eventId =  null)
+        public CommentViewModel()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
+        public CommentViewModel(string eventId)
         {
             this.Id = Guid.NewGuid().ToString();
             EventId = eventId;
@@ -18,7 +23,7 @@ namespace team2project.Models
         public string EventId { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        [StringLength(200)]
+        [StringLength(100)]
         [DataType(DataType.Text)]
         public string AuthorName { get; set; }
 
