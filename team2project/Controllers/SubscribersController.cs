@@ -35,7 +35,7 @@ namespace team2project.Controllers
 
         public JsonResult GetSubscribers(string id)
         {
-            return Json(Manager.GetAllSubscribers(id));
+            return Json(AutoMapper.Mapper.Map<List<Subscriber>>(Manager.GetAllSubscribers(id)));
         }
 
         public JsonResult Subscribe(string id)
@@ -44,7 +44,7 @@ namespace team2project.Controllers
             {
                 return Json(false);
             }
-            var user = UserManager.GetByEmail(User.Identity.Name);      
+            var user = UserManager.GetByEmail(User.Identity.Name);
             Manager.SubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
         }
@@ -67,7 +67,7 @@ namespace team2project.Controllers
                 return Json(false);
             }
             var user = UserManager.GetByEmail(User.Identity.Name);
-            return Json(Manager.IsSubscribed(new Subscribing(id, user.Id)));      
+            return Json(Manager.IsSubscribed(new Subscribing(id, user.Id)));
         }
     }
 }

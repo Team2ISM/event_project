@@ -13,21 +13,30 @@ namespace Events.Business.Classes
     {
         private ISubscribersDataProvider dataProvider;
 
+        UserManager userManager;
+
         protected override string Name { get; set; }
 
-        public SubscribersManager(ISubscribersDataProvider dataProvider, ICacheManager cacheManager)
+        public SubscribersManager(ISubscribersDataProvider dataProvider, ICacheManager cacheManager, UserManager userManager)
         {
             Name = "Subsribers";
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
+            this.userManager = userManager;
         }
 
-        public IList<Subscriber> GetAllSubscribers(string eventId)
+        public IList<User> GetAllSubscribers(string eventId)
         {
-            return FromCache<IList<Subscriber>>(eventId,
+            return FromCache<IList<User>>(eventId,
                 () =>
                 {
-                    return dataProvider.GetAllSubscribers(eventId);
+                    var listSubscribings = dataProvider.GetAllSubscribers(eventId);
+                    var listSuscribers = new List<User>();
+                    foreach (var subscribing in listSubscribings)
+                    {
+                        listSuscribers.Add(userManager.GetById(subscribing.UserId));
+                    }
+                    return listSuscribers;
                 });
         }
 

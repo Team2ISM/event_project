@@ -7,7 +7,7 @@ namespace Events.Business.Interfaces
     {
         int GetCount(string EventId);
 
-        IList<Subscriber> GetAllSubscribers(string EventId);
+        IList<Subscribing> GetAllSubscribers(string EventId);
 
         void SubscribeUser(Subscribing row);
 
