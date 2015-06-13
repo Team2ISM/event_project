@@ -24,37 +24,31 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public User GetById(string id)
         {
-            User Model;
             using (ISession session = Helper.OpenSession())
             {
-                Model = session.Get<User>(id);
+                return session.Get<User>(id);
             }
-            return Model;
         }
 
         public User GetByMail(string email)
         {
-            User Model;
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria(typeof(User));
                 criteria.Add(Restrictions.Eq("Email", email));
-                Model = criteria.UniqueResult<User>();
+                return criteria.UniqueResult<User>();
             }
-            return Model;
         }
 
         public string GetFullName(string email)
         {
-            string name;
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria(typeof(User));
                 criteria.Add(Restrictions.Eq("Email", email));
                 User Model = criteria.UniqueResult<User>();
-                name = Model.Name + " " + Model.Surname;
+                return Model.Name + " " + Model.Surname;
             }
-            return name;
         }
 
         public void CreateUser(User user)
@@ -62,7 +56,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             using (ISession session = Helper.OpenSession())
             {
                 session.Save(user);
-                session.Flush();
             }
         }
 
@@ -80,7 +73,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             using (ISession session = Helper.OpenSession())
             {
                 session.Update(user);
-                session.Flush();
             }
         }
     }

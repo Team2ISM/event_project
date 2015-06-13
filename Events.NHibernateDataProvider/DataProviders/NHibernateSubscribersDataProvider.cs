@@ -14,56 +14,52 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateSubscribersDataProvider : ISubscribersDataProvider
     {
-
-        public int GetCount(string EventId)
+        public int GetCount(string eventId)
         {
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria(typeof(Subscribing));
-                criteria.Add(Restrictions.Eq("EventId", EventId));
+                criteria.Add(Restrictions.Eq("EventId", eventId));
                 var list = criteria.List<Subscribing>();
                 return list.Count;
             }
-
         }
-        public IList<Subscriber> GetAllSubscribers(string EventId)
+
+        public IList<Subscribing> GetAllSubscribers(string eventId)
         {
-            var result = new List<Subscriber>();
-            var userProvider = new NHibernateUserDataProvider();
             using (ISession session = Helper.OpenSession())
             {
                 var criteria = session.CreateCriteria(typeof(Subscribing));
-                criteria.Add(Restrictions.Eq("EventId", EventId));
-                var list = criteria.List<Subscribing>();
-                foreach (var item in list)
-                {
-                    result.Add(AutoMapper.Mapper.Map<Subscriber>(userProvider.GetById(item.UserId)));
-                }
+                criteria.Add(Restrictions.Eq("EventId", eventId));
+                return criteria.List<Subscribing>();
             }
-            return result;
         }
 
 
         public void SubscribeUser(Subscribing row)
         {
-            if (IsSubscribed(row)) return;
-            using (ISession session = Helper.OpenSession())
+            if (!IsSubscribed(row))
             {
-                session.Save(row);
+                using (ISession session = Helper.OpenSession())
+                {
+                    session.Save(row);
+                }
             }
         }
 
         public void UnsubscribeUser(Subscribing row)
         {
-            if (!IsSubscribed(row)) return;
-            using (ISession session = Helper.OpenSession())
+            if (IsSubscribed(row))
             {
-                var criteria = session.CreateCriteria<Subscribing>();
-                criteria.Add(Restrictions.Eq("EventId", row.EventId));
-                criteria.Add(Restrictions.Eq("UserId", row.UserId));
-                var rowForDeleting = criteria.List<Subscribing>()[0];
-                session.Delete(rowForDeleting);
-                session.Flush();
+                using (ISession session = Helper.OpenSession())
+                {
+                    var criteria = session.CreateCriteria<Subscribing>();
+                    criteria.Add(Restrictions.Eq("EventId", row.EventId));
+                    criteria.Add(Restrictions.Eq("UserId", row.UserId));
+                    var rowForDeleting = criteria.List<Subscribing>()[0];
+                    session.Delete(rowForDeleting);
+                    session.Flush();
+                }
             }
         }
 
