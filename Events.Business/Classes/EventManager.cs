@@ -38,17 +38,15 @@ namespace Events.Business.Classes
         {
             int? days = getDaysCount(period);
 
-            if (days == null)
+            if (!days.HasValue)
             {
                 return null;
             }
 
-            int daysToEvent = (int)days;
-
             return FromCache<IList<Event>>("list" + period + "-" + locationId,
                 () =>
                 {
-                    return dataProvider.GetList(daysToEvent, locationId);
+                    return dataProvider.GetList(days.Value, locationId);
                 });
         }
 
