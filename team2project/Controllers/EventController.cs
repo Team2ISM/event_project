@@ -141,7 +141,7 @@ namespace team2project.Controllers
             evntModel.LocationId = cityManager.GetByName(evnt.Location).Id;
             evntModel.AuthorId = User.Identity.Name;
             evntModel.Description = evntModel.Description.RemovePreTag();
-            eventManager.Create(evntModel.Id, evntModel);
+            eventManager.Create(evntModel);
             return RedirectToRoute("EventDetails", new { id = evntModel.Id});
         }
 

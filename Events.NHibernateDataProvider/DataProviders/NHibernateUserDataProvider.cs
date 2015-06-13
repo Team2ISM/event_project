@@ -17,8 +17,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria(typeof(User));
-                return criteria.List<User>();
+                return session.CreateCriteria(typeof(User)).List<User>();
             }
         }
 

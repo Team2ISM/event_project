@@ -52,39 +52,37 @@ namespace Events.Business.Classes
                 });
         }
 
-        public void Create(string key, Event model)
+        public void Create(Event model)
         {
             model.DateOfCreation = DateTime.Now;
             dataProvider.Create(model);
-            ToCache<Event>(key,
+            ClearCache();
+            ToCache<Event>(model.Id,
                 () =>
                 {
                     return model;
                 });
-            ClearCache();
         }
 
         public void Update(Event model)
         {
             model.Checked = false;
             dataProvider.Update(model);
-            RemoveFromCache(model.Id);
+            ClearCache();
             ToCache<Event>(model.Id,
                 () =>
                 {
                     return model;
                 });
-            ClearCache();
         }
 
         public Event GetById(string id)
         {
-            var evntModel = cacheManager.FromCache<Event>(id,
+            return cacheManager.FromCache<Event>(id,
                  () =>
                  {
                      return dataProvider.GetById(id);
                  });
-            return evntModel;
         }
 
         public IList<Event> GetAuthorPastEvents(string email)
@@ -110,7 +108,6 @@ namespace Events.Business.Classes
             EventStatuses result = dataProvider.ToggleStatus(id, false);
             if (result == EventStatuses.ToggleOK)
             {
-                RemoveFromCache(id);
                 ClearCache();
             }
             return result;
@@ -121,7 +118,6 @@ namespace Events.Business.Classes
             EventStatuses result = dataProvider.ToggleStatus(id, true);
             if (result == EventStatuses.ToggleOK)
             {
-                RemoveFromCache(id);
                 ClearCache();
             }
             return result;
@@ -130,7 +126,6 @@ namespace Events.Business.Classes
         public void MarkAsSeen(string id)
         {
             dataProvider.MarkAsSeen(id);
-            RemoveFromCache(id);
             ClearCache();
         }
 
@@ -138,7 +133,6 @@ namespace Events.Business.Classes
         {
             commentManager.DeleteByEventId(id);
             dataProvider.Delete(dataProvider.GetById(id));
-            RemoveFromCache(id);
             ClearCache();
         }
 
