@@ -20,12 +20,10 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public Comment GetById(string id)
         {
-            Comment Model;
             using (ISession session = Helper.OpenSession())
             {
-                Model = session.Get<Comment>(id);
+                return session.Get<Comment>(id);
             }
-            return Model;
         }
 
         public IList<Comment> GetByEventId(string eventId)
@@ -85,8 +83,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 {
                     var criteria = session.CreateCriteria<Comment>();
                     criteria.Add(Expression.Eq("EventId", id));
-                    var list = criteria.List<Comment>();
-                    foreach(var comment in list)
+                    foreach (var comment in criteria.List<Comment>())
                     {
                         session.Delete(comment);
                     }

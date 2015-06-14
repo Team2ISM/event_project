@@ -61,8 +61,7 @@ table td
 table a
 {
 	display: inline-block;
-
-overflow: hidden;
+    overflow: hidden;
 }
 .seen {
     border: none;
@@ -81,8 +80,8 @@ td a:hover, td a:active {
 
 #TdDell
 {
-    padding: 0 1rem;
-    width: 145px;
+    /*padding: 0 1rem;*/
+    /*width: 145px;*/
 }
 
 .text-white a
@@ -92,14 +91,14 @@ td a:hover, td a:active {
 
 #TdUpdate
 {
-    width: 200px;
+    /*width: 200px;*/
 }
 
 #TdUpdate a
 {
-    color: white;
+    /*color: white;
     padding: 0 1rem;
-    width: 145px;
+    width: 145px;*/
 }
 .text-white a
 {
@@ -156,6 +155,22 @@ td a:hover, td a:active {
 .day {
     font-family: Roboto;
     font-size:2em;
+}
+
+.list-events-img {
+    width:18%;
+    height: 100%;
+    text-align: center;
+}
+
+.event-img {
+    width:100%;
+    height:100%;
+}
+
+.event-small-img {
+    width:100%;
+    height: 100%;
 }
 
 .list-events-content {

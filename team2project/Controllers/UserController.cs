@@ -69,7 +69,7 @@ namespace team2project.Controllers
             }
 
             var user = userManager.GetByEmail(email);
-            if (user != null && userManager.isValid(email, password))
+            if (user != null && userManager.ValidatePassword(email, password))
             {
                 if (user.IsActive == true)
                 {
