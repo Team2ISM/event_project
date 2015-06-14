@@ -12,62 +12,62 @@ namespace team2project.Controllers
 {
     public class SubscribersController : Controller
     {
-        SubscribersManager Manager;
-        UserManager UserManager;
+        SubscribersManager manager;
+        UserManager userManager;
 
         public SubscribersController(SubscribersManager subscribersManager, UserManager userManager)
         {
-            Manager = subscribersManager;
-            UserManager = userManager;
+            this.manager = subscribersManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]
-        public ActionResult Index(string EventId)
+        public ActionResult Index(string id)
         {
-            return View(Manager.GetCount(EventId));
+            return View(manager.GetCount(id));
         }
 
         [HttpPost]
-        public JsonResult GetCount(string id)
+        public ActionResult GetCount(string id)
         {
-            return Json(Manager.GetCount(id));
+            return Json(manager.GetCount(id));
         }
 
-        public JsonResult GetSubscribers(string id)
+        public ActionResult GetSubscribers(string id)
         {
-            return Json(AutoMapper.Mapper.Map<List<Subscriber>>(Manager.GetAllSubscribers(id)));
+            return Json(AutoMapper.Mapper.Map<List<Subscriber>>(manager.GetAllSubscribers(id)));
         }
 
-        public JsonResult Subscribe(string id)
+        public ActionResult Subscribe(string id)
         {
             if (!User.Identity.IsAuthenticated)
             {
                 return Json(false);
             }
-            var user = UserManager.GetByEmail(User.Identity.Name);
-            Manager.SubscribeUser(new Subscribing(id, user.Id));
+            var user = userManager.GetByEmail(User.Identity.Name);
+            manager.SubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
         }
 
-        public JsonResult Unsubscribe(string id)
+        public ActionResult Unsubscribe(string id)
         {
             if (!User.Identity.IsAuthenticated)
             {
                 return Json(false);
             }
-            var user = UserManager.GetByEmail(User.Identity.Name);
-            Manager.UnsubscribeUser(new Subscribing(id, user.Id));
+            var user = userManager.GetByEmail(User.Identity.Name);
+            manager.UnsubscribeUser(new Subscribing(id, user.Id));
             return Json(true);
         }
 
-        public JsonResult IsSubscribed(string id)
+        public ActionResult IsSubscribed(string id)
         {
-            if (String.IsNullOrEmpty(User.Identity.Name))
+            if (!User.Identity.IsAuthenticated)
             {
                 return Json(false);
             }
-            var user = UserManager.GetByEmail(User.Identity.Name);
-            return Json(Manager.IsSubscribed(new Subscribing(id, user.Id)));
+            var user = userManager.GetByEmail(User.Identity.Name);
+            return Json(manager.IsSubscribed(new Subscribing(id, user.Id)));
         }
     }
 }
