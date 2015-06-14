@@ -63,14 +63,11 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+            if (!ModelState.IsValid) return View();
 
-            var user = userManager.GetByEmail(email);
-            if (user != null && userManager.ValidatePassword(email, password))
+            if (userManager.ValidatePassword(email, password) == true)
             {
+                var user = userManager.GetByEmail(email);
                 if (user.IsActive == true)
                 {
                     SignIn(user);
@@ -91,7 +88,7 @@ namespace team2project.Controllers
         public ActionResult UnconfirmedUser(string email)
         {
             var user = userManager.GetByEmail(email);
-            if (user != null && user.IsActive == false)
+            if (user != null && !user.IsActive)
             {
                 SendActivationLink(AutoMapper.Mapper.Map<UserViewModel>(user));
                 return RedirectToRoute("ConfirmRegistration");
@@ -200,13 +197,11 @@ namespace team2project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var crypto = new SimpleCrypto.PBKDF2();
+                var email = User.Identity.Name;                
 
-                var mail = User.Identity.Name;
-                User user = userManager.GetByEmail(mail);
-
-                if (user.Password == crypto.Compute(oldPassword, user.PasswordSalt))
+                if (userManager.ValidatePassword(email, oldPassword) == true)
                 {
+                    User user = userManager.GetByEmail(email);
                     userManager.ChangePassword(user, password);
                     ViewBag.PasswordSuccess = "Пароль изменен";
                 }
