@@ -44,17 +44,17 @@ namespace Events.NHibernateDataProvider.DataProviders
             return result;
         }
 
-        public IsReminded GetIsRemindedModel(string eventId)
+        public RemindModel GetIsRemindedModel(string eventId)
         {
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria(typeof(IsReminded));
+                var criteria = session.CreateCriteria(typeof(RemindModel));
                 criteria.Add(Restrictions.Eq("EventId", eventId));
-                return criteria.UniqueResult<IsReminded>();
+                return criteria.UniqueResult<RemindModel>();
             }
         }
 
-        public void SaveOrUpdateIsRemindedModel(IsReminded model)
+        public void SaveOrUpdateIsRemindedModel(RemindModel model)
         {
             using (ISession session = Helper.OpenSession())
             {

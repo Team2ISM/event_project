@@ -15,8 +15,6 @@ namespace Events.EmailReminder
 
         private EmailRemindSender sender;
 
-        string HostName;
-
         public enum Periods { Day = 1, Hour = 2 };
 
         public EmailReminderJob(RemindManager manager)
@@ -39,10 +37,10 @@ namespace Events.EmailReminder
         private void RemindSubscribers(Event evnt, DateTime date)
         {
             IList<User> userList = manager.GetUsersToRemind(evnt.Id);
-            IsReminded model = manager.GetIsRemindedModel(evnt.Id);
+            RemindModel model = manager.GetIsRemindedModel(evnt.Id);
             if (model == null)
             {
-                model = new IsReminded()
+                model = new RemindModel()
                 {
                     EventId = evnt.Id
                 };

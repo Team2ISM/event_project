@@ -4,7 +4,7 @@
  assembly="Events.NHibernateDataProvider"
  namespace="Events.Business.Models"
  auto-import="true">
-  <class name="IsReminded, Events.Business" table="IsReminded">
+  <class name="RemindModel, Events.Business" table="IsReminded">
 
     <id name="Id" access="property" type="string">
       <generator class="assigned"></generator>

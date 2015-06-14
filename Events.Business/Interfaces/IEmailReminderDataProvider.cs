@@ -10,8 +10,8 @@ namespace Events.Business.Interfaces
 
         IList<User> GetUsersToRemind(string EventId);
 
-        IsReminded GetIsRemindedModel(string eventId);
+        RemindModel GetIsRemindedModel(string eventId);
 
-        void SaveOrUpdateIsRemindedModel(IsReminded model);
+        void SaveOrUpdateIsRemindedModel(RemindModel model);
     }
 }

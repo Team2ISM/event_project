@@ -39,20 +39,20 @@ namespace Events.Business.Classes
                 });
         }
 
-        public IsReminded GetIsRemindedModel(string eventId)
+        public RemindModel GetIsRemindedModel(string eventId)
         {
-            return FromCache<IsReminded>("RemindModel:" + eventId,
+            return FromCache<RemindModel>("RemindModel:" + eventId,
                 () =>
                 {
                     return dataProvider.GetIsRemindedModel(eventId);
                 });
         }
 
-        public void SaveOrUpdateIsRemindedModel(IsReminded model)
+        public void SaveOrUpdateIsRemindedModel(RemindModel model)
         {
             dataProvider.SaveOrUpdateIsRemindedModel(model);
             ClearCache();
-            ToCache<IsReminded>("RemindModel:" + model.EventId,
+            ToCache<RemindModel>("RemindModel:" + model.EventId,
                 () =>
                 {
                     return model;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Events.Business.Models
 {
-    public class IsReminded
+    public class RemindModel
     {
         public virtual string Id { get; set; }
 
@@ -16,7 +16,7 @@ namespace Events.Business.Models
 
         public virtual bool Hour { get; set; }
 
-        public IsReminded()
+        public RemindModel()
         {
             Id = Guid.NewGuid().ToString();
         }
