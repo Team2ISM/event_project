@@ -61,5 +61,8 @@ namespace team2project.Models
         public DateTime? DateOfCreation { get; set; }
 
         public IList<Comment> Comments { get; set; }
+
+        [RegularExpression(@"^https?://(?:[a-z\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpe?g|gif|png)(?:\?([^#]*))?(?:#(.*))?$", ErrorMessage = "Некорректный адрес")]
+        public string Image { get; set; }
     }
 }

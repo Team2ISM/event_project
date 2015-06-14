@@ -26,5 +26,7 @@ namespace Events.Business.Models
         public virtual DateTime? DateOfCreation { get; set; }
 
         public virtual string AuthorId { get; set; }
+
+        public virtual string Image { get; set; }
     }
 }

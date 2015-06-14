@@ -50,6 +50,12 @@
             @Html.ValidationMessageFor(m => m.Description)
         </div>
 
+        <div class="input-field col s12 m12 l12">
+            @Html.LabelFor(m => m.Image, "Изображение")
+            @Html.EditorFor(m => m.Image)
+            @Html.ValidationMessageFor(m => m.Image)
+        </div>
+        
         <div class="row">
             <div class="input-field col s12 m6">
                 @Html.LabelFor(m => m.FromDate, "От")
