@@ -19,6 +19,7 @@ using Events.Business.Helpers;
 using team2project.Models;
 using Newtonsoft.Json;
 using System.IO;
+using team2project.Properties;
 
 namespace team2project.Controllers
 {
@@ -47,7 +48,7 @@ namespace team2project.Controllers
             {
                 if (!User.IsInRole("Admin"))
                 {
-                    return View("GenericError", ResponseMessages.AccessDenied);
+                    return View("GenericError", model: Resources.ResponseAccessDenied);
                 }
                 if (!string.IsNullOrEmpty(returnUrl))
                 {                    
