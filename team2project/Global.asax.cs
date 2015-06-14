@@ -10,6 +10,7 @@ using System.Web.Routing;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Context;
+using Events.Business.Helpers;
 
 namespace team2project
 {
@@ -29,9 +30,15 @@ namespace team2project
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        protected void Application_BeginRequest()
+        protected void Application_BeginRequest(Object source, EventArgs e)
         {
             MyCultureConfig.SetCulture("ru");
-        }
+
+            if(string.IsNullOrEmpty(EnvironmentInfo.Host))
+            {
+                HttpApplication app = (HttpApplication)source;
+                EnvironmentInfo.Host = FirstRequestInitialisation.Initialise(app.Context);
+            }
+        }    
     }
 }

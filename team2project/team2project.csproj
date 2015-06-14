@@ -259,6 +259,7 @@
     <Compile Include="App_Start\CultureConfig.cs" />
     <Compile Include="App_Start\CustomWebViewPage.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\FirstInitialize.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
