@@ -54,7 +54,11 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                session.Save(user);
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    session.Save(user);
+                    transaction.Commit();
+                }                
             }
         }
 
