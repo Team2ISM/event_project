@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataProviders\NHibenateEmailReminderDataProvider.cs" />
     <Compile Include="DataProviders\NHibernateCitiesDataProvider.cs" />
     <Compile Include="DataProviders\NHibernateCommentDataProvider.cs" />
     <Compile Include="DataProviders\NHibernateEventDataProvider.cs" />
@@ -95,6 +96,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NHibernateCore\Mappings\Subscribing.hbm.xml">
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NHibernateCore\Mappings\IsReminded.hbm.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="Scripts\dbo.Role.sql" />
     <Content Include="Scripts\dbo.UserRole.sql" />

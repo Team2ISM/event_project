@@ -36,6 +36,8 @@
     <filter name ="equalLocation" condition ="LocationId = :chosenLocation"/>
     
     <filter name ="equalDate" condition ="ToDate >= :nowaday AND :chosenDate >= FromDate"/>
+
+    <filter name="eventsToRemind" condition ="FromDate >= :startDate AND  :endDate >= FromDate"></filter>
   </class>
   
   
@@ -52,5 +54,10 @@
     <filter-param name ="chosenDate" type ="System.DateTime"/>
     <filter-param name ="nowaday" type ="System.DateTime"/>
   </filter-def>
-  
+
+  <filter-def name = "eventsToRemind">
+    <filter-param name ="startDate" type ="System.DateTime"/>
+    <filter-param name ="endDate" type ="System.DateTime"/>
+  </filter-def>
+
 </hibernate-mapping>

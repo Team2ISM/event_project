@@ -2,6 +2,7 @@
 using System.Net.Mail;
 using System.Net.Mime;
 using Events.Business;
+using Events.Business.Helpers;
 
 namespace Events.EmailReminder
 {
@@ -49,7 +50,7 @@ namespace Events.EmailReminder
                             " </tr>" +
                             "</table>" +
                             "</td>";
-            return MailTemplates.HeadOfEmail.ToString() + body + MailTemplates.FooterOfEmail.ToString();
+            return body;
         }
     }
 }

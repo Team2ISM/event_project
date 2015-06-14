@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping
+ xmlns="urn:nhibernate-mapping-2.2"
+ assembly="Events.NHibernateDataProvider"
+ namespace="Events.Business.Models"
+ auto-import="true">
+  <class name="IsReminded, Events.Business" table="IsReminded">
+
+    <id name="Id" access="property" type="string">
+      <generator class="assigned"></generator>
+    </id>
+
+    <property name="EventId" access="property" type="string"></property>
+
+    <property name="Hour" access="property" type="bool"></property>
+
+    <property name="Day" access="property" type="bool"></property>
+
+  </class>
+</hibernate-mapping>
