@@ -94,9 +94,9 @@ namespace team2project.Controllers
             if (user != null && user.IsActive == false)
             {
                 SendActivationLink(AutoMapper.Mapper.Map<UserViewModel>(user));
-                return RedirectToAction("ConfirmRegistration", "User");
+                return RedirectToRoute("ConfirmRegistration");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToRoute("Home");
         }
 
         public ActionResult ConfirmRegistration()
@@ -128,7 +128,7 @@ namespace team2project.Controllers
             {
                userManager.SendNewPassword(user);
             }
-            return RedirectToAction("ThankYouPage", "User");
+            return RedirectToRoute("ThankYouPage");
         }
 
         public ActionResult ThankYouPage()
@@ -159,7 +159,7 @@ namespace team2project.Controllers
                     userManager.RegisterUser(mappedUser);
                     SendActivationLink(user);
 
-                    return RedirectToAction("ConfirmRegistration", "User");
+                    return RedirectToRoute("ConfirmRegistration");
                 }
                 else
                 {
@@ -179,7 +179,7 @@ namespace team2project.Controllers
                 user.IsActive = true;
                 userManager.UpdateUser(user);                
                 SignIn(user);
-                return RedirectToRoute("Welcome", "User");
+                return RedirectToRoute("Welcome");
             }
             return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
         }
