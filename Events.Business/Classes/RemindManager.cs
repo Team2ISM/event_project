@@ -10,7 +10,7 @@ namespace Events.Business.Classes
 {
     public class RemindManager : BaseManager
     {
-        IEmailReminderDataProvider dataProvider;
+        protected IEmailReminderDataProvider dataProvider;
 
         protected override string Name { get; set; }
 
