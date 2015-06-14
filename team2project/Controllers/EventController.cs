@@ -36,10 +36,7 @@ namespace team2project.Controllers
                 return RedirectToRoute("Error404");
             }
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
-            foreach (var ev in list)
-            {
-                ev.Location = cityManager.GetById(ev.LocationId).Name;
-            }
+            PrepareEventsToView(ref list);
             ViewBag.location = location;
             return View("List", list);
         }
@@ -93,14 +90,12 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Update(EventViewModel evnt)
         {
+            if (!ModelState.IsValid) return View("Create", evnt);
+
             if (evnt.AuthorId != User.Identity.Name)
             {
                 return View("GenericError", model: Resources.ResponseEditingNotAllowedDueToWrongUser);
-            }
-            if (!ModelState.IsValid)
-            {
-                return View("Create", evnt);
-            }
+            }            
             evnt.AuthorId = User.Identity.Name;
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             if (!String.IsNullOrEmpty(evnt.Location))
@@ -135,10 +130,8 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Create(EventViewModel evnt)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(evnt);
-            }
+            if (!ModelState.IsValid) return View(evnt);
+
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             evntModel.LocationId = cityManager.GetByName(evnt.Location).Id;
             evntModel.AuthorId = User.Identity.Name;
@@ -153,10 +146,7 @@ namespace team2project.Controllers
         {
             IList<Event> events = eventManager.GetAuthorPastEvents(User.Identity.Name);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            foreach (var ev in eventsModels)
-            {
-                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
-            }
+            PrepareEventsToView(ref eventsModels);
             return View(eventsModels);
         }
 
@@ -166,12 +156,16 @@ namespace team2project.Controllers
         {
             IList<Event> events = eventManager.GetAuthorFutureEvents(User.Identity.Name);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
+            PrepareEventsToView(ref eventsModels);
+            return View(eventsModels);
+        }
+
+        private void PrepareEventsToView(ref List<EventViewModel> eventsModels)
+        {
             foreach (var ev in eventsModels)
             {
                 ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
             }
-            return View(eventsModels);
         }
-
     }
 }

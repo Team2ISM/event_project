@@ -51,11 +51,11 @@
                                     @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
                                 </span>
                                 <p>
-                                    @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
+                                    @if (!String.IsNullOrEmpty(evnt.TextDescription) && evnt.TextDescription.Length >= 300)
                                 {
                                     About = "Подробнее...";
                                 }
-                                    @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
+                                    @Html.RouteLink((!String.IsNullOrEmpty(evnt.TextDescription) ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
                                     @{About = " ";}
                                 </p>
                             </div>
