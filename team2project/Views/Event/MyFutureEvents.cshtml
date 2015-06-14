@@ -1,6 +1,6 @@
 ﻿@model System.Collections.Generic.List<team2project.Models.EventViewModel>
-
 @{
+    var currentURL = Request.Url;
     ViewBag.Title = "Текущие/будущие события";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var About = " ";
@@ -37,7 +37,7 @@
                                 @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
                             </h5>
                             <div class="list-events-links">
-                                @Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light dark-blue-grey white-text", @id = "TdUpdate"})
+                                @Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id, returnUrl = @currentURL }, new { @class = "btn waves-effect waves-light dark-blue-grey white-text", @id = "TdUpdate"})
                                 <button id="TdDell" class="btn waves-effect waves-light white-text red" onclick="deleteEvent('@evnt.Id')">Удалить</button>
                             </div>                         
                             <span class="list-events-location">

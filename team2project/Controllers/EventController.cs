@@ -60,15 +60,16 @@ namespace team2project.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Create()
+        public ActionResult Create(string returnUrl)
         {
             var evnt = new EventViewModel();
+            ViewBag.returnUrl = (String.IsNullOrEmpty(returnUrl)) ? "/events/all" : returnUrl;
             return View(evnt);
         }
 
         [HttpGet]
         [Authorize]
-        public ActionResult Update(string id)
+        public ActionResult Update(string id, string returnUrl)
         {
             var evntModel = eventManager.GetById(id);
             if (evntModel == null)
@@ -84,6 +85,7 @@ namespace team2project.Controllers
                 return View("GenericError", ResponseMessages.EditingNotAllowedDueToWrongUser);
             }
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
+            ViewBag.returnUrl = (String.IsNullOrEmpty(returnUrl)) ? "/events/all" : returnUrl;
             return View("Create", evnt);
         }
 
