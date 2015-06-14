@@ -15,10 +15,10 @@
 <div class="container">
     <h2 class="center blue-grey-text">Прошедшие события</h2>
     <div class="width80">
- @Html.RouteLink("Текущие/будущие события", "FutureEvents", null, new { Class = "blue-grey-text" })
+        @Html.RouteLink("Текущие/будущие события", "FutureEvents", null, new { Class = "blue-grey-text" })
     </div>
-<table class="striped width80 centered" >
-        
+    <table class="striped width80 centered">
+
         <tbody>
             @foreach (var evnt in Model)
             {
@@ -31,37 +31,68 @@
                             @CheckDateIfNull(evnt.FromDate, "dd")
                         </div>
                     </td>
-                    <td>                        
-                        <div class="list-events-content">
-                            <h5 class="blue-grey-text">
-                                @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
-                            </h5>
-                            <div class="list-events-links">
-                                @*Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light dark-blue-grey white-text", @id = "TdUpdate"})*@
-                                <button id="TdDell" class="btn waves-effect waves-light white-text red" onclick="deleteEvent('@evnt.Id')">Удалить</button>
-                            </div>                         
-                            <span class="list-events-location">
-                                @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
-                                @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
-                            </span>
-                            <p>
-                                @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
+                    @if (evnt.Image != null)
+                    {
+                        <td class="list-events-img">
+                            <div class="event-small-img">
+                                @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
+                            </div>
+                        </td>
+                        <td>
+                            <div class="list-events-content">
+                                <h5 class="blue-grey-text">
+                                    @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
+                                </h5>
+                                <div class="list-events-links">                                    
+                                    <button id="TdDell" class="btn waves-effect waves-light white-text red" onclick="deleteEvent('@evnt.Id')">Удалить</button>                                    
+                                </div>
+                                <span class="list-events-location">
+                                    @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
+                                    @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
+                                </span>
+                                <p>
+                                    @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
                                 {
                                     About = "Подробнее...";
-                                } 
-                                @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })                          
-                                @{About = " ";}
-                            </p>
-                        </div>
-                    </td>
-                    
-                </tr>
+                                }
+                                    @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
+                                    @{About = " ";}
+                                </p>
+                            </div>
+                        </td>
+                    }
+                    else
+                    {
+                        <td colspan="2">
+                            <div class="list-events-content">
+                                <h5 class="blue-grey-text">
+                                    @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
+                                </h5>
+                                <div class="list-events-links">                                   
+                                    <button id="TdDell" class="btn waves-effect waves-light white-text red" onclick="deleteEvent('@evnt.Id')">Удалить</button>
+                                </div>
+                                <span class="list-events-location">
+                                    @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
+                                    @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
+                                </span>
+                                <p>
+                                    @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
+                                {
+                                    About = "Подробнее...";
+                                }
+                                    @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
+                                    @{About = " ";}
+                                </p>
+                            </div>
+                        </td>
+                    }
+                </tr>  
             }
         </tbody>
     </table>
-    <div id="dialog-confirm" title="Удалить это событие?" style="display:none;">
+    <div id="dialog-confirm" title="Удалить это событие?" style="display: none;">
         <p>
-            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0"></span>
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
             Это событие будет удалено окончательно и не может быть восстановлено. Вы уверены?
         </p>
     </div>

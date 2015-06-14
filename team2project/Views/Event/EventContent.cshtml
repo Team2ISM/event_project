@@ -1,0 +1,23 @@
+﻿@model team2project.Models.EventViewModel
+@{
+    var About = " ";
+ }
+@using team2project.Helpers
+
+<div class="list-events-content">
+    <h5 class="blue-grey-text">
+        @Html.RouteLink(Model.Title, "EventDetails", new { Model.Id })
+    </h5>
+    <span class="list-events-location">
+        @Html.RouteLink(((String.IsNullOrEmpty(Model.Location)) ? "Null" : Model.Location), "EventDetails", new { Model.Id })
+        @Html.RouteLink((Model.FromDate != null ? Model.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { Model.Id })
+    </span>
+    <p>
+    @if (Model.TextDescription != null && Model.TextDescription.Length >= 300)
+    {
+        About = "Подробнее...";
+    } 
+    @Html.RouteLink((Model.TextDescription != null ? Model.TextDescription.Cut(300) : Model.Description.Cut(300)) + About, "EventDetails", new { Model.Id })
+    @{About = " ";}
+    </p>
+</div>
