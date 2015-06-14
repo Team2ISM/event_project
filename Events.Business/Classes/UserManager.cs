@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
-
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-
 using Events.Business;
 using Events.Business.Interfaces;
 using Events.Business.Models;
@@ -58,40 +55,15 @@ namespace Events.Business.Classes
                  });            
         }
 
-        public void CreateUser(User user)
+        private void CreateUser(User user)
         {
             userDataProvider.CreateUser(user);
-            ToCache<User>("id:" + user.Id,
-                ( ) => {
-                    return user;
-                });
-            ToCache<User>("email:" + user.Email,
-                ( ) => {
-                    return user;
-                });
             ClearCache();
-        }
-
-        public void DeleteUser(User user)
-        {
-            userDataProvider.DeleteUser(user);
-            RemoveFromCache("id:" + user.Id);
-            RemoveFromCache("email:" + user.Email);
-            ClearCache();            
         }
 
         public void UpdateUser(User user)
         {
             userDataProvider.UpdateUser(user);
-            RemoveFromCache("id:" + user.Id);
-            ToCache<User>("id:" + user.Id,
-                ( ) => {
-                    return user;
-                });
-            ToCache<User>("email:" + user.Email,
-                ( ) => {
-                    return user;
-                });
             ClearCache();          
         }
 
@@ -142,18 +114,17 @@ namespace Events.Business.Classes
             EmailSender(user.Email, body, subject);
         }
 
-        public bool isValid(string email, string password)
+        public bool ValidatePassword(string email, string password)
         {
-            bool isValid = false;
             User user = GetByEmail(email);
             if (user != null)
             {
                 if (user.Password == crypto.Compute(password, user.PasswordSalt))
                 {
-                    isValid = true;
+                    return true;
                 }
             }
-            return isValid;
+            return false;
         }
 
         public void EmailSender(string userEmail, string body, string subject)
