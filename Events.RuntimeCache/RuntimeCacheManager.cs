@@ -31,20 +31,13 @@ namespace Events.RuntimeCache
 
         public void ClearCacheByRegion(string r)
         {
-            ClearCacheHelper(
-                (string key) =>
-                {
-                    return key.Contains(r);
-                });
+            ClearCacheHelper(key => key.Contains(r));
+
         }
 
         public void ClearCacheByName(string name)
         {
-            ClearCacheHelper(
-                (string key) =>
-                {
-                    return key.StartsWith(name);
-                });
+            ClearCacheHelper( key => key.StartsWith(name));
         }
 
         public CacheItem ToCache<TValue>(string key, Func<TValue> function)
@@ -78,12 +71,11 @@ namespace Events.RuntimeCache
 
         void ClearCacheHelper(Func<string, bool> func)
         {
-            foreach (var item in MemoryCache.Default)
+            foreach (var item in cache)
             {
                 if (func(item.Key))
                 {
                     MemoryCache.Default.Remove(item.Key);
-
                 }
             }
         }
