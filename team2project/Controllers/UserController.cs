@@ -171,7 +171,7 @@ namespace team2project.Controllers
         public ActionResult Activate(string id)
         {
             var user = userManager.GetById(id);
-            if (user != null && user.IsActive == false)
+            if (user != null && !user.IsActive)
             {
                 user.IsActive = true;
                 userManager.UpdateUser(user);                
