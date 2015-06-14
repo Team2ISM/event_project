@@ -35,16 +35,17 @@
             </div>
         </div>
     </noscript>
+
     <ul id="dropdown1" class="dropdown-content">
         @{
             if (!User.Identity.IsAuthenticated)
             {
                 <li>
-                    @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "dark-text" })
-                </li>
-                <li>
                     @Html.RouteLink("Вход", "Login", new { returnURL = currentURL }, new { @class = "dark-text" })
                 </li>
+                <li>
+                    @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "dark-text" })
+                </li>                
             }
         }
 
@@ -100,20 +101,8 @@
                     <i class="center" style="font-size: 1rem;">
                         Здравствуйте, @userName
                     </i>
-                }
-                else
-                {
-                     <li class="menu-content">
-                        @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "dark-text" })
-                    </li>
-                    <li>
-                        @Html.RouteLink("Вход", "Login", new { returnURL = currentURL }, new { @class = "dark-text" })
-                    </li>  
-                }
-                <li class="divider"></li>
-                <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text" })</li>
-                @if (User.Identity.IsAuthenticated)
-                {
+                    <li class="divider"></li>
+                    <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text" })</li>
                     <li class="menu-content">
                         @Html.RouteLink("Создать событие", "CreateEvent", new { returnURL = currentURL }, new { @class = "white-text" })
                     </li>
@@ -126,8 +115,19 @@
                     </li>
                     <li>
                         @Html.RouteLink("Выйти", "Logout", FormMethod.Post, new { @class = "dark-text" })
-                    </li>  
+                    </li>
                 }
+                else
+                {                    
+                    <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text" })</li>
+                    <li class="divider"></li>
+                    <li>
+                        @Html.RouteLink("Вход", "Login", new { returnURL = currentURL }, new { @class = "dark-text" })
+                    </li>
+                     <li class="menu-content">
+                        @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "dark-text" })
+                    </li>                      
+                }                                
                 @ThisPage()
             </ul>
         </div>
