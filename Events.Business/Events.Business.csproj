@@ -57,6 +57,7 @@
     <Compile Include="Classes\CommentManager.cs" />
     <Compile Include="Classes\EventManager.cs" />
     <Compile Include="Classes\EventsRoleProvider.cs" />
+    <Compile Include="Classes\RemindManager.cs" />
     <Compile Include="Classes\SubscribersManager.cs" />
     <Compile Include="Classes\UserManager.cs" />
     <Compile Include="Helpers\EventStatus.cs" />
@@ -68,11 +69,13 @@
     <Compile Include="Interfaces\ICommentDataProvider.cs" />
     <Compile Include="Interfaces\IEventDataProvider.cs" />
     <Compile Include="Interfaces\INHibernateRoleDataProvider.cs" />
+    <Compile Include="Interfaces\IEmailReminderDataProvider.cs" />
     <Compile Include="Interfaces\IUserDataProvider.cs" />
     <Compile Include="Interfaces\ISubscribersDataProvider.cs" />
     <Compile Include="Models\CityModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\EventModel.cs" />
+    <Compile Include="Models\IsReminded.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Subscriber.cs" />
