@@ -36,6 +36,7 @@
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.TextDescription)
         @Html.HiddenFor(m => m.LocationId)
+        @Html.HiddenFor(m => m.AuthorId)
         @Html.ValidationSummary(true)
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.Title, "Название")
@@ -77,8 +78,9 @@
 
         </div>
 
-        <button class="btn waves-effect waves-light dark-blue-grey" type="submit">@button</button>
+        <button class="btn waves-effect waves-light dark-blue-grey" type="submit">@button</button>      
     }
+    <button class="btn waves-effect waves-light dark-blue-grey" onclick="window.location = '@ViewBag.returnUrl'">Отмена</button>
 </div>
 <script>
     window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using team2project.Models;
 using team2project.Helpers;
-
+using team2project.Properties;
 
 namespace team2project.Controllers
 {
@@ -50,7 +50,7 @@ namespace team2project.Controllers
             var evntModel = eventManager.GetById(id);
             if (evntModel == null || !evntModel.Active)
             {
-                return View("GenericError", ResponseMessages.EventNotFound);
+                return View("GenericError", model: Resources.ResponseEventNotFound);
             }
             var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
             evntViewModel.Location = cityManager.GetById(evntViewModel.LocationId).Name;
@@ -60,30 +60,32 @@ namespace team2project.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Create()
+        public ActionResult Create(string returnUrl)
         {
             var evnt = new EventViewModel();
+            ViewBag.returnUrl = (String.IsNullOrEmpty(returnUrl)) ? "/events/all" : returnUrl;
             return View(evnt);
         }
 
         [HttpGet]
         [Authorize]
-        public ActionResult Update(string id)
+        public ActionResult Update(string id, string returnUrl)
         {
             var evntModel = eventManager.GetById(id);
             if (evntModel == null)
             {
-                return View("GenericError", ResponseMessages.EventNotFound);
+                return View("GenericError", model: Resources.ResponseEventNotFound);
             }
             if (DateTime.Now > evntModel.ToDate)
             {
-                return View("GenericError", ResponseMessages.EditingNotAllowedDueToEventEndingTime);
+                return View("GenericError", model: Resources.ResponseEditingNotAllowedDueToEventEndingTime);
             }
             if (evntModel.AuthorId != User.Identity.Name)
             {
-                return View("GenericError", ResponseMessages.EditingNotAllowedDueToWrongUser);
+                return View("GenericError", model: Resources.ResponseEditingNotAllowedDueToWrongUser);
             }
             var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
+            ViewBag.returnUrl = (String.IsNullOrEmpty(returnUrl)) ? "/events/all" : returnUrl;
             return View("Create", evnt);
         }
 
@@ -91,10 +93,9 @@ namespace team2project.Controllers
         [Authorize]
         public ActionResult Update(EventViewModel evnt)
         {
-            evnt = evnt.Merge(eventManager.GetById(evnt.Id));
             if (evnt.AuthorId != User.Identity.Name)
             {
-                return View("GenericError", ResponseMessages.EditingNotAllowedDueToWrongUser);
+                return View("GenericError", model: Resources.ResponseEditingNotAllowedDueToWrongUser);
             }
             if (!ModelState.IsValid)
             {
@@ -107,6 +108,7 @@ namespace team2project.Controllers
                 evntModel.LocationId = cityManager.GetByName(evnt.Location).Id;
             }
             evntModel.Description = evntModel.Description.RemovePreTag();
+            evntModel.DateOfCreation = eventManager.GetById(evntModel.Id).DateOfCreation;
             eventManager.Update(evntModel);
             return RedirectToRoute("EventDetails", new { id = evntModel.Id });
         }
@@ -119,11 +121,11 @@ namespace team2project.Controllers
             var target = eventManager.GetById(id);
             if (target == null)
             {
-                return View("GenericError", ResponseMessages.EventNotFound);
+                return View("GenericError", model: Resources.ResponseEventNotFound);
             }
             if (mail != target.AuthorId)
             {
-                return View("GenericError", ResponseMessages.DeletingNotAllowedDueToWrongUser);
+                return View("GenericError", model: Resources.ResponseDeletingNotAllowedDueToWrongUser);
             }
             eventManager.Delete(id);
             return RedirectToRoute("FutureEvents");
