@@ -73,40 +73,33 @@ namespace Events.Business.Classes
 
         public override bool DeleteRole(string rolename, bool throwOnPopulatedRole)
         {
-            bool deleted = false;
             if (!RoleExists(rolename))
             {
                 throw new ProviderException("Role does not exist.");
             }
-
             if (throwOnPopulatedRole && GetUsersInRole(rolename).Length > 0)
             {
                 throw new ProviderException("Cannot delete a populated role.");
             }
             dataProvider.DeleteRole(rolename);
-
-            return deleted;
+            return false;
         }
 
         public override string[] GetAllRoles()
         {
             StringBuilder sb = new StringBuilder();
-
             ICollection<Role> allRole;
-
             allRole = dataProvider.GetAllRoles();
 
             foreach (Role r in allRole)
             {
                 sb.Append(r.Name + ",");
             }
-
             if (sb.Length > 0)
             {
                 sb.Remove(sb.Length - 1, 1);
                 return sb.ToString().Split(',');
             }
-
             return new string[0];
         }
 
@@ -114,20 +107,17 @@ namespace Events.Business.Classes
         {
             ICollection<Role> usrRoles = null;
             StringBuilder sb = new StringBuilder();
-
             usrRoles = dataProvider.GetRolesForUser(username);
 
             foreach (Role r in usrRoles)
             {
                 sb.Append(r.Name + ",");
             }
-
             if (sb.Length > 0)
             {
                 sb.Remove(sb.Length - 1, 1);
                 return sb.ToString().Split(',');
             }
-
             return new string[0];
         }
 
@@ -135,20 +125,17 @@ namespace Events.Business.Classes
         {
             StringBuilder sb = new StringBuilder();
             ICollection<User> usrs = null;
-
             usrs = dataProvider.GetUsersInRole(rolename);
 
             foreach (User u in usrs)
             {
                 sb.Append(u.Name + ",");
             }
-
             if (sb.Length > 0)
             {
                 sb.Remove(sb.Length - 1, 1);
                 return sb.ToString().Split(',');
             }
-
             return new string[0];
         }
 
