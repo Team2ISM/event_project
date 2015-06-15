@@ -48,40 +48,31 @@
                         <div class="day color-blue-grey">
                             @CheckDateIfNull(evnt.FromDate, "dd")
                         </div>
+                    </td>                    
+                    <td class="list-events-img">
+                        <div class="event-small-img">
+                            @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
+                        </div>
                     </td>
-                    @if (evnt.Image != null)
-                    {
-                        <td class="list-events-img">
-                            <div class="event-small-img">
-                                @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
-                            </div>
-                        </td>
-                        <td style="width: 77%">
-                            <div class="list-events-content">
-                                <h5 class="blue-grey-text">
-                                    @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
-                                </h5>
-                                <span class="list-events-location">
-                                    @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
-                                    @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
-                                </span>
-                                <p>
-                                    @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
-                                    {
-                                        About = "Подробнее...";
-                                    }
-                                    @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
-                                    @{About = " ";}
-                                </p>
-                            </div>
-                        </td>
-                    }
-                    else
-                    {
-                        <td colspan="2" style="width: 95%">
-                            @Html.Partial("~/Views/Event/EventContent.cshtml", evnt)
-                        </td>
-                    }
+                    <td style="width: 77%">
+                        <div class="list-events-content">
+                            <h5 class="blue-grey-text">
+                                @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
+                            </h5>
+                            <span class="list-events-location">
+                                @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
+                                @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
+                            </span>
+                            <p>
+                                @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
+                                {
+                                    About = "Подробнее...";
+                                }
+                                @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
+                                @{About = " ";}
+                            </p>
+                        </div>
+                    </td>                                        
                 </tr>
             }
         </tbody>
