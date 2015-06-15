@@ -54,7 +54,7 @@
                             @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
                         </div>
                     </td>
-                    <td style="width: 77%">
+                    <td>
                         <div class="list-events-content">
                             <h5 class="blue-grey-text">
                                 @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
@@ -72,8 +72,14 @@
                                 @{About = " ";}
                             </p>
                         </div>
+                    </td>
+                    <td class="list-events-buttons">                       
+                        <div>
+                            <a class="btn-floating blue"><i class="small mdi-editor-mode-edit"></i></a>
+                            <a class="btn-floating red"><i class="small mdi-action-delete"></i></a>
+                        </div>
                     </td>                                                            
-                </tr>
+                </tr>                
             }
         </tbody>
     </table>
