@@ -53,25 +53,27 @@ namespace Events.EmailReminder
                     EventId = evnt.Id
                 };
             }
-
-            switch (deadline)
+            else 
             {
-                case Deadlines.Day:
-                    if (model.Day)
-                    {
+                switch (deadline)
+                {
+                    case Deadlines.Day:
+                        if (model.Day)
+                        {
+                            return;
+                        }
+                        model.Day = true;
+                        break;
+                    case Deadlines.Hour:
+                        if (model.Hour)
+                        {
+                            return;
+                        }
+                        model.Hour = true;
+                        break;
+                    default:
                         return;
-                    }
-                    model.Day = true;
-                    break;
-                case Deadlines.Hour:
-                    if (model.Hour)
-                    {
-                        return;
-                    }
-                    model.Hour = true;
-                    break;
-                default:
-                    return;
+                }
             }
 
             Task.Run(() => manager.SaveOrUpdateIsRemindedModel(model));
