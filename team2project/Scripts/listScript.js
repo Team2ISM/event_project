@@ -163,7 +163,13 @@ $(function () {
     $("#toggle").click(function () {
         combobox.toggle();
     });
+
+    $(".zoomEnabled").zoom({
+        duration: 150,
+        magnify:0.3
+    });
 });
+
 $(function () {
     $('.date-filters a').each(function () {
         var location = window.location.href;

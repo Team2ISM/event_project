@@ -249,3 +249,14 @@ td a:hover, td a:active {
     background-color: #eeeeee !important;
     border: none !important;
 }
+
+.zoomEnabled:after {
+    content: '';
+    display: block;
+    width: 33px;
+    height: 33px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: url(/Content/zoom.icon.png)
+}

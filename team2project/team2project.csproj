@@ -493,6 +493,7 @@
     <Content Include="Scripts\ckeditor\styles.js" />
     <Content Include="Scripts\deleteButton.js" />
     <Content Include="Scripts\details.js" />
+    <Content Include="Content\zoom.icon.png" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.datetimepicker.js" />
@@ -522,6 +523,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.zoom.min.js" />
     <Content Include="Scripts\knockout-3.3.0.js" />
     <Content Include="Scripts\materialize\materialize.js" />
     <Content Include="Scripts\materialize\materialize.min.js" />
