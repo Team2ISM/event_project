@@ -53,7 +53,7 @@ namespace Events.EmailReminder
                     EventId = evnt.Id
                 };
             }
-            else 
+            else
             {
                 switch (deadline)
                 {
@@ -86,11 +86,11 @@ namespace Events.EmailReminder
 
         private Deadlines GetPeriodForRemind(Event evnt)
         {
-            if (evnt.FromDate < timeNow.AddHours(1).AddSeconds(30) && evnt.FromDate > timeNow.AddHours(1).AddSeconds(-30))
+            if (evnt.FromDate < timeNow.AddHours(1).AddSeconds(StaticVariables.PeriodTriggerInSeconds / 2) && evnt.FromDate > timeNow.AddHours(1).AddSeconds(-(StaticVariables.PeriodTriggerInSeconds / 2)))
             {
                 return Deadlines.Hour;
             }
-            if (evnt.FromDate < timeNow.AddDays(1).AddSeconds(30) && evnt.FromDate > timeNow.AddDays(1).AddSeconds(-30))
+            if (evnt.FromDate < timeNow.AddDays(1).AddSeconds(StaticVariables.PeriodTriggerInSeconds / 2) && evnt.FromDate > timeNow.AddDays(1).AddSeconds(-(StaticVariables.PeriodTriggerInSeconds / 2)))
             {
                 return Deadlines.Day;
             }

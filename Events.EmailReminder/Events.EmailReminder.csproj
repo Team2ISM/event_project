@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutofacJobFactory.cs" />
+    <Compile Include="Statics.cs" />
     <Compile Include="EmailReminderJob.cs" />
     <Compile Include="EmailReminderScheduler.cs" />
     <Compile Include="EmailSender.cs" />

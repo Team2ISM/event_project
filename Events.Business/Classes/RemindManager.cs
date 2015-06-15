@@ -41,7 +41,7 @@ namespace Events.Business.Classes
 
         public RemindModel GetIsRemindedModel(string eventId)
         {
-            return FromCache<RemindModel>("RemindModel:" + eventId,
+            return FromCache<RemindModel>(eventId,
                 () =>
                 {
                     return dataProvider.GetIsRemindedModel(eventId);
@@ -52,7 +52,7 @@ namespace Events.Business.Classes
         {
             dataProvider.SaveOrUpdateIsRemindedModel(model);
             ClearCache();
-            ToCache<RemindModel>("RemindModel:" + model.EventId,
+            ToCache<RemindModel>(model.EventId,
                 () =>
                 {
                     return model;

@@ -12,17 +12,14 @@ namespace Events.EmailReminder
     {
         public static void Start(IScheduler scheduler)
         {
-            JobDetailImpl job = new JobDetailImpl("1Job", null, typeof(EmailReminderJob));
-
+            JobDetailImpl job = new JobDetailImpl("EmailReminderJob", null, typeof(EmailReminderJob));
             ITrigger trigger = TriggerBuilder.Create()
-                                                    .WithIdentity("trigger1", "group1")
+                                                    .WithIdentity("EmailReminderTrigger", "EmailReminderGroup")
                                                     .StartNow()
                                                     .WithSimpleSchedule(x => x
-                                                        .WithIntervalInSeconds(60)
+                                                        .WithIntervalInSeconds(StaticVariables.PeriodTriggerInSeconds)
                                                         .RepeatForever())
                                                     .Build();
-
-
             scheduler.ScheduleJob(job, trigger);
         }
     }

@@ -24,7 +24,7 @@ namespace Events.EmailReminder
                     return;
             }
             MailMessage msg = new MailMessage();
-            msg.From = new MailAddress("team2project222@gmail.com");
+            msg.From = new MailAddress(EnvironmentInfo.Email);
             msg.To.Add(email);
             msg.Subject = "Напоминание";
             msg.IsBodyHtml = true;
