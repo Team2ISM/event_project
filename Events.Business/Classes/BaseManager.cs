@@ -27,6 +27,10 @@ namespace Events.Business.Classes
         protected void ClearCache()
         {
             cacheManager.ClearCacheByName(Name);
+            if (Name != "Reminder")
+            {
+                cacheManager.ClearCacheByName("Reminder");
+            }
         }
 
         protected void RemoveFromCache(string name)

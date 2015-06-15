@@ -3,6 +3,7 @@ using System.Net.Mail;
 using System.Net.Mime;
 using Events.Business;
 using Events.Business.Helpers;
+using System.Globalization;
 
 namespace Events.EmailReminder
 {
@@ -40,8 +41,8 @@ namespace Events.EmailReminder
         private string FormEmailRemind(Event evnt, string period)
         {
             string body = "<td>" +
-                            "<h1>До события " + evnt.Title + " остался один " + period + "</h1>" +
-                            "<p>Начало события: " + evnt.FromDate.Value.ToString("dd MMMM yyyy года, H:mm") + "</p>" +
+                            "<h1>До события '" + evnt.Title + "' остался один " + period + "</h1>" +
+                            "<p>Начало события: " + evnt.FromDate.Value.ToString("dd MMMM yyyy года, H:mm", new CultureInfo("ru")) + "</p>" +
                             "<table>" +
                             "<tr>" +
                             "<td class='padding'>" +

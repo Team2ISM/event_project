@@ -14,15 +14,18 @@ namespace Events.Business.Classes
 
         ICitiesDataProvider citiesProvider;
 
+        RemindManager remindManager;
+
         protected override string Name { get; set; }
 
-        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, ICitiesDataProvider citiesProvider, CommentManager commentManager)
+        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, ICitiesDataProvider citiesProvider, CommentManager commentManager, RemindManager remindManager)
         {
             Name = "Events";
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
             this.citiesProvider = citiesProvider;
             this.commentManager = commentManager;
+            this.remindManager = remindManager;
         }
 
         public IList<Event> GetAllEvents()
@@ -66,6 +69,7 @@ namespace Events.Business.Classes
         {
             model.Checked = false;
             dataProvider.Update(model);
+            remindManager.ResetRemindModel(model.Id);
             ClearCache();
             ToCache<Event>(model.Id,
                 () =>

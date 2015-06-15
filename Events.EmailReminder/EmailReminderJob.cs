@@ -27,7 +27,7 @@ namespace Events.EmailReminder
 
         public void Execute(IJobExecutionContext context)
         {
-            var timeNow = DateTime.Now;
+            timeNow = DateTime.Now;
             var list = manager.GetListEventsToRemind();
 
             foreach (var evnt in list)

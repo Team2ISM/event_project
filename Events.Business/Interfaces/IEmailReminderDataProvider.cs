@@ -13,5 +13,7 @@ namespace Events.Business.Interfaces
         RemindModel GetIsRemindedModel(string eventId);
 
         void SaveOrUpdateIsRemindedModel(RemindModel model);
+
+        void ResetRemindModel(string eventId);
     }
 }

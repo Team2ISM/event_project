@@ -58,5 +58,11 @@ namespace Events.Business.Classes
                     return model;
                 });
         }
+
+        public void ResetRemindModel(string eventId)
+        {
+            dataProvider.ResetRemindModel(eventId);
+            ClearCache();
+        }
     }
 }

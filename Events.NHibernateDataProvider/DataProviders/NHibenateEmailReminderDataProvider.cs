@@ -62,5 +62,24 @@ namespace Events.NHibernateDataProvider.DataProviders
                 session.Flush();
             }
         }
+
+        public void ResetRemindModel(string eventId)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                using (ITransaction trans = session.BeginTransaction())
+                {
+                    var criteria = session.CreateCriteria(typeof(RemindModel));
+                    criteria.Add(Restrictions.Eq("EventId", eventId));
+                    var remindModel = criteria.UniqueResult<RemindModel>();
+                    if (remindModel != null)
+                    {
+                        remindModel.Day = remindModel.Hour = false;
+                        session.Update(remindModel);
+                    }
+                    trans.Commit();
+                }
+            }
+        }
     }
 }
