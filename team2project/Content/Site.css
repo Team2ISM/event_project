@@ -188,9 +188,14 @@ nav li a
 }
 
 #ui-id-1 {
-    max-height: 8em;
+    background: none;
+    background-color: white !important;
+    max-height: 10em;
     outline: medium none;
     overflow: hidden;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 .ui-autocomplete {
     overflow-y: scroll !important;
@@ -221,4 +226,15 @@ nav li a
 img {
     max-width:100%;
     height:auto;
+}
+
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br
+{
+    border-bottom-right-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+}
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl
+{
+    border-bottom-left-radius: 3px !important;
+    border-top-left-radius: 3px !important;
 }

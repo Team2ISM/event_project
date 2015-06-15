@@ -164,7 +164,6 @@ $(function () {
         combobox.toggle();
     });
 });
-
 $(function () {
     $('.date-filters a').each(function () {
         var location = window.location.href;
@@ -182,4 +181,5 @@ $(function () {
             $(this).attr("href", $(this).attr("href") + "/" + cityValue);
         }
     })
+    $('.custom-combobox input').attr('readonly', true);
 });

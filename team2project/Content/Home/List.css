@@ -117,6 +117,24 @@ td a:hover, td a:active {
     margin-bottom: 1%;
 }
 
+#select-menu
+{
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    padding: 7px;
+}
+
+#select-menu div label
+{
+    margin-top: 2px;
+}
+
+#select-menu div div
+{
+    margin-top: -2px;
+}
+
 #visibleButton
 {
     width: 182px;
@@ -212,4 +230,22 @@ td a:hover, td a:active {
 .list-events-links {
     margin-top: -4.5%;
     float:right;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+{
+      border: 1px solid #ddd !important;
+    background: #d7ebf9 url("images/ui-bg_glass_80_d7ebf9_1x400.png") 50% 50% repeat-x !important;
+    font-weight: bold;
+    color: #607d8b !important;
+    background-color: #f2f2f2 !important;
+    //border-radius: 1px !important;
+}
+
+.ui-state-focus
+{
+    color: #607d8b !important;
+    background: none !important;
+    background-color: #eeeeee !important;
+    border: none !important;
 }
