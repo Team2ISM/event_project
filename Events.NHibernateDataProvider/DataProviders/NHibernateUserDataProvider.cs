@@ -55,6 +55,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             using (ISession session = Helper.OpenSession())
             {
                 session.Save(user);
+                session.Flush();               
             }
         }
 
@@ -63,7 +64,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             using (ISession session = Helper.OpenSession())
             {
                 session.Delete(user);
-                session.Flush();
             }
         }
 
@@ -72,6 +72,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             using (ISession session = Helper.OpenSession())
             {
                 session.Update(user);
+                session.Flush(); 
             }
         }
     }

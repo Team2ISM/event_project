@@ -10,15 +10,14 @@ using Events.Business.Helpers;
 
 namespace Events.NHibernateDataProvider.NHibernateCore
 {
-
     public class NHibernateEventDataProvider : IEventDataProvider
     {
-
         public IList<Event> GetList(int daysToEvent, string location)
         {
+            if (daysToEvent == null) return null;
             using (ISession session = Helper.OpenSession())
             {
-                var endOfDay = DateTime.Now.Date.AddDays(1).AddTicks(-1);
+                var endOfDay = DateTime.Today;
                 if (!String.IsNullOrEmpty(location))
                 {
                     session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
@@ -45,16 +44,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 return session.CreateCriteria<Event>()
                         .AddOrder(Order.Asc("Checked"))
                         .AddOrder(Order.Desc("DateOfCreation")).List<Event>();
-            }
-        }
-
-        public IList<Event> GetByAuthorMail(string email)
-        {
-            using (ISession session = Helper.OpenSession())
-            {
-                var criteria = session.CreateCriteria(typeof(Event));
-                criteria.Add(Restrictions.Eq("AuthorId", email));
-                return criteria.List<Event>();
             }
         }
 
