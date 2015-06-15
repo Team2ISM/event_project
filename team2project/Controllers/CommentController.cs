@@ -11,7 +11,6 @@ namespace team2project.Controllers
 {
     public class CommentController : Controller
     {
-
         CommentManager commentManager;
         EventManager eventManager;
         UserManager userManager;
@@ -26,7 +25,7 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult AddComment(CommentViewModel commentModel)
         {
-            if (commentModel.EventId == null)
+            if (String.IsNullOrEmpty(commentModel.EventId))
             {
                 return RedirectToRoute("eventDetails");
             }
@@ -41,6 +40,5 @@ namespace team2project.Controllers
             commentManager.Create(comment);
             return RedirectToRoute("eventDetails", new { id = commentModel.EventId });
         }
-
     }
 }

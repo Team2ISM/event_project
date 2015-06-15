@@ -75,12 +75,12 @@
             </div>
             <input id="location" name="Location" style="height: 0; padding: 0; margin: 0; border: none;">
             @Html.ValidationMessageFor(m => m.Location)
-
         </div>
 
-        <button class="btn waves-effect waves-light dark-blue-grey" type="submit">@button</button>      
+        <button class="btn waves-effect waves-light dark-blue-grey" onclick="window.location = '@ViewBag.returnUrl'" type="button">Отмена</button>  
+        <button class="btn waves-effect waves-light dark-blue-grey" type="submit">@button</button>        
     }
-    <button class="btn waves-effect waves-light dark-blue-grey" onclick="window.location = '@ViewBag.returnUrl'">Отмена</button>
+    
 </div>
 <script>
     window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");

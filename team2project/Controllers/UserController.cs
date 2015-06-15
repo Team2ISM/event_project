@@ -63,14 +63,11 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Login(string email, string password, string returnUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
+            if (!ModelState.IsValid) return View();
 
-            var user = userManager.GetByEmail(email);
-            if (user != null && userManager.ValidatePassword(email, password))
+            if (userManager.ValidatePassword(email, password) == true)
             {
+                var user = userManager.GetByEmail(email);
                 if (user.IsActive == true)
                 {
                     SignIn(user);
@@ -91,12 +88,12 @@ namespace team2project.Controllers
         public ActionResult UnconfirmedUser(string email)
         {
             var user = userManager.GetByEmail(email);
-            if (user != null && user.IsActive == false)
+            if (user != null && !user.IsActive)
             {
                 SendActivationLink(AutoMapper.Mapper.Map<UserViewModel>(user));
-                return RedirectToAction("ConfirmRegistration", "User");
+                return RedirectToRoute("ConfirmRegistration");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToRoute("Home");
         }
 
         public ActionResult ConfirmRegistration()
@@ -128,7 +125,7 @@ namespace team2project.Controllers
             {
                userManager.SendNewPassword(user);
             }
-            return RedirectToAction("ThankYouPage", "User");
+            return RedirectToRoute("ThankYouPage");
         }
 
         public ActionResult ThankYouPage()
@@ -159,7 +156,7 @@ namespace team2project.Controllers
                     userManager.RegisterUser(mappedUser);
                     SendActivationLink(user);
 
-                    return RedirectToAction("ConfirmRegistration", "User");
+                    return RedirectToRoute("ConfirmRegistration");
                 }
                 else
                 {
@@ -174,12 +171,12 @@ namespace team2project.Controllers
         public ActionResult Activate(string id)
         {
             var user = userManager.GetById(id);
-            if (user != null && user.IsActive == false)
+            if (user != null && !user.IsActive)
             {
                 user.IsActive = true;
                 userManager.UpdateUser(user);                
                 SignIn(user);
-                return RedirectToRoute("Welcome", "User");
+                return RedirectToRoute("Welcome");
             }
             return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });
         }
@@ -200,13 +197,11 @@ namespace team2project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var crypto = new SimpleCrypto.PBKDF2();
+                var email = User.Identity.Name;                
 
-                var mail = User.Identity.Name;
-                User user = userManager.GetByEmail(mail);
-
-                if (user.Password == crypto.Compute(oldPassword, user.PasswordSalt))
+                if (userManager.ValidatePassword(email, oldPassword) == true)
                 {
+                    User user = userManager.GetByEmail(email);
                     userManager.ChangePassword(user, password);
                     ViewBag.PasswordSuccess = "Пароль изменен";
                 }

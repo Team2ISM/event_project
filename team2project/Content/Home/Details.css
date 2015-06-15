@@ -307,3 +307,8 @@ fieldset h5 p {
 {
     display: none;
 }
+
+#subscribed
+{
+    cursor: pointer;
+}
