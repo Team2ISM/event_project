@@ -312,3 +312,7 @@ fieldset h5 p {
 {
     cursor: pointer;
 }
+
+.details-event-img img {
+    width:100%;
+}

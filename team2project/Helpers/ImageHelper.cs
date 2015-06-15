@@ -14,9 +14,15 @@ namespace team2project.Helpers
         {
             TagBuilder img = new TagBuilder("img");
             img.AddCssClass(classAttr);
-
-            img.MergeAttribute("src", url);
-            img.MergeAttribute("onerror", "this.src = '" + notAvailUrl + "'");
+            if (string.IsNullOrEmpty(url))
+            {
+                img.MergeAttribute("src", notAvailUrl);
+            }
+            else
+            {
+                img.MergeAttribute("src", url);
+                img.MergeAttribute("onerror", "this.src = '" + notAvailUrl + "'");
+            }
 
             return new MvcHtmlString(img.ToString());
         }
