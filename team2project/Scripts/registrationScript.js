@@ -151,4 +151,5 @@ window.onload = function () {
     document.forms[0].onsubmit = function () {
         if ($(this).valid()) $('#loading-img').show();
     }
+    $('.custom-combobox input').attr('readonly', true);
 };
