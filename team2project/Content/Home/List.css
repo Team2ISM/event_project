@@ -268,3 +268,7 @@ td a:hover, td a:active {
     right: 0;
     background: url(/Content/zoom.icon.png)
 }
+
+.ui-button-text {
+    margin-top: -7px;
+}

@@ -12,8 +12,8 @@
 @using Events.Business.Helpers
 @section css{
     @Styles.Render("~/Content/Home/List.css")
-    @Styles.Render("~/Content/jquery-ui.min.css")
     @Styles.Render("~/Content/jquery-ui.theme.min.css")
+    @Styles.Render("~/Content/jquery-ui.min.css")    
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
 }
 
@@ -72,16 +72,16 @@
                                 @{About = " ";}
                             </p>
                         </div>
-                    </td>
-                    @if(evnt.AuthorId == User.Identity.Name)
-                    {
-                        <td class="list-events-buttons">                       
+                    </td>                    
+                    <td class="list-events-buttons">
+                            @if(evnt.AuthorId == User.Identity.Name)
+                            {
                             <div>
                                 @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating blue"})
                                 <a class="btn-floating red" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
                             </div>
-                        </td>                                                            
-                    }
+                            }
+                        </td>
                 </tr>                
             }
         </tbody>
@@ -135,6 +135,6 @@
     @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/jquery.zoom.min.js")
-@Scripts.Render("~/Scripts/deleteButton.js")
+    @Scripts.Render("~/Scripts/deleteButton.js")
     @Scripts.Render("~/Scripts/listScript.js")
 }
