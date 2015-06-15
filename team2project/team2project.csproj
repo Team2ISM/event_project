@@ -274,6 +274,7 @@
     </Compile>
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\JsonResultHelper.cs" />
+    <Compile Include="Helpers\LinkHelper.cs" />
     <Compile Include="Helpers\ResponseMessages.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Helpers\UserControllerHelper.cs" />

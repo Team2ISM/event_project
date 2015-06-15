@@ -77,8 +77,8 @@
                     {
                         <td class="list-events-buttons">                       
                             <div>
-                                <a class="btn-floating blue"><i class="small mdi-editor-mode-edit"></i></a>
-                                <a class="btn-floating red"><i class="small mdi-action-delete"></i></a>
+                                @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating blue"})
+                                <a class="btn-floating red" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
                             </div>
                         </td>                                                            
                     }
@@ -86,7 +86,12 @@
             }
         </tbody>
     </table>
-
+    <div id="dialog-confirm" title="Удалить это событие?" style="display: none;">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
+            Это событие будет удалено окончательно и не может быть восстановлено. Вы уверены?
+        </p>
+    </div>
 </div>
 
 <script>
@@ -130,5 +135,6 @@
     @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/jquery.zoom.min.js")
+@Scripts.Render("~/Scripts/deleteButton.js")
     @Scripts.Render("~/Scripts/listScript.js")
 }
