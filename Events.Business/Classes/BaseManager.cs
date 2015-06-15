@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Events.Business.Interfaces;
 using System.Runtime.Caching;
+using Events.Business.Helpers;
 
 namespace Events.Business.Classes
 {
@@ -27,9 +28,9 @@ namespace Events.Business.Classes
         protected void ClearCache()
         {
             cacheManager.ClearCacheByName(Name);
-            if (Name != "Reminder")
+            if (!Name.Equals(EnvironmentInfo.ReminderCacheName))
             {
-                cacheManager.ClearCacheByName("Reminder");
+                cacheManager.ClearCacheByName(EnvironmentInfo.ReminderCacheName);
             }
         }
 

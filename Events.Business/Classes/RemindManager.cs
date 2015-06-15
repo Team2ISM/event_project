@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Events.Business.Models;
 using Events.Business.Interfaces;
+using Events.Business.Helpers;
 
 namespace Events.Business.Classes
 {
@@ -16,7 +17,7 @@ namespace Events.Business.Classes
 
         public RemindManager(IEmailReminderDataProvider dataProvider, ICacheManager cacheManager)
         {
-            Name = "Reminder";
+            Name = EnvironmentInfo.ReminderCacheName;
             this.dataProvider = dataProvider;
             this.cacheManager = cacheManager;
         }
