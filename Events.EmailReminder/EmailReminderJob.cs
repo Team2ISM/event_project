@@ -15,7 +15,9 @@ namespace Events.EmailReminder
 
         private EmailRemindSender sender;
 
-        public enum Periods { Day = 1, Hour = 2 };
+        private DateTime timeNow;
+
+        public enum Deadlines { NotRemind, Day, Hour };
 
         public EmailReminderJob(RemindManager manager)
         {
@@ -25,17 +27,23 @@ namespace Events.EmailReminder
 
         public void Execute(IJobExecutionContext context)
         {
-            var date = DateTime.Now;
+            var timeNow = DateTime.Now;
             var list = manager.GetListEventsToRemind();
 
             foreach (var evnt in list)
             {
-                RemindSubscribers(evnt, date);
+                RemindSubscribers(evnt);
             }
         }
 
-        private void RemindSubscribers(Event evnt, DateTime date)
+        private void RemindSubscribers(Event evnt)
         {
+            Deadlines deadline = GetPeriodForRemind(evnt);
+            if (deadline == Deadlines.NotRemind)
+            {
+                return;
+            }
+
             IList<User> userList = manager.GetUsersToRemind(evnt.Id);
             RemindModel model = manager.GetIsRemindedModel(evnt.Id);
             if (model == null)
@@ -45,18 +53,17 @@ namespace Events.EmailReminder
                     EventId = evnt.Id
                 };
             }
-            Periods period = GetPeriodForRemind(evnt, date);
 
-            switch (period)
+            switch (deadline)
             {
-                case Periods.Day:
+                case Deadlines.Day:
                     if (model.Day)
                     {
                         return;
                     }
                     model.Day = true;
                     break;
-                case Periods.Hour:
+                case Deadlines.Hour:
                     if (model.Hour)
                     {
                         return;
@@ -71,19 +78,19 @@ namespace Events.EmailReminder
 
             foreach (var user in userList)
             {
-                Task.Run(() => sender.SendEmailRemind(user.Email, evnt, period));
+                Task.Run(() => sender.SendEmailRemind(user.Email, evnt, deadline));
             }
         }
 
-        private Periods GetPeriodForRemind(Event evnt, DateTime date)
+        private Deadlines GetPeriodForRemind(Event evnt)
         {
-            if (evnt.FromDate < date.AddHours(1).AddSeconds(30) && evnt.FromDate > date.AddHours(1).AddSeconds(-30))
+            if (evnt.FromDate < timeNow.AddHours(1).AddSeconds(30) && evnt.FromDate > timeNow.AddHours(1).AddSeconds(-30))
             {
-                return Periods.Hour;
+                return Deadlines.Hour;
             }
-            if (evnt.FromDate < date.AddDays(1).AddSeconds(30) && evnt.FromDate > date.AddDays(1).AddSeconds(-30))
+            if (evnt.FromDate < timeNow.AddDays(1).AddSeconds(30) && evnt.FromDate > timeNow.AddDays(1).AddSeconds(-30))
             {
-                return Periods.Day;
+                return Deadlines.Day;
             }
             return 0;
         }

@@ -8,15 +8,15 @@ namespace Events.EmailReminder
 {
     class EmailRemindSender
     {
-        public void SendEmailRemind(string email, Event evnt, EmailReminderJob.Periods period)
+        public void SendEmailRemind(string email, Event evnt, EmailReminderJob.Deadlines period)
         {
             string periodName;
             switch (period)
             {
-                case EmailReminderJob.Periods.Day:
+                case EmailReminderJob.Deadlines.Day:
                     periodName = "день";
                     break;
-                case EmailReminderJob.Periods.Hour:
+                case EmailReminderJob.Deadlines.Hour:
                     periodName = "час";
                     break;
                 default:
