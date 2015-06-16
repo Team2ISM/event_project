@@ -36,7 +36,7 @@ namespace team2project.Controllers
                 return RedirectToRoute("Error404");
             }
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
-            PrepareEventsToView(ref list);
+            PrepareEventsToView(list);
             ViewBag.location = location;
             return View("List", list);
         }
@@ -146,7 +146,7 @@ namespace team2project.Controllers
         {
             IList<Event> events = eventManager.GetAuthorPastEvents(User.Identity.Name);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            PrepareEventsToView(ref eventsModels);
+            PrepareEventsToView(eventsModels);
             return View(eventsModels);
         }
 
@@ -156,11 +156,11 @@ namespace team2project.Controllers
         {
             IList<Event> events = eventManager.GetAuthorFutureEvents(User.Identity.Name);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            PrepareEventsToView(ref eventsModels);
+            PrepareEventsToView(eventsModels);
             return View(eventsModels);
         }
 
-        private void PrepareEventsToView(ref List<EventViewModel> eventsModels)
+        private void PrepareEventsToView(List<EventViewModel> eventsModels)
         {
             foreach (var ev in eventsModels)
             {
