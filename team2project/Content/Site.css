@@ -192,16 +192,6 @@ nav li a
     padding-left: 8px;
 }
 
-#ui-id-1 {
-    background: none;
-    background-color: white !important;
-    max-height: 10em;
-    outline: medium none;
-    overflow: hidden;
-    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
 .ui-autocomplete {
     overflow-y: scroll !important;
 }
@@ -251,13 +241,13 @@ img {
   z-index: 1100;
 }
 
-.create-event-block .btn-floating{
+.create-event-block .btn-floating, .edit-event-block .btn-floating {
   width: 50px;
   height: 50px;
   background-color: #607d8b !important;
 }
 
-.create-event-block .btn-floating i{
+.create-event-block .btn-floating i, .edit-event-block .btn-floating i {
   color: white !important;
   font-size: 3rem;
   line-height: 49px;

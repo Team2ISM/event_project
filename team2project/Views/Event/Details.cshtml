@@ -13,16 +13,15 @@
 
 @section css{
     @Styles.Render("~/Content/Home/Details.css")
-    @*<style>
-        html {         
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-image: url("@Model.Image");
-        }
-        body {
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-    </style>*@
+    @Styles.Render("~/Content/jquery-ui.min.css")
+    @Styles.Render("~/Content/jquery-ui.structure.min.css")
+}
+@if (User.Identity.Name == Model.AuthorId)
+{
+    <div class="edit-event-block">
+        @Html.CreateLink("<i class=\"large mdi-editor-mode-edit\"></i>", "UpdateEvent", new { Model.Id }, new { @class = "large btn-floating blue" })
+        <a class="large btn-floating red" onclick="deleteEvent('@Model.Id'); return false"><i class="large mdi-action-delete"></i></a>
+    </div>
 }
 <div class="container z-depth-1">
     <form onsubmit="return false">
@@ -74,7 +73,6 @@
         </fieldset>
     </form>
 </div>
-
 <div class="container z-depth-1">
     @Html.Partial("~/Views/Comment/Create.cshtml", new CommentViewModel(Model.Id))
 </div>
@@ -99,6 +97,12 @@
         </div>
     </div>
     }
+    <div id="dialog-confirm" title="Удалить это событие?" style="display: none;">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
+            Это событие будет удалено окончательно и не может быть восстановлено. Вы уверены?
+        </p>
+    </div>
 }
 @helper CheckDateIfNull(DateTime? date, string format)
 {
@@ -113,5 +117,7 @@
 }
 @section scripts{
     @Scripts.Render("~/Scripts/details.js")
+    @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/deleteButton.js")
 }

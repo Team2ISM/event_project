@@ -316,3 +316,9 @@ fieldset h5 p {
 .details-event-img img {
     width:100%;
 }
+.edit-event-block{
+  position: fixed;
+  top: 40px;
+  right: 581px;
+  z-index: 1100;
+}
