@@ -15,6 +15,7 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated) return RedirectToRoute("FutureEvents");
             return RedirectToRoute("EventsList", routeValues: new { period = PeriodStates.Anytime });
         }
     }
