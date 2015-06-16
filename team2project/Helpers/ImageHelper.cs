@@ -46,7 +46,7 @@ namespace team2project.Helpers
 
             TagBuilder imglink = new TagBuilder("a");
             imglink.MergeAttribute("href", url);
-            imglink.AddCssClass("zoomEnabled");
+            //imglink.AddCssClass("zoomEnabled");
             imglink.InnerHtml = img.ToString();
 
             return new MvcHtmlString(imglink.ToString());
