@@ -15,6 +15,7 @@ $(function () {
             });
         }
     }
+    else $("#City :first-child").attr("selected", "selected");
 
     select.on("change", function () {
         var url = location.protocol + '//' + location.host + '/', path = location.pathname.split('/');
