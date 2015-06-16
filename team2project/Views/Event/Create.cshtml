@@ -84,6 +84,9 @@
     
 </div>
 <script>
+    $(document).ready(function(){
+        $(".create-event-block").hide(0);
+    });
     window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");
     window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");
     window.city = @Html.Raw("'" + (Model.LocationId != null ? Model.LocationId.ToString() : " ") + "'");
