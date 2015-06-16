@@ -144,7 +144,8 @@ window.onload = function () {
             if (val.value === city) {
                 val.setAttribute('selected', 'selected');
                 value = city;
-                locat.val(val.value);
+                inner = val.innerHTML;
+                locat.val(val.innerHTML);
                 return false;
             }
         });
@@ -152,6 +153,7 @@ window.onload = function () {
     combobox.combobox();
     locat.val(combobox.children()[0].innerHTML);
     if (value) $('#LocationId').val(value);
+    if (inner) locat.val(inner);
 
     var content, label = $('label[for="Description"]'),
         textDescr = $('#TextDescription'),

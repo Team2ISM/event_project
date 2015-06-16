@@ -258,7 +258,7 @@ td a:hover, td a:active {
     border: none !important;
 }
 
-.zoomEnabled:after {
+/*.zoomEnabled:after {
     content: '';
     display: block;
     width: 33px;
@@ -267,7 +267,7 @@ td a:hover, td a:active {
     top: 0;
     right: 0;
     background: url(/Content/zoom.icon.png)
-}
+}*/
 
 .ui-button-text {
     margin-top: -7px;
