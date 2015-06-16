@@ -193,6 +193,11 @@ namespace team2project
                 defaults: new { controller = "Subscribers", action = "Index" }
             );
             routes.MapRoute(
+                name: "IntCountGet",
+                url: "subscribers/intgetcount/{id}",
+                defaults: new { controller = "Subscribers", action = "Count" }
+            );
+            routes.MapRoute(
                 name: "Subscribe",
                 url: "subscribe",
                 defaults: new { controller = "Subscribers", action = "Subscribe" }

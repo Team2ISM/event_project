@@ -72,6 +72,9 @@
                                 </ul>
                             </div>
                         }
+                        @{
+                Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
+                        }
                         <div class="list-events-content">
                             <h5 class="blue-grey-text">
                                 @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })

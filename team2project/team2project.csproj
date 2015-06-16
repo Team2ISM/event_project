@@ -557,7 +557,7 @@
     <Content Include="Views\Admin\ManagerPage.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\Comment\Create.cshtml" />
-    <Content Include="Views\Subscribers\GetSubscribers.cshtml" />
+    <Content Include="Views\Subscribers\Count.cshtml" />
     <Content Include="Views\Subscribers\Index.cshtml" />
     <Content Include="Views\User\email.cshtml" />
     <Content Include="Views\Event\MyPastEvents.cshtml" />
