@@ -73,7 +73,7 @@
                     <input type="text" id="search" />
                 </li>
                 <li class="menu-content">
-                    <a href="#" class="white-text">Искать</a>
+                    <a href="#" class="white-text" onclick="document.location = '/find/' + encodeURIComponent($('#search').val());">Искать</a>
                 </li>
                 <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text" })</li>
                 @if (User.Identity.IsAuthenticated)

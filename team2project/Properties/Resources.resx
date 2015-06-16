@@ -132,4 +132,7 @@
   <data name="ResponseEventNotFound" xml:space="preserve">
     <value>Событие не найдено :(</value>
   </data>
+  <data name="ResponseNoMatches" xml:space="preserve">
+    <value>Совпадений не найдено.</value>
+  </data>
 </root>

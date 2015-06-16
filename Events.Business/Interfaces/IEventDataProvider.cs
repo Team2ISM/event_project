@@ -12,6 +12,7 @@ namespace Events.Business.Interfaces
 
         Event GetById(string id);
 
+        IList<Event> Find(string text, int period = 0, string location = null);
         IList<Event> GetAuthorPastEvents(string email);
 
         IList<Event> GetAuthorFutureEvents(string email);

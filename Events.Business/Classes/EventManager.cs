@@ -96,6 +96,21 @@ namespace Events.Business.Classes
                 });
         }
 
+        public IList<Event> Find(string text, string period, string locationId)
+        {
+            int? days = getDaysCount(period);
+
+            if (!days.HasValue)
+            {
+                return null;
+            }
+            return FromCache<IList<Event>>("list" + period + "-" + locationId + "@"+"text",
+                () =>
+                {
+                    return dataProvider.Find(text, days.Value, locationId);
+                });
+        }
+
         public IList<Event> GetAuthorFutureEvents(string email)
         {
             return FromCache<IList<Event>>("userEvents" + email + "future",
