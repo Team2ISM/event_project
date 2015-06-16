@@ -333,3 +333,18 @@ ul li {
     display: inline-block;
     padding: 0px;
 }
+
+.bacgr-text
+{
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.bacgr-text:hover
+{
+    background-color: transparent;
+}
+
+.btn-floating i {
+  color: #727272 !important;
+}
