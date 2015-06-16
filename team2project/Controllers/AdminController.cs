@@ -93,7 +93,7 @@ namespace team2project.Controllers
         [HttpPost]
         public ActionResult Deactivate(string id)
         {
-            EventStatuses result = manager.Activate(id);
+            EventStatuses result = manager.Deactivate(id);
             JsonResultHelper dataResult = null;
             switch (result)
             {
