@@ -238,3 +238,9 @@ img {
     border-bottom-left-radius: 3px !important;
     border-top-left-radius: 3px !important;
 }
+
+.create-event-block {
+    position:fixed;
+    top:90%;
+    right: 3%;
+}

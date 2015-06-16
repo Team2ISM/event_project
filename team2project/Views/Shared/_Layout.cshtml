@@ -1,4 +1,5 @@
 ﻿@using Newtonsoft.Json
+@using team2project.Helpers
 @{
     var currentURL = Request.Url;
     var userName = "";
@@ -72,9 +73,6 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <li class="menu-content">
-                        @Html.RouteLink("Создать событие", "CreateEvent", new { returnURL = currentURL }, new { @class = "white-text" })
-                    </li>
-                    <li class="menu-content">
                         @Html.RouteLink("Мои события", "FutureEvents", FormMethod.Post, new { @class = "white-text" })
                     </li>
                 }
@@ -118,7 +116,7 @@
                     </li>
                 }
                 else
-                {                    
+                {                       
                     <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text" })</li>
                     <li class="divider"></li>
                     <li>
@@ -132,7 +130,12 @@
             </ul>
         </div>
     </nav>
-
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="create-event-block">
+            @Html.CreateLink("<i class=\"large mdi-content-add\"></i>", "CreateEvent", new { returnURL = currentURL }, new { @class = "large btn-floating green" })
+        </div> 
+    }        
     @RenderBody()
     <div id="loader-wrapper">
         <div id="loader"></div>
