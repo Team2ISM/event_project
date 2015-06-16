@@ -37,6 +37,26 @@ namespace Events.Business.Classes
                     });
         }
 
+
+        public IList<Event> GetMyFutureEvents(IList<Subscribing> ids)
+        {
+            return FromCache<IList<Event>>("AdminList",
+                    () =>
+                    {
+                        return dataProvider.GetMyFutureEvents(ids);
+                    });
+        }
+
+        public IList<Event> GetMyPastEvents(IList<Subscribing> ids)
+        {
+            return FromCache<IList<Event>>("AdminList",
+                    () =>
+                    {
+                        return dataProvider.GetMyPastEvents(ids);
+                    });
+        }
+
+
         public IList<Event> GetList(string period, string locationId)
         {
             int? days = getDaysCount(period);
@@ -85,24 +105,6 @@ namespace Events.Business.Classes
                  {
                      return dataProvider.GetById(id);
                  });
-        }
-
-        public IList<Event> GetAuthorPastEvents(string email)
-        {
-            return FromCache<IList<Event>>("userEvents" + email + "past",
-                () =>
-                {
-                    return dataProvider.GetAuthorPastEvents(email);
-                });
-        }
-
-        public IList<Event> GetAuthorFutureEvents(string email)
-        {
-            return FromCache<IList<Event>>("userEvents" + email + "future",
-                () =>
-                {
-                    return dataProvider.GetAuthorFutureEvents(email);
-                });
         }
 
         public EventStatuses Deactivate(string id)

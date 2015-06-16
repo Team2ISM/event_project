@@ -18,13 +18,16 @@ namespace team2project.Controllers
         CommentManager commentManager;
         CitiesManager cityManager;
         UserManager userManager;
+        SubscribersManager subscribersManager;
 
-        public EventController(EventManager eventManager, CommentManager commentManager, CitiesManager cityManager, UserManager userManager)
+        public EventController(EventManager eventManager, CommentManager commentManager, CitiesManager cityManager, UserManager userManager, SubscribersManager subscribersManager)
         {
+            
             this.eventManager = eventManager;
             this.commentManager = commentManager;
             this.cityManager = cityManager;
             this.userManager = userManager;
+            this.subscribersManager = subscribersManager;
         }
 
         [HttpGet]
@@ -139,7 +142,9 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult MyPastEvents()
         {
-            IList<Event> events = eventManager.GetAuthorPastEvents(User.Identity.Name);
+            var user = userManager.GetByEmail(User.Identity.Name);
+            var eventsId = subscribersManager.GetMyEventsId(user.Id);
+            IList<Event> events = eventManager.GetMyPastEvents(eventsId);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
             PrepareEventsToView(eventsModels);
             return View(eventsModels);
@@ -149,7 +154,9 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult MyFutureEvents()
         {
-            IList<Event> events = eventManager.GetAuthorFutureEvents(User.Identity.Name);
+            var user = userManager.GetByEmail(User.Identity.Name);
+            var eventsId = subscribersManager.GetMyEventsId(user.Id);
+            IList<Event> events = eventManager.GetMyFutureEvents(eventsId);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
             PrepareEventsToView(eventsModels);
             return View(eventsModels);

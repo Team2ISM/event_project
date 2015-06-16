@@ -47,27 +47,43 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public IList<Event> GetAuthorPastEvents(string email)
+        public IList<Event> GetMyFutureEvents(IList<Subscribing> sub)
         {
+            IList<Event> events = new List<Event>();
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria(typeof(Event));
-                criteria.Add(Restrictions.And(Restrictions.Eq("AuthorId", email),
-                    Restrictions.Lt("ToDate", DateTime.Now)));
-                return criteria.List<Event>();
+                
+                foreach (var sub in ids)
+                {
+                    var criteria = session.CreateCriteria<Event>();
+                    var el = criteria.Add(Restrictions.And(Restrictions.Eq("Id", sub.EventId), Restrictions.Ge("ToDate", DateTime.Now))).List<Event>();
+                   
+                    if(el.Count != 0)
+                        events.Add(el[0]);
+                }
+                return events;
             }
         }
 
-        public IList<Event> GetAuthorFutureEvents(string email)
+        public IList<Event> GetMyPastEvents(IList<Subscribing> sub)
         {
+            IList<Event> events = new List<Event>();
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria(typeof(Event));
-                criteria.Add(Restrictions.And(Restrictions.Eq("AuthorId", email),
-                    Restrictions.Ge("ToDate", DateTime.Now)));
-                return criteria.List<Event>();
+                
+                foreach (var sub in ids)
+                {
+                    var criteria = session.CreateCriteria<Event>();
+                    var elem = criteria.Add(Restrictions.And(Restrictions.Eq("Id", sub.EventId),
+                    Restrictions.Lt("ToDate", DateTime.Now))).List<Event>();
+                    if (elem.Count != 0)
+                        events.Add(elem[0]);
+                }
+                return events;
             }
         }
+
+
 
         public Event GetById(string id)
         {
