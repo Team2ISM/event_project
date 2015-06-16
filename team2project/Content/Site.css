@@ -6,13 +6,12 @@
 	min-width: 600px;
     padding-top:64px;
 }
-
 header, footer, nav, section {
     display: block;
 }
 nav{
     position: fixed;
-    z-index: 9000;
+    z-index: 700;
     top: 0;
 }
 p, div{
@@ -249,4 +248,11 @@ img {
     position:fixed;
     top:90%;
     right: 3%;
+}
+
+.sticky-filters {
+    margin-left: 0 !important;
+    position: fixed;
+    top: 64px;
+    width: 100%;
 }
