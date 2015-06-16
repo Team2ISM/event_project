@@ -260,3 +260,12 @@ img {
     background-color: #607D8B !important;
     color: white !important;
 }
+.dark-blue-grey-hover:focus{
+    background-color: #607D8B !important;
+    color: white !important;
+}
+.visible{
+    height:20px;
+    display: inline-block;
+    padding: 0px;
+}

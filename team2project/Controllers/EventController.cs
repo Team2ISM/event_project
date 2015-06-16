@@ -98,10 +98,6 @@ namespace team2project.Controllers
             }            
             evnt.AuthorId = User.Identity.Name;
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
-            if (!String.IsNullOrEmpty(evnt.Location))
-            {
-                evntModel.LocationId = cityManager.GetByName(evnt.Location).Id;
-            }
             evntModel.Description = evntModel.Description.RemovePreTag();
             evntModel.DateOfCreation = eventManager.GetById(evntModel.Id).DateOfCreation;
             eventManager.Update(evntModel);
@@ -133,7 +129,6 @@ namespace team2project.Controllers
             if (!ModelState.IsValid) return View(evnt);
 
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
-            evntModel.LocationId = cityManager.GetByName(evnt.Location).Id;
             evntModel.AuthorId = User.Identity.Name;
             evntModel.Description = evntModel.Description.RemovePreTag();
             eventManager.Create(evntModel);
