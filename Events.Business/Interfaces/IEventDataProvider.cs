@@ -10,11 +10,11 @@ namespace Events.Business.Interfaces
 
         IList<Event> GetAllEvents();
 
+        IList<Event> GetMyFutureEvents(IList<Subscribing> subscribing);
+
+        IList<Event> GetMyPastEvents(IList<Subscribing> subscribing);
+
         Event GetById(string id);
-
-        IList<Event> GetAuthorPastEvents(string email);
-
-        IList<Event> GetAuthorFutureEvents(string email);
 
         void Delete(Event model);
 
