@@ -36,7 +36,32 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 return criteria.List<Event>();
             }
         }
-
+        public IList<Event> Find(string text, int daysToEvent, string location)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                var endOfDay = DateTime.Today;
+                if (!String.IsNullOrEmpty(location))
+                {
+                    session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
+                }
+                if (daysToEvent > 0)
+                {
+                    session.EnableFilter("equalDate").SetParameter("nowaday", endOfDay).SetParameter("chosenDate", endOfDay.AddDays(daysToEvent - 1));
+                }
+                else
+                {
+                    session.EnableFilter("effectiveDate").SetParameter("asOfDate", endOfDay);
+                }
+                var criteria = session.CreateCriteria<Event>();
+                criteria.Add(Restrictions.Or(
+                    Restrictions.Like("Title", text, MatchMode.Anywhere),
+                    Restrictions.Like("TextDescription", text, MatchMode.Anywhere)));
+                criteria.Add(Restrictions.Eq("Active", true));
+                criteria.AddOrder(Order.Asc("FromDate"));
+                return criteria.List<Event>();
+            }
+        }
         public IList<Event> GetAllEvents()
         {
             using (ISession session = Helper.OpenSession())

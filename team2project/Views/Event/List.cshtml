@@ -16,10 +16,13 @@
     @Styles.Render("~/Content/jquery-ui.min.css")    
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
 }
-<h1 class="center blue-grey-text">Мероприятия</h1>
+
 
 <!-- Dropdown Trigger -->
-<div id="sticky">
+@if(!ViewBag.isFromFind)
+{
+    <h1 class="center blue-grey-text">Мероприятия</h1>
+    <div id="sticky">
     <div id="select-menu-wrapper">
         <div class="width80" id="select-menu">
             <div class="ui-widget left">
@@ -38,6 +41,16 @@
         </div>
     </div>
 </div>
+}
+else
+{
+    <h1 class="center blue-grey-text">Результаты поиска</h1>
+    <script>
+        $(document).ready(function () {
+            $("#search").val(decodeURIComponent(document.location.href.split("/")[4]));
+        });
+    </script>
+}
 
 <div class="container">
     

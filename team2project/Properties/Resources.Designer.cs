@@ -104,5 +104,14 @@ namespace team2project.Properties {
                 return ResourceManager.GetString("ResponseEventNotFound", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Совпадений не найдено..
+        /// </summary>
+        internal static string ResponseNoMatches {
+            get {
+                return ResourceManager.GetString("ResponseNoMatches", resourceCulture);
+            }
+        }
     }
 }

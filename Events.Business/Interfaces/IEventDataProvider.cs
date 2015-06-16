@@ -14,6 +14,8 @@ namespace Events.Business.Interfaces
 
         IList<Event> GetMyPastEvents(IList<Subscribing> subscribing);
 
+        IList<Event> Find(string text, int period = 0, string location = null);
+
         Event GetById(string id);
 
         void Delete(Event model);

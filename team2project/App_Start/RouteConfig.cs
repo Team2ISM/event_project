@@ -62,6 +62,12 @@ namespace team2project
               defaults: new { controller = "Event", action = "Index", location = UrlParameter.Optional }
           );
 
+            routes.MapRoute(
+              name: "Find",
+              url: "find/{text}",
+              defaults: new { controller = "Event", action = "Find", location = UrlParameter.Optional }
+          );
+
             #endregion
 
             #region User map routes            
