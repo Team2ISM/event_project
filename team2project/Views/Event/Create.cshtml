@@ -35,7 +35,6 @@
     {
         @Html.HiddenFor(m => m.Id)
         @Html.HiddenFor(m => m.TextDescription)
-        @Html.HiddenFor(m => m.LocationId)
         @Html.HiddenFor(m => m.AuthorId)
         @Html.ValidationSummary(true)
         <div class="input-field col s12 m12 l12">
@@ -53,10 +52,8 @@
         <div class="input-field col s12 m12 l12 center">
             <div class="m-left" id="city">@Html.LabelFor(m => m.Location, "Город")</div>
             <div class="ui-widget m-left">
-                @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
+                @Html.DropDownList("LocationId", AvailableLocations, new { @class = "visible" })
             </div>
-            <input id="location" name="Location" style="height: 0; padding: 0; margin: 0; border: none;">
-            @Html.ValidationMessageFor(m => m.Location)
         </div>
         
         <div class="input-field col s12 m12 l12">
@@ -78,8 +75,10 @@
             </div>
         </div>
 
-        <button class="btn waves-effect waves-light red lighten-1" onclick="window.location = '@ViewBag.returnUrl'" type="button">Отмена</button>  
-        <button class="btn waves-effect waves-light dark-blue-grey" type="submit">@button</button>        
+    <div class="center">
+        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover large-font" onclick="window.location = '@ViewBag.returnUrl'" type="button">Отмена</button>
+        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover bold large-font" type="submit">@button</button>
+    </div>
     }
     
 </div>
