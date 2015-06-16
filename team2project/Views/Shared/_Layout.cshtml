@@ -69,6 +69,12 @@
             @Html.RouteLink("Субботник", "Index", htmlAttributes: new { Class = "white-text", Id = "logo" })
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
             <ul class="right hide-on-med-and-down">
+                <li class="menu-content">
+                    <input type="text" id="search" />
+                </li>
+                <li class="menu-content">
+                    <a href="#" class="white-text">Искать</a>
+                </li>
                 <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text" })</li>
                 @if (User.Identity.IsAuthenticated)
                 {
