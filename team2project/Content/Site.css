@@ -256,3 +256,17 @@ img {
     top: 64px;
     width: 100%;
 }
+.dark-blue-grey-hover:hover{
+    background-color: #607D8B !important;
+    color: white !important;
+}
+.dark-blue-grey-hover:focus{
+    background-color: #607D8B !important;
+    color: white !important;
+}
+.visible{
+    height:20px;
+    width: auto;
+    display: inline-block;
+    padding: 0px;
+}

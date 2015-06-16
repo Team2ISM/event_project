@@ -33,15 +33,6 @@ else
         <div class="row">
 
             @Html.ValidationSummary(true)
-            @*@if (ViewBag.RegistrationSuccess != null)
-                {
-                <div id="registrationSuccess" class="col s12 m12 12 reg-mess center large-font">
-                    @ViewBag.RegistrationSuccess
-                </div>
-                }
-                else
-                {
-            *@
             <div class="input-field col s12 m6">
                 @Html.LabelFor(m => m.Name, "Имя")
                 @Html.EditorFor(m => m.Name)
@@ -60,11 +51,8 @@ else
             <div class="input-field col s12 m12 l12 center">
                 <div class="m-left" id="city">@Html.LabelFor(m => m.LocationId, "Город")</div>
                 <div class="ui-widget m-left">
-                    @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
+                    @Html.DropDownList("LocationId", AvailableLocations, new { @class = "visible" })
                 </div>
-                <input id="location" name="LocationId" style="height: 0; padding: 0; margin: 0; border: none;">
-                @Html.ValidationMessageFor(m => m.LocationId)
-
             </div>
             <div class="input-field col s12">
                 @Html.LabelFor(m => m.Password, "Пароль")
@@ -77,7 +65,6 @@ else
                 @Html.ValidationMessageFor(m => m.RepeatPassword)
             </div>
             <button class="btn waves-effect waves-light dark-blue-grey" type="submit">Зарегистрировать меня</button>
-            @*}*@
         </div>
     }      
 </div>

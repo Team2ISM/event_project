@@ -49,7 +49,10 @@ label[for="Description"] {
 .cke_dialog_ui_hbox_first input{
     margin-bottom: 4px;
 }
-
+.bold{
+    font-weight: bold;
+}
 .container button {
-    width: 49.5%;
+    min-width: 200px;
+    width: 200px;
 }
