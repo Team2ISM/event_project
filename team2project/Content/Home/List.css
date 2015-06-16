@@ -328,3 +328,8 @@ ul li {
   line-height: 55.5px;
   margin-top: -10px;
 }
+#City{
+    height:20px;
+    display: inline-block;
+    padding: 0px;
+}
