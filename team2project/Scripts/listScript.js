@@ -164,10 +164,10 @@ $(function () {
         combobox.toggle();
     });
 
-    $(".zoomEnabled").zoom({
+    /*$(".zoomEnabled").zoom({
         duration: 150,
         magnify:0.3
-    });
+    });*/
 });
 
 $(function () {
