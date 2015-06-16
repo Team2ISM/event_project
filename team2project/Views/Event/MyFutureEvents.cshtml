@@ -30,67 +30,38 @@
                         <div class="day color-blue-grey">
                             @CheckDateIfNull(evnt.FromDate, "dd")
                         </div>
+                    </td>                    
+                    <td class="list-events-img">
+                        <div class="event-small-img">
+                            @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
+                        </div>
                     </td>
-                    @if (evnt.Image != null)
-                    {
-                        <td class="list-events-img">
-                            <div class="event-small-img">
-                                @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
-                            </div>
-                        </td>
-                        <td>
-                            <div class="list-events-content">
-                                <h5 class="blue-grey-text">
-                                    @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
-                                </h5>
-                                <div class="list-events-links">
-                                    @Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light dark-blue-grey white-text", @id = "TdUpdate" })
-                                    <button id="TdDell" class="btn waves-effect waves-light white-text red" onclick="deleteEvent('@evnt.Id')">Удалить</button>
-                                    @*<a class="btn-floating blue"><i class="small mdi-editor-mode-edit"></i></a>
-                                    <a id="TdDell" class="btn-floating red" onlick="deleteEvent('@evnt.Id')"><i class="small mdi-action-delete"></i></a>*@                                                                                                       
-                                </div>
-                                <span class="list-events-location">
-                                    @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
-                                    @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
-                                </span>
-                                <p>
-                                    @if (!String.IsNullOrEmpty(evnt.TextDescription) && evnt.TextDescription.Length >= 300)
+                    <td>
+                        <div class="list-events-content">
+                            <h5 class="blue-grey-text">
+                                @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
+                            </h5>
+                            <span class="list-events-location">
+                                @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
+                                @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
+                            </span>
+                            <p>
+                                @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
                                 {
                                     About = "Подробнее...";
                                 }
-                                    @Html.RouteLink((!String.IsNullOrEmpty(evnt.TextDescription) ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
-                                    @{About = " ";}
-                                </p>
-                            </div>
-                        </td>
-                    }
-                    else
-                    {
-                        <td colspan="2">
-                            <div class="list-events-content">
-                                <h5 class="blue-grey-text">
-                                    @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
-                                </h5>
-                                <div class="list-events-links">
-                                    @Html.RouteLink("Редактировать", "UpdateEvent", new { evnt.Id }, new { @class = "btn waves-effect waves-light dark-blue-grey white-text", @id = "TdUpdate" })
-                                    <button id="TdDell" class="btn waves-effect waves-light white-text red" onclick="deleteEvent('@evnt.Id')">Удалить</button>
-                                </div>
-                                <span class="list-events-location">
-                                    @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
-                                    @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
-                                </span>
-                                <p>
-                                    @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
-                                    {
-                                        About = "Подробнее...";
-                                    }
-                                    @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
-                                    @{About = " ";}
-                                </p>
-                            </div>
-                        </td>
-                    }
-                </tr>              
+                                @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
+                                @{About = " ";}
+                            </p>
+                        </div>
+                    </td>                    
+                    <td class="list-events-buttons">
+                        <div>
+                            @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating blue"})
+                            <a class="btn-floating red" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
+                        </div>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>

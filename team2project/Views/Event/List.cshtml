@@ -74,14 +74,14 @@
                         </div>
                     </td>                    
                     <td class="list-events-buttons">
-                            @if(evnt.AuthorId == User.Identity.Name)
-                            {
-                            <div>
-                                @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating blue"})
-                                <a class="btn-floating red" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
-                            </div>
-                            }
-                        </td>
+                        @if(evnt.AuthorId == User.Identity.Name)
+                        {
+                        <div>
+                            @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating blue"})
+                            <a class="btn-floating red" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
+                        </div>
+                        }
+                    </td>
                 </tr>                
             }
         </tbody>
