@@ -179,13 +179,9 @@ $(function () {
         }
     });
 
-    var isClicked = false;
-    
-    $(".routelink").on("click", function () {
-        if (!isClicked && cityValue && cityValue !== "undefined") {
-            isClicked = true;
-            $(this).attr("href", $(this).attr("href") + "/" + cityValue);
-        }
-    })
+    $(".filter-link").each(function() {
+        $(this).attr("href",$(this).attr("href") + "/" + cityValue);
+    });
+
     $('.custom-combobox input').attr('readonly', true);
 });
