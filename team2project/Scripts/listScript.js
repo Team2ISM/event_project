@@ -183,5 +183,4 @@ $(function () {
         $(this).attr("href",$(this).attr("href") + "/" + cityValue);
     });
 
-    $('.custom-combobox input').attr('readonly', true);
 });

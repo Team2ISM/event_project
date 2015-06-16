@@ -194,5 +194,5 @@ window.onload = function () {
         lang: 'ru',
         mask: true
     });
-    $('.custom-combobox input').attr('readonly', true);
+   
 };
