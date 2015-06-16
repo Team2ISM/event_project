@@ -115,6 +115,10 @@ td a:hover, td a:active {
     margin: 0 auto;
     margin-bottom: 1%;
 }
+#sticky{
+    width: 100%;
+    padding: 0;
+}
 #select-menu-wrapper{
   text-align: center;
   z-index: 800;

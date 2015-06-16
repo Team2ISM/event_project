@@ -19,23 +19,26 @@
 <h1 class="center blue-grey-text">Мероприятия</h1>
 
 <!-- Dropdown Trigger -->
-<div id="select-menu-wrapper">
-    <div class="width80" id="select-menu">
-        <div class="ui-widget left">
-            <label class="left">Город: </label>
-            <div class="ui-widget m-left">
-                @Html.DropDownList("City", AvailableLocations, new { id = "combobox" })
+<div id="sticky">
+    <div id="select-menu-wrapper">
+        <div class="width80" id="select-menu">
+            <div class="ui-widget left">
+                <label class="left">Город: </label>
+                <div class="ui-widget m-left">
+                    @Html.DropDownList("City", AvailableLocations, new { id = "combobox" })
+                </div>
             </div>
-        </div>
 
-        <div class="date-filters">
-            @ConstructLink("Все мероприятия", PeriodStates.Anytime)
-            @ConstructLink("На сегодня", PeriodStates.Today)
-            @ConstructLink("На 3 дня", PeriodStates.ThreeDays)
-            @ConstructLink("На неделю", PeriodStates.Week)
+            <div class="date-filters">
+                @ConstructLink("Все мероприятия", PeriodStates.Anytime)
+                @ConstructLink("На сегодня", PeriodStates.Today)
+                @ConstructLink("На 3 дня", PeriodStates.ThreeDays)
+                @ConstructLink("На неделю", PeriodStates.Week)
+            </div>
         </div>
     </div>
 </div>
+
 <div class="container">
     
     <table class="striped width80 centered">
@@ -101,15 +104,15 @@
 
 <script>
     $(document).ready(function () {
-        var stickyNavTop = $('#select-menu-wrapper').offset().top;
+        var stickyNavTop = $('#sticky').offset().top;
 
         var stickyNav = function () {
             var scrollTop = $(window).scrollTop();
 
             if (scrollTop+64 > stickyNavTop) {
-                $('#select-menu-wrapper').addClass('sticky-filters');
+                $('#sticky').addClass('sticky-filters');
             } else {
-                $('#select-menu-wrapper').removeClass('sticky-filters');
+                $('#sticky').removeClass('sticky-filters');
             }
         };
 
