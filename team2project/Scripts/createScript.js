@@ -2,7 +2,6 @@
 window.onload = function () {
     editor = CKEDITOR.replace('Description', { /*magicline_everywhere : true*/ });
 
-    var cityVa
     $("#LocationId").on("change", function () {
         var arr = $("#LocationId").children();
         var value = $("#LocationId").val();

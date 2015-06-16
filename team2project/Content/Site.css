@@ -266,6 +266,7 @@ img {
 }
 .visible{
     height:20px;
+    width: auto;
     display: inline-block;
     padding: 0px;
 }
