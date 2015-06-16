@@ -4,6 +4,7 @@ using Events.Business.Models;
 using Events.NHibernateDataProvider.NHibernateCore;
 using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using team2project.Models;
@@ -41,6 +42,22 @@ namespace team2project.Controllers
             List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
             PrepareEventsToView(list);
             ViewBag.location = location;
+            ViewBag.isFromFind = false;
+            return View("List", list);
+        }
+
+        [HttpGet]
+        public ActionResult Find(string text)
+        {
+            text = HttpUtility.UrlDecode(text);
+            var listModel = eventManager.Find(text, "all", null);
+            if (listModel == null || listModel.Count == 0)
+            {
+                return View("GenericError", model: Resources.ResponseNoMatches);
+            }
+            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
+            PrepareEventsToView(list);
+            ViewBag.isFromFind = true;
             return View("List", list);
         }
 
