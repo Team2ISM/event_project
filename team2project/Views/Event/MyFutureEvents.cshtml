@@ -39,10 +39,10 @@
                     <td>
                         @Html.Partial("EventContent", evnt)
                     </td>
-                    <td class="list-events-buttons">
-                        <div>
-                            @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating blue"})
-                            <a class="btn-floating red" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
+                    <td>
+                        <div class="right" id="event-menu">
+                            @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating bacgr-text" })
+                            <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
                         </div>
                     </td>
                 </tr>
