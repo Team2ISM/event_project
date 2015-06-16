@@ -137,7 +137,7 @@ var locat = $("#location"), editor;
 window.onload = function () {
     editor = CKEDITOR.replace('Description', { /*magicline_everywhere : true*/ });
 
-    var combobox = $("#combobox"), value;
+    var combobox = $("#combobox"), value, inner;
     if (city) {
         var arr = combobox.children();
         arr.each(function (i, val) {
