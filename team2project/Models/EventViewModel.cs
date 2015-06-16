@@ -62,7 +62,8 @@ namespace team2project.Models
 
         public IList<Comment> Comments { get; set; }
 
-        [RegularExpression(@"^https?://(?:[a-z\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpe?g|gif|png)(?:\?([^#]*))?(?:#(.*))?$", ErrorMessage = "Некорректный адрес")]
+        [RegularExpression(@"^https?://(?:[a-z\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+(?:\.(?:jpe?g|gif|png))?(?:\?([^#]*))?(?:#(.*))?$", ErrorMessage = "Некорректный адрес")]
+        [StringLength(400, MinimumLength = 5, ErrorMessage = "Длина должна быть от 5 до 400 символов")]
         public string Image { get; set; }
     }
 }
