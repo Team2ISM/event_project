@@ -348,3 +348,8 @@ ul li {
 .btn-floating i {
   color: #727272 !important;
 }
+#event-menu
+{
+    margin-top: -5px;
+    margin-right: -8px;
+}
