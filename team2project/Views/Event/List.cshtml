@@ -57,6 +57,18 @@
                         </div>
                     </td>
                     <td>
+                        @if(evnt.AuthorId == User.Identity.Name)
+                        {
+                            <div class="fixed-action-btn">
+                                <a class="btn-floating btn-large red">
+                                  <i class="large mdi-editor-mode-edit"></i>
+                                </a>
+                                <ul>
+                                  <li>@Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating blue"})</li>
+                                  <li><a class="btn-floating red" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a></li>
+                                </ul>
+                            </div>
+                        }
                         <div class="list-events-content">
                             <h5 class="blue-grey-text">
                                 @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
@@ -75,15 +87,6 @@
                             </p>
                         </div>
                     </td>                    
-                    <td class="list-events-buttons">
-                        @if(evnt.AuthorId == User.Identity.Name)
-                        {
-                        <div>
-                            @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating blue"})
-                            <a class="btn-floating red" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
-                        </div>
-                        }
-                    </td>
                 </tr>                
             }
         </tbody>

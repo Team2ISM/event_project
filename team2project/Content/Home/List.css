@@ -278,3 +278,48 @@ td a:hover, td a:active {
 .ui-button-text {
     margin-top: -7px;
 }
+.fixed-action-btn ul {
+  z-index: 99999999;
+  left: 0;
+  right: 0;
+  text-align: center;
+  position: static;
+  bottom: 64px;
+  margin-top: -66px;
+  margin-left: -82px;
+  /* z-index: 10000; */
+}
+
+ul li {
+  list-style-type: none;
+  display: table-cell !important;
+}
+
+.fixed-action-btn {
+  position: inherit;
+  right: 23px;
+  bottom: 23px;
+  padding-top: 15px;
+  margin-bottom: 0;
+  z-index: 998;
+  float: right;
+}
+
+.fixed-action-btn ul li
+{
+    /* margin-bottom: 15px; */
+    margin: 2px;
+    padding: 2px;
+}
+
+.btn-floating.btn-large {
+  width: 43.5px;
+  height: 43.5px;
+  top: -23px;
+  left: 7px;
+}
+
+.btn-floating.btn-large i {
+  line-height: 55.5px;
+  margin-top: -5px;
+}
