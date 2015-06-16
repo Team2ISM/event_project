@@ -49,7 +49,16 @@
             @Html.EditorFor(m => m.Description)
             @Html.ValidationMessageFor(m => m.Description)
         </div>
-
+        
+        <div class="input-field col s12 m12 l12 center">
+            <div class="m-left" id="city">@Html.LabelFor(m => m.Location, "Город")</div>
+            <div class="ui-widget m-left">
+                @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
+            </div>
+            <input id="location" name="Location" style="height: 0; padding: 0; margin: 0; border: none;">
+            @Html.ValidationMessageFor(m => m.Location)
+        </div>
+        
         <div class="input-field col s12 m12 l12">
             @Html.LabelFor(m => m.Image, "Изображение")
             @Html.EditorFor(m => m.Image)
@@ -67,14 +76,6 @@
                 <input id="datetimepicker2" name="ToDate" type="text">
                 @Html.ValidationMessageFor(m => m.ToDate)
             </div>
-        </div>
-        <div class="input-field col s12 m12 l12 center">
-            <div class="m-left" id="city">@Html.LabelFor(m => m.Location, "Город")</div>
-            <div class="ui-widget m-left">
-                @Html.DropDownList("some name", AvailableLocations, new { id = "combobox" })
-            </div>
-            <input id="location" name="Location" style="height: 0; padding: 0; margin: 0; border: none;">
-            @Html.ValidationMessageFor(m => m.Location)
         </div>
 
         <button class="btn waves-effect waves-light dark-blue-grey" onclick="window.location = '@ViewBag.returnUrl'" type="button">Отмена</button>  
