@@ -47,13 +47,13 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public IList<Event> GetMyFutureEvents(IList<Subscribing> sub)
+        public IList<Event> GetMyFutureEvents(IList<Subscribing> subscribing)
         {
             IList<Event> events = new List<Event>();
             using (ISession session = Helper.OpenSession())
             {
-                
-                foreach (var sub in ids)
+
+                foreach (var sub in subscribing)
                 {
                     var criteria = session.CreateCriteria<Event>();
                     var el = criteria.Add(Restrictions.And(Restrictions.Eq("Id", sub.EventId), Restrictions.Ge("ToDate", DateTime.Now))).List<Event>();
@@ -65,13 +65,13 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public IList<Event> GetMyPastEvents(IList<Subscribing> sub)
+        public IList<Event> GetMyPastEvents(IList<Subscribing> subscribing)
         {
             IList<Event> events = new List<Event>();
             using (ISession session = Helper.OpenSession())
             {
-                
-                foreach (var sub in ids)
+
+                foreach (var sub in subscribing)
                 {
                     var criteria = session.CreateCriteria<Event>();
                     var elem = criteria.Add(Restrictions.And(Restrictions.Eq("Id", sub.EventId),

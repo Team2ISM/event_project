@@ -10,9 +10,9 @@ namespace Events.Business.Interfaces
 
         IList<Event> GetAllEvents();
 
-        IList<Event> GetMyFutureEvents(IList<Subscribing> sub);
+        IList<Event> GetMyFutureEvents(IList<Subscribing> subscribing);
 
-        IList<Event> GetMyPastEvents(IList<Subscribing> sub);
+        IList<Event> GetMyPastEvents(IList<Subscribing> subscribing);
 
         Event GetById(string id);
 
