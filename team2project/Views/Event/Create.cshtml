@@ -77,18 +77,23 @@
 
     <div class="center">
         <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover large-font" onclick="window.location = '@ViewBag.returnUrl'" type="button">Отмена</button>
-        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover bold large-font" type="submit">@button</button>
+        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover bold large-font" id="create" type="submit">@button</button>
     </div>
     }
     
 </div>
 <script>
     $(document).ready(function(){
+        var target = $("#create");
+        $("form").on("submit", function () {
+            target.addClass("disabled");
+            target.attr("disabled", "disabled");
+        });
         $(".create-event-block").hide(0);
     });
     window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");
     window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");
-    window.city = @Html.Raw("'" + (Model.LocationId != null ? Model.LocationId.ToString() : " ") + "'");
+    window.city = @Html.Raw("'" + (Model.LocationId != null ? Model.LocationId.ToString() : " ") + "'")
 </script>
 @section scripts{
     @Scripts.Render("~/Scripts/jquery-ui.js")
