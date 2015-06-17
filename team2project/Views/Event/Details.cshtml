@@ -1,4 +1,5 @@
 ﻿@{
+    var currentURL = Request.Url;
     ViewBag.Title = "Details";
 }
 
@@ -19,7 +20,7 @@
 @if (User.Identity.Name == Model.AuthorId)
 {
     <div class="edit-event-block">
-        @Html.CreateLink("<i class=\"large mdi-editor-mode-edit\"></i>", "UpdateEvent", new { Model.Id }, new { @class = "large btn-floating blue" })
+        @Html.CreateLink("<i class=\"large mdi-editor-mode-edit\"></i>", "UpdateEvent", new { returnURL = currentURL, Model.Id }, new { @class = "large btn-floating blue" })
         <a class="large btn-floating red" onclick="deleteEvent('@Model.Id'); return false"><i class="large mdi-action-delete"></i></a>
     </div>
 }
