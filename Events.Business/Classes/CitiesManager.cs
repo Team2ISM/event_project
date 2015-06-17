@@ -12,10 +12,10 @@ namespace Events.Business.Classes
         protected override string Name { get; set; }
 
         public CitiesManager(ICitiesDataProvider dataProvider, ICacheManager cacheManager)
+            : base(cacheManager)
         {
             Name = "Cities";
             this.dataProvider = dataProvider;
-            this.cacheManager = cacheManager;
         }
 
         public IList<City> GetList()
@@ -35,15 +35,5 @@ namespace Events.Business.Classes
                     return dataProvider.GetById(citytId);
                 });
         }
-
-        public City GetByName(string name)
-        {
-            return cacheManager.FromCache<City>(name,
-                () =>
-                {
-                    return dataProvider.GetByName(name);
-                });
-        }
-
     }
 }

@@ -31,7 +31,7 @@ namespace team2project
             builder.RegisterType<NHibernateEventDataProvider>()
                 .As<IEventDataProvider>();
             builder.RegisterType<NHibernateCitiesDataProvider>()
-                .As<ICitiesDataProvider>();
+                .As<ICitiesDataProvider>().SingleInstance();
             builder.RegisterType<NHibernateCommentDataProvider>()
                 .As<ICommentDataProvider>();
             builder.RegisterType<NHibernateSubscribersDataProvider>()
