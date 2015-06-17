@@ -24,10 +24,10 @@ namespace Events.Business.Classes
         protected override string Name { get; set; }
 
         public UserManager(IUserDataProvider userDataProvider, ICacheManager cacheManager)
+            : base(cacheManager)
         {
             Name = "Users";
             this.userDataProvider = userDataProvider;
-            this.cacheManager = cacheManager;
         }
 
         public IList<User> GetAllUsers()
@@ -40,7 +40,7 @@ namespace Events.Business.Classes
 
         public User GetById(string id)
         {
-            return cacheManager.FromCache<User>("id:" + id,
+            return CacheManager.FromCache<User>("id:" + id,
                  ( ) => {
                      return userDataProvider.GetById(id);
                  });
@@ -48,7 +48,7 @@ namespace Events.Business.Classes
 
         public User GetByEmail(string mail)
         {
-            return cacheManager.FromCache<User>("email:" + mail,
+            return CacheManager.FromCache<User>("email:" + mail,
                  ( ) => {
                      return userDataProvider.GetByMail(mail);
                  });            

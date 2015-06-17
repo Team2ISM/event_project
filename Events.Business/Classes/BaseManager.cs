@@ -11,32 +11,37 @@ namespace Events.Business.Classes
 {
     public abstract class BaseManager
     {
-        protected ICacheManager cacheManager;
-
+        protected ICacheManager CacheManager { get; private set; }
+        
         protected abstract string Name { get; set; }
+
+        public BaseManager(ICacheManager cacheManager)
+        {
+            this.CacheManager = cacheManager;
+        }
 
         protected TValue FromCache<TValue>(string name, Func<TValue> function)
         {
-            return cacheManager.FromCache<TValue>(Name + "::" + name, function);
+            return CacheManager.FromCache<TValue>(Name + "::" + name, function);
         }
 
         protected CacheItem ToCache<TValue>(string name, Func<TValue> function)
         {
-            return cacheManager.ToCache<TValue>(Name + "::" + name, function);
+            return CacheManager.ToCache<TValue>(Name + "::" + name, function);
         }
 
         protected void ClearCache()
         {
-            cacheManager.ClearCacheByName(Name);
+            CacheManager.ClearCacheByName(Name);
             if (!Name.Equals(EnvironmentInfo.ReminderCacheName))
             {
-                cacheManager.ClearCacheByName(EnvironmentInfo.ReminderCacheName);
+                CacheManager.ClearCacheByName(EnvironmentInfo.ReminderCacheName);
             }
         }
 
         protected void RemoveFromCache(string name)
         {
-            cacheManager.RemoveFromCache(Name + "::" + name);
+            CacheManager.RemoveFromCache(Name + "::" + name);
         }
     }
 }

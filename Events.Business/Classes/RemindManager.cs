@@ -16,10 +16,10 @@ namespace Events.Business.Classes
         protected override string Name { get; set; }
 
         public RemindManager(IEmailReminderDataProvider dataProvider, ICacheManager cacheManager)
+            : base(cacheManager)
         {
             Name = EnvironmentInfo.ReminderCacheName;
             this.dataProvider = dataProvider;
-            this.cacheManager = cacheManager;
         }
 
         public IList<Event> GetListEventsToRemind()

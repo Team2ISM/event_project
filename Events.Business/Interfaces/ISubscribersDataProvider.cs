@@ -13,6 +13,6 @@ namespace Events.Business.Interfaces
 
         void UnsubscribeUser(Subscribing row);
 
-        bool IsSubscribed(Subscribing row);
+        bool IsSubscribed(string eventId, string userId);
     }
 }
