@@ -18,7 +18,7 @@ namespace Events.Business.Classes
     public class UserManager : BaseManager
     {
         IUserDataProvider userDataProvider;
-        
+
         SimpleCrypto.PBKDF2 crypto = new SimpleCrypto.PBKDF2();
 
         protected override string Name { get; set; }
@@ -33,15 +33,17 @@ namespace Events.Business.Classes
         public IList<User> GetAllUsers()
         {
             return FromCache<IList<User>>("AllUsersList",
-                    ( ) => {
+                    () =>
+                    {
                         return userDataProvider.GetAllUsers();
-                    });            
+                    });
         }
 
         public User GetById(string id)
         {
             return CacheManager.FromCache<User>("id:" + id,
-                 ( ) => {
+                 () =>
+                 {
                      return userDataProvider.GetById(id);
                  });
         }
@@ -49,9 +51,10 @@ namespace Events.Business.Classes
         public User GetByEmail(string mail)
         {
             return CacheManager.FromCache<User>("email:" + mail,
-                 ( ) => {
+                 () =>
+                 {
                      return userDataProvider.GetByMail(mail);
-                 });            
+                 });
         }
 
         private void CreateUser(User user)
@@ -63,25 +66,14 @@ namespace Events.Business.Classes
         public void UpdateUser(User user)
         {
             userDataProvider.UpdateUser(user);
-            ClearCache();          
+            ClearCache();
         }
 
-        public string GetFullName(string email)
-        {
-            return FromCache<string>("UserName:" + email,
-                () =>
-                {
-                    return userDataProvider.GetFullName(email);
-                });
-        }        
-
         public void ChangePassword(User user, string password)
-        {            
+        {
             var encrPass = crypto.Compute(password);
-
             user.Password = encrPass;
             user.PasswordSalt = crypto.Salt;
-
             UpdateUser(user);
         }
 
@@ -147,7 +139,8 @@ namespace Events.Business.Classes
             try
             {
                 client.Send(msg);
-            } catch
+            }
+            catch
             {
             }
         }
