@@ -40,15 +40,6 @@ namespace Events.Business.Classes
                 });
         }
 
-        public IList<Subscribing> GetMyEventsId(string userId)
-        {
-            return FromCache<IList<Subscribing>>(userId,
-                () =>
-                {
-                    return dataProvider.GetMyEventsId(userId);
-                });
-        }
-
         public int GetCount(string eventId)
         {
             return FromCache<int>("Count:" + eventId,

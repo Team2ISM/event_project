@@ -23,7 +23,7 @@ namespace team2project.Controllers
 
         public EventController(EventManager eventManager, CommentManager commentManager, CitiesManager cityManager, UserManager userManager, SubscribersManager subscribersManager)
         {
-            
+
             this.eventManager = eventManager;
             this.commentManager = commentManager;
             this.cityManager = cityManager;
@@ -34,15 +34,18 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index(string period, string location)
         {
-            var listModel = eventManager.GetList(period, location);
-            if (listModel == null)
+            try
             {
-                return RedirectToRoute("Error404");
+                var listModel = eventManager.GetList(period, location);
+                List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
+                PrepareEventsToView(list);
+                ViewBag.location = location;
+                return View("List", list);
             }
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
-            PrepareEventsToView(list);
-            ViewBag.location = location;
-            return View("List", list);
+            catch (ArgumentException ex)
+            {
+                return View("GenericError", model: Resources.ListOfEventsNotFound);
+            }
         }
 
         [HttpGet]
@@ -99,7 +102,7 @@ namespace team2project.Controllers
             if (evnt.AuthorId != User.Identity.Name)
             {
                 return View("GenericError", model: Resources.ResponseEditingNotAllowedDueToWrongUser);
-            }            
+            }
             evnt.AuthorId = User.Identity.Name;
             var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
             evntModel.Description = evntModel.Description.RemovePreTag();
@@ -136,7 +139,7 @@ namespace team2project.Controllers
             evntModel.AuthorId = User.Identity.Name;
             evntModel.Description = evntModel.Description.RemovePreTag();
             eventManager.Create(evntModel);
-            return RedirectToRoute("EventDetails", new { id = evntModel.Id});
+            return RedirectToRoute("EventDetails", new { id = evntModel.Id });
         }
 
         [Authorize]
@@ -144,10 +147,8 @@ namespace team2project.Controllers
         public ActionResult MyPastEvents()
         {
             var user = userManager.GetByEmail(User.Identity.Name);
-            var eventsId = subscribersManager.GetMyEventsId(user.Id);
-            IList<Event> events = eventManager.GetMyPastEvents(eventsId);
+            IList<Event> events = eventManager.GetMyPastEvents(user.Id);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            eventsModels = eventsModels.OrderBy(x => x.FromDate).ToList();
             PrepareEventsToView(eventsModels);
             return View(eventsModels);
         }
@@ -157,10 +158,8 @@ namespace team2project.Controllers
         public ActionResult MyFutureEvents()
         {
             var user = userManager.GetByEmail(User.Identity.Name);
-            var eventsId = subscribersManager.GetMyEventsId(user.Id);
-            IList<Event> events = eventManager.GetMyFutureEvents(eventsId);
+            IList<Event> events = eventManager.GetMyFutureEvents(user.Id);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            eventsModels = eventsModels.OrderBy(x => x.FromDate).ToList();
             PrepareEventsToView(eventsModels);
             return View(eventsModels);
         }

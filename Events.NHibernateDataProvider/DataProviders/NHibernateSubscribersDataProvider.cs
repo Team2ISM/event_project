@@ -18,10 +18,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria(typeof(Subscribing));
-                criteria.Add(Restrictions.Eq("EventId", eventId));
-                var list = criteria.List<Subscribing>();
-                return list.Count;
+                return session.QueryOver<Subscribing>().RowCount();
             }
         }
 
@@ -34,17 +31,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 return criteria.List<Subscribing>();
             }
         }
-
-        public IList<Subscribing> GetMyEventsId(string userId)
-        {
-            using (ISession session = Helper.OpenSession())
-            {
-                var criteria = session.CreateCriteria<Subscribing>();
-                criteria.Add(Restrictions.Eq("UserId", userId));
-                return criteria.List<Subscribing>();
-            }
-        }
-
 
         public void SubscribeUser(Subscribing row)
         {
