@@ -46,47 +46,53 @@ $(function () {
         $(this).attr("href", $(this).attr("href") + "/" + cityValue);
     });
 
-    $(".subscribe-button").click(function () {
-        button = $(this);
-        id = button.attr("id").split("@")[0];
-        if (button.hasClass("subscribe"))
-        {
-            button.addClass("disabled");
-            button.attr("disabled", true);
-            $.post("/subscribe", { id: id }, function (data) {
-                if (data) {
-                    button.toggleClass("unsubscribe");
-                    button.toggleClass("subscribe");
-                }
-                else {
-                    location.assign('/user/login?returnURL=' + returnURL);
-                }
-                reloadCount(id);
-                button.removeClass("disabled");
-                button.removeAttr("disabled");
-            });
-        }
-        else
-        {
-            button.addClass("disabled");
-            button.attr("disabled", true);
-            $.post("/unsubscribe", { id: id }, function (data) {
-                if (data) {
-                    button.toggleClass("unsubscribe-button");
-                    button.toggleClass("subscribe-button");
-                }
-                else {
-                    location.assign('/user/login');
-                }
-                reloadCount(id);
-                button.removeClass("disabled");
-                button.removeAttr("disabled");
-            });
-        }
-    });
+    $(".subscribe-button").click(subscribe);
+
+    $(".unsubscribe-button").click(unsubscribe);
+    
 });
 function reloadCount(id) {
     $.post("/subscribers/getcount", { id: id }, function (data) {
         $("#"+id+"-count").children().html(data);
+    });
+}
+function subscribe() {
+    button = $(this);
+    id = button.attr("id").split("_")[0];
+    button.addClass("disabled");
+    button.attr("disabled", true);
+    $.post("/subscribe", { id: id }, function (data) {
+        if (data) {
+            button.toggleClass("unsubscribe-button");
+            button.toggleClass("subscribe-button");
+            button.unbind("click");
+            button.click(unsubscribe);
+        }
+        else {
+            location.assign('/user/login?returnURL=' + returnURL);
+        }
+        reloadCount(id);
+        button.removeClass("disabled");
+        button.removeAttr("disabled");
+    });
+}
+function unsubscribe() {
+    button = $(this);
+    id = button.attr("id").split("_")[0];
+    button.addClass("disabled");
+    button.attr("disabled", true);
+    $.post("/unsubscribe", { id: id }, function (data) {
+        if (data) {
+            button.toggleClass("unsubscribe-button");
+            button.toggleClass("subscribe-button");
+            button.unbind("click");
+            button.click(subscribe);
+        }
+        else {
+            location.assign('/user/login');
+        }
+        reloadCount(id);
+        button.removeClass("disabled");
+        button.removeAttr("disabled");
     });
 }
