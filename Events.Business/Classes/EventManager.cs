@@ -63,7 +63,7 @@ namespace Events.Business.Classes
 
             if (!days.HasValue)
             {
-                return null;
+                throw new ArgumentException();
             }
 
             return FromCache<IList<Event>>("list" + period + "-" + locationId,
