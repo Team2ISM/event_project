@@ -10,8 +10,6 @@ namespace Events.Business.Interfaces
     {
         IList<User> GetAllUsers();
 
-        string GetFullName(string email);
-
         User GetById(string id);
 
         User GetByMail(string mail);
