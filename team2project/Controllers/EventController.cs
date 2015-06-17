@@ -147,10 +147,8 @@ namespace team2project.Controllers
         public ActionResult MyPastEvents()
         {
             var user = userManager.GetByEmail(User.Identity.Name);
-            var eventsId = subscribersManager.GetMyEventsId(user.Id);
-            IList<Event> events = eventManager.GetMyPastEvents(eventsId);
+            IList<Event> events = eventManager.GetMyPastEvents(user.Id);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            eventsModels = eventsModels.OrderBy(x => x.FromDate).ToList();
             PrepareEventsToView(eventsModels);
             return View(eventsModels);
         }
@@ -160,10 +158,8 @@ namespace team2project.Controllers
         public ActionResult MyFutureEvents()
         {
             var user = userManager.GetByEmail(User.Identity.Name);
-            var eventsId = subscribersManager.GetMyEventsId(user.Id);
-            IList<Event> events = eventManager.GetMyFutureEvents(eventsId);
+            IList<Event> events = eventManager.GetMyFutureEvents(user.Id);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            eventsModels = eventsModels.OrderBy(x => x.FromDate).ToList();
             PrepareEventsToView(eventsModels);
             return View(eventsModels);
         }

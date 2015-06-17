@@ -38,21 +38,21 @@ namespace Events.Business.Classes
         }
 
 
-        public IList<Event> GetMyFutureEvents(IList<Subscribing> ids)
+        public IList<Event> GetMyFutureEvents(string userId)
         {
             return FromCache<IList<Event>>("AdminList",
                     () =>
                     {
-                        return dataProvider.GetMyFutureEvents(ids);
+                        return dataProvider.GetMyFutureEvents(userId);
                     });
         }
 
-        public IList<Event> GetMyPastEvents(IList<Subscribing> ids)
+        public IList<Event> GetMyPastEvents(string userId)
         {
             return FromCache<IList<Event>>("AdminList",
                     () =>
                     {
-                        return dataProvider.GetMyPastEvents(ids);
+                        return dataProvider.GetMyPastEvents(userId);
                     });
         }
 
