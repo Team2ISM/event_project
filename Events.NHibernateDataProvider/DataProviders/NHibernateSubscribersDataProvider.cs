@@ -18,10 +18,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                var criteria = session.CreateCriteria(typeof(Subscribing));
-                criteria.Add(Restrictions.Eq("EventId", eventId));
-                var list = criteria.List<Subscribing>();
-                return list.Count;
+                return session.QueryOver<Subscribing>().RowCount();
             }
         }
 
