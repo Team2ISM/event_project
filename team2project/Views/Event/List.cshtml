@@ -69,8 +69,8 @@
                     </td>
                     <td>
                         <div class="fixed-action-btn">
-                            <a class="btn-floating btn-large bacgr-text subscribe-button subscribe" id="@(evnt.Id + "_sub")">
-                                <i class="large mdi-social-person-add"></i>
+                            <a class="btn-floating btn-large bacgr-text subscribe" id="@(evnt.Id + "_sub")">
+                                <i class="large"></i>
                             </a>
                         </div>
                         @if (evnt.AuthorId == User.Identity.Name)
@@ -138,6 +138,28 @@
         $(window).scroll(function () {
             stickyNav();
         });
+
+        buttons = $(".subscribe");
+        
+        $.each(buttons, function (index, value) {
+;
+            $(value).addClass("disabled");
+            $(value).attr("disabled", true);
+            $.post("/issubscribed", { id: $(value).attr("id").split("_")[0] }, function (data) {
+                if (data) {
+                    $(value).addClass("unsubscribe-button");
+                    $(value).find("i").addClass("image-minus");
+                }
+                else {
+                    $(value).addClass("subscribe-button");
+                    $(value).find("i").addClass("mdi-social-person-add");
+                }
+                $(value).removeClass("disabled");
+                $(value).attr("disabled", false);
+            });
+        });
+        
+        bindButtons();
     });
     var cityValue = "@locationId";
 </script>

@@ -46,11 +46,14 @@ $(function () {
         $(this).attr("href", $(this).attr("href") + "/" + cityValue);
     });
 
+    
+    
+});
+function bindButtons() {
     $(".subscribe-button").click(subscribe);
 
     $(".unsubscribe-button").click(unsubscribe);
-    
-});
+}
 function reloadCount(id) {
     $.post("/subscribers/getcount", { id: id }, function (data) {
         $("#"+id+"-count").children().html(data);

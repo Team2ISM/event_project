@@ -351,5 +351,7 @@ td a:hover, td a:active {
 
 .image-minus
 {
-    background: url(Content\images\minus-icon.png);
+    min-height: 100%;
+    margin-top: 0 !important;
+    background: url(/Content/images/minus-icon.png);
 }
