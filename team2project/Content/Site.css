@@ -292,3 +292,6 @@ img {
     font-size: 0.9em;
     font-family: Roboto;
 }
+.align-left{
+    text-align: left;
+}

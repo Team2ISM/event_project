@@ -206,6 +206,7 @@ td a:hover, td a:active {
 }
     .list-events-content h5 {
         margin-top: 0%;
+        width: calc(100% - 140px);
     }
     
     .list-events-content h5 a {
@@ -219,6 +220,7 @@ td a:hover, td a:active {
     .list-events-content p {
         margin-left: -1%;
         margin-top: -1px;
+        margin-bottom: 0;
     }
 
     .list-events-content p a {
