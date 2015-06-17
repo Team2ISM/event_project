@@ -84,8 +84,10 @@
 </div>
 <script>
     $(document).ready(function(){
-        var target = $("#create");
-        $("form").on("submit", function () {
+        var target = $("#create"), form = $("form");
+        target.removeAttr('disabled');
+        target.removeClass('disabled');
+        form.on("submit", function () {
             target.addClass("disabled");
             target.attr("disabled", "disabled");
         });
