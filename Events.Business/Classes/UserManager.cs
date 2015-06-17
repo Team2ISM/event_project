@@ -18,8 +18,7 @@ namespace Events.Business.Classes
     public class UserManager : BaseManager
     {
         IUserDataProvider userDataProvider;
-
-        string userName;
+        
         SimpleCrypto.PBKDF2 crypto = new SimpleCrypto.PBKDF2();
 
         protected override string Name { get; set; }
