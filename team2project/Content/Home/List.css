@@ -352,6 +352,11 @@ td a:hover, td a:active {
     margin-right: -14px;
 }
 
+#event-menu-my
+{
+    margin-right: -5px;
+}
+
 .btn-floating.btn-large.disabled i {
   color: white !important;
 }
