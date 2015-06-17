@@ -73,5 +73,16 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 return (subscription != null);
             }
         }
+
+        public Subscribing GetSubscribing(string eventId, string userId)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                var criteria = session.CreateCriteria(typeof(Subscribing));
+                criteria.Add(Restrictions.Eq("EventId", eventId));
+                criteria.Add(Restrictions.Eq("UserId", userId));
+                return criteria.UniqueResult<Subscribing>();
+            }
+        }
     }
 }

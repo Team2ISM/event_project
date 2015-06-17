@@ -39,17 +39,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public string GetFullName(string email)
-        {
-            using (ISession session = Helper.OpenSession())
-            {
-                var criteria = session.CreateCriteria(typeof(User));
-                criteria.Add(Restrictions.Eq("Email", email));
-                User Model = criteria.UniqueResult<User>();
-                return Model.Name + " " + Model.Surname;
-            }
-        }
-
         public void CreateUser(User user)
         {
             using (ISession session = Helper.OpenSession())

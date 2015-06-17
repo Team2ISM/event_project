@@ -11,12 +11,6 @@ namespace Events.Business.Interfaces
     {
         Role GetRole(string rolename);
 
-        void AddUsersToRoles(string[] usernames, string[] rolenames);
-
-        void CreateRole(string rolename);
-
-        void DeleteRole(string rolename);
-
         ICollection<Role> GetAllRoles();
 
         ICollection<Role> GetRolesForUser(string username);

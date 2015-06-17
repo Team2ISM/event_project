@@ -88,21 +88,21 @@ namespace Events.Business.Classes
         {
             ICollection<Role> allRole;
             allRole = dataProvider.GetAllRoles();
-            return allRole.Extract<Role>(e => e.Name);
+            return allRole.Select(u => u.Name).ToArray();
         }
 
         public override string[] GetRolesForUser(string username)
         {
             ICollection<Role> usrRoles;
             usrRoles = dataProvider.GetRolesForUser(username);
-            return usrRoles.Extract<Role>(e => e.Name);
+            return usrRoles.Select(u => u.Name).ToArray();
         }
 
         public override string[] GetUsersInRole(string rolename)
         {
             ICollection<User> usrs;
             usrs = dataProvider.GetUsersInRole(rolename);
-            return usrs.Extract<User>(e => e.Name);
+            return usrs.Select(u => u.Name).ToArray();
         }
 
         public override bool IsUserInRole(string username, string rolename)
@@ -125,7 +125,7 @@ namespace Events.Business.Classes
         }
     }
 
-    private static class Helper
+    public static class ArrayExtention
     {
         public static string[] Extract<T>(this ICollection<T> container, Func<T, string> lambda)
         {

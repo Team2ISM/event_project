@@ -36,7 +36,6 @@ namespace team2project.Controllers
                 commentModel.AuthorName = user.FullName;
             }
             var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
-            comment.PostingTime = DateTime.Now;
             commentManager.Create(comment);
             return RedirectToRoute("eventDetails", new { id = commentModel.EventId });
         }
