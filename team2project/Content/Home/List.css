@@ -345,9 +345,7 @@ td a:hover, td a:active {
     margin-top: -5px;
     margin-right: -8px;
 }
-.btn-floating.btn-large:disabled{
-    background-color: #DFDFDF;
-    box-shadow: none;
-    color: #9F9F9F;
-    cursor: default;
+
+.btn-floating.btn-large.disabled i {
+  color: white !important;
 }
