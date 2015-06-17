@@ -148,7 +148,7 @@
             $.post("/issubscribed", { id: $(value).attr("id").split("_")[0] }, function (data) {
                 if (data) {
                     $(value).addClass("unsubscribe-button");
-                    $(value).find("i").addClass("image-minus");
+                    $(value).find("i").addClass("mdi-action-exit-to-app");
                 }
                 else {
                     $(value).addClass("subscribe-button");
@@ -156,10 +156,11 @@
                 }
                 $(value).removeClass("disabled");
                 $(value).attr("disabled", false);
+                bindButton(value);
             });
         });
         
-        bindButtons();
+        
     });
     var cityValue = "@locationId";
 </script>

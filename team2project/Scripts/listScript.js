@@ -49,10 +49,10 @@ $(function () {
     
     
 });
-function bindButtons() {
-    $(".subscribe-button").click(subscribe);
-
-    $(".unsubscribe-button").click(unsubscribe);
+function bindButton(value) {
+    $(value).unbind("click");
+    if ($(value).hasClass("subscribe-button")) $(value).click(subscribe);
+    else $(value).click(unsubscribe);
 }
 function reloadCount(id) {
     $.post("/subscribers/getcount", { id: id }, function (data) {
@@ -71,7 +71,7 @@ function subscribe() {
             button.unbind("click");
             button.click(unsubscribe);
             button.find('i').toggleClass('mdi-action-exit-to-app');
-            button.find('i').removeClass('mdi-social-person-add');
+            button.find('i').toggleClass('mdi-social-person-add');
         }
         else {
             location.assign('/user/login?returnURL=' + returnURL);
@@ -93,7 +93,7 @@ function unsubscribe() {
             button.unbind("click");
             button.click(subscribe);
             button.find('i').toggleClass('mdi-social-person-add');
-            button.find('i').removeClass('mdi-action-exit-to-app');
+            button.find('i').toggleClass('mdi-action-exit-to-app');
         }
         else {
             location.assign('/user/login');
