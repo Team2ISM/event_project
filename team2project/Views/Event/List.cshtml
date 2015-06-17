@@ -126,7 +126,7 @@
         var stickyNav = function () {
             var scrollTop = $(window).scrollTop();
 
-            if (scrollTop+64 > stickyNavTop) {
+            if (scrollTop+64 > stickyNavTop && $( document ).width() > 670) {
                 $('#sticky').addClass('sticky-filters');
             } else {
                 $('#sticky').removeClass('sticky-filters');
