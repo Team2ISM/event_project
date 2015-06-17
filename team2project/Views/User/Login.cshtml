@@ -36,7 +36,7 @@
 <script>
     $(document).ready(function () {
         $("#send").click(function () {
-            $("#send").attr("disabled", true)
+            if ($("#Email").val().replace(/\s/g, "") && $("#Password").val().replace(/\s/g, "")) $("#send").attr("disabled", true)
             $("#login-form").submit();
         });
 
