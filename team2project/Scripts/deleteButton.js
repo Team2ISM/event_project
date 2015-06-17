@@ -1,7 +1,6 @@
-﻿function deleteEvent(e) {
+﻿function deleteEvent(e, reloadPage) {
     var host = location.protocol + '//' + location.host;
     var url = host + "/events/delete";
-
     $("#dialog-confirm").dialog({
         resizable: false,
         width: 400,
@@ -17,7 +16,8 @@
                         id: e
                     },
                     success: function (response) {
-                        location.reload();
+                        if (reloadPage) location.reload();
+                        else $("#" + e + "_row").remove();
                     },     
                     error: function (er) {
                         console.dir(er);
