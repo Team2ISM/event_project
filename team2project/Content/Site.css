@@ -289,6 +289,7 @@ img {
     z-index: 1000;
 }
 .ui-widget select{
+    border: 1px solid darkgray;
     font-size: 0.9em;
     font-family: Roboto;
 }
