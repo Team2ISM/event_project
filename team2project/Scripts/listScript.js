@@ -67,6 +67,8 @@ function subscribe() {
             button.toggleClass("subscribe-button");
             button.unbind("click");
             button.click(unsubscribe);
+            button.find('i').toggleClass('mdi-action-exit-to-app');
+            button.find('i').removeClass('mdi-social-person-add');
         }
         else {
             location.assign('/user/login?returnURL=' + returnURL);
@@ -87,6 +89,8 @@ function unsubscribe() {
             button.toggleClass("subscribe-button");
             button.unbind("click");
             button.click(subscribe);
+            button.find('i').toggleClass('mdi-social-person-add');
+            button.find('i').removeClass('mdi-action-exit-to-app');
         }
         else {
             location.assign('/user/login');
