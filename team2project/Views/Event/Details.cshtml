@@ -25,15 +25,33 @@
 }
 <div class="container z-depth-1">
     <form onsubmit="return false">
-        <fieldset>            
-            <div class="row first-row">
-                <div class="month-date-block left border-blue-grey center no-padding">
+        <fieldset>   
+            <div id="onme" class="button-block medium-font center right">
+                <div class="month-date-block left border-blue-grey center no-padding inline-block">
                     <div class="white-text bg-blue-grey month">
                         @CheckDateIfNull(Model.FromDate, "MMMM")
                     </div>
                     <div class="day color-blue-grey">
                         @CheckDateIfNull(Model.FromDate, "dd")
                     </div>
+                </div>
+                <div class="join-button">
+                    @if (Model.ToDate > DateTime.Now)
+                    {
+                        <button id="submit" class="btn waves-effect waves-light dark-blue-grey margin-right large-font">Подождите</button>
+                    }
+                </div>
+                <div class="wrap">
+                    @{
+                        Html.RenderAction("Index", "Subscribers", new { EventId = @Model.Id });
+                    }
+                </div>
+            </div>
+         
+            <div class="row first-row inline-block">
+                
+                <div class="details-event-img">
+                    @Html.CreateImage(Model.Image)
                 </div>
                 <div class="title-date-block inline-block left">
                     <div class="event-title inline-block"><h4 class="inline-block no-margin">@Model.Title</h4></div>
@@ -48,22 +66,7 @@
                         <span class="text-bold large-font">@Model.Location</span>
                     </div>
                 </div>
-                <div id="onme"  class="button-block medium-font center right">
-                    <div class="details-event-img">
-                        @Html.CreateImage(Model.Image)
-                    </div>
-                    <div class="join-button">
-                        @if (Model.ToDate > DateTime.Now)
-                        {
-                            <button id="submit" class="btn waves-effect waves-light dark-blue-grey margin-right large-font">Подождите</button>
-                        }
-                    </div>
-                    <div class="wrap">          
-                        @{
-                            Html.RenderAction("Index", "Subscribers",new { EventId = @Model.Id });
-                        }
-                    </div>
-                </div>
+                
             </div>
             <div class="row medium-font" id="desc">
                 <div>

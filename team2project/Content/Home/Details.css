@@ -132,10 +132,9 @@ textarea
 }
 .month-date-block
 {
-    min-width: 75px;
-    width: 10%;
-    height: 100%;
-    margin-left:20px;
+    width: 130px;
+    margin-left:40px;
+    margin-bottom: 5px;
 }
 .color-blue-grey
 {
@@ -312,7 +311,11 @@ fieldset h5 p {
 {
     cursor: pointer;
 }
-
+.details-event-img
+{
+    float: left;
+    width: 25%;
+}
 .details-event-img img {
     width:100%;
 }
@@ -321,4 +324,11 @@ fieldset h5 p {
   top: 40px;
   right: 30%;
   z-index: 501;
+}
+.first-row{
+    width: calc(100% - 200px);
+}
+#onme{
+    width: 200px;
+    text-align: center;
 }
