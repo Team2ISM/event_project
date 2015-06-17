@@ -32,7 +32,6 @@ namespace Events.Business.Classes
 
         public override void AddUsersToRoles(string[] usernames, string[] rolenames)
         {
-
             foreach (string rolename in rolenames)
             {
                 if (!RoleExists(rolename))
@@ -87,56 +86,23 @@ namespace Events.Business.Classes
 
         public override string[] GetAllRoles()
         {
-            StringBuilder sb = new StringBuilder();
             ICollection<Role> allRole;
             allRole = dataProvider.GetAllRoles();
-
-            foreach (Role r in allRole)
-            {
-                sb.Append(r.Name + ",");
-            }
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-            return new string[0];
+            return allRole.Extract<Role>(e => e.Name);
         }
 
         public override string[] GetRolesForUser(string username)
         {
-            ICollection<Role> usrRoles = null;
-            StringBuilder sb = new StringBuilder();
+            ICollection<Role> usrRoles;
             usrRoles = dataProvider.GetRolesForUser(username);
-
-            foreach (Role r in usrRoles)
-            {
-                sb.Append(r.Name + ",");
-            }
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-            return new string[0];
+            return usrRoles.Extract<Role>(e => e.Name);
         }
 
         public override string[] GetUsersInRole(string rolename)
         {
-            StringBuilder sb = new StringBuilder();
-            ICollection<User> usrs = null;
+            ICollection<User> usrs;
             usrs = dataProvider.GetUsersInRole(rolename);
-
-            foreach (User u in usrs)
-            {
-                sb.Append(u.Name + ",");
-            }
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-            return new string[0];
+            return usrs.Extract<User>(e => e.Name);
         }
 
         public override bool IsUserInRole(string username, string rolename)
@@ -155,8 +121,20 @@ namespace Events.Business.Classes
 
         public override string[] FindUsersInRole(string rolename, string usernameToMatch)
         {
-            return null;//realization to fix conflict
+            return null;
         }
+    }
 
+    private static class Helper
+    {
+        public static string[] Extract<T>(this ICollection<T> container, Func<T, string> lambda)
+        {
+            var result = new List<string>();
+            foreach (var element in container)
+            {
+                result.Add(lambda(element));
+            }
+            return result.ToArray();
+        }
     }
 }
