@@ -30,18 +30,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public void AddUsersToRoles(string[] usernames, string[] rolenames)
-        {
-        }
-
-        public void CreateRole(string rolename)
-        {
-        }
-
-        public void DeleteRole(string rolename)
-        {
-        }
-
         public ICollection<Role> GetAllRoles()
         {
             using (ISession session = Helper.OpenSession())
@@ -92,12 +80,5 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 return false;
             }
         }
-
-
-        public bool RoleExists(string rolename)
-        {
-            return true;
-        }
-
-    }
+   }
 }

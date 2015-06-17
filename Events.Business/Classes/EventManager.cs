@@ -9,23 +9,13 @@ namespace Events.Business.Classes
     public class EventManager : BaseManager
     {
         IEventDataProvider dataProvider;
-
-        CommentManager commentManager;
-
-        ICitiesDataProvider citiesProvider;
-
-        RemindManager remindManager;
-
         protected override string Name { get; set; }
 
-        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, ICitiesDataProvider citiesProvider, CommentManager commentManager, RemindManager remindManager)
+        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager)
             : base(cacheManager)
         {
             Name = "Events";
             this.dataProvider = dataProvider;
-            this.citiesProvider = citiesProvider;
-            this.commentManager = commentManager;
-            this.remindManager = remindManager;
         }
 
         public IList<Event> GetAllEvents()
@@ -89,7 +79,7 @@ namespace Events.Business.Classes
         {
             model.Checked = false;
             dataProvider.Update(model);
-            remindManager.ResetRemindModel(model.Id);
+            Api.RemindManager.ResetRemindModel(model.Id);
             ClearCache();
             ToCache<Event>(model.Id,
                 () =>
@@ -135,7 +125,7 @@ namespace Events.Business.Classes
 
         public void Delete(string id)
         {
-            commentManager.DeleteByEventId(id);
+            Api.CommentManager.DeleteByEventId(id);
             dataProvider.Delete(dataProvider.GetById(id));
             ClearCache();
         }
