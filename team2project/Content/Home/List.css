@@ -348,3 +348,8 @@ td a:hover, td a:active {
     margin-top: -5px;
     margin-right: -8px;
 }
+
+.image-minus
+{
+    background: url(Content\images\minus-icon.png);
+}
