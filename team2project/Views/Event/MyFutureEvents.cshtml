@@ -44,9 +44,6 @@
                         </div>
                     </td>
                     <td>
-                        @Html.Partial("EventContent", evnt)
-                    </td>
-                    <td>
                         @if (evnt.AuthorId == User.Identity.Name)
                         {
                             <div class="right" id="event-menu">
@@ -54,6 +51,7 @@
                                 <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
                             </div>
                         }
+                        @Html.Partial("EventContent", evnt)
                     </td>
                 </tr>
             }

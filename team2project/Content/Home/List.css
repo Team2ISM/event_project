@@ -310,15 +310,16 @@ td a:hover, td a:active {
 }
 
 .btn-floating.btn-large {
-  width: 43.5px;
-  height: 43.5px;
-  top: -23px;
+  width: 37px;
+  height: 37px;
+  top: -20px;
   left: 7px;
 }
 
 .btn-floating.btn-large i {
-  line-height: 55.5px;
+  line-height: 57.5px;
   margin-top: -10px;
+  font-size: 1.8rem;
 }
 #City{
     height:20px;
@@ -343,9 +344,24 @@ td a:hover, td a:active {
 #event-menu
 {
     margin-top: -5px;
-    margin-right: -8px;
+    margin-right: -14px;
 }
 
 .btn-floating.btn-large.disabled i {
   color: white !important;
+}
+
+.large-line
+{
+    line-height: 49px;
+}
+.button-menu
+{
+    white-space: nowrap;
+    float: right;
+}
+
+#subscribe
+{
+    margin-top: 30px;
 }

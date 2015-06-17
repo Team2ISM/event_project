@@ -73,7 +73,7 @@
                         @Html.RouteLink("Мои события", "FutureEvents", FormMethod.Post, new { @class = "white-text" })
                     </li>
                 }
-                <li class="menu-content">
+                <li class="menu-content log">
                     <a class="dropdown-button" href="#!" data-activates="dropdown1">
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -153,7 +153,8 @@
                 drop.hide(100);
                 event.stopPropagation();
             });
-            $('.create-event-block').css('right', parseInt($('.log').css('width'))+7+'px');
+            $('.create-event-block').css({'right': parseInt($('.log').css('width'))-19+'px', 'display': 'block'});
+
         });
     </script>
 

@@ -67,19 +67,29 @@
                         </div>
                     </td>
                     <td>
-                        <div class="fixed-action-btn">
-                            <a class="btn-floating btn-large bacgr-text subscribe" id="@(evnt.Id + "_sub")">
-                                <i class="large"></i>
-                            </a>
+                        <div class="button-menu">
+                            <div class="fixed-action-btn">
+                                <a class="btn-floating btn-large bacgr-text subscribe large-line" id="@(evnt.Id + "_sub")">
+                                    <i class="large"></i>
+                                </a>
+                            </div>
+                            @if (evnt.AuthorId == User.Identity.Name)
+                            {
+                                    <div class="right" id="event-menu">                                    
+                                        <a class="btn-floating bacgr-text" href="@Url.RouteUrl("UpdateEvent", new { id=evnt.Id })"><i class="small mdi-editor-mode-edit"></i></a>
+                                        <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id', false); return false"><i class="small mdi-action-delete"></i></a>
+                                    </div>
+                            }
+                            
+                            <div id="subscribe">
+                                <span id="@(evnt.Id + "-count")" >
+                                    Подписались:
+                                    @{
+                                        Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
+                                    }
+                                </span>
+                            </div>
                         </div>
-                        @if (evnt.AuthorId == User.Identity.Name)
-                        {
-                                <div class="right" id="event-menu">                                    
-                                    <a class="btn-floating bacgr-text" href="@Url.RouteUrl("UpdateEvent", new { id=evnt.Id })"><i class="small mdi-editor-mode-edit"></i></a>
-                                    <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id', false); return false"><i class="small mdi-action-delete"></i></a>
-                                </div>
-                        }
-                        
                         <div class="list-events-content">
                             <h5 class="blue-grey-text">
                                 @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
@@ -92,15 +102,6 @@
                                 @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)), "EventDetails", new { evnt.Id })
 
                             </p>
-                        </div>
-                        <div class="align-left">
-                            <span id="@(evnt.Id + "-count")" >
-                                Уже подписалось:
-                                @{
-                                    Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
-                                }
-                            </span>
-
                         </div>
                         <div class="align-left">
                             @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)

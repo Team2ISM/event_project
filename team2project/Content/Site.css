@@ -239,6 +239,7 @@ img {
   top: 40px;
   right: 250px;
   z-index: 500;
+  display: none;
 }
 
 .create-event-block a
@@ -295,4 +296,8 @@ img {
 }
 .align-left{
     text-align: left;
+}
+.align-right
+{
+    text-align: right;
 }
