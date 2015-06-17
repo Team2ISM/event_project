@@ -64,10 +64,20 @@ else
                 @Html.PasswordFor(m => m.RepeatPassword)
                 @Html.ValidationMessageFor(m => m.RepeatPassword)
             </div>
-            <button class="btn waves-effect waves-light dark-blue-grey" type="submit">Зарегистрировать меня</button>
+            <button class="btn waves-effect waves-light dark-blue-grey" id="register"type="submit">Зарегистрировать меня</button>
         </div>
     }      
 </div>
+<script>
+ $(document).ready(function(){
+     var target = $("#register");
+     $("form").on("submit", function () {
+         target.addClass("disabled");
+         target.attr("disabled", "disabled");
+     });
+     $(".create-event-block").hide(0);
+ });
+</script>
 @section scripts{
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/bundles/jqueryval")
