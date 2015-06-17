@@ -292,6 +292,7 @@
   <ItemGroup>
     <Content Include="Content\images\closegray.png" />
     <Content Include="Content\images\doge-regular.png" />
+    <Content Include="Content\images\image-not-avaible.png" />
     <Content Include="Content\loading32.GIF" />
     <Content Include="Content\loading.GIF" />
     <Content Include="Content\Captcha\-772591457.png" />
@@ -307,7 +308,6 @@
     <Content Include="Content\Events\CreatePage.css" />
     <Content Include="Content\Home\Details.css" />
     <Content Include="Content\Home\List.css" />
-    <Content Include="Content\images\karl.jpg" />
     <Content Include="Content\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
     <Content Include="Content\images\ui-bg_flat_15_cd0a0a_40x100.png" />
     <Content Include="Content\images\ui-bg_glass_100_e4f1fb_1x400.png" />
