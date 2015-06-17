@@ -29,7 +29,12 @@ tbody tr {
 
 .date-filters a
 {
-	margin-left: 10px;
+	margin-left: 20px;
+}
+
+.date-filters a:first-child
+{
+	margin-left: -17%;
 }
 
 .m-left
