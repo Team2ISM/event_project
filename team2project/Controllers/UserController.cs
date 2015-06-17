@@ -51,7 +51,7 @@ namespace team2project.Controllers
                     return View("GenericError", model: Resources.ResponseAccessDenied);
                 }
                 if (!string.IsNullOrEmpty(returnUrl))
-                {                    
+                {
                     return Redirect(returnUrl);
                 }
                 return RedirectToRoute("EventsList", new { period = PeriodStates.Anytime });

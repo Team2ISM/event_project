@@ -9,8 +9,6 @@ namespace Events.Business.Interfaces
 
         IList<Subscribing> GetAllSubscribers(string EventId);
 
-        IList<Subscribing> GetMyEventsId(string userId);
-
         void SubscribeUser(Subscribing row);
 
         void UnsubscribeUser(Subscribing row);

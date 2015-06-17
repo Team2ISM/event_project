@@ -35,17 +35,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public IList<Subscribing> GetMyEventsId(string userId)
-        {
-            using (ISession session = Helper.OpenSession())
-            {
-                var criteria = session.CreateCriteria<Subscribing>();
-                criteria.Add(Restrictions.Eq("UserId", userId));
-                return criteria.List<Subscribing>();
-            }
-        }
-
-
         public void SubscribeUser(Subscribing row)
         {
             if (!IsSubscribed(row))
