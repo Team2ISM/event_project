@@ -123,7 +123,7 @@ namespace team2project.Controllers
             var user = userManager.GetByEmail(email);
             if (user != null)
             {
-               userManager.SendNewPassword(user);
+               userManager.GenerateNewPassword(user);
             }
             return RedirectToRoute("ThankYouPage");
         }
