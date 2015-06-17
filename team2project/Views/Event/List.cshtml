@@ -148,7 +148,7 @@
             $.post("/issubscribed", { id: $(value).attr("id").split("_")[0] }, function (data) {
                 if (data) {
                     $(value).addClass("unsubscribe-button");
-                    $(value).find("i").addClass("image-minus");
+                    $(value).find('i').toggleClass('mdi-action-exit-to-app');
                 }
                 else {
                     $(value).addClass("subscribe-button");
