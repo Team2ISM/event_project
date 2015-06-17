@@ -55,7 +55,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                     var criteria = session.CreateCriteria<Subscribing>();
                     criteria.Add(Restrictions.Eq("EventId", row.EventId));
                     criteria.Add(Restrictions.Eq("UserId", row.UserId));
-                    var rowForDeleting = criteria.List<Subscribing>()[0];
+                    var rowForDeleting = criteria.UniqueResult<Subscribing>();
                     session.Delete(rowForDeleting);
                     session.Flush();
                 }

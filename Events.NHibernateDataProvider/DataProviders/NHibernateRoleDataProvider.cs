@@ -75,28 +75,22 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public bool IsUserInRole(string username, string rolename)
         {
-            bool userIsInRole = false;
-            User usr = null;
             using (ISession session = Helper.OpenSession())
             {
-                usr = session.CreateCriteria(typeof(User))
+                var usr = session.CreateCriteria(typeof(User))
                                 .Add(NHibernate.Criterion.Restrictions.Eq(userNameColumn, username))
                                 .UniqueResult<User>();
-            }
 
-            if (usr != null)
-            {
                 foreach (Role r in usr.Roles)
                 {
                     if (r.Name.Equals(rolename))
                     {
-                        userIsInRole = true;
-                        break;
+                        return true;
                     }
                 }
-            }
 
-            return userIsInRole;
+                return false;
+            }
         }
 
 
