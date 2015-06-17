@@ -48,10 +48,7 @@
                     @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "dark-text" })
                 </li>                
             }
-        }
-
-        @{
-            if (User.Identity.IsAuthenticated)
+            else
             {
                 <li>
                     @Html.RouteLink("Сменить пароль", "Update", FormMethod.Post, new { @class = "dark-text" })

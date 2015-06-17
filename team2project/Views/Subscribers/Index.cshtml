@@ -2,23 +2,7 @@
     Layout = null;
 }
 @model int
-@Scripts.Render("~/Scripts/jquery.js")
-@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
-<script type="text/javascript">
-    function ReloadSubscr(elem) {
-        $.post("/subscribers", { id: id }, function (data, err) {
-            if (data) {
-                elem.empty(); //очищаем элемент
-                if (data) for (var i = 0; i < data.length && i<10; i++) {
-                    if (data[i]) elem.append('<li>' + data[i].Surname + ' ' + data[i].Name + '</li>'); // добавляем данные в список
-                }
-            }
-            else {
-                console.log(err);
-            }
-        });
-    }
-</script>
+
 <span id="subscribers">
     <span id="subscribed">Уже подписалось:
         <a href="#" onclick="ReloadSubscr($('#subscribers_list')); return false;">
@@ -35,3 +19,20 @@
 </div>
 </div>
 <ul id="subscribers_onhover"></ul>
+
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+<script type="text/javascript">
+    function ReloadSubscr(elem) {
+        $.post("/subscribers", { id: id }, function (data, err) {
+            if (data) {
+                elem.empty(); //очищаем элемент
+                if (data) for (var i = 0; i < data.length && i<10; i++) {
+                    if (data[i]) elem.append('<li>' + data[i].Surname + ' ' + data[i].Name + '</li>'); // добавляем данные в список
+                }
+            }
+            else {
+                console.log(err);
+            }
+        });
+    }
+</script>
