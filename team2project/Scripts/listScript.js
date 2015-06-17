@@ -93,7 +93,7 @@ function unsubscribe() {
             button.find('i').toggleClass('mdi-action-exit-to-app');
         }
         else {
-            location.assign('/user/login');
+            location.assign('/user/login?returnURL=' + returnURL);
         }
         reloadCount(id);
         button.toggleClass("disabled");
