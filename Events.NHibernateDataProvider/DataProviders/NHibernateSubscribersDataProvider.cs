@@ -52,11 +52,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 using (ISession session = Helper.OpenSession())
                 {
-                    var criteria = session.CreateCriteria<Subscribing>();
-                    criteria.Add(Restrictions.Eq("EventId", row.EventId));
-                    criteria.Add(Restrictions.Eq("UserId", row.UserId));
-                    var rowForDeleting = criteria.UniqueResult<Subscribing>();
-                    session.Delete(rowForDeleting);
+                    session.Delete(GetSubscribing(row.EventId, row.UserId));
                     session.Flush();
                 }
             }
@@ -64,14 +60,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
 
         public bool IsSubscribed(string eventId, string userId)
         {
-            using (ISession session = Helper.OpenSession())
-            {
-                var criteria = session.CreateCriteria(typeof(Subscribing));
-                criteria.Add(Restrictions.Eq("EventId", eventId));
-                criteria.Add(Restrictions.Eq("UserId", userId));
-                var subscription = criteria.UniqueResult<Subscribing>();
-                return (subscription != null);
-            }
+            return (GetSubscribing(eventId, userId) != null);
         }
 
         public Subscribing GetSubscribing(string eventId, string userId)

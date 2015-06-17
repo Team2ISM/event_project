@@ -33,10 +33,6 @@ namespace Events.Business.Classes
         protected void ClearCache()
         {
             CacheManager.ClearCacheByName(Name);
-            if (!Name.Equals(EnvironmentInfo.ReminderCacheName))
-            {
-                CacheManager.ClearCacheByName(EnvironmentInfo.ReminderCacheName);
-            }
         }
 
         protected void RemoveFromCache(string name)
