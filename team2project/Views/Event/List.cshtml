@@ -68,26 +68,20 @@
                         </div>
                     </td>
                     <td>
+                        <div class="fixed-action-btn">
+                            <a class="btn-floating btn-large bacgr-text subscribe-button subscribe" id="@(evnt.Id + "@sub")">
+                                <i class="large mdi-social-person-add"></i>
+                            </a>
+                        </div>
                         @if (evnt.AuthorId == User.Identity.Name)
                         {
-                            <div class="fixed-action-btn">
-                                <a class="btn-floating btn-large bacgr-text">
-                                  <i class="large mdi-social-person-add"></i>
-                                </a>
-                            </div>
+                            
                                 <div class="right" id="event-menu">
                                     @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating bacgr-text" })
                                     <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
                                 </div>
                         }
-                        else
-                        {
-                            <div class="fixed-action-btn">
-                                <a class="btn-floating btn-large bacgr-text">
-                                  <i class="large mdi-social-person-add"></i>
-                                </a>
-                            </div>
-                        }
+                        
                         <div class="list-events-content">
                             <h5 class="blue-grey-text">
                                 @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
@@ -106,10 +100,12 @@
                             </p>
                         </div>
                         <div class="left">
-                            <label>Уже подписалось:</label>
-                            @{
-                                Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
-                            }
+                            <span id="@(evnt.Id + "-count")">
+                                Уже подписалось:
+                                @{
+                                    Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
+                                }
+                            </span>
                         </div>
                     </td>                    
                 </tr>                
