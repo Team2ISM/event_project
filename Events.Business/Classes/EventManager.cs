@@ -19,10 +19,10 @@ namespace Events.Business.Classes
         protected override string Name { get; set; }
 
         public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, ICitiesDataProvider citiesProvider, CommentManager commentManager, RemindManager remindManager)
+            : base(cacheManager)
         {
             Name = "Events";
             this.dataProvider = dataProvider;
-            this.cacheManager = cacheManager;
             this.citiesProvider = citiesProvider;
             this.commentManager = commentManager;
             this.remindManager = remindManager;
@@ -100,7 +100,7 @@ namespace Events.Business.Classes
 
         public Event GetById(string id)
         {
-            return cacheManager.FromCache<Event>(id,
+            return CacheManager.FromCache<Event>(id,
                  () =>
                  {
                      return dataProvider.GetById(id);

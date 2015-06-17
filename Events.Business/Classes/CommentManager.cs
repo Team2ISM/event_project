@@ -11,10 +11,10 @@ namespace Events.Business.Classes
         protected override string Name { get; set; }
 
         public CommentManager(ICommentDataProvider dataProvider, ICacheManager cacheManager)
+            : base(cacheManager)
         {
             Name = "Comments";
             this.dataProvider = dataProvider;
-            this.cacheManager = cacheManager;
         }
 
         public IList<Comment> GetList()
