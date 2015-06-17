@@ -128,13 +128,7 @@
                 @ThisPage()
             </ul>
         </div>
-    </nav>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div class="create-event-block">
-            @Html.CreateLink("<i class=\"large mdi-content-add\"></i>", "CreateEvent", new { returnURL = currentURL }, new { @class = "large btn-floating green" })
-        </div> 
-    }        
+    </nav>       
     @RenderBody()
     <div id="loader-wrapper">
         <div id="loader"></div>

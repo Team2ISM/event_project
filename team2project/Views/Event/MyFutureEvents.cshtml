@@ -1,6 +1,7 @@
 ﻿@model System.Collections.Generic.List<team2project.Models.EventViewModel>
 
 @{
+    var currentURL = Request.Url;
     ViewBag.Title = "Текущие/будущие события";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var About = " ";
@@ -11,7 +12,13 @@
     @Styles.Render("~/Content/jquery-ui.min.css")
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
 }
-
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="create-event-block hide-on-med-and-down">
+        @Html.CreateLink("<i class=\"large mdi-content-add\"></i>", "CreateEvent", new { returnURL = currentURL }, new { @class = "large btn-floating green" })
+    </div>
+}
+ 
 <div class="container">
     <h2 class="center blue-grey-text">Текущие/будущие события</h2>
     <div class="width80">

@@ -1,4 +1,5 @@
 ﻿@{
+    var currentURL = Request.Url;
     ViewBag.Title = "List";
     var locationId = ViewBag.location;
     var About = " ";
@@ -16,10 +17,16 @@
     @Styles.Render("~/Content/jquery-ui.min.css")    
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
 }
-<h1 class="center blue-grey-text">Мероприятия</h1>
 
-<!-- Dropdown Trigger -->
-<div id="sticky">
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="create-event-block hide-on-med-and-down">
+        @Html.CreateLink("<i class=\"large mdi-content-add\"></i>", "CreateEvent", new { returnURL = currentURL }, new { @class = "large btn-floating green" })
+    </div>
+}
+ 
+    <h1 class="center blue-grey-text">Мероприятия</h1>
+    <div id="sticky">
     <div id="select-menu-wrapper">
         <div class="width80" id="select-menu">
             <div class="ui-widget left">
@@ -38,6 +45,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="container">
     

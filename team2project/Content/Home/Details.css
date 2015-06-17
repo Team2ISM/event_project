@@ -319,6 +319,6 @@ fieldset h5 p {
 .edit-event-block{
   position: fixed;
   top: 40px;
-  right: 581px;
-  z-index: 1100;
+  right: 30%;
+  z-index: 501;
 }

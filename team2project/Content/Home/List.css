@@ -121,7 +121,7 @@ td a:hover, td a:active {
 }
 #select-menu-wrapper{
   text-align: center;
-  z-index: 800;
+  z-index: 500;
   margin: 0 auto;
   max-width: 1280px;
 }
@@ -293,11 +293,6 @@ td a:hover, td a:active {
   margin-top: -66px;
   margin-left: -82px;
   /* z-index: 10000; */
-}
-
-ul li {
-  list-style-type: none;
-  display: table-cell !important;
 }
 
 .fixed-action-btn {
