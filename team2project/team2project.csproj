@@ -280,6 +280,7 @@
     <Compile Include="Helpers\UserControllerHelper.cs" />
     <Compile Include="Models\CitiesViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
+    <Compile Include="Models\EventListViewModel.cs" />
     <Compile Include="Models\EventViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

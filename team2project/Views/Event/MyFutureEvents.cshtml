@@ -1,12 +1,12 @@
-﻿@model System.Collections.Generic.List<team2project.Models.EventViewModel>
-
+﻿@using team2project.Helpers
+@using team2project.Models
+@model EventListViewModel
 @{
     var currentURL = Request.Url;
     ViewBag.Title = "Текущие/будущие события";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var About = " ";
 }
-@using team2project.Helpers
 @section css{
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/jquery-ui.min.css")
@@ -27,7 +27,7 @@
     <table class="striped width80 centered">
 
         <tbody>
-            @foreach (var evnt in Model)
+            @foreach (var evnt in Model.EventsList)
             {
                 <tr>
                     <td class="list-events-date">
