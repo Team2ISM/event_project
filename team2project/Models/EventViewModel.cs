@@ -43,7 +43,7 @@ namespace team2project.Models
 
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Это поле должно быть заполненым")]
-        [GreaterThan("FromDate",ErrorMessage="Даты введены неправильно")]
+        [GreaterThan("FromDate",ErrorMessage="Конец события должен быть после начала")]
         public DateTime? ToDate { get; set; }
 
         public string Location { get; set; }
