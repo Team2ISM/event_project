@@ -288,3 +288,7 @@ img {
 #mobile-demo *{
     z-index: 1000;
 }
+.ui-widget select{
+    font-size: 0.9em;
+    font-family: Roboto;
+}
