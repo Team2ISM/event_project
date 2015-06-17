@@ -29,5 +29,9 @@ namespace Events.Business
         {
             get { return DependencyResolver.Current.GetService<UserManager>(); }
         }
+        public static SubscribersManager SubscribersManager
+        {
+            get { return DependencyResolver.Current.GetService<SubscribersManager>(); }
+        }
     }
 }
