@@ -88,7 +88,7 @@ namespace Events.Business.Classes
             CreateUser(user);
         }
 
-        public void SendNewPassword(User user)
+        public void GenerateNewPassword(User user)
         {
             string newPassword = Guid.NewGuid().ToString().Substring(0, 8);
 
@@ -99,6 +99,11 @@ namespace Events.Business.Classes
 
             UpdateUser(user);
 
+            SendEmailWithNewPassword(user, newPassword);
+        }
+
+        private void SendEmailWithNewPassword(User user, string newPassword)
+        {
             string body = user.Name + ", ваш пароль: \n" + newPassword;
             string subject = "Новый пароль";
 
