@@ -52,7 +52,7 @@
         <tbody>
             @foreach (var evnt in Model.EventsList)
             {
-                <tr>
+                <tr id="@(evnt.Id + "_row")">
                     <td class="list-events-date">
                         <div class="bg-blue-grey month">
                             @CheckDateIfNull(evnt.FromDate, "MMMM")
@@ -76,7 +76,7 @@
                         {
                                 <div class="right" id="event-menu">                                    
                                     <a class="btn-floating bacgr-text" href="@Url.RouteUrl("UpdateEvent", new { id=evnt.Id })"><i class="small mdi-editor-mode-edit"></i></a>
-                                    <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
+                                    <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id', false); return false"><i class="small mdi-action-delete"></i></a>
                                 </div>
                         }
                         
