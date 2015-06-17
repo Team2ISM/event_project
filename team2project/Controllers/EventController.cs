@@ -9,6 +9,7 @@ using System.Web.Script.Serialization;
 using team2project.Models;
 using team2project.Helpers;
 using team2project.Properties;
+using System.Linq;
 
 namespace team2project.Controllers
 {
@@ -146,6 +147,7 @@ namespace team2project.Controllers
             var eventsId = subscribersManager.GetMyEventsId(user.Id);
             IList<Event> events = eventManager.GetMyPastEvents(eventsId);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
+            eventsModels = eventsModels.OrderBy(x => x.FromDate).ToList();
             PrepareEventsToView(eventsModels);
             return View(eventsModels);
         }
@@ -158,6 +160,7 @@ namespace team2project.Controllers
             var eventsId = subscribersManager.GetMyEventsId(user.Id);
             IList<Event> events = eventManager.GetMyFutureEvents(eventsId);
             List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
+            eventsModels = eventsModels.OrderBy(x => x.FromDate).ToList();
             PrepareEventsToView(eventsModels);
             return View(eventsModels);
         }
