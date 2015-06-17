@@ -95,7 +95,7 @@
             <ul class="side-nav z-depth-3" id="mobile-demo">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <i class="center" style="font-size: 1rem;">
+                    <i class="center log" style="font-size: 1rem;">
                         Здравствуйте, @userName
                     </i>
                     <li class="divider"></li>
@@ -116,7 +116,7 @@
                 }
                 else
                 {                       
-                    <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text" })</li>
+                    <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text log" })</li>
                     <li class="divider"></li>
                     <li>
                         @Html.RouteLink("Вход", "Login", new { returnURL = currentURL }, new { @class = "dark-text" })
@@ -156,6 +156,7 @@
                 drop.hide(100);
                 event.stopPropagation();
             });
+            $('.create-event-block').css('right', parseInt($('.log').css('width'))+7+'px');
         });
     </script>
 

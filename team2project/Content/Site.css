@@ -237,8 +237,13 @@ img {
 .create-event-block {
   position: fixed;
   top: 40px;
-  right: 30%;
+  right: 250px;
   z-index: 500;
+}
+
+.create-event-block a
+{
+    box-shadow: none;
 }
 
 .create-event-block .btn-floating, .edit-event-block .btn-floating {
