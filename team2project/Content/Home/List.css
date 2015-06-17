@@ -327,9 +327,11 @@ td a:hover, td a:active {
   font-size: 1.8rem;
 }
 #City{
-    height:20px;
+    height:22px;
     display: inline-block;
     padding: 0px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
 }
 
 .bacgr-text
