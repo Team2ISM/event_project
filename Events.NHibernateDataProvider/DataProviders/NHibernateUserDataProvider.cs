@@ -59,14 +59,6 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public void DeleteUser(User user)
-        {
-            using (ISession session = Helper.OpenSession())
-            {
-                session.Delete(user);
-            }
-        }
-
         public void UpdateUser(User user)
         {
             using (ISession session = Helper.OpenSession())

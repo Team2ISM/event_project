@@ -18,8 +18,6 @@ namespace Events.Business.Interfaces
 
         void CreateUser(User user);
 
-        void DeleteUser(User user);
-
         void UpdateUser(User user);
     }
 }
