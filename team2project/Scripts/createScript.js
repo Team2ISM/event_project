@@ -47,7 +47,6 @@ window.onload = function () {
         mask: true
     });
     pick2.datetimepicker({
-        minDate: 0,
         sstartDate: tDate ? tDate : '',
         lang: 'ru',
         mask: true
