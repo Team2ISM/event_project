@@ -1,7 +1,6 @@
 ﻿@{
     var currentURL = Request.Url;
     ViewBag.Title = "List";
-    var About = " ";
 }
 
 @using System.Globalization
@@ -89,22 +88,25 @@
                                 @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
                                 @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
                             </span>
-                            <p>
-                                @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
-                                {
-                                    About = "Подробнее...";
-                                }
-                                @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
-                                @{About = " ";}
+                            <p>              
+                                @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)), "EventDetails", new { evnt.Id })
+
                             </p>
                         </div>
-                        <div class="left">
-                            <span id="@(evnt.Id + "-count")">
+                        <div class="align-left">
+                            <span id="@(evnt.Id + "-count")" >
                                 Уже подписалось:
                                 @{
                                     Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
                                 }
                             </span>
+
+                        </div>
+                        <div class="align-left">
+                            @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
+                            {
+                                @Html.RouteLink("Подробнее...", "EventDetails", new { evnt.Id }, new { @class = "medium-font" })
+                            }
                         </div>
                     </td>                    
                 </tr>                
@@ -126,7 +128,7 @@
         var stickyNav = function () {
             var scrollTop = $(window).scrollTop();
 
-            if (scrollTop+64 > stickyNavTop) {
+            if (scrollTop+64 > stickyNavTop && $( document ).width() > 670) {
                 $('#sticky').addClass('sticky-filters');
             } else {
                 $('#sticky').removeClass('sticky-filters');
