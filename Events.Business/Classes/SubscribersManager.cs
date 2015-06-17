@@ -18,10 +18,10 @@ namespace Events.Business.Classes
         protected override string Name { get; set; }
 
         public SubscribersManager(ISubscribersDataProvider dataProvider, ICacheManager cacheManager, UserManager userManager)
+            : base(cacheManager)
         {
             Name = "Subsribers";
             this.dataProvider = dataProvider;
-            this.cacheManager = cacheManager;
             this.userManager = userManager;
         }
 
@@ -37,15 +37,6 @@ namespace Events.Business.Classes
                         listSuscribers.Add(userManager.GetById(subscribing.UserId));
                     }
                     return listSuscribers;
-                });
-        }
-
-        public IList<Subscribing> GetMyEventsId(string userId)
-        {
-            return FromCache<IList<Subscribing>>(userId,
-                () =>
-                {
-                    return dataProvider.GetMyEventsId(userId);
                 });
         }
 
@@ -70,12 +61,12 @@ namespace Events.Business.Classes
             dataProvider.UnsubscribeUser(row);
         }
 
-        public bool IsSubscribed(Subscribing row)
+        public bool IsSubscribed(string eventId, string userId)
         {
-            return FromCache<bool>(row.EventId + "." + row.UserId,
+            return FromCache<bool>(eventId + "." + userId,
                 () =>
                 {
-                    return dataProvider.IsSubscribed(row);
+                    return dataProvider.IsSubscribed(eventId, userId);
                 });
         }
     }

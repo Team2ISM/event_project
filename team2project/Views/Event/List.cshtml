@@ -5,9 +5,10 @@
 }
 
 @using System.Globalization
+@using System.Web.Mvc
+@using System.Text.RegularExpressions
 @using team2project.Models
 @using team2project.Helpers
-@using System.Text.RegularExpressions
 @using Events.Business.Helpers
 @model EventListViewModel
 @section css{
@@ -20,7 +21,7 @@
 @if (User.Identity.IsAuthenticated)
 {
     <div class="create-event-block hide-on-med-and-down">
-        @Html.CreateLink("<i class=\"large mdi-content-add\"></i>", "CreateEvent", new { returnURL = currentURL }, new { @class = "large btn-floating green" })
+        <a class="large btn-floating green" href="@Url.RouteUrl("CreateEvent")"><i class="large mdi-content-add"></i></a>        
     </div>
 }
  
@@ -74,8 +75,8 @@
                         </div>
                         @if (evnt.AuthorId == User.Identity.Name)
                         {
-                                <div class="right" id="event-menu">
-                                    @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { returnURL = currentURL, evnt.Id }, new { @class = "btn-floating bacgr-text" })
+                                <div class="right" id="event-menu">                                    
+                                    <a class="btn-floating bacgr-text" href="@Url.RouteUrl("UpdateEvent", new { id=evnt.Id })"><i class="small mdi-editor-mode-edit"></i></a>
                                     <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
                                 </div>
                         }

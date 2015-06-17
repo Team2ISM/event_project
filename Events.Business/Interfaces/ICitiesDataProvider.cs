@@ -9,7 +9,5 @@ namespace Events.Business.Interfaces
         IList<City> GetAll();
 
         City GetById(int citytId);
-
-        City GetByName(string name);
     }
 }

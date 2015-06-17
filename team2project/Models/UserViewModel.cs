@@ -36,6 +36,19 @@ namespace team2project.Models
         [Required(ErrorMessage = "Введите город")]
         public int LocationId { get; set; }
 
+        public string FullName
+        {
+            get
+            {
+                return Name + " " + Surname;
+            }
+
+            set
+            {
+
+            }
+        }
+
         public IList<Role> Roles { get; set; }
 
         public UserViewModel()

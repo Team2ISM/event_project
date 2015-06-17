@@ -15,7 +15,7 @@ namespace team2project.Controllers
 {
     public class EventController : Controller
     {
-        EventManager eventManager;
+	EventManager eventManager;
         CommentManager commentManager;
         CitiesManager cityManager;
         UserManager userManager;
@@ -23,7 +23,7 @@ namespace team2project.Controllers
 
         public EventController(EventManager eventManager, CommentManager commentManager, CitiesManager cityManager, UserManager userManager, SubscribersManager subscribersManager)
         {
-            this.eventManager = eventManager;
+	    this.eventManager = eventManager;
             this.commentManager = commentManager;
             this.cityManager = cityManager;
             this.userManager = userManager;
@@ -33,15 +33,19 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index(string period, string location)
         {
-            var list = eventManager.GetList(period, location);
-            if (list == null)
+            try
             {
-                return RedirectToRoute("Error404");
-            }
-            var listModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(list), location);
+                var listModel = eventManager.GetList(period, location);
+                var listModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(list), location);
             listModel.PrepareEventsToView(cityManager);
             return View("List", listModel);
-        }
+            }
+            catch (ArgumentException ex)
+
+            {	
+		return View("GenericError", model: Resources.ListOfEventsNotFound);
+            }
+       }
 
         [HttpGet]
         public ActionResult Details(string id)
@@ -103,6 +107,7 @@ namespace team2project.Controllers
             eventBussinesModel.DateOfCreation = eventManager.GetById(eventBussinesModel.Id).DateOfCreation;
             eventManager.Update(eventBussinesModel);
             return RedirectToRoute("EventDetails", new { id = eventBussinesModel.Id });
+
         }
 
         [HttpPost]
@@ -128,12 +133,12 @@ namespace team2project.Controllers
         public ActionResult Create(EventViewModel eventModel)
         {
             if (!ModelState.IsValid) return View(eventModel);
-
             var eventBussinesModel = AutoMapper.Mapper.Map<Event>(eventModel);
             eventBussinesModel.AuthorId = User.Identity.Name;
             eventBussinesModel.Description = eventBussinesModel.Description.RemovePreTag();
             eventManager.Create(eventBussinesModel);
             return RedirectToRoute("EventDetails", new { id = eventBussinesModel.Id});
+
         }
 
         [Authorize]
@@ -141,12 +146,14 @@ namespace team2project.Controllers
         public ActionResult MyPastEvents()
         {
             var user = userManager.GetByEmail(User.Identity.Name);
+
             var eventsId = subscribersManager.GetMyEventsId(user.Id);
             IList<Event> events = eventManager.GetMyPastEvents(eventsId);
             var eventsListModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(events));
             eventsListModel.EventsList = eventsListModel.EventsList.OrderBy(x => x.FromDate).ToList();
             eventsListModel.PrepareEventsToView(cityManager);
             return View(eventsListModel);
+
         }
 
         [Authorize]
@@ -154,12 +161,14 @@ namespace team2project.Controllers
         public ActionResult MyFutureEvents()
         {
             var user = userManager.GetByEmail(User.Identity.Name);
+
             var eventsId = subscribersManager.GetMyEventsId(user.Id);
             IList<Event> events = eventManager.GetMyFutureEvents(eventsId);
             var eventsListModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(events));
             eventsListModel.EventsList = eventsListModel.EventsList.OrderBy(x => x.FromDate).ToList();
             eventsListModel.PrepareEventsToView(cityManager);
             return View(eventsListModel);
+
         }
     }
     

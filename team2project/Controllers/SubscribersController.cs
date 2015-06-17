@@ -73,7 +73,7 @@ namespace team2project.Controllers
                 return Json(false);
             }
             var user = userManager.GetByEmail(User.Identity.Name);
-            return Json(manager.IsSubscribed(new Subscribing(id, user.Id)));
+            return Json(manager.IsSubscribed(id, user.Id));
         }
     }
 }
