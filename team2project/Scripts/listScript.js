@@ -62,13 +62,12 @@ function reloadCount(id) {
 function subscribe() {
     button = $(this);
     id = button.attr("id").split("_")[0];
-    button.addClass("disabled");
-    button.attr("disabled", true);
+    button.toggleClass("disabled");
+    button.unbind("click");
     $.post("/subscribe", { id: id }, function (data) {
         if (data) {
             button.toggleClass("unsubscribe-button");
             button.toggleClass("subscribe-button");
-            button.unbind("click");
             button.click(unsubscribe);
             button.find('i').toggleClass('mdi-action-exit-to-app');
             button.find('i').toggleClass('mdi-social-person-add');
@@ -77,20 +76,18 @@ function subscribe() {
             location.assign('/user/login?returnURL=' + returnURL);
         }
         reloadCount(id);
-        button.removeClass("disabled");
-        button.removeAttr("disabled");
+        button.toggleClass("disabled");
     });
 }
 function unsubscribe() {
     button = $(this);
     id = button.attr("id").split("_")[0];
-    button.addClass("disabled");
-    button.attr("disabled", true);
+    button.toggleClass("disabled");
+    button.unbind("click");
     $.post("/unsubscribe", { id: id }, function (data) {
         if (data) {
             button.toggleClass("unsubscribe-button");
             button.toggleClass("subscribe-button");
-            button.unbind("click");
             button.click(subscribe);
             button.find('i').toggleClass('mdi-social-person-add');
             button.find('i').toggleClass('mdi-action-exit-to-app');
@@ -99,7 +96,6 @@ function unsubscribe() {
             location.assign('/user/login');
         }
         reloadCount(id);
-        button.removeClass("disabled");
-        button.removeAttr("disabled");
+        button.toggleClass("disabled");
     });
 }

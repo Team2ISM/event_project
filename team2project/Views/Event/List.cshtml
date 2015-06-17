@@ -139,26 +139,26 @@
             stickyNav();
         });
 
-        buttons = $(".subscribe");
-        
-        $.each(buttons, function (index, value) {
-;
-            $(value).addClass("disabled");
-            $(value).attr("disabled", true);
-            $.post("/issubscribed", { id: $(value).attr("id").split("_")[0] }, function (data) {
-                if (data) {
-                    $(value).addClass("unsubscribe-button");
-                    $(value).find("i").addClass("mdi-action-exit-to-app");
-                }
-                else {
-                    $(value).addClass("subscribe-button");
-                    $(value).find("i").addClass("mdi-social-person-add");
-                }
-                $(value).removeClass("disabled");
-                $(value).attr("disabled", false);
-                bindButton(value);
+        setTimeout(function () {
+            buttons = $(".subscribe");
+
+            $.each(buttons, function (index, value) {
+                $(value).toggleClass("disabled");
+                $.post("/issubscribed", { id: $(value).attr("id").split("_")[0] }, function (data) {
+                    if (data) {
+                        $(value).addClass("unsubscribe-button");
+                        $(value).find("i").addClass("mdi-action-exit-to-app");
+                    }
+                    else {
+                        $(value).addClass("subscribe-button");
+                        $(value).find("i").addClass("mdi-social-person-add");
+                    }
+                    $(value).toggleClass("disabled");
+                    bindButton(value);
+                });
             });
-        });
+        }, 300);
+        
         
         
     });
