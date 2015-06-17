@@ -135,9 +135,12 @@ namespace team2project.Controllers
         {
             if (!ModelState.IsValid) return View(eventModel);
             var eventBussinesModel = AutoMapper.Mapper.Map<Event>(eventModel);
-            eventBussinesModel.AuthorId = User.Identity.Name;
+            eventBussinesModel.AuthorId = User.Identity.Name;            
             eventBussinesModel.Description = eventBussinesModel.Description.RemovePreTag();
             eventManager.Create(eventBussinesModel);
+
+            var user = userManager.GetByEmail(User.Identity.Name);
+            subscribersManager.SubscribeUser(new Subscribing { EventId = eventBussinesModel.Id, UserId = user.Id });
             return RedirectToRoute("EventDetails", new { id = eventBussinesModel.Id});
         }
 
