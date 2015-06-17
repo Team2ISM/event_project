@@ -24,7 +24,7 @@ else
     classes = "container z-depth-3";
 }
 <div class="@classes" style="position: relative">
-    @using (Html.BeginForm("Registration", "User", FormMethod.Post))
+    @using (Html.BeginForm("Registration", "User", FormMethod.Post, new { id = "form" }))
     {          
         <div class="row center">
             <h5>Регистрация участников</h5>
@@ -70,11 +70,12 @@ else
 </div>
 <script>
  $(document).ready(function(){
-     var target = $("#register");
-     $("form").on("submit", function () {
-         target.addClass("disabled");
-         target.attr("disabled", "disabled");
-     });
+     $(document).ready(function () {
+         $("#register").click(function () {
+             if ($("#Email").val().replace(/\s/g, "") && $("#Password").val().replace(/\s/g, "") && $("#Name").val().replace(/\s/g, "") && $("#Surname").val().replace(/\s/g, "") && $("#RepeatPassword").val().replace(/\s/g, "")) $("#register").attr("disabled", true)
+             $("#form").submit();
+         });
+     })
  });
 </script>
 @section scripts{
