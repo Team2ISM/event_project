@@ -76,15 +76,15 @@
         </div>
 
     <div class="center">
-        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover large-font" onclick="window.location = '@ViewBag.returnUrl'" type="button">Отмена</button>
-        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover bold large-font" id="create" type="submit">@button</button>
+        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover large-font forDisable" onclick="window.location = '@ViewBag.returnUrl'" type="button">Отмена</button>
+        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover bold large-font forDisable" id="create" type="submit">@button</button>
     </div>
     }
     
 </div>
 <script>
     $(document).ready(function(){
-        var target = $("#create"), form = $("form");
+        var target = $(".forDisable"), form = $("form");
         target.removeAttr('disabled');
         target.removeClass('disabled');
         form.on("submit", function () {
