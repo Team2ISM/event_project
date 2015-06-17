@@ -145,7 +145,12 @@ namespace Events.Business.Classes
 
             SmtpClient client = new SmtpClient();
 
-            client.Send(msg);
+            try
+            {
+                client.Send(msg);
+            } catch
+            {
+            }
         }
     }
 }
