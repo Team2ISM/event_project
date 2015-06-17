@@ -20,6 +20,7 @@ using team2project.Models;
 using Newtonsoft.Json;
 using System.IO;
 using team2project.Properties;
+using Events.Business.Components;
 
 namespace team2project.Controllers
 {
@@ -44,9 +45,9 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Login(string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
+            if (UserContext.Current.IsLoggedIn)
             {
-                if (!User.IsInRole("Admin"))
+                if (!UserContext.Current.IsAdmin)
                 {
                     return View("GenericError", model: Resources.ResponseAccessDenied);
                 }
@@ -123,7 +124,7 @@ namespace team2project.Controllers
             var user = userManager.GetByEmail(email);
             if (user != null)
             {
-               Api.UserManager.GenerateNewPassword(user);
+                userManager.GenerateNewPassword(user);
             }
             return RedirectToRoute("ThankYouPage");
         }
@@ -160,7 +161,7 @@ namespace team2project.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Пользователь с такой почтой уже зарегистрирован");                   
+                    ModelState.AddModelError("", "Пользователь с такой почтой уже зарегистрирован");
                 }
             }
             return View();
@@ -174,7 +175,7 @@ namespace team2project.Controllers
             if (user != null && !user.IsActive)
             {
                 user.IsActive = true;
-                userManager.UpdateUser(user);                
+                userManager.UpdateUser(user);
                 SignIn(user);
                 return RedirectToRoute("Welcome");
             }
@@ -197,7 +198,7 @@ namespace team2project.Controllers
         {
             if (ModelState.IsValid)
             {
-                var email = User.Identity.Name;                
+                var email = User.Identity.Name;
 
                 if (userManager.ValidatePassword(email, oldPassword) == true)
                 {
@@ -252,7 +253,7 @@ namespace team2project.Controllers
             string subject = "Подтверждение регистрации";
             string newBody = this.RenderPartialViewToString("email", activationLink);
             userManager.EmailSender(user.Email, newBody, subject);
-        }  
+        }
 
     }
 }

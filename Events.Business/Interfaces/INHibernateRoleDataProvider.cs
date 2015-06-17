@@ -18,7 +18,5 @@ namespace Events.Business.Interfaces
         ICollection<User> GetUsersInRole(string rolename);
 
         bool IsUserInRole(string username, string rolename);
-
-        bool RoleExists(string rolename);
     }
 }

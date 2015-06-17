@@ -11,6 +11,8 @@ using Quartz.Impl;
 using Events.EmailReminder;
 using Quartz;
 using Quartz.Spi;
+using Events.Business.Components;
+using team2project.Components;
 
 namespace team2project
 {
@@ -31,7 +33,7 @@ namespace team2project
             builder.RegisterType<NHibernateEventDataProvider>()
                 .As<IEventDataProvider>();
             builder.RegisterType<NHibernateCitiesDataProvider>()
-                .As<ICitiesDataProvider>().SingleInstance();
+                .As<ICitiesDataProvider>();
             builder.RegisterType<NHibernateCommentDataProvider>()
                 .As<ICommentDataProvider>();
             builder.RegisterType<NHibernateSubscribersDataProvider>()
@@ -44,6 +46,8 @@ namespace team2project
             builder.RegisterType<NHibernateEmailReminderDataProvider>()
                 .As<IEmailReminderDataProvider>();
             builder.RegisterType<AutofacJobFactory>().AsImplementedInterfaces();
+
+            builder.RegisterType<WebUserContext>().As<UserContext>().InstancePerHttpRequest();
 
             builder.Register(x => new StdSchedulerFactory().GetScheduler()).As<IScheduler>();
             builder.RegisterAssemblyTypes(typeof(EmailRemiderScheduler).Assembly).Where(x => typeof(IJob).IsAssignableFrom(x));

@@ -30,60 +30,6 @@ namespace Events.Business.Classes
             base.Initialize(name, config);
         }
 
-        public override void AddUsersToRoles(string[] usernames, string[] rolenames)
-        {
-            foreach (string rolename in rolenames)
-            {
-                if (!RoleExists(rolename))
-                {
-                    throw new ProviderException(String.Format("Role name {0} not found.", rolename));
-                }
-            }
-
-            foreach (string username in usernames)
-            {
-                if (username.Contains(","))
-                {
-                    throw new ArgumentException(String.Format("User names {0} cannot contain commas.", username));
-                }
-                foreach (string rolename in rolenames)
-                {
-                    if (IsUserInRole(username, rolename))
-                    {
-                        throw new ProviderException(String.Format("User {0} is already in role {1}.", username, rolename));
-                    }
-                }
-            }
-            dataProvider.AddUsersToRoles(usernames, rolenames);
-        }
-
-        public override void CreateRole(string rolename)
-        {
-            if (rolename.Contains(","))
-            {
-                throw new ArgumentException("Role names cannot contain commas.");
-            }
-            if (RoleExists(rolename))
-            {
-                throw new ProviderException("Role name already exists.");
-            }
-            dataProvider.CreateRole(rolename);
-        }
-
-        public override bool DeleteRole(string rolename, bool throwOnPopulatedRole)
-        {
-            if (!RoleExists(rolename))
-            {
-                throw new ProviderException("Role does not exist.");
-            }
-            if (throwOnPopulatedRole && GetUsersInRole(rolename).Length > 0)
-            {
-                throw new ProviderException("Cannot delete a populated role.");
-            }
-            dataProvider.DeleteRole(rolename);
-            return false;
-        }
-
         public override string[] GetAllRoles()
         {
             ICollection<Role> allRole;
@@ -114,14 +60,29 @@ namespace Events.Business.Classes
         {
         }
 
-        public override bool RoleExists(string rolename)
-        {
-            return dataProvider.RoleExists(rolename);
-        }
-
         public override string[] FindUsersInRole(string rolename, string usernameToMatch)
         {
             return null;
+        }
+
+        public override void AddUsersToRoles(string[] usernames, string[] roleNames)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void CreateRole(string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool RoleExists(string roleName)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -147,11 +147,9 @@ namespace team2project.Controllers
         {
             var user = userManager.GetByEmail(User.Identity.Name);
             IList<Event> events = eventManager.GetMyPastEvents(user.Id);
-            var eventsListModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(events));
-            eventsListModel.EventsList = eventsListModel.EventsList.OrderBy(x => x.FromDate).ToList();
+            var eventsListModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(events));            
             eventsListModel.PrepareEventsToView(cityManager);
             return View(eventsListModel);
-
         }
 
         [Authorize]
@@ -161,10 +159,8 @@ namespace team2project.Controllers
             var user = userManager.GetByEmail(User.Identity.Name);
             IList<Event> events = eventManager.GetMyFutureEvents(user.Id);
             var eventsListModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(events));
-            eventsListModel.EventsList = eventsListModel.EventsList.OrderBy(x => x.FromDate).ToList();
             eventsListModel.PrepareEventsToView(cityManager);
             return View(eventsListModel);
-
         }
     }
     
