@@ -48,14 +48,15 @@
                     }
                 </div>
             </div>
-         
-            <div class="row first-row inline-block">
-                
+            <div class="row short-row inline-block">
+                <div class="event-title inline-block"><h4 class="inline-block no-margin">@Model.Title</h4></div>
+            </div>
+            <div class="row short-row inline-block">
+
                 <div class="details-event-img">
                     @Html.CreateImage(Model.Image)
                 </div>
                 <div class="title-date-block inline-block left">
-                    <div class="event-title inline-block"><h4 class="inline-block no-margin">@Model.Title</h4></div>
                     <div></div>
                     <div class="inline-block">
                         <span class="text-bold large-font">@CheckDateIfNull(Model.FromDate, "dd MMMM yyyy года, H:mm ")</span>
@@ -67,8 +68,9 @@
                         <span class="text-bold large-font">@Model.Location</span>
                     </div>
                 </div>
-                
+
             </div>
+            
             <div class="row medium-font" id="desc">
                 <div>
                     <p class="text-align-justify">@Model.Description.ToHtmlString()</p>

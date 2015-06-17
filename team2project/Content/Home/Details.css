@@ -306,7 +306,9 @@ fieldset h5 p {
 {
     display: none;
 }
-
+fieldset:first-child{
+    padding-top: 10px;
+}
 #subscribed
 {
     cursor: pointer;
@@ -314,7 +316,7 @@ fieldset h5 p {
 .details-event-img
 {
     float: left;
-    width: 25%;
+    max-width: 150px;
 }
 .details-event-img img {
     width:100%;
@@ -325,8 +327,9 @@ fieldset h5 p {
   right: 30%;
   z-index: 501;
 }
-.first-row{
+.short-row{
     width: calc(100% - 200px);
+    margin-bottom: 0;   
 }
 #onme{
     width: 200px;
