@@ -1,16 +1,15 @@
 ﻿@{
     var currentURL = Request.Url;
     ViewBag.Title = "List";
-    var locationId = ViewBag.location;
     var About = " ";
 }
 
-@model System.Collections.Generic.List<team2project.Models.EventViewModel>
 @using System.Globalization
 @using team2project.Models
 @using team2project.Helpers
 @using System.Text.RegularExpressions
 @using Events.Business.Helpers
+@model EventListViewModel
 @section css{
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/jquery-ui.theme.min.css")
@@ -51,7 +50,7 @@
     
     <table class="striped width80 centered">
         <tbody>
-            @foreach (var evnt in Model)
+            @foreach (var evnt in Model.EventsList)
             {
                 <tr>
                     <td class="list-events-date">
@@ -162,7 +161,7 @@
         
         
     });
-    var cityValue = "@locationId";
+    var cityValue = "@Model.Location";
 </script>
 
 @helper ConstructLink(string linkName, string period)

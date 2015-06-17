@@ -23,7 +23,6 @@ namespace team2project.Controllers
 
         public EventController(EventManager eventManager, CommentManager commentManager, CitiesManager cityManager, UserManager userManager, SubscribersManager subscribersManager)
         {
-            
             this.eventManager = eventManager;
             this.commentManager = commentManager;
             this.cityManager = cityManager;
@@ -34,78 +33,76 @@ namespace team2project.Controllers
         [HttpGet]
         public ActionResult Index(string period, string location)
         {
-            var listModel = eventManager.GetList(period, location);
-            if (listModel == null)
+            var list = eventManager.GetList(period, location);
+            if (list == null)
             {
                 return RedirectToRoute("Error404");
             }
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
-            PrepareEventsToView(list);
-            ViewBag.location = location;
-            return View("List", list);
+            var listModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(list), location);
+            listModel.PrepareEventsToView(cityManager);
+            return View("List", listModel);
         }
 
         [HttpGet]
         public ActionResult Details(string id)
         {
-            var evntModel = eventManager.GetById(id);
-            if (evntModel == null || !evntModel.Active)
+            var eventsBussinesModelList = eventManager.GetById(id);
+            if (eventsBussinesModelList == null || !eventsBussinesModelList.Active)
             {
                 return View("GenericError", model: Resources.ResponseEventNotFound);
             }
-            var evntViewModel = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
-            evntViewModel.Location = cityManager.GetById(evntViewModel.LocationId).Name;
-            evntViewModel.Comments = commentManager.GetByEventId(id);
-            return View(evntViewModel);
+            var eventsViewModelList = AutoMapper.Mapper.Map<EventViewModel>(eventsBussinesModelList);
+            eventsViewModelList.Location = cityManager.GetById(eventsViewModelList.LocationId).Name;
+            eventsViewModelList.Comments = commentManager.GetByEventId(id);
+            return View(eventsViewModelList);
         }
 
         [HttpGet]
         [Authorize]
         public ActionResult Create(string returnUrl)
         {
-            var evnt = new EventViewModel();
             ViewBag.returnUrl = (String.IsNullOrEmpty(returnUrl)) ? "/events/all" : returnUrl;
-            return View(evnt);
+            return View(new EventViewModel());
         }
 
         [HttpGet]
         [Authorize]
         public ActionResult Update(string id, string returnUrl)
         {
-            var evntModel = eventManager.GetById(id);
-            if (evntModel == null)
+            var eventBussinesModel = eventManager.GetById(id);
+            if (eventBussinesModel == null)
             {
                 return View("GenericError", model: Resources.ResponseEventNotFound);
             }
-            if (DateTime.Now > evntModel.ToDate)
+            if (DateTime.Now > eventBussinesModel.ToDate)
             {
                 return View("GenericError", model: Resources.ResponseEditingNotAllowedDueToEventEndingTime);
             }
-            if (evntModel.AuthorId != User.Identity.Name)
+            if (eventBussinesModel.AuthorId != User.Identity.Name)
             {
                 return View("GenericError", model: Resources.ResponseEditingNotAllowedDueToWrongUser);
             }
-            var evnt = AutoMapper.Mapper.Map<EventViewModel>(evntModel);
+            var eventModel = AutoMapper.Mapper.Map<EventViewModel>(eventBussinesModel);
             ViewBag.returnUrl = (String.IsNullOrEmpty(returnUrl)) ? "/events/all" : returnUrl;
-            return View("Create", evnt);
+            return View("Create", eventModel);
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult Update(EventViewModel evnt)
+        public ActionResult Update(EventViewModel eventModel)
         {
-            if (!ModelState.IsValid) return View("Create", evnt);
+            if (!ModelState.IsValid) return View("Create", eventModel);
 
-            if (evnt.AuthorId != User.Identity.Name)
+            if (eventModel.AuthorId != User.Identity.Name)
             {
                 return View("GenericError", model: Resources.ResponseEditingNotAllowedDueToWrongUser);
             }            
-            evnt.AuthorId = User.Identity.Name;
-            var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
-            evntModel.Description = evntModel.Description.RemovePreTag();
-            evntModel.DateOfCreation = eventManager.GetById(evntModel.Id).DateOfCreation;
-            eventManager.Update(evntModel);
-            return RedirectToRoute("EventDetails", new { id = evntModel.Id });
+            eventModel.AuthorId = User.Identity.Name;
+            var eventBussinesModel = AutoMapper.Mapper.Map<Event>(eventModel);
+            eventBussinesModel.Description = eventBussinesModel.Description.RemovePreTag();
+            eventBussinesModel.DateOfCreation = eventManager.GetById(eventBussinesModel.Id).DateOfCreation;
+            eventManager.Update(eventBussinesModel);
+            return RedirectToRoute("EventDetails", new { id = eventBussinesModel.Id });
         }
 
         [HttpPost]
@@ -128,15 +125,15 @@ namespace team2project.Controllers
 
         [HttpPost]
         [Authorize]
-        public ActionResult Create(EventViewModel evnt)
+        public ActionResult Create(EventViewModel eventModel)
         {
-            if (!ModelState.IsValid) return View(evnt);
+            if (!ModelState.IsValid) return View(eventModel);
 
-            var evntModel = AutoMapper.Mapper.Map<Event>(evnt);
-            evntModel.AuthorId = User.Identity.Name;
-            evntModel.Description = evntModel.Description.RemovePreTag();
-            eventManager.Create(evntModel);
-            return RedirectToRoute("EventDetails", new { id = evntModel.Id});
+            var eventBussinesModel = AutoMapper.Mapper.Map<Event>(eventModel);
+            eventBussinesModel.AuthorId = User.Identity.Name;
+            eventBussinesModel.Description = eventBussinesModel.Description.RemovePreTag();
+            eventManager.Create(eventBussinesModel);
+            return RedirectToRoute("EventDetails", new { id = eventBussinesModel.Id});
         }
 
         [Authorize]
@@ -146,10 +143,10 @@ namespace team2project.Controllers
             var user = userManager.GetByEmail(User.Identity.Name);
             var eventsId = subscribersManager.GetMyEventsId(user.Id);
             IList<Event> events = eventManager.GetMyPastEvents(eventsId);
-            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            eventsModels = eventsModels.OrderBy(x => x.FromDate).ToList();
-            PrepareEventsToView(eventsModels);
-            return View(eventsModels);
+            var eventsListModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(events));
+            eventsListModel.EventsList = eventsListModel.EventsList.OrderBy(x => x.FromDate).ToList();
+            eventsListModel.PrepareEventsToView(cityManager);
+            return View(eventsListModel);
         }
 
         [Authorize]
@@ -159,17 +156,20 @@ namespace team2project.Controllers
             var user = userManager.GetByEmail(User.Identity.Name);
             var eventsId = subscribersManager.GetMyEventsId(user.Id);
             IList<Event> events = eventManager.GetMyFutureEvents(eventsId);
-            List<EventViewModel> eventsModels = AutoMapper.Mapper.Map<List<EventViewModel>>(events);
-            eventsModels = eventsModels.OrderBy(x => x.FromDate).ToList();
-            PrepareEventsToView(eventsModels);
-            return View(eventsModels);
+            var eventsListModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(events));
+            eventsListModel.EventsList = eventsListModel.EventsList.OrderBy(x => x.FromDate).ToList();
+            eventsListModel.PrepareEventsToView(cityManager);
+            return View(eventsListModel);
         }
-
-        private void PrepareEventsToView(List<EventViewModel> eventsModels)
+    }
+    
+    static class Extension
+    {
+        public static void PrepareEventsToView(this EventListViewModel Model, CitiesManager cityManager)
         {
-            foreach (var ev in eventsModels)
+            foreach (var eventModel in Model.EventsList)
             {
-                ev.Location = cityManager.GetById(Convert.ToInt32(ev.LocationId)).Name;
+                eventModel.Location = cityManager.GetById(eventModel.LocationId).Name;
             }
         }
     }
