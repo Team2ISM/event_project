@@ -65,6 +65,7 @@ function subscribe() {
     button.toggleClass("disabled");
     button.unbind("click");
     $.post("/subscribe", { id: id }, function (data) {
+        button = $("#" + this.data.split("=")[1] + "_sub");
         if (data) {
             button.toggleClass("unsubscribe-button");
             button.toggleClass("subscribe-button");
@@ -85,6 +86,7 @@ function unsubscribe() {
     button.toggleClass("disabled");
     button.unbind("click");
     $.post("/unsubscribe", { id: id }, function (data) {
+        button = $("#" + this.data.split("=")[1] + "_sub");
         if (data) {
             button.toggleClass("unsubscribe-button");
             button.toggleClass("subscribe-button");
