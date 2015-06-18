@@ -44,7 +44,7 @@
         </div>
 
         <div class="input-field col s12 m12 l12">
-            @Html.LabelFor(m => m.Description, new { @id = "description"})
+            <label for="Description" id="description">Описание</label>
             @Html.EditorFor(m => m.Description)
             @Html.ValidationMessageFor(m => m.Description)
         </div>
@@ -89,7 +89,6 @@
             $("#form").submit();
         });
         $(".create-event-block").hide(0);
-        $('#description').text('Описание').css('display','block');
     });
     window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'")
     window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'")
