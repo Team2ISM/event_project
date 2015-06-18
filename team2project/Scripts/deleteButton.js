@@ -1,4 +1,5 @@
-﻿function deleteEvent(e, reloadPage) {
+﻿function deleteEvent(e, fromPage) {
+    fromPage = fromPage || "admin";
     var host = location.protocol + '//' + location.host;
     var url = host + "/events/delete";
     $("#dialog-confirm").dialog({
@@ -16,8 +17,21 @@
                         id: e
                     },
                     success: function (response) {
-                        if (reloadPage) location.reload();
-                        else $("#" + e + "_row").remove();
+                        switch (fromPage)
+                        {
+                            case "admin":
+                                location.reload();
+                                break;
+                            case "list":
+                                $("#" + e + "_row").remove();
+                                break;
+                            case "details":
+                                window.location.assign(host);
+                                break;
+                            default:
+                                console.dir("ERROR: Unknown source");
+                                break;
+                        }
                     },     
                     error: function (er) {
                         console.dir(er);
