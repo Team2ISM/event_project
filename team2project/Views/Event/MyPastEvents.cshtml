@@ -29,7 +29,7 @@
         <tbody>
             @foreach (var evnt in Model.EventsList)
             {
-                <tr>
+                <tr id="@(evnt.Id + "_row")">
                     <td class="list-events-date">
                         <div class="bg-blue-grey month">
                             @CheckDateIfNull(evnt.FromDate, "MMMM")
@@ -50,7 +50,7 @@
                         @if (evnt.AuthorId == User.Identity.Name)
                         {
                             <div class="right" id="event-menu">                           
-                                <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
+                                <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id', 'list'); return false"><i class="small mdi-action-delete"></i></a>
                             </div>
                         }
                     </td>
