@@ -47,6 +47,7 @@ window.onload = function () {
         mask: true
     });
     pick2.datetimepicker({
+        minDate: '-1970/01/01',
         startDate: tDate ? tDate : '',
         lang: 'ru',
         mask: true
