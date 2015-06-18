@@ -44,7 +44,7 @@
         </div>
 
         <div class="input-field col s12 m12 l12">
-            @Html.LabelFor(m => m.Description, "Описание")
+            @Html.LabelFor(m => m.Description, new { @id = "description"})
             @Html.EditorFor(m => m.Description)
             @Html.ValidationMessageFor(m => m.Description)
         </div>
@@ -92,14 +92,14 @@
             target.attr("disabled", "disabled");
         });
         $(".create-event-block").hide(0);
+        $('#description').text('Описание').css('display','block');
     });
-    window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");
-    window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");
+    window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'")
+    window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'")
     window.city = @Html.Raw("'" + (Model.LocationId != null ? Model.LocationId.ToString() : " ") + "'")
 </script>
 @section scripts{
     @Scripts.Render("~/Scripts/jquery-ui.js")
-    @Scripts.Render("~/Scripts/script.js")
     @Scripts.Render("~/Scripts/jquery.datetimepicker.js")
     @Scripts.Render("~/Scripts/ckeditor/ckeditor.js")
     @Scripts.Render("~/Scripts/createScript.js")
