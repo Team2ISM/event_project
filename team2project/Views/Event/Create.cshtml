@@ -84,12 +84,9 @@
 </div>
 <script>
     $(document).ready(function(){
-        var target = $(".forDisable"), form = $("form");
-        target.removeAttr('disabled');
-        target.removeClass('disabled');
-        form.on("submit", function () {
-            target.addClass("disabled");
-            target.attr("disabled", "disabled");
+        $("#create").click(function () {
+            if ($("#Title").val().replace(/\s/g, "") && $("#Description").val().replace(/\s/g, "") && $("#Image").val().replace(/\s/g, "")) $("#register").attr("create", true)
+            $("#form").submit();
         });
         $(".create-event-block").hide(0);
         $('#description').text('Описание').css('display','block');
