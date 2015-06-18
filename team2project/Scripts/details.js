@@ -43,6 +43,7 @@ function unsubscribe() {
 }
 var button, id, link;
 window.onload = function () {
+    $("body").toggleClass("loaded");
     button = $('#submit');
     button.addClass("disabled");
     button.attr("disabled", true);
