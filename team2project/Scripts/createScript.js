@@ -42,7 +42,7 @@ window.onload = function () {
         pick1.datetimepicker({
         minDate: '-1970/01/01',
         startDate: fDate ? fDate : '',
-        minTime: 0,
+        //minTime: 0,
         lang: 'ru',
         mask: true
     });
