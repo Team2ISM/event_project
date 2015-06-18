@@ -10,6 +10,7 @@
         buttons: {
             "Удалить событие": function () {
                 $(this).dialog("close");
+                $("body").toggleClass("loaded");
                 $.ajax({
                     url: host + "/events/delete",
                     type: "POST",
