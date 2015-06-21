@@ -33,12 +33,6 @@ namespace team2project
         protected void Application_BeginRequest(Object source, EventArgs e)
         {
             MyCultureConfig.SetCulture("ru");
-
-            if(string.IsNullOrEmpty(EnvironmentInfo.Host))
-            {
-                HttpApplication app = (HttpApplication)source;
-                EnvironmentInfo.Host = FirstRequestInitialisation.Initialise(app.Context);
-            }
         }    
     }
 }

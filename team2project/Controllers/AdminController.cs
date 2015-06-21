@@ -72,10 +72,10 @@ namespace team2project.Controllers
 
                 case EventStatuses.NotExist:
                     dataResult = new JsonResultHelper()
-                         {
-                             Message = "Событие было удалено",
-                             State = JsonResultHelper.ResponseStatus.Error
-                         };
+                    {
+                        Message = "Событие было удалено",
+                        State = JsonResultHelper.ResponseStatus.Error
+                    };
                     break;
 
                 case EventStatuses.WasToggled:
@@ -85,7 +85,13 @@ namespace team2project.Controllers
                         State = JsonResultHelper.ResponseStatus.Error
                     };
                     break;
-
+                default:
+                    dataResult = new JsonResultHelper()
+                    {
+                        Message = "Необработаное исключение",
+                        State = JsonResultHelper.ResponseStatus.Error
+                    };
+                    break;
             }
             return Json(dataResult);
         }
@@ -122,7 +128,13 @@ namespace team2project.Controllers
                         State = JsonResultHelper.ResponseStatus.Error
                     };
                     break;
-
+                default:
+                    dataResult = new JsonResultHelper()
+                    {
+                        Message = "Необработаное исключение",
+                        State = JsonResultHelper.ResponseStatus.Error
+                    };
+                    break;
             }
             return Json(dataResult);
         }
@@ -152,8 +164,7 @@ namespace team2project.Controllers
             });
         }
 
-
-        void MarkAsSeen()
+        private void MarkAsSeen()
         {
             var list = manager.GetAllEvents();
 

@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api.cs" />
     <Compile Include="Classes\BaseManager.cs" />
     <Compile Include="Classes\CitiesManager.cs" />
     <Compile Include="Classes\CommentManager.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Classes\RemindManager.cs" />
     <Compile Include="Classes\SubscribersManager.cs" />
     <Compile Include="Classes\UserManager.cs" />
+    <Compile Include="Components\UserContext.cs" />
     <Compile Include="Helpers\EnvironmentInfo.cs" />
     <Compile Include="Helpers\EventStatus.cs" />
     <Compile Include="Helpers\PeriodStates.cs" />
@@ -127,6 +129,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

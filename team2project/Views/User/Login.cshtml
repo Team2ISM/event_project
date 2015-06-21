@@ -10,7 +10,7 @@
     @Styles.Render("~/Content/User/user.css")
 }
 
-@using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "container z-depth-3" }))
+@using (Html.BeginForm("Login", "User", FormMethod.Post, new { @class = "container z-depth-3", id="login-form" }))
 {
 
     @Html.ValidationSummary(true)
@@ -35,12 +35,12 @@
 }
 <script>
     $(document).ready(function () {
-        var target = $("#send");
-        $("form").on("submit", function () {
-            target.addClass("disabled");
-            target.attr("disabled", "disabled");
+        $("#send").click(function () {
+            if ($("#Email").val().replace(/\s/g, "") && $("#Password").val().replace(/\s/g, "")) $("#send").attr("disabled", true)
+            $("#login-form").submit();
         });
-    });
+
+    })
 </script>
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")

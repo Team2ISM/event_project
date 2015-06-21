@@ -132,10 +132,9 @@ textarea
 }
 .month-date-block
 {
-    min-width: 75px;
-    width: 10%;
-    height: 100%;
-    margin-left:20px;
+    width: 130px;
+    margin-left:40px;
+    margin-bottom: 5px;
 }
 .color-blue-grey
 {
@@ -296,7 +295,7 @@ fieldset h5 p {
 
 #desc div p img
 {
-    width: 100% !important;
+    max-width: 100% !important;
     height: 100% !important;
 }
 .cke_editable img
@@ -307,18 +306,32 @@ fieldset h5 p {
 {
     display: none;
 }
-
+fieldset:first-child{
+    padding-top: 10px;
+}
 #subscribed
 {
     cursor: pointer;
 }
-
+.details-event-img
+{
+    float: left;
+    max-width: 150px;
+}
 .details-event-img img {
     width:100%;
 }
 .edit-event-block{
   position: fixed;
   top: 40px;
-  right: 581px;
-  z-index: 1100;
+  right: 30%;
+  z-index: 501;
+}
+.short-row{
+    width: calc(100% - 200px);
+    margin-bottom: 0;   
+}
+#onme{
+    width: 200px;
+    text-align: center;
 }

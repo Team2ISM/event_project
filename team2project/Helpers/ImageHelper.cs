@@ -8,7 +8,7 @@ namespace team2project.Helpers
 {
     public static class ImageHelper
     {
-        private const string notAvailUrl = "http://www.tarcbusinessreview.com/wp-content/plugins/wp-voting-contest/assets/image//img_not_available.png";
+        private const string notAvailUrl = "/Content/images/image-not-avaible.png";
 
         public static MvcHtmlString CreateImage(this HtmlHelper html, string url, string classAttr = "")
         {

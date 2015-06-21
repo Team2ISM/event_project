@@ -11,7 +11,7 @@ header, footer, nav, section {
 }
 nav{
     position: fixed;
-    z-index: 700;
+    z-index: 500;
     top: 0;
 }
 p, div{
@@ -237,8 +237,14 @@ img {
 .create-event-block {
   position: fixed;
   top: 40px;
-  right: 529px;
-  z-index: 1100;
+  right: 250px;
+  z-index: 500;
+  display: none;
+}
+
+.create-event-block a
+{
+    box-shadow: none;
 }
 
 .create-event-block .btn-floating, .edit-event-block .btn-floating {
@@ -254,7 +260,7 @@ img {
 }
 
 .sticky-filters {
-    z-index: 1000;
+    z-index: 499;
     position: fixed;
     top: 64px;
     width: 100%;
@@ -279,4 +285,20 @@ img {
 #search:focus{
     border-bottom: 1px solid white;
     box-shadow: 0 1px 0 0 white;
+}
+#mobile-demo *{
+    z-index: 1000;
+}
+.ui-widget select{
+    border: 1px solid darkgray;
+    font-size: 0.9em;
+    font-family: Roboto;
+}
+.align-left{
+    text-align: left;
+}
+.align-right
+{
+    text-align: right;
+
 }

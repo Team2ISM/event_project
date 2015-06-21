@@ -5,12 +5,7 @@
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/preloader.css")
 }
-@section scripts{
-    @Scripts.Render("~/bundles/knockout");
-    @Scripts.Render("~/Scripts/adminScript.js")
-    @Styles.Render("~/Content/jquery-ui.min.css")
-    @Scripts.Render("~/Scripts/jquery-ui.min.js")
-}
+
 <div class="container">
     <h2 class ="center dark-text">Кабинет администратора</h2>
     <table class="striped centered width80">
@@ -52,3 +47,9 @@
         </p>
     </div>
 </div>
+@section scripts{
+    @Scripts.Render("~/bundles/knockout");
+    @Scripts.Render("~/Scripts/adminScript.js")
+    @Styles.Render("~/Content/jquery-ui.min.css")
+    @Scripts.Render("~/Scripts/jquery-ui.min.js")
+}

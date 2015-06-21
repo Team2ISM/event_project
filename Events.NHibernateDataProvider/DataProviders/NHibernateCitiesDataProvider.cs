@@ -3,63 +3,35 @@ using NHibernate;
 using NHibernate.Criterion;
 using Events.Business.Interfaces;
 using Events.Business.Models;
+using System.Linq;
 
 namespace Events.NHibernateDataProvider.NHibernateCore
 {
     public class NHibernateCitiesDataProvider : ICitiesDataProvider
     {
-        private static IList<City> Cities { get; set; }
+        private IList<City> Cities { get; set; }
+
+        public NHibernateCitiesDataProvider()
+        {
+            InitializeCities();
+        }
+
+        private void InitializeCities()
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                Cities = session.CreateCriteria<City>().List<City>();
+            }
+        }
 
         public IList<City> GetAll()
         {
-            if (Cities != null)
-            {
-                return Cities;
-            }
-            using (ISession session = Helper.OpenSession())
-            {
-                return Cities = session.CreateCriteria<City>().List<City>();
-            }
+            return Cities;
         }
 
         public City GetById(int id)
         {
-            if (Cities != null)
-            {
-                foreach (var city in Cities)
-                {
-                    if (city.Id == id)
-                    {
-                        return city;
-                    }
-                }
-            }
-
-            using (ISession session = Helper.OpenSession())
-            {
-                return session.Get<City>(id);
-            }
-        }
-
-        public City GetByName(string name)
-        {
-            if (Cities != null)
-            {
-                foreach (var city in Cities)
-                {
-                    if (city.Name == name)
-                    {
-                        return city;
-                    }
-                }
-            }
-
-            using (ISession session = Helper.OpenSession())
-            {
-                var creteria = session.CreateCriteria<City>();
-                creteria.Add(Restrictions.Eq("Name", name));
-                    return new List<City>(creteria.List<City>()).ToArray()[0];
-            }
+            return Cities.FirstOrDefault(c => c.Id == id);
         }
     }
 }

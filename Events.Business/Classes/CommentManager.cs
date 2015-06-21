@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Events.Business.Models;
 using Events.Business.Interfaces;
+using System;
 
 namespace Events.Business.Classes
 {
@@ -11,10 +12,10 @@ namespace Events.Business.Classes
         protected override string Name { get; set; }
 
         public CommentManager(ICommentDataProvider dataProvider, ICacheManager cacheManager)
+            : base(cacheManager)
         {
             Name = "Comments";
             this.dataProvider = dataProvider;
-            this.cacheManager = cacheManager;
         }
 
         public IList<Comment> GetList()
@@ -28,6 +29,7 @@ namespace Events.Business.Classes
 
         public void Create(Comment model)
         {
+            model.PostingTime = DateTime.Now;
             dataProvider.Create(model);
             RemoveFromCache("commentsList");
             RemoveFromCache("commentsToEvent/" + model.EventId);

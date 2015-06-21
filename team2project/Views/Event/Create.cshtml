@@ -44,7 +44,7 @@
         </div>
 
         <div class="input-field col s12 m12 l12">
-            @Html.LabelFor(m => m.Description, "Описание")
+            <label for="Description" id="description">Описание</label>
             @Html.EditorFor(m => m.Description)
             @Html.ValidationMessageFor(m => m.Description)
         </div>
@@ -57,7 +57,7 @@
         </div>
         
         <div class="input-field col s12 m12 l12">
-            @Html.LabelFor(m => m.Image, "Изображение")
+            @Html.LabelFor(m => m.Image, "Ссылка на изображение")
             @Html.EditorFor(m => m.Image)
             @Html.ValidationMessageFor(m => m.Image)
         </div>
@@ -76,23 +76,26 @@
         </div>
 
     <div class="center">
-        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover large-font" onclick="window.location = '@ViewBag.returnUrl'" type="button">Отмена</button>
-        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover bold large-font" type="submit">@button</button>
+        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover large-font forDisable" onclick="window.location = '@ViewBag.returnUrl'" type="button">Отмена</button>
+        <button class="btn btn-flat waves-effect waves-light dark-text dark-blue-grey-hover bold large-font forDisable" id="create" type="submit">@button</button>
     </div>
     }
     
 </div>
 <script>
     $(document).ready(function(){
+        $("#create").click(function () {
+            if ($("#Title").val().replace(/\s/g, "") && $("#Description").val().replace(/\s/g, "") && $("#Image").val().replace(/\s/g, "")) $("#register").attr("create", true)
+            $("#form").submit();
+        });
         $(".create-event-block").hide(0);
     });
-    window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");
-    window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'");
-    window.city = @Html.Raw("'" + (Model.LocationId != null ? Model.LocationId.ToString() : " ") + "'");
+    window.fDate = @Html.Raw("'" + (Model.FromDate != null ? Model.FromDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'")
+    window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'")
+    window.city = @Html.Raw("'" + (Model.LocationId != null ? Model.LocationId.ToString() : " ") + "'")
 </script>
 @section scripts{
     @Scripts.Render("~/Scripts/jquery-ui.js")
-    @Scripts.Render("~/Scripts/script.js")
     @Scripts.Render("~/Scripts/jquery.datetimepicker.js")
     @Scripts.Render("~/Scripts/ckeditor/ckeditor.js")
     @Scripts.Render("~/Scripts/createScript.js")

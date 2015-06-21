@@ -1,24 +1,27 @@
 ﻿@{
+    var currentURL = Request.Url;
     ViewBag.Title = "List";
-    var locationId = ViewBag.location;
-    var About = " ";
 }
 
-@model System.Collections.Generic.List<team2project.Models.EventViewModel>
 @using System.Globalization
+@using System.Web.Mvc
+@using System.Text.RegularExpressions
 @using team2project.Models
 @using team2project.Helpers
-@using System.Text.RegularExpressions
 @using Events.Business.Helpers
+@model EventListViewModel
 @section css{
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/jquery-ui.theme.min.css")
     @Styles.Render("~/Content/jquery-ui.min.css")    
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
 }
-
-
-<!-- Dropdown Trigger -->
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="create-event-block hide-on-med-and-down">
+        <a class="large btn-floating green" href="@Url.RouteUrl("CreateEvent")"><i class="large mdi-content-add"></i></a>        
+    </div>
+}
 @if(!ViewBag.isFromFind)
 {
     <h1 class="center blue-grey-text">Мероприятия</h1>
@@ -52,13 +55,14 @@ else
     </script>
 }
 
+
 <div class="container">
     
     <table class="striped width80 centered">
         <tbody>
-            @foreach (var evnt in Model)
+            @foreach (var evnt in Model.EventsList)
             {
-                <tr>
+                <tr id="@(evnt.Id + "_row")">
                     <td class="list-events-date">
                         <div class="bg-blue-grey month">
                             @CheckDateIfNull(evnt.FromDate, "MMMM")
@@ -73,26 +77,29 @@ else
                         </div>
                     </td>
                     <td>
-                        @if (evnt.AuthorId == User.Identity.Name)
-                        {
+                        <div class="button-menu">
                             <div class="fixed-action-btn">
-                                <a class="btn-floating btn-large bacgr-text">
-                                  <i class="large mdi-social-person-add"></i>
+                                <a class="btn-floating btn-large bacgr-text subscribe large-line" id="@(evnt.Id + "_sub")">
+                                    <i class="large"></i>
                                 </a>
                             </div>
-                                <div class="right" id="event-menu">
-                                    @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating bacgr-text" })
-                                    <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
-                                </div>
-                        }
-                        else
-                        {
-                            <div class="fixed-action-btn">
-                                <a class="btn-floating btn-large bacgr-text">
-                                  <i class="large mdi-social-person-add"></i>
-                                </a>
+                            @if (evnt.AuthorId == User.Identity.Name)
+                            {
+                                    <div class="right" id="event-menu">                                    
+                                        <a class="btn-floating bacgr-text" href="@Url.RouteUrl("UpdateEvent", new { id=evnt.Id })"><i class="small mdi-editor-mode-edit"></i></a>
+                                        <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id','list'); return false"><i class="small mdi-action-delete"></i></a>
+                                    </div>
+                            }
+                            
+                            <div id="subscribe">
+                                <span id="@(evnt.Id + "-count")" >
+                                    Подписалось:
+                                    @{
+                                        Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
+                                    }
+                                </span>
                             </div>
-                        }
+                        </div>
                         <div class="list-events-content">
                             <h5 class="blue-grey-text">
                                 @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
@@ -101,19 +108,15 @@ else
                                 @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
                                 @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
                             </span>
-                            <p>
-                                @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
-                                {
-                                    About = "Подробнее...";
-                                }
-                                @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)) + About, "EventDetails", new { evnt.Id })
-                                @{About = " ";}
+                            <p>              
+                                @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)), "EventDetails", new { evnt.Id })
+
                             </p>
                         </div>
-                        <div class="left">
-                            <label>Уже подписалось:</label>
-                            @{
-                                Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
+                        <div class="align-left">
+                            @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
+                            {
+                                @Html.RouteLink("Подробнее...", "EventDetails", new { evnt.Id }, new { @class = "medium-font" })
                             }
                         </div>
                     </td>                    
@@ -136,7 +139,7 @@ else
         var stickyNav = function () {
             var scrollTop = $(window).scrollTop();
 
-            if (scrollTop+64 > stickyNavTop) {
+            if (scrollTop+64 > stickyNavTop && $( document ).width() > 670) {
                 $('#sticky').addClass('sticky-filters');
             } else {
                 $('#sticky').removeClass('sticky-filters');
@@ -148,8 +151,31 @@ else
         $(window).scroll(function () {
             stickyNav();
         });
+
+        setTimeout(function () {
+            buttons = $(".subscribe");
+
+            $.each(buttons, function (index, value) {
+                $(value).toggleClass("disabled");
+                $.post("/issubscribed", { id: $(value).attr("id").split("_")[0] }, function (data) {
+                    if (data) {
+                        $(value).addClass("unsubscribe-button");
+                        $(value).find("i").addClass("mdi-action-exit-to-app");
+                    }
+                    else {
+                        $(value).addClass("subscribe-button");
+                        $(value).find("i").addClass("mdi-social-person-add");
+                    }
+                    $(value).toggleClass("disabled");
+                    bindButton(value);
+                });
+            });
+        }, 300);
+        
+        
+        
     });
-    var cityValue = "@locationId";
+    var cityValue = "@Model.Location";
 </script>
 
 @helper ConstructLink(string linkName, string period)
@@ -186,7 +212,6 @@ else
 }
 
 @section scripts{
-    @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/jquery.zoom.min.js")
     @Scripts.Render("~/Scripts/deleteButton.js")

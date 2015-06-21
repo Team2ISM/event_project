@@ -16,8 +16,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/materialize/materialize.css")
-    @Styles.Render("~/Content/css")
     @RenderSection("css", false)
+    @Styles.Render("~/Content/css")
     <script src="@Url.Content("~/Scripts/jquery.js")" type="text/javascript"> </script>
     <script src="@Url.Content("~/Scripts/materialize/materialize.js")" type="text/javascript"> </script>
 </head>
@@ -48,10 +48,7 @@
                     @Html.RouteLink("Регистрация", "Registration", FormMethod.Post, new { @class = "dark-text" })
                 </li>                
             }
-        }
-
-        @{
-            if (User.Identity.IsAuthenticated)
+            else
             {
                 <li>
                     @Html.RouteLink("Сменить пароль", "Update", FormMethod.Post, new { @class = "dark-text" })
@@ -82,7 +79,7 @@
                         @Html.RouteLink("Мои события", "FutureEvents", FormMethod.Post, new { @class = "white-text" })
                     </li>
                 }
-                <li class="menu-content">
+                <li class="menu-content log">
                     <a class="dropdown-button" href="#!" data-activates="dropdown1">
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -101,7 +98,7 @@
             <ul class="side-nav z-depth-3" id="mobile-demo">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <i class="center" style="font-size: 1rem;">
+                    <i class="center log" style="font-size: 1rem;">
                         Здравствуйте, @userName
                     </i>
                     <li class="divider"></li>
@@ -122,7 +119,7 @@
                 }
                 else
                 {                       
-                    <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text" })</li>
+                    <li>@Html.RouteLink("Список событий", "EventsList", new { period = "all" }, new { @class = "white-text log" })</li>
                     <li class="divider"></li>
                     <li>
                         @Html.RouteLink("Вход", "Login", new { returnURL = currentURL }, new { @class = "dark-text" })
@@ -134,13 +131,7 @@
                 @ThisPage()
             </ul>
         </div>
-    </nav>
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div class="create-event-block">
-            @Html.CreateLink("<i class=\"large mdi-content-add\"></i>", "CreateEvent", new { returnURL = currentURL }, new { @class = "large btn-floating green" })
-        </div> 
-    }        
+    </nav>       
     @RenderBody()
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -168,6 +159,8 @@
                 drop.hide(100);
                 event.stopPropagation();
             });
+            $('.create-event-block').css({'right': parseInt($('.log').css('width'))-19+'px', 'display': 'block'});
+
         });
     </script>
 

@@ -19,7 +19,7 @@ namespace Events.NHibernateDataProvider.DataProviders
                 session
                     .EnableFilter("eventsToRemind")
                     .SetParameter("startDate", DateTime.Today.AddHours(DateTime.Now.Hour + 1).AddMinutes(-1))
-                    .SetParameter("endDate", DateTime.Today.AddDays(2).AddTicks(-1));
+                    .SetParameter("endDate", DateTime.Today.AddDays(1).AddHours(1).AddTicks(-1));
                 var criteria = session.CreateCriteria<Event>();
                 criteria.Add(Restrictions.Eq("Active", true));
                 criteria.AddOrder(Order.Asc("FromDate"));

@@ -9,23 +9,13 @@ namespace Events.Business.Classes
     public class EventManager : BaseManager
     {
         IEventDataProvider dataProvider;
-
-        CommentManager commentManager;
-
-        ICitiesDataProvider citiesProvider;
-
-        RemindManager remindManager;
-
         protected override string Name { get; set; }
 
-        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager, ICitiesDataProvider citiesProvider, CommentManager commentManager, RemindManager remindManager)
+        public EventManager(IEventDataProvider dataProvider, ICacheManager cacheManager)
+            : base(cacheManager)
         {
             Name = "Events";
             this.dataProvider = dataProvider;
-            this.cacheManager = cacheManager;
-            this.citiesProvider = citiesProvider;
-            this.commentManager = commentManager;
-            this.remindManager = remindManager;
         }
 
         public IList<Event> GetAllEvents()
@@ -38,21 +28,21 @@ namespace Events.Business.Classes
         }
 
 
-        public IList<Event> GetMyFutureEvents(IList<Subscribing> ids)
+        public IList<Event> GetMyFutureEvents(string userId)
         {
             return FromCache<IList<Event>>("AdminList",
                     () =>
                     {
-                        return dataProvider.GetMyFutureEvents(ids);
+                        return dataProvider.GetMyFutureEvents(userId);
                     });
         }
 
-        public IList<Event> GetMyPastEvents(IList<Subscribing> ids)
+        public IList<Event> GetMyPastEvents(string userId)
         {
             return FromCache<IList<Event>>("AdminList",
                     () =>
                     {
-                        return dataProvider.GetMyPastEvents(ids);
+                        return dataProvider.GetMyPastEvents(userId);
                     });
         }
 
@@ -63,7 +53,7 @@ namespace Events.Business.Classes
 
             if (!days.HasValue)
             {
-                return null;
+                throw new ArgumentException();
             }
 
             return FromCache<IList<Event>>("list" + period + "-" + locationId,
@@ -89,7 +79,7 @@ namespace Events.Business.Classes
         {
             model.Checked = false;
             dataProvider.Update(model);
-            remindManager.ResetRemindModel(model.Id);
+            Api.RemindManager.ResetRemindModel(model.Id);
             ClearCache();
             ToCache<Event>(model.Id,
                 () =>
@@ -100,7 +90,7 @@ namespace Events.Business.Classes
 
         public Event GetById(string id)
         {
-            return cacheManager.FromCache<Event>(id,
+            return CacheManager.FromCache<Event>(id,
                  () =>
                  {
                      return dataProvider.GetById(id);
@@ -150,7 +140,7 @@ namespace Events.Business.Classes
 
         public void Delete(string id)
         {
-            commentManager.DeleteByEventId(id);
+            Api.CommentManager.DeleteByEventId(id);
             dataProvider.Delete(dataProvider.GetById(id));
             ClearCache();
         }

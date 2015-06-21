@@ -72,43 +72,38 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             }
         }
 
-        public IList<Event> GetMyFutureEvents(IList<Subscribing> subscribing)
+        public IList<Event> GetMyFutureEvents(string userId)
+        {
+            using (ISession session = Helper.OpenSession())
+            {
+                var sub = DetachedCriteria.For<Subscribing>();
+                sub.Add(Restrictions.Eq("UserId", userId));
+                    sub.SetProjection(Projections.Property( "EventId"));
+
+                var eventCriteria = session.CreateCriteria<Event>();
+                eventCriteria.Add(Restrictions.And(Restrictions.Ge("ToDate", DateTime.Now),
+                    Subqueries.PropertyIn("Id", sub)))
+                    .AddOrder(Order.Asc("FromDate"));
+                return eventCriteria.List<Event>();
+            }
+        }
+
+        public IList<Event> GetMyPastEvents(string userId)
         {
             IList<Event> events = new List<Event>();
             using (ISession session = Helper.OpenSession())
             {
+                var sub = DetachedCriteria.For<Subscribing>();
+                sub.Add(Restrictions.Eq("UserId", userId));
+                sub.SetProjection(Projections.Property("EventId"));
 
-                foreach (var sub in subscribing)
-                {
-                    var criteria = session.CreateCriteria<Event>();
-                    var el = criteria.Add(Restrictions.And(Restrictions.Eq("Id", sub.EventId), Restrictions.Ge("ToDate", DateTime.Now))).List<Event>();
-                   
-                    if(el.Count != 0)
-                        events.Add(el[0]);
-                }
-                return events;
+                var eventCriteria = session.CreateCriteria<Event>();
+                eventCriteria.Add(Restrictions.And(Restrictions.Lt("ToDate", DateTime.Now),
+                    Subqueries.PropertyIn("Id", sub)))
+                    .AddOrder(Order.Asc("FromDate"));
+                return eventCriteria.List<Event>();
             }
         }
-
-        public IList<Event> GetMyPastEvents(IList<Subscribing> subscribing)
-        {
-            IList<Event> events = new List<Event>();
-            using (ISession session = Helper.OpenSession())
-            {
-
-                foreach (var sub in subscribing)
-                {
-                    var criteria = session.CreateCriteria<Event>();
-                    var elem = criteria.Add(Restrictions.And(Restrictions.Eq("Id", sub.EventId),
-                    Restrictions.Lt("ToDate", DateTime.Now))).List<Event>();
-                    if (elem.Count != 0)
-                        events.Add(elem[0]);
-                }
-                return events;
-            }
-        }
-
-
 
         public Event GetById(string id)
         {
@@ -149,8 +144,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                    session.Save(model);
-                    session.Flush();
+                session.Save(model);
+                session.Flush();
             }
         }
 
@@ -158,8 +153,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                    session.Update(model);
-                    session.Flush();
+                session.Update(model);
+                session.Flush();
             }
         }
 
@@ -167,8 +162,8 @@ namespace Events.NHibernateDataProvider.NHibernateCore
         {
             using (ISession session = Helper.OpenSession())
             {
-                    session.Delete(model);
-                    session.Flush();
+                session.Delete(model);
+                session.Flush();
             }
         }
     }

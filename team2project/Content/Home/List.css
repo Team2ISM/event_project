@@ -27,14 +27,14 @@ tbody tr {
 	width: 100%;
 }
 
-.date-filters
-{
-	margin-left: 250px;
-}
-
 .date-filters a
 {
-	margin-left: 10px;
+	margin-left: 20px;
+}
+
+.date-filters a:first-child
+{
+	margin-left: -17%;
 }
 
 .m-left
@@ -121,13 +121,13 @@ td a:hover, td a:active {
 }
 #select-menu-wrapper{
   text-align: center;
-  z-index: 800;
+  z-index: 500;
   margin: 0 auto;
   max-width: 1280px;
 }
 #select-menu
 {
-    min-width: 85%;
+    min-width: 550px;
     background-color: white;
     -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
     -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -211,6 +211,7 @@ td a:hover, td a:active {
 }
     .list-events-content h5 {
         margin-top: 0%;
+        width: calc(100% - 140px);
     }
     
     .list-events-content h5 a {
@@ -224,6 +225,7 @@ td a:hover, td a:active {
     .list-events-content p {
         margin-left: -1%;
         margin-top: -1px;
+        margin-bottom: 0;
     }
 
     .list-events-content p a {
@@ -295,11 +297,6 @@ td a:hover, td a:active {
   /* z-index: 10000; */
 }
 
-ul li {
-  list-style-type: none;
-  display: table-cell !important;
-}
-
 .fixed-action-btn {
   position: inherit;
   right: 23px;
@@ -318,20 +315,23 @@ ul li {
 }
 
 .btn-floating.btn-large {
-  width: 43.5px;
-  height: 43.5px;
-  top: -23px;
+  width: 37px;
+  height: 37px;
+  top: -20px;
   left: 7px;
 }
 
 .btn-floating.btn-large i {
-  line-height: 55.5px;
+  line-height: 57.5px;
   margin-top: -10px;
+  font-size: 1.8rem;
 }
 #City{
-    height:20px;
+    height:22px;
     display: inline-block;
     padding: 0px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
 }
 
 .bacgr-text
@@ -351,5 +351,30 @@ ul li {
 #event-menu
 {
     margin-top: -5px;
-    margin-right: -8px;
+    margin-right: -14px;
+}
+
+#event-menu-my
+{
+    margin-right: -5px;
+}
+
+.btn-floating.btn-large.disabled i {
+  color: white !important;
+}
+
+.large-line
+{
+    line-height: 49px;
+}
+.button-menu
+{
+    white-space: nowrap;
+    float: right;
+}
+
+#subscribe
+{
+    margin-top: 30px;
+    margin-left: 9px;
 }

@@ -30,113 +30,25 @@ namespace Events.Business.Classes
             base.Initialize(name, config);
         }
 
-        public override void AddUsersToRoles(string[] usernames, string[] rolenames)
-        {
-
-            foreach (string rolename in rolenames)
-            {
-                if (!RoleExists(rolename))
-                {
-                    throw new ProviderException(String.Format("Role name {0} not found.", rolename));
-                }
-            }
-
-            foreach (string username in usernames)
-            {
-                if (username.Contains(","))
-                {
-                    throw new ArgumentException(String.Format("User names {0} cannot contain commas.", username));
-                }
-                foreach (string rolename in rolenames)
-                {
-                    if (IsUserInRole(username, rolename))
-                    {
-                        throw new ProviderException(String.Format("User {0} is already in role {1}.", username, rolename));
-                    }
-                }
-            }
-            dataProvider.AddUsersToRoles(usernames, rolenames);
-        }
-
-        public override void CreateRole(string rolename)
-        {
-            if (rolename.Contains(","))
-            {
-                throw new ArgumentException("Role names cannot contain commas.");
-            }
-            if (RoleExists(rolename))
-            {
-                throw new ProviderException("Role name already exists.");
-            }
-            dataProvider.CreateRole(rolename);
-        }
-
-        public override bool DeleteRole(string rolename, bool throwOnPopulatedRole)
-        {
-            if (!RoleExists(rolename))
-            {
-                throw new ProviderException("Role does not exist.");
-            }
-            if (throwOnPopulatedRole && GetUsersInRole(rolename).Length > 0)
-            {
-                throw new ProviderException("Cannot delete a populated role.");
-            }
-            dataProvider.DeleteRole(rolename);
-            return false;
-        }
-
         public override string[] GetAllRoles()
         {
-            StringBuilder sb = new StringBuilder();
             ICollection<Role> allRole;
             allRole = dataProvider.GetAllRoles();
-
-            foreach (Role r in allRole)
-            {
-                sb.Append(r.Name + ",");
-            }
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-            return new string[0];
+            return allRole.Select(u => u.Name).ToArray();
         }
 
         public override string[] GetRolesForUser(string username)
         {
-            ICollection<Role> usrRoles = null;
-            StringBuilder sb = new StringBuilder();
+            ICollection<Role> usrRoles;
             usrRoles = dataProvider.GetRolesForUser(username);
-
-            foreach (Role r in usrRoles)
-            {
-                sb.Append(r.Name + ",");
-            }
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-            return new string[0];
+            return usrRoles.Select(u => u.Name).ToArray();
         }
 
         public override string[] GetUsersInRole(string rolename)
         {
-            StringBuilder sb = new StringBuilder();
-            ICollection<User> usrs = null;
+            ICollection<User> usrs;
             usrs = dataProvider.GetUsersInRole(rolename);
-
-            foreach (User u in usrs)
-            {
-                sb.Append(u.Name + ",");
-            }
-            if (sb.Length > 0)
-            {
-                sb.Remove(sb.Length - 1, 1);
-                return sb.ToString().Split(',');
-            }
-            return new string[0];
+            return usrs.Select(u => u.Name).ToArray();
         }
 
         public override bool IsUserInRole(string username, string rolename)
@@ -148,15 +60,42 @@ namespace Events.Business.Classes
         {
         }
 
-        public override bool RoleExists(string rolename)
-        {
-            return dataProvider.RoleExists(rolename);
-        }
-
         public override string[] FindUsersInRole(string rolename, string usernameToMatch)
         {
-            return null;//realization to fix conflict
+            return null;
         }
 
+        public override void AddUsersToRoles(string[] usernames, string[] roleNames)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void CreateRole(string roleName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override bool RoleExists(string roleName)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public static class ArrayExtention
+    {
+        public static string[] Extract<T>(this ICollection<T> container, Func<T, string> lambda)
+        {
+            var result = new List<string>();
+            foreach (var element in container)
+            {
+                result.Add(lambda(element));
+            }
+            return result.ToArray();
+        }
     }
 }

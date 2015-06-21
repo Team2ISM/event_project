@@ -13,16 +13,13 @@ namespace Events.Business.Classes
     {
         private ISubscribersDataProvider dataProvider;
 
-        UserManager userManager;
-
         protected override string Name { get; set; }
 
-        public SubscribersManager(ISubscribersDataProvider dataProvider, ICacheManager cacheManager, UserManager userManager)
+        public SubscribersManager(ISubscribersDataProvider dataProvider, ICacheManager cacheManager)
+            : base(cacheManager)
         {
             Name = "Subsribers";
             this.dataProvider = dataProvider;
-            this.cacheManager = cacheManager;
-            this.userManager = userManager;
         }
 
         public IList<User> GetAllSubscribers(string eventId)
@@ -34,18 +31,9 @@ namespace Events.Business.Classes
                     var listSuscribers = new List<User>();
                     foreach (var subscribing in listSubscribings)
                     {
-                        listSuscribers.Add(userManager.GetById(subscribing.UserId));
+                        listSuscribers.Add(Api.UserManager.GetById(subscribing.UserId));
                     }
                     return listSuscribers;
-                });
-        }
-
-        public IList<Subscribing> GetMyEventsId(string userId)
-        {
-            return FromCache<IList<Subscribing>>(userId,
-                () =>
-                {
-                    return dataProvider.GetMyEventsId(userId);
                 });
         }
 
@@ -70,12 +58,12 @@ namespace Events.Business.Classes
             dataProvider.UnsubscribeUser(row);
         }
 
-        public bool IsSubscribed(Subscribing row)
+        public bool IsSubscribed(string eventId, string userId)
         {
-            return FromCache<bool>(row.EventId + "." + row.UserId,
+            return FromCache<bool>(eventId + "." + userId,
                 () =>
                 {
-                    return dataProvider.IsSubscribed(row);
+                    return dataProvider.IsSubscribed(eventId, userId);
                 });
         }
     }

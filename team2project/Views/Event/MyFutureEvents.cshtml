@@ -1,17 +1,24 @@
-﻿@model System.Collections.Generic.List<team2project.Models.EventViewModel>
-
+﻿@using team2project.Helpers
+@using team2project.Models
+@model EventListViewModel
 @{
+    var currentURL = Request.Url;
     ViewBag.Title = "Текущие/будущие события";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var About = " ";
 }
-@using team2project.Helpers
 @section css{
     @Styles.Render("~/Content/Home/List.css")
     @Styles.Render("~/Content/jquery-ui.min.css")
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
 }
-
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="create-event-block hide-on-med-and-down">
+        @Html.CreateLink("<i class=\"large mdi-content-add\"></i>", "CreateEvent", new { returnURL = currentURL }, new { @class = "large btn-floating green" })
+    </div>
+}
+ 
 <div class="container">
     <h2 class="center blue-grey-text">Текущие/будущие события</h2>
     <div class="width80">
@@ -20,9 +27,9 @@
     <table class="striped width80 centered">
 
         <tbody>
-            @foreach (var evnt in Model)
+            @foreach (var evnt in Model.EventsList)
             {
-                <tr>
+                <tr id="@(evnt.Id + "_row")">
                     <td class="list-events-date">
                         <div class="bg-blue-grey month">
                             @CheckDateIfNull(evnt.FromDate, "MMMM")
@@ -37,13 +44,14 @@
                         </div>
                     </td>
                     <td>
+                        @if (evnt.AuthorId == User.Identity.Name)
+                        {
+                            <div class="right" id="event-menu-my">
+                                @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating bacgr-text" })
+                                <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id', 'list'); return false"><i class="small mdi-action-delete"></i></a>
+                            </div>
+                        }
                         @Html.Partial("EventContent", evnt)
-                    </td>
-                    <td>
-                        <div class="right" id="event-menu">
-                            @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating bacgr-text" })
-                            <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id'); return false"><i class="small mdi-action-delete"></i></a>
-                        </div>
                     </td>
                 </tr>
             }
@@ -69,7 +77,6 @@
 }
 
 @section scripts{
-    @Scripts.Render("~/Scripts/jquery.js")
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/deleteButton.js")
 }

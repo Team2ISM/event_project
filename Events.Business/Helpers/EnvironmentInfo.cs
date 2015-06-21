@@ -8,8 +8,16 @@ namespace Events.Business.Helpers
 {
     public static class EnvironmentInfo
     {
-        public static string Host { get; set; }
-
+        public static string Host
+        {
+            get
+            {
+                return "http://subbotnik.azurewebsites.net";
+            }
+            private set
+            {
+            }
+        }
         public static string Email
         {
             get

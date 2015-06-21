@@ -31,12 +31,11 @@ namespace team2project.Controllers
             }
             if (HttpContext.User.Identity.IsAuthenticated)
             {
-                var user = userManager.GetByEmail(User.Identity.Name);
+                var user = AutoMapper.Mapper.Map<UserViewModel>(userManager.GetByEmail(User.Identity.Name));
                 commentModel.AuthorId = user.Id;
-                commentModel.AuthorName = userManager.GetFullName(user.Email);
+                commentModel.AuthorName = user.FullName;
             }
             var comment = AutoMapper.Mapper.Map<Comment>(commentModel);
-            comment.PostingTime = DateTime.Now;
             commentManager.Create(comment);
             return RedirectToRoute("eventDetails", new { id = commentModel.EventId });
         }

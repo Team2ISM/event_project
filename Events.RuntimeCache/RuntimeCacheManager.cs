@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Caching;
 using Events.Business.Interfaces;
+using Events.Business.Helpers;
 
 namespace Events.RuntimeCache
 {
@@ -37,7 +38,10 @@ namespace Events.RuntimeCache
 
         public void ClearCacheByName(string name)
         {
-            ClearCacheHelper( key => key.StartsWith(name));
+            ClearCacheHelper( key => 
+            {
+                return key.StartsWith(name) || key.StartsWith(EnvironmentInfo.ReminderCacheName);
+            });
         }
 
         public CacheItem ToCache<TValue>(string key, Func<TValue> function)
