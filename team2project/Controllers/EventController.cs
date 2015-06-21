@@ -39,9 +39,10 @@ namespace team2project.Controllers
                 var list = eventManager.GetList(period, location);
                 var listModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(list), location);
                 listModel.PrepareEventsToView(cityManager);
+                ViewBag.isFromFind = false;
                 return View("List", listModel);
             }
-         catch (ArgumentException ex)
+            catch (ArgumentException ex)
             {	
 		        return View("GenericError", model: Resources.ListOfEventsNotFound);
             }
@@ -50,16 +51,23 @@ namespace team2project.Controllers
 	[HttpGet]
         public ActionResult Find(string text)
         {
-            text = HttpUtility.UrlDecode(text);
-            var listModel = eventManager.Find(text, "all", null);
-            if (listModel == null || listModel.Count == 0)
+            try
             {
-                return View("GenericError", model: Resources.ResponseNoMatches);
+                text = HttpUtility.UrlDecode(text);
+                var list = eventManager.Find(text, "all", null);
+                if (list == null || list.Count == 0)
+                {
+                    return View("GenericError", model: Resources.ResponseNoMatches);
+                }
+                var listModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(list));
+                listModel.PrepareEventsToView(cityManager);
+                ViewBag.isFromFind = true;
+                return View("List", listModel);
             }
-            List<EventViewModel> list = AutoMapper.Mapper.Map<List<EventViewModel>>(listModel);
-            PrepareEventsToView(list);
-            ViewBag.isFromFind = true;
-            return View("List", list);
+            catch (ArgumentException ex)
+            {
+                return View("GenericError", model: Resources.ListOfEventsNotFound);
+            }
         }
 
         [HttpGet]

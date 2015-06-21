@@ -54,9 +54,19 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                     session.EnableFilter("effectiveDate").SetParameter("asOfDate", endOfDay);
                 }
                 var criteria = session.CreateCriteria<Event>();
-                criteria.Add(Restrictions.Or(
-                    Restrictions.Like("Title", text, MatchMode.Anywhere),
-                    Restrictions.Like("TextDescription", text, MatchMode.Anywhere)));
+                var queries = text.Split(',');
+                var dis = Restrictions.Disjunction();
+                foreach(var query in queries)
+                {
+                    var words = query.Split(new[] { ' ', '.', '-', ':', '(', ')', '!', '?', ';' });
+                    foreach (var word in words)
+                    {
+                        dis.Add(Restrictions.Or(
+                            Restrictions.Like("Title", word, MatchMode.Anywhere),
+                            Restrictions.Like("TextDescription", word, MatchMode.Anywhere)));
+                    }
+                }
+                criteria.Add(dis);
                 criteria.Add(Restrictions.Eq("Active", true));
                 criteria.AddOrder(Order.Asc("FromDate"));
                 return criteria.List<Event>();
