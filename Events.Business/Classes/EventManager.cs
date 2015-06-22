@@ -63,6 +63,24 @@ namespace Events.Business.Classes
                 });
         }
 
+        public IList<Event> GetRangedEvents(string period, string location, int startRow, int rowsCount)
+        {
+
+            int? days = getDaysCount(period);
+
+            if (!days.HasValue)
+            {
+                throw new ArgumentException();
+            }
+
+            return FromCache<IList<Event>>(startRow + "index",
+                () =>
+                {
+                    return dataProvider.GetRangedEvents(days.Value, location, startRow, rowsCount);
+                });
+        }
+
+
         public void Create(Event model)
         {
             model.DateOfCreation = DateTime.Now;
@@ -105,7 +123,7 @@ namespace Events.Business.Classes
             {
                 return null;
             }
-            return FromCache<IList<Event>>("list" + period + "-" + locationId + "@"+"text",
+            return FromCache<IList<Event>>("list" + period + "-" + locationId + "@" + "text",
                 () =>
                 {
                     return dataProvider.Find(text, days.Value, locationId);

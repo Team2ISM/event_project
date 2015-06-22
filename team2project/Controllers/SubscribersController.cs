@@ -27,7 +27,6 @@ namespace team2project.Controllers
             return View(manager.GetCount(id));
         }
 
-        [HttpGet]
         public ActionResult Count(string id)
         {
             return View(manager.GetCount(id));

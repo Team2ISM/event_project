@@ -57,6 +57,12 @@ namespace team2project
             );
 
             routes.MapRoute(
+                name: "EventScrolling",
+                url: "events/scrolling/{period}/{location}",
+                defaults: new { controller = "Event", action = "InfinityScroll", location = UrlParameter.Optional }
+                );
+
+            routes.MapRoute(
               name: "EventsList",
               url: "events/{period}/{location}",
               defaults: new { controller = "Event", action = "Index", location = UrlParameter.Optional }
@@ -70,7 +76,7 @@ namespace team2project
 
             #endregion
 
-            #region User map routes            
+            #region User map routes
 
             routes.MapRoute(
                 name: "Activate",

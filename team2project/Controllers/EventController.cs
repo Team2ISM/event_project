@@ -36,7 +36,7 @@ namespace team2project.Controllers
         {
             try
             {
-                var list = eventManager.GetList(period, location);
+                var list = eventManager.GetRangedEvents(period, location, 0, 10);
                 var listModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(list), location);
                 listModel.PrepareEventsToView(cityManager);
                 ViewBag.isFromFind = false;
@@ -47,6 +47,27 @@ namespace team2project.Controllers
 		        return View("GenericError", model: Resources.ListOfEventsNotFound);
             }
        }
+
+        [HttpPost]
+        public ActionResult InfinityScroll(string period, string location,int startRow)
+        {
+            try
+            {
+                int rowsBlock = 10;
+                var list = eventManager.GetRangedEvents(period, location, startRow, rowsBlock);
+                var listModel = new EventListViewModel(AutoMapper.Mapper.Map<List<EventViewModel>>(list), location);
+                listModel.PrepareEventsToView(cityManager);
+                var jsonModel = new JsonEventsViewModel();
+                jsonModel.HTMLString = this.RenderPartialViewToString("EventListPartialVIew", listModel);
+                jsonModel.NoMoreData = listModel.EventsList.Count < rowsBlock;
+                return Json(jsonModel);
+            }
+            catch (ArgumentException ex)
+            {
+                return View("GenericError", model: Resources.ListOfEventsNotFound);
+            }
+        }
+
 
 	[HttpGet]
         public ActionResult Find(string text)

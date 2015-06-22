@@ -10,6 +10,7 @@ namespace Events.Business.Interfaces
 
         IList<Event> GetAllEvents();
 
+        IList<Event> GetRangedEvents(int period = 0, string location = null, int startRow = 0, int rowsCount = 10);
 
         IList<Event> Find(string text, int period = 0, string location = null);
 

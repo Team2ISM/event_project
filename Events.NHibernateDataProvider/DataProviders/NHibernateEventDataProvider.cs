@@ -36,6 +36,36 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 return criteria.List<Event>();
             }
         }
+
+
+        public IList<Event> GetRangedEvents(int period, string location, int startRow, int rowsCount)
+        {
+            if (period == null) return null;
+            using (ISession session = Helper.OpenSession())
+            {
+                var endOfDay = DateTime.Today;
+                if (!String.IsNullOrEmpty(location))
+                {
+                    session.EnableFilter("equalLocation").SetParameter("chosenLocation", location);
+                }
+                if (period > 0)
+                {
+                    session.EnableFilter("equalDate").SetParameter("nowaday", endOfDay).SetParameter("chosenDate", endOfDay.AddDays((int)period - 1));
+                }
+                else
+                {
+                    session.EnableFilter("effectiveDate").SetParameter("asOfDate", endOfDay);
+                }
+                var criteria = session.CreateCriteria<Event>();
+                criteria.Add(Restrictions.Eq("Active", true));
+                return criteria.AddOrder(Order.Asc("FromDate"))
+
+                    .SetFirstResult(startRow)
+                    .SetMaxResults(rowsCount).List<Event>();
+            }
+        }
+
+
         public IList<Event> Find(string text, int daysToEvent, string location)
         {
             using (ISession session = Helper.OpenSession())
@@ -56,7 +86,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 var criteria = session.CreateCriteria<Event>();
                 var queries = text.Split(',');
                 var dis = Restrictions.Disjunction();
-                foreach(var query in queries)
+                foreach (var query in queries)
                 {
                     var words = query.Split(new[] { ' ', '.', '-', ':', '(', ')', '!', '?', ';' });
                     foreach (var word in words)
@@ -88,7 +118,7 @@ namespace Events.NHibernateDataProvider.NHibernateCore
             {
                 var sub = DetachedCriteria.For<Subscribing>();
                 sub.Add(Restrictions.Eq("UserId", userId));
-                    sub.SetProjection(Projections.Property( "EventId"));
+                sub.SetProjection(Projections.Property("EventId"));
 
                 var eventCriteria = session.CreateCriteria<Event>();
                 eventCriteria.Add(Restrictions.And(Restrictions.Ge("ToDate", DateTime.Now),

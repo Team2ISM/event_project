@@ -1,0 +1,84 @@
+﻿@{
+Layout = null;
+}
+@using System.Globalization
+@using System.Web.Mvc
+@using System.Text.RegularExpressions
+@using team2project.Models
+@using team2project.Helpers
+@using Events.Business.Helpers
+@model EventListViewModel
+            @foreach (var evnt in Model.EventsList)
+            {
+                <tr id="@(evnt.Id + "_row")">
+                    <td class="list-events-date">
+                        <div class="bg-blue-grey month">
+                            @CheckDateIfNull(evnt.FromDate, "MMMM")
+                        </div>
+                        <div class="day color-blue-grey">
+                            @CheckDateIfNull(evnt.FromDate, "dd")
+                        </div>
+                    </td>                    
+                    <td class="list-events-img">
+                        <div class="event-small-img">
+                            @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
+                        </div>
+                    </td>
+                    <td>
+                        <div class="button-menu">
+                            <div class="fixed-action-btn">
+                                <a class="btn-floating btn-large bacgr-text subscribe large-line" id="@(evnt.Id + "_sub")">
+                                    <i class="large"></i>
+                                </a>
+                            </div>
+                            @if (evnt.AuthorId == User.Identity.Name)
+                            {
+                                    <div class="right" id="event-menu">                                    
+                                        <a class="btn-floating bacgr-text" href="@Url.RouteUrl("UpdateEvent", new { id=evnt.Id })"><i class="small mdi-editor-mode-edit"></i></a>
+                                        <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id','list'); return false"><i class="small mdi-action-delete"></i></a>
+                                    </div>
+                            }
+                            
+                            <div id="subscribe">
+                                <span id="@(evnt.Id + "-count")" >
+                                    Подписалось:
+                                    @{
+                                        Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                        <div class="list-events-content">
+                            <h5 class="blue-grey-text">
+                                @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
+                            </h5>
+                            <span class="list-events-location">
+                                @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
+                                @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
+                            </span>
+                            <p>              
+                                @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)), "EventDetails", new { evnt.Id })
+
+                            </p>
+                        </div>
+                        <div class="align-left">
+                            @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
+                            {
+                                @Html.RouteLink("Подробнее...", "EventDetails", new { evnt.Id }, new { @class = "medium-font" })
+                            }
+                        </div>
+                    </td>                    
+                </tr>                
+            }
+
+@helper CheckDateIfNull(DateTime? date, string format)
+{
+    if (date != null)
+    {
+    @date.Value.ToString(format)
+    }
+    else
+    {
+    <span>n/a</span>
+    }
+}

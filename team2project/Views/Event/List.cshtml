@@ -1,6 +1,5 @@
 ﻿@{
     var currentURL = Request.Url;
-    ViewBag.Title = "List";
 }
 
 @using System.Globalization
@@ -59,71 +58,16 @@ else
 <div class="container">
     
     <table class="striped width80 centered">
-        <tbody>
-            @foreach (var evnt in Model.EventsList)
-            {
-                <tr id="@(evnt.Id + "_row")">
-                    <td class="list-events-date">
-                        <div class="bg-blue-grey month">
-                            @CheckDateIfNull(evnt.FromDate, "MMMM")
-                        </div>
-                        <div class="day color-blue-grey">
-                            @CheckDateIfNull(evnt.FromDate, "dd")
-                        </div>
-                    </td>                    
-                    <td class="list-events-img">
-                        <div class="event-small-img">
-                            @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
-                        </div>
-                    </td>
-                    <td>
-                        <div class="button-menu">
-                            <div class="fixed-action-btn">
-                                <a class="btn-floating btn-large bacgr-text subscribe large-line" id="@(evnt.Id + "_sub")">
-                                    <i class="large"></i>
-                                </a>
-                            </div>
-                            @if (evnt.AuthorId == User.Identity.Name)
-                            {
-                                    <div class="right" id="event-menu">                                    
-                                        <a class="btn-floating bacgr-text" href="@Url.RouteUrl("UpdateEvent", new { id=evnt.Id })"><i class="small mdi-editor-mode-edit"></i></a>
-                                        <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id','list'); return false"><i class="small mdi-action-delete"></i></a>
-                                    </div>
-                            }
-                            
-                            <div id="subscribe">
-                                <span id="@(evnt.Id + "-count")" >
-                                    Подписалось:
-                                    @{
-                                        Html.RenderAction("Count", "Subscribers", new { id = evnt.Id });
-                                    }
-                                </span>
-                            </div>
-                        </div>
-                        <div class="list-events-content">
-                            <h5 class="blue-grey-text">
-                                @Html.RouteLink(evnt.Title, "EventDetails", new { evnt.Id })
-                            </h5>
-                            <span class="list-events-location">
-                                @Html.RouteLink(((String.IsNullOrEmpty(evnt.Location)) ? "Null" : evnt.Location), "EventDetails", new { evnt.Id })
-                                @Html.RouteLink((evnt.FromDate != null ? evnt.FromDate.Value.ToString("H:mm") : "n/a"), "EventDetails", new { evnt.Id })
-                            </span>
-                            <p>              
-                                @Html.RouteLink((evnt.TextDescription != null ? evnt.TextDescription.Cut(300) : evnt.Description.Cut(300)), "EventDetails", new { evnt.Id })
-
-                            </p>
-                        </div>
-                        <div class="align-left">
-                            @if (evnt.TextDescription != null && evnt.TextDescription.Length >= 300)
-                            {
-                                @Html.RouteLink("Подробнее...", "EventDetails", new { evnt.Id }, new { @class = "medium-font" })
-                            }
-                        </div>
-                    </td>                    
-                </tr>                
-            }
+        <tbody id ="data">
+            @{Html.RenderPartial("EventListPartialView", Model);};
         </tbody>
     </table>
+
+    <div id="loadingDiv" style="text-align: center; display: none; margin-bottom: 20px;">
+            <img alt="Loading" 
+            src="@Url.Content("~/Content/Images/ajax-loader.gif")" />
+    </div> 
+
     <div id="dialog-confirm" title="Удалить это событие?" style="display: none;">
         <p>
             <span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0"></span>
@@ -133,13 +77,39 @@ else
 </div>
 
 <script>
+    var startRow = 10;
+    var rowCount = 10;
+    var inProgress = false;
+    var noMoreData = false;
+
+
+    $(window).scroll(function () {
+        if (Math.abs($(window).scrollTop() - ($(document).height() - $(window).height())) <= 3 && !noMoreData && !inProgress) {
+            inProgress = true;
+            $("#loadingDiv").show();
+            $.ajax(
+            {
+                type: "POST",
+                url: "@Url.Action("InfinityScroll", "Event")",
+                data: { "location": "@Model.Location", "startRow": startRow, "period": "@Request.Url.AbsolutePath.Split('/')[2]" },
+                success: function (data) {
+                    inProgress = false;
+                    $("#loadingDiv").hide();
+                    noMoreData = data.NoMoreData;
+                    startRow += rowCount;
+                    $("#data").append(data.HTMLString);
+                }
+            })
+        }
+    });
+
     $(document).ready(function () {
         var stickyNavTop = $('#sticky').offset().top;
 
         var stickyNav = function () {
             var scrollTop = $(window).scrollTop();
 
-            if (scrollTop+64 > stickyNavTop && $( document ).width() > 670) {
+            if (scrollTop + 64 > stickyNavTop && $(document).width() > 670) {
                 $('#sticky').addClass('sticky-filters');
             } else {
                 $('#sticky').removeClass('sticky-filters');
@@ -171,9 +141,9 @@ else
                 });
             });
         }, 300);
-        
-        
-        
+
+
+
     });
     var cityValue = "@Model.Location";
 </script>
