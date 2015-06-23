@@ -85,18 +85,20 @@ namespace Events.NHibernateDataProvider.NHibernateCore
                 }
                 var criteria = session.CreateCriteria<Event>();
                 var queries = text.Split(',');
-                var dis = Restrictions.Disjunction();
+                var summaryQuery = Restrictions.Disjunction();
                 foreach (var query in queries)
                 {
+                    var tempQuery = Restrictions.Conjunction();
                     var words = query.Split(new[] { ' ', '.', '-', ':', '(', ')', '!', '?', ';' });
                     foreach (var word in words)
                     {
-                        dis.Add(Restrictions.Or(
+                        tempQuery.Add(Restrictions.Or(
                             Restrictions.Like("Title", word, MatchMode.Anywhere),
                             Restrictions.Like("TextDescription", word, MatchMode.Anywhere)));
                     }
+                    summaryQuery.Add(tempQuery);
                 }
-                criteria.Add(dis);
+                criteria.Add(summaryQuery);
                 criteria.Add(Restrictions.Eq("Active", true));
                 criteria.AddOrder(Order.Asc("FromDate"));
                 return criteria.List<Event>();
