@@ -68,17 +68,17 @@ else
         </div>
     }      
 </div>
-<script>
- $(document).ready(function(){
-     $(document).ready(function () {
-         $("#register").click(function () {
-             if ($("#Email").val().replace(/\s/g, "") && $("#Password").val().replace(/\s/g, "") && $("#Name").val().replace(/\s/g, "") && $("#Surname").val().replace(/\s/g, "") && $("#RepeatPassword").val().replace(/\s/g, "")) $("#register").attr("disabled", true)
-             $("#form").submit();
-         });
-     })
- });
-</script>
 @section scripts{
+<script>
+    $(document).ready(function () {
+        $(document).ready(function () {
+            $("#register").click(function () {
+                if ($("#Email").val().replace(/\s/g, "") && $("#Password").val().replace(/\s/g, "") && $("#Name").val().replace(/\s/g, "") && $("#Surname").val().replace(/\s/g, "") && $("#RepeatPassword").val().replace(/\s/g, "")) $("#register").attr("disabled", true)
+                $("#form").submit();
+            });
+        })
+    });
+</script>
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/register.js")

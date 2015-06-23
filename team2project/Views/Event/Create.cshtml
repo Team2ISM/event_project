@@ -82,6 +82,7 @@
     }
     
 </div>
+@section scripts{
 <script>
     $(document).ready(function(){
         $("#create").click(function () {
@@ -94,7 +95,6 @@
     window.tDate = @Html.Raw("'" + (Model.ToDate != null ? Model.ToDate.Value.ToString("yyyy/MM/dd HH:mm").Replace('.', '/') : " ") + "'")
     window.city = @Html.Raw("'" + (Model.LocationId != null ? Model.LocationId.ToString() : " ") + "'")
 </script>
-@section scripts{
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/jquery.datetimepicker.js")
     @Scripts.Render("~/Scripts/ckeditor/ckeditor.js")

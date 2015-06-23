@@ -33,6 +33,7 @@
     </div>
     <button class="btn waves-effect waves-light dark-blue-grey" id="send" type="submit">Вход</button>
 }
+@section scripts{
 <script>
     $(document).ready(function () {
         $("#send").click(function () {
@@ -42,6 +43,5 @@
 
     })
 </script>
-@section scripts{
     @Scripts.Render("~/bundles/jqueryval")
 }
