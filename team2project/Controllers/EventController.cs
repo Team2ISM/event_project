@@ -74,6 +74,10 @@ namespace team2project.Controllers
         {
             try
             {
+                if (String.IsNullOrEmpty(text))
+                {
+                    return View("GenericError", model: Resources.ResponseNoMatches);
+                }
                 text = HttpUtility.UrlDecode(text);
                 var list = eventManager.Find(text, "all", null);
                 if (list == null || list.Count == 0)

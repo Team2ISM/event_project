@@ -71,7 +71,7 @@ namespace team2project
             routes.MapRoute(
               name: "Find",
               url: "find/{text}",
-              defaults: new { controller = "Event", action = "Find", location = UrlParameter.Optional }
+              defaults: new { controller = "Event", action = "Find", text = UrlParameter.Optional }
           );
 
             #endregion
