@@ -19,7 +19,7 @@ namespace SolariCaptcha
             {
                 var picName = BitConverter.ToInt32(crypto.ComputeHash(BitConverter.GetBytes(Convert.ToInt32(element))), 0);
                 var rotation = rand.Next(-30, 30);
-                result += "<img src=\"http://" + url + "/Content/Captcha/" + picName + ".png\" style=\"transform: rotate(" + rotation.ToString() + "deg)\">";
+                result += "<img src=\"http://" + url + "/Content/Captcha/" + picName + ".png\" style=\"transform: rotate(" + rotation.ToString() + "deg); -ms-transform: rotate(" + rotation.ToString() + "deg); -moz-transform: rotate(" + rotation.ToString() + "deg); -webkit-transform: rotate(" + rotation.ToString() + "deg)\">";
             }
             result += "</p>";
             return result;
