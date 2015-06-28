@@ -35,6 +35,7 @@ namespace team2project.Models
 
         [AllowHtml]
         [ScaffoldColumn(false)]
+        [StringLength(6000, MinimumLength = 5, ErrorMessage = "Длина текстового описания должна быть от 5 до 6000 символов")]
         public string TextDescription { get; set; }
 
         [Required(ErrorMessage = "Это поле должно быть заполненым")]

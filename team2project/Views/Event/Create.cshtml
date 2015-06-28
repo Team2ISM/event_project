@@ -47,6 +47,7 @@
             <label for="Description" id="description">Описание</label>
             @Html.EditorFor(m => m.Description)
             @Html.ValidationMessageFor(m => m.Description)
+            @Html.ValidationMessageFor(m => m.TextDescription)
         </div>
         
         <div class="input-field col s12 m12 l12 center">
