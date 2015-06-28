@@ -27,35 +27,7 @@
     <table class="striped width80 centered">
 
         <tbody>
-            @foreach (var evnt in Model.EventsList)
-            {
-                <tr id="@(evnt.Id + "_row")">
-                    <td class="list-events-date">
-                        <div class="bg-blue-grey month">
-                            @CheckDateIfNull(evnt.FromDate, "MMMM")
-                        </div>
-                        <div class="day color-blue-grey">
-                            @CheckDateIfNull(evnt.FromDate, "dd")
-                        </div>
-                    </td>
-                    <td class="list-events-img">
-                        <div class="event-small-img">
-                            @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
-                        </div>
-                    </td>
-                    <td>
-                        @Html.Partial("EventContent", evnt)
-                    </td>                    
-                    <td>
-                        @if (evnt.AuthorId == User.Identity.Name)
-                        {
-                            <div class="right" id="event-menu">                           
-                                <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id', 'list'); return false"><i class="small mdi-action-delete"></i></a>
-                            </div>
-                        }
-                    </td>
-                </tr>
-            }
+            @{Html.RenderPartial("EventListPartialView", Model);}
         </tbody>
     </table>
     <div id="dialog-confirm" title="Удалить это событие?" style="display: none;">

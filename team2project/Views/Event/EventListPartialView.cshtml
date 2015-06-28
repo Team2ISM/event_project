@@ -26,17 +26,23 @@ Layout = null;
                     </td>
                     <td>
                         <div class="button-menu">
-                            <div class="fixed-action-btn">
-                                <a class="btn-floating btn-large bacgr-text subscribe unbinded large-line" id="@(evnt.Id + "_sub")">
-                                    <i class="large"></i>
-                                </a>
-                            </div>
+                            @if (evnt.ToDate > DateTime.Now)
+                            {
+                                <div class="fixed-action-btn">
+                                    <a class="btn-floating btn-large bacgr-text subscribe unbinded large-line" id="@(evnt.Id + "_sub")">
+                                        <i class="large"></i>
+                                    </a>
+                                </div>
+                            }
                             @if (evnt.AuthorId == User.Identity.Name)
                             {
-                                    <div class="right" id="event-menu">                                    
+                                <div class="right" id="event-menu">                                    
+                                    @if (evnt.ToDate > DateTime.Now)
+                                    {
                                         <a class="btn-floating bacgr-text" href="@Url.RouteUrl("UpdateEvent", new { id=evnt.Id })"><i class="small mdi-editor-mode-edit"></i></a>
-                                        <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id','list'); return false"><i class="small mdi-action-delete"></i></a>
-                                    </div>
+                                    }
+                                    <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id','list'); return false"><i class="small mdi-action-delete"></i></a>
+                                </div>
                             }
                             
                             <div id="subscribe">

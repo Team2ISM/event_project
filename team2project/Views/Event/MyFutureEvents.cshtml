@@ -9,6 +9,7 @@
 }
 @section css{
     @Styles.Render("~/Content/Home/List.css")
+    @Styles.Render("~/Content/jquery-ui.theme.min.css")
     @Styles.Render("~/Content/jquery-ui.min.css")
     @Styles.Render("~/Content/jquery-ui.structure.min.css")
 }
@@ -27,34 +28,7 @@
     <table class="striped width80 centered">
 
         <tbody>
-            @foreach (var evnt in Model.EventsList)
-            {
-                <tr id="@(evnt.Id + "_row")">
-                    <td class="list-events-date">
-                        <div class="bg-blue-grey month">
-                            @CheckDateIfNull(evnt.FromDate, "MMMM")
-                        </div>
-                        <div class="day color-blue-grey">
-                            @CheckDateIfNull(evnt.FromDate, "dd")
-                        </div>
-                    </td>                    
-                    <td class="list-events-img">
-                        <div class="event-small-img">
-                            @Html.ImageLink(evnt.Image, "Details", "Event", new { evnt.Id }, "event-img")
-                        </div>
-                    </td>
-                    <td>
-                        @if (evnt.AuthorId == User.Identity.Name)
-                        {
-                            <div class="right" id="event-menu-my">
-                                @Html.CreateLink("<i class=\"small mdi-editor-mode-edit\"></i>", "UpdateEvent", new { evnt.Id }, new { @class = "btn-floating bacgr-text" })
-                                <a class="btn-floating bacgr-text" onclick="deleteEvent('@evnt.Id', 'list'); return false"><i class="small mdi-action-delete"></i></a>
-                            </div>
-                        }
-                        @Html.Partial("EventContent", evnt)
-                    </td>
-                </tr>
-            }
+           @{Html.RenderPartial("EventListPartialView", Model);}
         </tbody>
     </table>
     <div id="dialog-confirm" title="Удалить это событие?" style="display: none;">
@@ -79,4 +53,5 @@
 @section scripts{
     @Scripts.Render("~/Scripts/jquery-ui.js")
     @Scripts.Render("~/Scripts/deleteButton.js")
+    @Scripts.Render("~/Scripts/listSubscribing.js")
 }

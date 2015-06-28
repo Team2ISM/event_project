@@ -529,6 +529,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\jquery.zoom.min.js" />
     <Content Include="Scripts\knockout-3.3.0.js" />
+    <Content Include="Scripts\listSubscribing.js" />
     <Content Include="Scripts\materialize\materialize.js" />
     <Content Include="Scripts\materialize\materialize.min.js" />
     <Content Include="Scripts\metro.js" />
