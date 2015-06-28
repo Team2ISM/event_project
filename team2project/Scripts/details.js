@@ -10,7 +10,7 @@ function subscribe() {
     button.attr("disabled", true);
     $.post("/subscribe", { id: id }, function (data) {
         if (data) {
-            button.html('Покинуть');
+            button.html('Не пойти');
             button.get()[0].onclick = unsubscribe;
         }
         else {
@@ -29,7 +29,7 @@ function unsubscribe() {
     button.attr("disabled", true);
     $.post("/unsubscribe", { id: id }, function (data) {
         if (data) {
-            button.html('Присоединиться');
+            button.html('Пойти');
             button.get()[0].onclick = subscribe;
         }
         else {
@@ -53,11 +53,11 @@ window.onload = function () {
     $('#subscribers_onhover').addClass("hover");
     $.post("/issubscribed", {id:id}, function (data) {
         if (data) {
-            button.html('Покинуть');
+            button.html('Не пойти');
             button.get()[0].onclick = unsubscribe;
         }
         else {
-            button.html('Присоединиться');
+            button.html('Пойти');
             button.get()[0].onclick = subscribe;
         }
         button.removeClass("disabled");
