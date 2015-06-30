@@ -12,9 +12,11 @@ namespace team2project.Models
         public string Id { get; set; }
 
         [Required(ErrorMessage = "Введите ваше имя")]
+        [StringLength(100, ErrorMessage = "Длина должна быть не больше 100 символов")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Введите вашу фамилию")]
+        [StringLength(100, ErrorMessage = "Длина должна быть не больше 100 символов")]
         public string Surname { get; set; }
 
         [Required(ErrorMessage = "Введите e-mail")]
